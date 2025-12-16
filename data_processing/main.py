@@ -1,10 +1,5 @@
-# main.py
 from __future__ import annotations
-
-import argparse
-
 from parser.parser import Parser
-
 
 def main() -> int:
     p = Parser(
