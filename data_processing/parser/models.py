@@ -53,3 +53,22 @@ class ParsedGame:
     moves: List[Dict[str, Optional[float]]]  # [{"move": "e4", "eval": 0.2}, ...]
     # Raw PGN (keep it if you need to persist the source)
     pgn_source: str
+
+    def __str__(self) -> str:
+        lines: List[str] = []
+        lines.append("event : " + str(self.event))
+        lines.append("timeControl : " + str(self.time_control))
+        lines.append("site : " + str(self.site))
+        lines.append("eloWhite : " + str(self.white_elo))
+        lines.append("eloBlack : " + str(self.black_elo))
+        lines.append("averageElo : " + str(self.average_elo))
+        lines.append("result : " + str(self.result_value))
+        lines.append("UTCDate : " + str(self.utc_date))
+        lines.append("eco : " + str(self.eco))
+        lines.append("opening : " + str(self.opening))
+        lines.append("avgAccuracyWhite : " + str(self.avg_accuracy_white))
+        lines.append("avgAccuracyBlack : " + str(self.avg_accuracy_black))
+        lines.append("avgAccuracyPerMoveWhite : " + str(self.avg_accuracy_per_move_white))
+        lines.append("avgAccuracyPerMoveBlack : " + str(self.avg_accuracy_per_move_black))
+        lines.append("moveArray : " + str(self.moves))
+        return "\n".join(lines) + "\n"
