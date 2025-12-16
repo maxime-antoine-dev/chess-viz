@@ -8,6 +8,8 @@ import sys
 
 import zstandard as zstd
 
+from .game_helpers import normalize_moves_in_place
+
 from .models import GameHeader, ParsedGame
 from .game_helpers import (
     normalize_time_control_bucket,
@@ -383,6 +385,7 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
             opening = tags.get("Opening")
 
             moves = _extract_moves_with_eval(movetext_flat)
+            normalize_moves_in_place(moves)
 
             (
                 has_eval,

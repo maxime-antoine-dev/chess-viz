@@ -8,6 +8,18 @@ from typing import Dict, List, Optional, Tuple
 
 _TC_RE = re.compile(r"^\s*(\d+)\s*(?:\+\s*(\d+)\s*)?$")
 
+# Lichess move annotations we want to extract
+# Note: order matters (longest first) so "??" is matched before "?"
+_ANNOTATION_MAP = {
+    "??": "blunder",
+    "?!": "inaccuracy",
+    "?": "mistake",
+    "!!": "brilliant",
+    "!": "excellent",
+}
+
+_ANNOTATION_SUFFIX_RE = re.compile(r"(?:\?\?|\?!|\?|\!\!|\!)$")
+
 
 def normalize_time_control_bucket(time_control_raw: str) -> str:
     m = _TC_RE.match(time_control_raw or "")
@@ -59,6 +71,52 @@ def accuracy_from_avg_cp_loss(avg_cp_loss: Optional[float]) -> Optional[float]:
     return round(acc, 2)
 
 
+def normalize_move_annotation(move_san: str) -> Dict[str, str]:
+    """
+    Extract lichess suffix annotations from a SAN move, e.g.:
+      "Nb6?!" -> {"move": "Nb6", "tag": "?!", "label": "inaccuracy"}
+      "Bf6??" -> {"move": "Bf6", "tag": "??", "label": "blunder"}
+      "e4"    -> {"move": "e4"}
+
+    Only adds tag/label if an annotation exists.
+    """
+    s = (move_san or "").strip()
+    if not s:
+        return {"move": s}
+
+    m = _ANNOTATION_SUFFIX_RE.search(s)
+    if not m:
+        return {"move": s}
+
+    tag = m.group(0)
+    base = s[: -len(tag)].rstrip()
+    label = _ANNOTATION_MAP.get(tag)
+    if label is None:
+        return {"move": base}
+
+    return {"move": base, "tag": tag, "label": label}
+
+
+def normalize_moves_in_place(moves: List[Dict[str, Optional[float]]]) -> None:
+    """
+    Mutates the existing move dicts produced by the parser:
+      {"move": "...", "eval": ...}
+    into:
+      {"move": "...", "eval": ..., "tag": "...", "label": "..."}  (only when needed)
+    """
+    for m in moves:
+        raw = m.get("move")
+        if not isinstance(raw, str):
+            continue
+
+        norm = normalize_move_annotation(raw)
+        m["move"] = norm["move"]
+
+        if "tag" in norm:
+            m["tag"] = norm["tag"]       # type: ignore[index]
+            m["label"] = norm["label"]   # type: ignore[index]
+
+
 def compute_accuracy_metrics_from_moves(
     moves: List[Dict[str, Optional[float]]]
 ) -> Tuple[
@@ -71,7 +129,7 @@ def compute_accuracy_metrics_from_moves(
     List[float],
 ]:
     """
-    Input moves: [{"move": "e4", "eval": 0.2}, ...] where eval is in pawns.
+    Input moves: [{"move": "e4", "eval": 0.2, ...}, ...] where eval is in pawns.
 
     We compute centipawn loss per *player*:
       cp_loss_side = abs(eval_current - eval_previous_same_side) * 100
@@ -84,9 +142,6 @@ def compute_accuracy_metrics_from_moves(
       avgAccuracyBlack,
       avgAccuracyPerMoveWhite (NO None),
       avgAccuracyPerMoveBlack (NO None)
-
-    Note: a player needs at least 2 eval points on their own moves to produce
-    the first cp_loss (so the first accuracies appear later, but we don't emit None).
     """
     has_eval = any(m.get("eval") is not None for m in moves)
 
@@ -110,7 +165,6 @@ def compute_accuracy_metrics_from_moves(
         prev = last_eval_by_side[side]
         last_eval_by_side[side] = ev
 
-        # Need 2 evals for this side to compute a delta -> else we skip (no None output)
         if prev is None:
             continue
 
@@ -122,11 +176,9 @@ def compute_accuracy_metrics_from_moves(
         else:
             cp_losses_b.append(cp_loss)
 
-        # Global running accuracy
         avg_cp_all = sum(cp_losses_all) / len(cp_losses_all)
         acc_per_move_all.append(accuracy_from_avg_cp_loss(avg_cp_all) or 0.0)
 
-        # Per-side running accuracy
         if side == "w":
             avg_cp_w = sum(cp_losses_w) / len(cp_losses_w)
             acc_per_move_w.append(accuracy_from_avg_cp_loss(avg_cp_w) or 0.0)
