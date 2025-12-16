@@ -10,7 +10,7 @@ import zstandard as zstd
 
 from .models import GameHeader, ParsedGame
 
-#  profiling to see where time goes while parsing large PGN dumps
+#  Tiny, lightweight profiling to see where time goes while parsing large PGN dumps
 PGN_PROFILE: Dict[str, float] = {
     "parse_game_headers": 0.0,
     "approx_moves": 0.0,
@@ -34,7 +34,7 @@ TAG_RE = re.compile(r'^\[(\w+)\s+"(.*)"\]$') # PGN tag lines like: [Key "Value"]
 MOVE_NUMBER_RE = re.compile(r"\b\d+\.")  # Used as a quick/cheap proxy to count full moves ("1.", "2.", ...)
 EVAL_RE = re.compile(r"\[%eval\s+([^\]]+)\]") # Extract engine evals inside comments, e.g. { [%eval 0.17] ... }
 COMMENT_RE = re.compile(r"\{[^}]*\}")  # Curly-brace comments in movetext
-NAG_RE = re.compile(r"\$\d+")  # "Numeric Annotation Glyphs" like $1, $2, ...
+NAG_RE = re.compile(r"\$\d+")  # Numeric Annotation Glyphs like $1, $2, ...
 
 
 # Approximate number of full moves
@@ -169,29 +169,44 @@ def _extract_eval_stats(movetext_flat: str) -> Tuple[bool, Optional[float], Opti
     PGN_PROFILE["eval_stats"] += time.perf_counter() - t0
     return has_eval, acpl_w, acpl_b
 
-# Extract real PGN move tokens from movetext as an array.
-def _extract_san_moves(movetext_flat: str) -> List[str]:
-    # This returns SAN tokens in order (plies). We keep it permissive on purpose.
+# Extract PGN moves as an array of {"move": SAN, "eval": float|None}.
+def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[float]]]:
+    # We walk the token stream in order and:
+    # - when we see a move, we append {"move": ..., "eval": None}
+    # - when we see a comment containing [%eval X], we attach it to the last move
     t0 = time.perf_counter()
 
     tokens = _tokenize_movetext(movetext_flat)
-    moves: List[str] = []
+    moves: List[Dict[str, Optional[float]]] = []
+
+    last_move_index: Optional[int] = None
 
     for kind, val in tokens:
-        if kind != "TOKEN":
-            continue
+        if kind == "TOKEN":
+            tok = val
 
-        tok = val
+            # Same filters as before: skip results, move numbers, and NAGs
+            if tok in ("1-0", "0-1", "1/2-1/2", "*"):
+                continue
+            if re.fullmatch(r"\d+\.+", tok):
+                continue
+            if tok.startswith("$"):
+                continue
 
-        # Same filters as above: skip results, move numbers, and NAGs
-        if tok in ("1-0", "0-1", "1/2-1/2", "*"):
-            continue
-        if re.fullmatch(r"\d+\.+", tok):
-            continue
-        if tok.startswith("$"):
-            continue
+            moves.append({"move": tok, "eval": None})
+            last_move_index = len(moves) - 1
 
-        moves.append(tok)
+        else:  # COMMENT
+            if last_move_index is None:
+                continue
+
+            m = EVAL_RE.search(val)
+            if not m:
+                continue
+
+            ev = _parse_eval_value(m.group(1))
+            # ev can be None if it's a mate score or malformed -> keep None
+            moves[last_move_index]["eval"] = ev
 
     PGN_PROFILE["extract_moves"] += time.perf_counter() - t0
     return moves
@@ -328,7 +343,7 @@ def parse_game_headers(raw_path: Path) -> Iterable[GameHeader]:
 
 
 # Yield ParsedGame for each parsed game, including:
-# - moves array (SAN tokens)
+# - moves array (SAN tokens + eval per move when available)
 # - original PGN source (tags + movetext with line breaks)
 def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
     # Same filtering as parse_game_headers, but we also keep the move list + raw PGN text
@@ -373,7 +388,7 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
 
             approx_full_moves = _approx_moves_from_movetext(movetext_flat)
             has_eval, acpl_w, acpl_b = _extract_eval_stats(movetext_flat)
-            moves_san = _extract_san_moves(movetext_flat)
+            moves_san = _extract_moves_with_eval(movetext_flat)
 
             header = GameHeader(
                 event=event,

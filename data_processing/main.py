@@ -75,6 +75,11 @@ def main() -> int:
     parser.add_argument("--month", type=str, default=None, help="Month to parse, format YYYY-MM (e.g. 2013-01).")
     parser.add_argument("--path", type=str, default=None, help="Explicit path to a .pgn.zst file.")
     parser.add_argument("--no-sha-check", action="store_true", help="Skip SHA256 verification.")
+    parser.add_argument(
+        "--only-eval",
+        action="store_true",
+        help="Only keep games that contain at least one engine evaluation ([%eval ...]).",
+    )
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent
@@ -84,32 +89,24 @@ def main() -> int:
     if not args.no_sha_check:
         _maybe_verify_sha256(root, pgn_path)
 
-    print("\n=== First 3 parsed games (with movesArray + PGN source) ===\n")
+    games_iter = parse_games(pgn_path)
+    if args.only_eval:
+        games_iter = (game for game in games_iter if game.header.has_eval)
 
-    count = 0
-    for i, game in enumerate(itertools.islice(parse_games(pgn_path), 3), start=1):
-        count += 1
-
+    for game in itertools.islice(games_iter, 3):
         g = game.header
 
-        print(f"--- Game #{i} ---")
-        # tags like in your example
-        for k, v in game.tags.items():
-            print(f'[{k} "{v}"]')
-
-        # custom line as you showed (not standard PGN, but matches your requested format)
-        print(f"[movesArray: {game.moves_san}]")
+        print("event : " + str(g.event))
+        print("timeControl : " + str(g.time_control_raw))
+        print("site : " + str(g.site))
+        print("eloWhite : " + str(g.white_elo))
+        print("eloBlack : " + str(g.black_elo))
+        print("result : " + str(g.result))
+        print("UTCDate : " + _ms_to_iso_utc(g.ts_ms))
+        print("eco : " + str(g.eco))
+        print("opening : " + str(g.opening))
+        print("moveArray : " + str(game.moves_san))
         print("")
-        print("pgn (text) :")
-        print(game.movetext_raw.strip())
-        print("")
-
-        # small extra (optional) normalized debug line
-        print(f"# parsed UTC={_ms_to_iso_utc(g.ts_ms)} result={g.result} plies={len(game.moves_san)} approxFullMoves={g.moves}")
-        print("")
-
-    if count == 0:
-        print("[INFO] No games parsed (filters may be excluding everything).", file=sys.stderr)
 
     print_pgn_profile()
     return 0
