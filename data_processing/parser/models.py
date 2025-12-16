@@ -1,37 +1,55 @@
 from dataclasses import dataclass
 from typing import Optional, List, Dict
 
-# Minimal per-game information we need from the raw Lichess PGN.
+
 @dataclass
 class GameHeader:
     event: Optional[str]
     site: Optional[str]
     white: str
     black: str
-    result: str # "1-0", "0-1", or "1/2-1/2"
-    ts_ms: int                    # creation timestamp in ms (UTC)
+    result: str
+    ts_ms: int
     white_elo: Optional[int]
     black_elo: Optional[int]
     white_rating_diff: Optional[int]
     black_rating_diff: Optional[int]
-    time_control_raw: str # e.g. "300+0"
+    time_control_raw: str
     termination: Optional[str]
-    variant: str # e.g. "Standard"
-    eco: Optional[str] # ECO code like "C50"
+    variant: str
+    eco: Optional[str]
     opening: Optional[str]
-    white_title: Optional[str] = None # GM, IM, ...
+    white_title: Optional[str] = None
     black_title: Optional[str] = None
-    moves: int = 0  
+    moves: int = 0
     has_eval: bool = False
-    # average centipawn loss per move for each side
     white_cp_loss: Optional[float] = None
     black_cp_loss: Optional[float] = None
 
 
 @dataclass
 class ParsedGame:
-    header: GameHeader
-    tags: Dict[str, str]
-    moves_san: List[str]
-    movetext_raw: str
+    event: Optional[str]
+    site: Optional[str]
+    utc_date: str
+    time_control_raw: str
+    time_control: str  # RAPID | BLITZ | BULLET | OTHER
+    white_elo: Optional[int]
+    black_elo: Optional[int]
+    average_elo: Optional[float]
+    result_raw: str
+    result_value: int  # 1 white win, -1 black win, 0 draw/other
+    eco: Optional[str]
+    opening: Optional[str]
+    # Accuracy (global + per-side)
+    has_eval: bool
+    average_accuracy: Optional[float]
+    average_accuracy_per_move: List[float]
+    avg_accuracy_white: Optional[float]
+    avg_accuracy_black: Optional[float]
+    avg_accuracy_per_move_white: List[float]
+    avg_accuracy_per_move_black: List[float]
+    # Moves
+    moves: List[Dict[str, Optional[float]]]  # [{"move": "e4", "eval": 0.2}, ...]
+    # Raw PGN (keep it if you need to persist the source)
     pgn_source: str

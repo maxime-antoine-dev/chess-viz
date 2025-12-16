@@ -4,14 +4,9 @@ import argparse
 import itertools
 from pathlib import Path
 import sys
-import datetime as dt
 
 from parser.utils import load_sha256_sums, sha256_file
 from parser.pgn_reader import parse_games, print_pgn_profile
-
-
-def _ms_to_iso_utc(ts_ms: int) -> str:
-    return dt.datetime.fromtimestamp(ts_ms / 1000.0, tz=dt.timezone.utc).isoformat(timespec="seconds")
 
 
 def _resolve_pgn_path(root: Path, month: str | None, explicit_path: str | None) -> Path:
@@ -49,7 +44,6 @@ def _maybe_verify_sha256(root: Path, pgn_path: Path) -> None:
         return
 
     mapping = load_sha256_sums(sha_file)
-
     key = pgn_path.name
     expected = mapping.get(key)
     if not expected:
@@ -75,11 +69,7 @@ def main() -> int:
     parser.add_argument("--month", type=str, default=None, help="Month to parse, format YYYY-MM (e.g. 2013-01).")
     parser.add_argument("--path", type=str, default=None, help="Explicit path to a .pgn.zst file.")
     parser.add_argument("--no-sha-check", action="store_true", help="Skip SHA256 verification.")
-    parser.add_argument(
-        "--only-eval",
-        action="store_true",
-        help="Only keep games that contain at least one engine evaluation ([%eval ...]).",
-    )
+    parser.add_argument("--only-eval", action="store_true", help="Only keep games that contain evals.")
     args = parser.parse_args()
 
     root = Path(__file__).resolve().parent
@@ -91,21 +81,24 @@ def main() -> int:
 
     games_iter = parse_games(pgn_path)
     if args.only_eval:
-        games_iter = (game for game in games_iter if game.header.has_eval)
+        games_iter = (g for g in games_iter if g.has_eval)
 
     for game in itertools.islice(games_iter, 3):
-        g = game.header
-
-        print("event : " + str(g.event))
-        print("timeControl : " + str(g.time_control_raw))
-        print("site : " + str(g.site))
-        print("eloWhite : " + str(g.white_elo))
-        print("eloBlack : " + str(g.black_elo))
-        print("result : " + str(g.result))
-        print("UTCDate : " + _ms_to_iso_utc(g.ts_ms))
-        print("eco : " + str(g.eco))
-        print("opening : " + str(g.opening))
-        print("moveArray : " + str(game.moves_san))
+        print("event : " + str(game.event))
+        print("timeControl : " + str(game.time_control))
+        print("site : " + str(game.site))
+        print("eloWhite : " + str(game.white_elo))
+        print("eloBlack : " + str(game.black_elo))
+        print("averageElo : " + str(game.average_elo))
+        print("result : " + str(game.result_value))
+        print("UTCDate : " + str(game.utc_date))
+        print("eco : " + str(game.eco))
+        print("opening : " + str(game.opening))
+        print("avgAccuracyWhite : " + str(game.avg_accuracy_white))
+        print("avgAccuracyBlack : " + str(game.avg_accuracy_black))
+        print("avgAccuracyPerMoveWhite : " + str(game.avg_accuracy_per_move_white))
+        print("avgAccuracyPerMoveBlack : " + str(game.avg_accuracy_per_move_black))
+        print("moveArray : " + str(game.moves))
         print("")
 
     print_pgn_profile()

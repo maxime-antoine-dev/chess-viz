@@ -9,6 +9,13 @@ import sys
 import zstandard as zstd
 
 from .models import GameHeader, ParsedGame
+from .game_helpers import (
+    normalize_time_control_bucket,
+    normalize_result_value,
+    compute_average_elo,
+    ts_ms_to_utc_date,
+    compute_accuracy_metrics_from_moves,
+)
 
 #  Tiny, lightweight profiling to see where time goes while parsing large PGN dumps
 PGN_PROFILE: Dict[str, float] = {
@@ -205,7 +212,6 @@ def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[floa
                 continue
 
             ev = _parse_eval_value(m.group(1))
-            # ev can be None if it's a mate score or malformed -> keep None
             moves[last_move_index]["eval"] = ev
 
     PGN_PROFILE["extract_moves"] += time.perf_counter() - t0
@@ -342,11 +348,8 @@ def parse_game_headers(raw_path: Path) -> Iterable[GameHeader]:
         PGN_PROFILE["parse_game_headers"] += time.perf_counter() - t0
 
 
-# Yield ParsedGame for each parsed game, including:
-# - moves array (SAN tokens + eval per move when available)
-# - original PGN source (tags + movetext with line breaks)
+# Yield ParsedGame for each parsed game, with normalized/derived fields.
 def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
-    # Same filtering as parse_game_headers, but we also keep the move list + raw PGN text
     t0 = time.perf_counter()
     try:
         for tags, movetext_flat, movetext_raw in _parse_pgn_stream_zst(raw_path):
@@ -354,8 +357,8 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
             if ts_ms is None:
                 continue
 
-            result = tags.get("Result", "*")
-            if result not in ("1-0", "0-1", "1/2-1/2"):
+            result_raw = tags.get("Result", "*")
+            if result_raw not in ("1-0", "0-1", "1/2-1/2"):
                 continue
 
             variant = tags.get("Variant", "Standard")
@@ -373,54 +376,47 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
 
             event = tags.get("Event")
             site = tags.get("Site")
-            white = tags.get("White", "")
-            black = tags.get("Black", "")
             white_elo = _safe_int("WhiteElo")
             black_elo = _safe_int("BlackElo")
-            white_diff = _safe_int("WhiteRatingDiff")
-            black_diff = _safe_int("BlackRatingDiff")
             tc_raw = tags.get("TimeControl", "")
-            termination = tags.get("Termination")
             eco = tags.get("ECO")
             opening = tags.get("Opening")
-            white_title = tags.get("WhiteTitle")
-            black_title = tags.get("BlackTitle")
 
-            approx_full_moves = _approx_moves_from_movetext(movetext_flat)
-            has_eval, acpl_w, acpl_b = _extract_eval_stats(movetext_flat)
-            moves_san = _extract_moves_with_eval(movetext_flat)
+            moves = _extract_moves_with_eval(movetext_flat)
 
-            header = GameHeader(
-                event=event,
-                site=site,
-                white=white,
-                black=black,
-                result=result,
-                ts_ms=ts_ms,
-                white_elo=white_elo,
-                black_elo=black_elo,
-                white_rating_diff=white_diff,
-                black_rating_diff=black_diff,
-                time_control_raw=tc_raw,
-                termination=termination,
-                variant=variant,
-                eco=eco,
-                opening=opening,
-                white_title=white_title,
-                black_title=black_title,
-                moves=approx_full_moves,
-                has_eval=has_eval,
-                white_cp_loss=acpl_w,
-                black_cp_loss=acpl_b,
-            )
+            (
+                has_eval,
+                average_accuracy,
+                average_accuracy_per_move,
+                avg_acc_w,
+                avg_acc_b,
+                acc_per_move_w,
+                acc_per_move_b,
+            ) = compute_accuracy_metrics_from_moves(moves)
 
             pgn_source = _reconstruct_pgn_source(tags, movetext_raw)
 
             yield ParsedGame(
-                header=header,
-                tags=tags,
-                moves_san=moves_san,
-                movetext_raw=movetext_raw,
+                event=event,
+                site=site,
+                utc_date=ts_ms_to_utc_date(ts_ms),
+                time_control_raw=tc_raw,
+                time_control=normalize_time_control_bucket(tc_raw),
+                white_elo=white_elo,
+                black_elo=black_elo,
+                average_elo=compute_average_elo(white_elo, black_elo),
+                result_raw=result_raw,
+                result_value=normalize_result_value(result_raw),
+                eco=eco,
+                opening=opening,
+                has_eval=has_eval,
+                average_accuracy=average_accuracy,
+                average_accuracy_per_move=average_accuracy_per_move,
+                avg_accuracy_white=avg_acc_w,
+                avg_accuracy_black=avg_acc_b,
+                avg_accuracy_per_move_white=acc_per_move_w,
+                avg_accuracy_per_move_black=acc_per_move_b,
+                moves=moves,
                 pgn_source=pgn_source,
             )
     finally:
