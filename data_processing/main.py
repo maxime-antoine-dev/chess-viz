@@ -4,7 +4,7 @@ from parser.loader import Loader
 
 def export() -> int:
     p = Parser(
-        source_file="data/2013/lichess_db_standard_rated_2013-08.pgn.zst",
+        source_file="data/2013/lichess_db_standard_rated_2013-12.pgn.zst",
         eval_only=True,
         only_time_control_selection=True,
         sha_check=True,
@@ -14,7 +14,7 @@ def export() -> int:
     # for game in p.test(3):
     #     print(game)
     
-    # Export the games to a paruet file
+    # Export the games to a parquet file
     out_path = p.exportAll(progress=True)
     print(out_path)
 
@@ -23,8 +23,13 @@ def export() -> int:
 
 def load() -> int:
     loader = Loader()
+
+    # Load all games
     df = loader.load() # DataFrames
-    games = loader.toGames() # ParsedGame objects
+
+    # Takes around 10s for 2013
+    games = loader.toGames() # convert in ParsedGame objects
+
     s = loader.stats()
     print(s.total_games)
     print(s.by_time_control)
@@ -35,4 +40,4 @@ def load() -> int:
     return 0
 
 if __name__ == "__main__":
-    raise SystemExit(export())
+    raise SystemExit(load())
