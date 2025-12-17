@@ -25,17 +25,19 @@ def load() -> int:
     loader = Loader()
 
     # Load all games
+    # Takes around 1s for 2013
     df = loader.load() # DataFrames
 
-    # Takes around 10s for 2013
-    games = loader.toGames() # convert in ParsedGame objects
+    # Convert to game objects (optional)
+    # Takes around 18s for 2013
+    #games = loader.toGames() # convert in ParsedGame objects
 
     s = loader.stats()
     print(s.total_games)
     print(s.by_time_control)
     print(s.by_year)
 
-    # print(games[0])
+    print(df[0])
 
     return 0
 
