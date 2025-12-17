@@ -1,5 +1,8 @@
+# parser/pgn_reader.py
+from __future__ import annotations
+
 from pathlib import Path
-from typing import Dict, Tuple, Iterable, Optional, List
+from typing import Callable, Dict, Iterable, List, Optional, Tuple
 import io
 import re
 import datetime as dt
@@ -8,25 +11,21 @@ import sys
 
 import zstandard as zstd
 
-from .game_helpers import normalize_moves_in_place
-
-from .models import GameHeader, ParsedGame
+from .models import ParsedGame
 from .game_helpers import (
-    normalize_time_control_bucket,
-    normalize_result_value,
-    compute_average_elo,
-    ts_ms_to_utc_date,
     compute_accuracy_metrics_from_moves,
+    compute_average_elo,
+    normalize_moves_in_place,
+    normalize_result_value,
+    normalize_time_control_bucket,
+    ts_ms_to_utc_date,
 )
 
-#  Tiny, lightweight profiling to see where time goes while parsing large PGN dumps
+# Tiny, lightweight profiling to see where time goes while parsing large PGN dumps
 PGN_PROFILE: Dict[str, float] = {
-    "parse_game_headers": 0.0,
-    "approx_moves": 0.0,
-    "eval_stats": 0.0,
+    "parse_games": 0.0,
     "extract_moves": 0.0,
 }
-
 
 # Print the PGN profile (after parsing)
 def print_pgn_profile() -> None:
@@ -38,26 +37,11 @@ def print_pgn_profile() -> None:
         print(f"  {name:25s}: {seconds:10.3f}", file=sys.stderr)
 
 
-# Regexes
-TAG_RE = re.compile(r'^\[(\w+)\s+"(.*)"\]$') # PGN tag lines like: [Key "Value"]
-MOVE_NUMBER_RE = re.compile(r"\b\d+\.")  # Used as a quick/cheap proxy to count full moves ("1.", "2.", ...)
-EVAL_RE = re.compile(r"\[%eval\s+([^\]]+)\]") # Extract engine evals inside comments, e.g. { [%eval 0.17] ... }
-COMMENT_RE = re.compile(r"\{[^}]*\}")  # Curly-brace comments in movetext
-NAG_RE = re.compile(r"\$\d+")  # Numeric Annotation Glyphs like $1, $2, ...
+# PGN tag lines like: [Key "Value"]
+TAG_RE = re.compile(r'^\[(\w+)\s+"(.*)"\]$')
 
-
-# Approximate number of full moves
-def _approx_moves_from_movetext(movetext_flat: str) -> int:
-    # We strip comments/NAGs first, then count move numbers. It's approximate, but very fast.
-    t0 = time.perf_counter()
-
-    cleaned = COMMENT_RE.sub(" ", movetext_flat)
-    cleaned = NAG_RE.sub(" ", cleaned)
-    matches = MOVE_NUMBER_RE.findall(cleaned)
-    moves = len(matches)
-
-    PGN_PROFILE["approx_moves"] += time.perf_counter() - t0
-    return moves
+# Extract engine evals inside comments, e.g. { [%eval 0.17] ... }
+EVAL_RE = re.compile(r"\[%eval\s+([^\]]+)\]")
 
 
 def _parse_ts_ms_from_tags(tags: Dict[str, str]) -> Optional[int]:
@@ -66,6 +50,7 @@ def _parse_ts_ms_from_tags(tags: Dict[str, str]) -> Optional[int]:
     utc_time = tags.get("UTCTime") or "00:00:00"
     if not utc_date or utc_date == "????.??.??":
         return None
+
     try:
         dt_obj = dt.datetime.strptime(f"{utc_date} {utc_time}", "%Y.%m.%d %H:%M:%S")
     except ValueError:
@@ -74,40 +59,10 @@ def _parse_ts_ms_from_tags(tags: Dict[str, str]) -> Optional[int]:
             dt_obj = dt.datetime.strptime(f"{utc_date} 00:00:00", "%Y.%m.%d %H:%M:%S")
         except ValueError:
             return None
+
     return int(dt_obj.replace(tzinfo=dt.timezone.utc).timestamp() * 1000)
 
-# Tokenize movetext into ('TOKEN', token) and ('COMMENT', comment_content_without_braces).
-def _tokenize_movetext(movetext_flat: str) -> List[Tuple[str, str]]:
-    # Small custom tokenizer:
-    # - keeps { ... } as a single COMMENT token (so we can scan for evals)
-    # - everything else becomes TOKENs split by whitespace
-    tokens: List[Tuple[str, str]] = []
-    i = 0
-    n = len(movetext_flat)
-    while i < n:
-        c = movetext_flat[i]
-        if c.isspace():
-            i += 1
-            continue
-        if c == "{":
-            j = movetext_flat.find("}", i + 1)
-            if j == -1:
-                # Corrupted/unfinished comment: just stop at the end
-                j = n - 1
-            content = movetext_flat[i + 1 : j]
-            tokens.append(("COMMENT", content))
-            i = j + 1
-        else:
-            j = i
-            while j < n and (not movetext_flat[j].isspace()) and movetext_flat[j] != "{":
-                j += 1
-            tok = movetext_flat[i:j]
-            tokens.append(("TOKEN", tok))
-            i = j
-    return tokens
 
-# Parse a [%eval ...] value to a float in pawns.
-# Returns None for mates (#...) or unparsable values.
 def _parse_eval_value(raw: str) -> Optional[float]:
     # We ignore mate scores like "#3" or "#-1" (not comparable as floats)
     s = raw.strip()
@@ -118,71 +73,26 @@ def _parse_eval_value(raw: str) -> Optional[float]:
     except ValueError:
         return None
 
-# From movetext, extract whether the game has evals, and compute
-# average centipawn loss (ACPL) for White and Black.
-def _extract_eval_stats(movetext_flat: str) -> Tuple[bool, Optional[float], Optional[float]]:
-    # ACPL here is a simple heuristic based on consecutive eval deltas.
-    # If there's no [%eval] anywhere, we bail out early to keep things fast.
-    t0 = time.perf_counter()
+def _reconstruct_pgn_source(tags: Dict[str, str], movetext_raw: str) -> str:
+    # Rebuild a "pretty normal" PGN: tags block, blank line, then movetext
+    header_lines = [f'[{k} "{v}"]' for k, v in tags.items()]
+    return "\n".join(header_lines) + "\n\n" + movetext_raw.strip() + "\n"
 
-    if "[%eval" not in movetext_flat:
-        PGN_PROFILE["eval_stats"] += time.perf_counter() - t0
-        return False, None, None
 
-    tokens = _tokenize_movetext(movetext_flat)
+def _is_move_number(tok: str) -> bool:
+    # Matches "1." / "1..." / "23..." etc (same spirit as re.fullmatch(r"\d+\.+", tok))
+    if not tok or "." not in tok:
+        return False
+    for c in tok:
+        if not (c.isdigit() or c == "."):
+            return False
+    return any(c.isdigit() for c in tok)
 
-    evals_w: List[float] = []
-    evals_b: List[float] = []
 
-    side_to_move = "w"
-    last_mover: Optional[str] = None
-
-    for kind, val in tokens:
-        if kind == "COMMENT":
-            # If a comment contains an eval, assign it to the player who just moved
-            m = EVAL_RE.search(val)
-            if m and last_mover is not None:
-                ev = _parse_eval_value(m.group(1))
-                if ev is None:
-                    continue
-                if last_mover == "w":
-                    evals_w.append(ev)
-                else:
-                    evals_b.append(ev)
-        else:
-            tok = val
-
-            # Filter out non-move tokens we don't want to treat as SAN
-            if tok in ("1-0", "0-1", "1/2-1/2", "*"):
-                continue
-            if re.fullmatch(r"\d+\.+", tok):
-                continue
-            if tok.startswith("$"):
-                continue
-
-            # Every remaining token is assumed to be a SAN move -> alternate sides
-            last_mover = side_to_move
-            side_to_move = "b" if side_to_move == "w" else "w"
-
-    def average_cp_loss(evals: List[float]) -> Optional[float]:
-        # Need at least two eval points to measure change
-        if len(evals) < 2:
-            return None
-        diffs = [abs(evals[i] - evals[i - 1]) * 100.0 for i in range(1, len(evals))]
-        return sum(diffs) / len(diffs)
-
-    has_eval = bool(evals_w or evals_b)
-    acpl_w = average_cp_loss(evals_w)
-    acpl_b = average_cp_loss(evals_b)
-
-    PGN_PROFILE["eval_stats"] += time.perf_counter() - t0
-    return has_eval, acpl_w, acpl_b
-
-# Extract PGN moves as an array of {"move": SAN, "eval": float|None}.
 def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[float]]]:
-    # Single-pass parser:
+    # Single-pass move + eval extraction:
     # - avoids building a token list (big speed win)
-    # - keeps identical semantics: moves are SAN tokens, eval comes from the following comment
+    # - keeps identical semantics: SAN moves, eval comes from the following { ... } comment
     t0 = time.perf_counter()
 
     moves: List[Dict[str, Optional[float]]] = []
@@ -191,32 +101,20 @@ def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[floa
     n = len(movetext_flat)
     i = 0
 
-    def is_move_number(tok: str) -> bool:
-        # Matches "1." / "1..." / "23..." etc (same as re.fullmatch(r"\d+\.+", tok))
-        if not tok:
-            return False
-        # Must contain at least one dot and only digits/dots
-        if "." not in tok:
-            return False
-        for c in tok:
-            if not (c.isdigit() or c == "."):
-                return False
-        # Need at least one digit
-        return any(c.isdigit() for c in tok)
-
     while i < n:
         c = movetext_flat[i]
 
-        # Skip whitespace
+        # Skip whitespace quickly
         if c.isspace():
             i += 1
             continue
 
-        # Comment block: { ... }
+        # Curly-brace comment: { ... }
         if c == "{":
             j = movetext_flat.find("}", i + 1)
             if j == -1:
-                j = n - 1  # corrupted comment -> best effort
+                # Corrupted/unfinished comment: just stop at the end
+                j = n - 1
 
             if last_move_index is not None:
                 comment = movetext_flat[i + 1 : j]
@@ -231,19 +129,19 @@ def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[floa
             i = j + 1
             continue
 
-        # Token: read until whitespace or '{'
+        # Otherwise it's a token: read until whitespace or '{'
         j = i
         while j < n and (not movetext_flat[j].isspace()) and movetext_flat[j] != "{":
             j += 1
         tok = movetext_flat[i:j]
         i = j
 
-        # Filters identical to previous implementation
+        # Filter out non-move tokens we don't want to treat as SAN
         if tok in ("1-0", "0-1", "1/2-1/2", "*"):
             continue
         if tok.startswith("$"):
             continue
-        if is_move_number(tok):
+        if _is_move_number(tok):
             continue
 
         moves.append({"move": tok, "eval": None})
@@ -253,17 +151,18 @@ def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[floa
     return moves
 
 
-def _reconstruct_pgn_source(tags: Dict[str, str], movetext_raw: str) -> str:
-    # Rebuild a "pretty normal" PGN: tags block, blank line, then movetext
-    header_lines = [f'[{k} "{v}"]' for k, v in tags.items()]
-    return "\n".join(header_lines) + "\n\n" + movetext_raw.strip() + "\n"
+def _parse_pgn_stream_zst(
+    raw_path: Path,
+    *,
+    progress_hook: Optional[Callable[[int, int], None]] = None,
+    progress_every_bytes: int = 8 * (1 << 20),  # 8MB default
+) -> Iterable[Tuple[Dict[str, str], str, str]]:
+    """
+    Stream a .pgn.zst file and yield (tags_dict, movetext_flat, movetext_raw) per game.
+    """
+    total_bytes = raw_path.stat().st_size
+    last_report_pos = 0
 
-
-# Stream a .pgn.zst file and yield (tags_dict, movetext_flat, movetext_raw) per game.
-def _parse_pgn_stream_zst(raw_path: Path) -> Iterable[Tuple[Dict[str, str], str, str]]:
-    # We read the compressed stream and use a simple state machine:
-    # - read tag lines
-    # - then read movetext lines until a blank line ends the game
     with raw_path.open("rb") as fh:
         dctx = zstd.ZstdDecompressor()
         with dctx.stream_reader(fh) as reader:
@@ -275,6 +174,13 @@ def _parse_pgn_stream_zst(raw_path: Path) -> Iterable[Tuple[Dict[str, str], str,
 
             for line in text_stream:
                 line = line.rstrip("\n")
+
+                # Lightweight progress hook (based on compressed bytes)
+                if progress_hook is not None:
+                    pos = fh.tell()
+                    if pos - last_report_pos >= progress_every_bytes:
+                        last_report_pos = pos
+                        progress_hook(pos, total_bytes)
 
                 if mode in ("search_header", "header"):
                     if line.startswith("["):
@@ -309,93 +215,38 @@ def _parse_pgn_stream_zst(raw_path: Path) -> Iterable[Tuple[Dict[str, str], str,
                 movetext_flat = " ".join(s.strip() for s in movetext_lines if s.strip())
                 yield tags, movetext_flat, movetext_raw
 
+            # Final progress flush
+            if progress_hook is not None:
+                progress_hook(total_bytes, total_bytes)
 
-# Yield GameHeader objects from a lichess_db_standard_rated_YYYY-MM.pgn.zst file.
-def parse_game_headers(raw_path: Path) -> Iterable[GameHeader]:
-    # Parse and filter games into a lightweight header object (used by other pipelines)
+
+def parse_games(
+    raw_path: Path,
+    *,
+    progress_hook: Optional[Callable[[int, int], None]] = None,
+    progress_every_bytes: int = 8 * (1 << 20),
+) -> Iterable[ParsedGame]:
+    """
+    Yield ParsedGame objects from a lichess .pgn.zst file.
+    """
     t0 = time.perf_counter()
     try:
-        for tags, movetext_flat, _movetext_raw in _parse_pgn_stream_zst(raw_path):
+        for tags, movetext_flat, movetext_raw in _parse_pgn_stream_zst(
+            raw_path,
+            progress_hook=progress_hook,
+            progress_every_bytes=progress_every_bytes,
+        ):
+            # Timestamp (we keep it mainly to reconstruct UTCDate if needed)
             ts_ms = _parse_ts_ms_from_tags(tags)
             if ts_ms is None:
                 continue
 
-            result = tags.get("Result", "*")
-            if result not in ("1-0", "0-1", "1/2-1/2"):
-                continue
-
-            # For now we only keep Standard games, since other variants change interpretation
-            variant = tags.get("Variant", "Standard")
-            if variant.lower() != "standard":
-                continue
-
-            def _safe_int(key: str) -> Optional[int]:
-                v = tags.get(key)
-                if v is None:
-                    return None
-                try:
-                    return int(v)
-                except ValueError:
-                    return None
-
-            event = tags.get("Event")
-            site = tags.get("Site")
-            white = tags.get("White", "")
-            black = tags.get("Black", "")
-            white_elo = _safe_int("WhiteElo")
-            black_elo = _safe_int("BlackElo")
-            white_diff = _safe_int("WhiteRatingDiff")
-            black_diff = _safe_int("BlackRatingDiff")
-            tc_raw = tags.get("TimeControl", "")
-            termination = tags.get("Termination")
-            eco = tags.get("ECO")
-            opening = tags.get("Opening")
-            white_title = tags.get("WhiteTitle")
-            black_title = tags.get("BlackTitle")
-
-            moves = _approx_moves_from_movetext(movetext_flat)
-            has_eval, acpl_w, acpl_b = _extract_eval_stats(movetext_flat)
-
-            yield GameHeader(
-                event=event,
-                site=site,
-                white=white,
-                black=black,
-                result=result,
-                ts_ms=ts_ms,
-                white_elo=white_elo,
-                black_elo=black_elo,
-                white_rating_diff=white_diff,
-                black_rating_diff=black_diff,
-                time_control_raw=tc_raw,
-                termination=termination,
-                variant=variant,
-                eco=eco,
-                opening=opening,
-                white_title=white_title,
-                black_title=black_title,
-                moves=moves,
-                has_eval=has_eval,
-                white_cp_loss=acpl_w,
-                black_cp_loss=acpl_b,
-            )
-    finally:
-        PGN_PROFILE["parse_game_headers"] += time.perf_counter() - t0
-
-
-# Yield ParsedGame for each parsed game, with normalized/derived fields.
-def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
-    t0 = time.perf_counter()
-    try:
-        for tags, movetext_flat, movetext_raw in _parse_pgn_stream_zst(raw_path):
-            ts_ms = _parse_ts_ms_from_tags(tags)
-            if ts_ms is None:
-                continue
-
+            # Result filtering (you asked for a simple 1 / -1 / 0 mapping)
             result_raw = tags.get("Result", "*")
             if result_raw not in ("1-0", "0-1", "1/2-1/2"):
                 continue
 
+            # Only standard games (variants can change interpretation)
             variant = tags.get("Variant", "Standard")
             if variant.lower() != "standard":
                 continue
@@ -411,23 +262,37 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
 
             event = tags.get("Event")
             site = tags.get("Site")
+
+            utc_date = tags.get("UTCDate") or tags.get("Date")
+            if not utc_date or utc_date == "????.??.??":
+                # Last-resort fallback from timestamp if date tag is missing
+                utc_date = ts_ms_to_utc_date(ts_ms)
+
+            time_control_raw = tags.get("TimeControl", "") or ""
+            time_control = normalize_time_control_bucket(time_control_raw)
+
             white_elo = _safe_int("WhiteElo")
             black_elo = _safe_int("BlackElo")
-            tc_raw = tags.get("TimeControl", "")
+            average_elo = compute_average_elo(white_elo, black_elo)
+
             eco = tags.get("ECO")
             opening = tags.get("Opening")
 
+            # Moves + eval per move (fast path)
             moves = _extract_moves_with_eval(movetext_flat)
+
+            # Split "??", "?!", ... into tag/label fields (in-place)
             normalize_moves_in_place(moves)
 
+            # Accuracy metrics (global + per-side), built from eval deltas
             (
                 has_eval,
                 average_accuracy,
                 average_accuracy_per_move,
-                avg_acc_w,
-                avg_acc_b,
-                acc_per_move_w,
-                acc_per_move_b,
+                avg_accuracy_white,
+                avg_accuracy_black,
+                avg_accuracy_per_move_white,
+                avg_accuracy_per_move_black,
             ) = compute_accuracy_metrics_from_moves(moves)
 
             pgn_source = _reconstruct_pgn_source(tags, movetext_raw)
@@ -435,12 +300,12 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
             yield ParsedGame(
                 event=event,
                 site=site,
-                utc_date=ts_ms_to_utc_date(ts_ms),
-                time_control_raw=tc_raw,
-                time_control=normalize_time_control_bucket(tc_raw),
+                utc_date=utc_date,
+                time_control_raw=time_control_raw,
+                time_control=time_control,
                 white_elo=white_elo,
                 black_elo=black_elo,
-                average_elo=compute_average_elo(white_elo, black_elo),
+                average_elo=average_elo,
                 result_raw=result_raw,
                 result_value=normalize_result_value(result_raw),
                 eco=eco,
@@ -448,12 +313,12 @@ def parse_games(raw_path: Path) -> Iterable[ParsedGame]:
                 has_eval=has_eval,
                 average_accuracy=average_accuracy,
                 average_accuracy_per_move=average_accuracy_per_move,
-                avg_accuracy_white=avg_acc_w,
-                avg_accuracy_black=avg_acc_b,
-                avg_accuracy_per_move_white=acc_per_move_w,
-                avg_accuracy_per_move_black=acc_per_move_b,
+                avg_accuracy_white=avg_accuracy_white,
+                avg_accuracy_black=avg_accuracy_black,
+                avg_accuracy_per_move_white=avg_accuracy_per_move_white,
+                avg_accuracy_per_move_black=avg_accuracy_per_move_black,
                 moves=moves,
                 pgn_source=pgn_source,
             )
     finally:
-        PGN_PROFILE["parse_game_headers"] += time.perf_counter() - t0
+        PGN_PROFILE["parse_games"] += time.perf_counter() - t0

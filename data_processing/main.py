@@ -4,7 +4,7 @@ from parser.loader import Loader
 
 def export() -> int:
     p = Parser(
-        source_file="data/2013/lichess_db_standard_rated_2013-03.pgn.zst",
+        source_file="data/2013/lichess_db_standard_rated_2013-08.pgn.zst",
         eval_only=True,
         only_time_control_selection=True,
         sha_check=True,
@@ -15,7 +15,7 @@ def export() -> int:
     #     print(game)
     
     # Export the games to a paruet file
-    out_path = p.exportAll()   # -> parsed/lichess_db_standard_rated_2013-01.parquet
+    out_path = p.exportAll(progress=True)
     print(out_path)
 
     p.printProfile()
@@ -35,4 +35,4 @@ def load() -> int:
     return 0
 
 if __name__ == "__main__":
-    raise SystemExit(load())
+    raise SystemExit(export())

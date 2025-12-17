@@ -5,7 +5,7 @@ import json
 import sys
 import time
 from pathlib import Path
-from typing import Callable, Iterable, List, Optional, Tuple, Union
+from typing import Iterable, List, Optional, Union
 
 import polars as pl
 
@@ -42,7 +42,9 @@ class Parser:
 
         self.source_path = self._resolve_source_path(source_file)
 
+    # -------------------------
     # Public API
+    # -------------------------
 
     def iterGames(self) -> Iterable[ParsedGame]:
         """
@@ -73,16 +75,16 @@ class Parser:
         *,
         out_dir: Union[str, Path] = "parsed",
         progress: bool = True,
-        progress_every: int = 5000,
-        progress_min_interval_s: float = 0.25,
+        progress_min_interval_s: float = 0.15,
+        progress_every_bytes: int = 1 * (1 << 20),  # 1MB -> smoother by default
+        bar_width: int = 28,
     ) -> Path:
         """
         Export filtered games into:
             <root>/<out_dir>/<source_name>.parquet
 
-        progress:
-          - If True, prints in-place console updates like:
-              parsed=123456 kept=7890 kept%=6.39%
+        Progress is based on compressed bytes consumed (cheap + smooth),
+        and refreshes at least every `progress_min_interval_s`.
         """
         out_root = Path(out_dir)
         if not out_root.is_absolute():
@@ -93,35 +95,72 @@ class Parser:
 
         rows = []
 
-        last_print_t = 0.0
         parsed_total = 0
         kept_total = 0
+
+        total_bytes = self.source_path.stat().st_size
+        bytes_read = 0
+
+        last_print_t = 0.0
+        start_t = time.perf_counter()
+
+        def render_bar(p: float) -> str:
+            p = max(0.0, min(1.0, p))
+            filled = int(p * bar_width)
+            return "[" + ("#" * filled) + ("-" * (bar_width - filled)) + "]"
 
         def maybe_print(force: bool = False) -> None:
             nonlocal last_print_t
             if not progress:
                 return
+
             now = time.perf_counter()
-            if not force:
-                if parsed_total % progress_every != 0:
-                    if now - last_print_t < progress_min_interval_s:
-                        return
+            if not force and (now - last_print_t) < progress_min_interval_s:
+                return
             last_print_t = now
-            pct = (kept_total / parsed_total * 100.0) if parsed_total > 0 else 0.0
-            msg = f"\rparsed={parsed_total:,} kept={kept_total:,} kept%={pct:6.2f}%"
+
+            pct_bytes = (bytes_read / total_bytes) if total_bytes > 0 else 0.0
+            pct_kept = (kept_total / parsed_total * 100.0) if parsed_total > 0 else 0.0
+            elapsed = now - start_t
+            speed = (parsed_total / elapsed) if elapsed > 0 else 0.0
+
+            bar = render_bar(pct_bytes)
+            msg = (
+                f"\r{bar} {pct_bytes*100:6.2f}% "
+                f"parsed={parsed_total:,} kept={kept_total:,} kept%={pct_kept:6.2f}% "
+                f"({speed:,.0f} g/s)"
+            )
             print(msg, end="", file=sys.stderr, flush=True)
 
-        # We iterate the raw PGN stream (unfiltered) so we can count total parsed games too.
+        def progress_hook(cur: int, tot: int) -> None:
+            nonlocal bytes_read
+            bytes_read = cur
+
         if self.sha_check:
             self._maybe_verify_sha256(self.root, self.source_path)
 
-        for game, parsed_total, kept_total in self._iterGamesWithCounters():
-            rows.append(self._game_to_row(game))
+        # Iterate raw stream so we can count parsed_total too
+        for g in parse_games(
+            self.source_path,
+            progress_hook=progress_hook,
+            progress_every_bytes=progress_every_bytes,
+        ):
+            parsed_total += 1
+
+            if self.eval_only and not g.has_eval:
+                maybe_print()
+                continue
+            if self.only_time_control_selection and g.time_control not in self.ALLOWED_TIME_CONTROLS:
+                maybe_print()
+                continue
+
+            kept_total += 1
+            rows.append(self._game_to_row(g))
             maybe_print()
 
         if progress:
             maybe_print(force=True)
-            print("", file=sys.stderr)  # newline after the \r line
+            print("", file=sys.stderr)
 
         df = pl.DataFrame(rows) if rows else pl.DataFrame(
             schema={
@@ -157,29 +196,9 @@ class Parser:
     def printProfile(self) -> None:
         print_pgn_profile()
 
+    # -------------------------
     # Internals
-
-    def _iterGamesWithCounters(self) -> Iterable[Tuple[ParsedGame, int, int]]:
-        """
-        Iterate over the raw parse_games() stream, count parsed_total,
-        apply the same filters as iterGames(), and count kept_total.
-
-        Yields:
-          (game, parsed_total, kept_total) for each kept game.
-        """
-        parsed_total = 0
-        kept_total = 0
-
-        for g in parse_games(self.source_path):
-            parsed_total += 1
-
-            if self.eval_only and not g.has_eval:
-                continue
-            if self.only_time_control_selection and g.time_control not in self.ALLOWED_TIME_CONTROLS:
-                continue
-
-            kept_total += 1
-            yield g, parsed_total, kept_total
+    # -------------------------
 
     def _resolve_source_path(self, source_file: Union[str, Path]) -> Path:
         p = Path(source_file)
