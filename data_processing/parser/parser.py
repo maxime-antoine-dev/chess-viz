@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import itertools
 import json
+import sys
+import time
 from pathlib import Path
-from typing import Iterable, List, Optional, Union
+from typing import Callable, Iterable, List, Optional, Tuple, Union
 
 import polars as pl
 
@@ -15,11 +17,6 @@ from .utils import load_sha256_sums, sha256_file
 class Parser:
     """
     Wrapper around parse_games().
-
-    Usage:
-        p = Parser("data/2013/lichess_db_standard_rated_2013-01.pgn.zst")
-        first3 = p.test()
-        out = p.exportAll()   # writes parsed/<name>.parquet
 
     Notes:
       - eval_only defaults to True
@@ -45,9 +42,7 @@ class Parser:
 
         self.source_path = self._resolve_source_path(source_file)
 
-    # -------------------------
     # Public API
-    # -------------------------
 
     def iterGames(self) -> Iterable[ParsedGame]:
         """
@@ -68,29 +63,26 @@ class Parser:
         return games_iter
 
     def test(self, n: int = 3) -> List[ParsedGame]:
-        """
-        Return the first n parsed games as a list (default 3).
-        """
         return list(itertools.islice(self.iterGames(), n))
 
     def getAll(self) -> List[ParsedGame]:
-        """
-        Parse the whole file and return everything as a list.
-        (Warning: can be huge.)
-        """
         return list(self.iterGames())
 
-    def exportAll(self, *, out_dir: Union[str, Path] = "parsed") -> Path:
+    def exportAll(
+        self,
+        *,
+        out_dir: Union[str, Path] = "parsed",
+        progress: bool = True,
+        progress_every: int = 5000,
+        progress_min_interval_s: float = 0.25,
+    ) -> Path:
         """
-        Same idea as getAll(), but exports the filtered games into:
+        Export filtered games into:
             <root>/<out_dir>/<source_name>.parquet
 
-        The parquet contains only games that pass the Parser filters.
-        Nested fields are stored as JSON strings for robustness:
-          - moves
-          - average_accuracy_per_move
-          - avg_accuracy_per_move_white
-          - avg_accuracy_per_move_black
+        progress:
+          - If True, prints in-place console updates like:
+              parsed=123456 kept=7890 kept%=6.39%
         """
         out_root = Path(out_dir)
         if not out_root.is_absolute():
@@ -100,8 +92,36 @@ class Parser:
         out_path = out_root / f"{self._output_basename(self.source_path.name)}.parquet"
 
         rows = []
-        for g in self.iterGames():
-            rows.append(self._game_to_row(g))
+
+        last_print_t = 0.0
+        parsed_total = 0
+        kept_total = 0
+
+        def maybe_print(force: bool = False) -> None:
+            nonlocal last_print_t
+            if not progress:
+                return
+            now = time.perf_counter()
+            if not force:
+                if parsed_total % progress_every != 0:
+                    if now - last_print_t < progress_min_interval_s:
+                        return
+            last_print_t = now
+            pct = (kept_total / parsed_total * 100.0) if parsed_total > 0 else 0.0
+            msg = f"\rparsed={parsed_total:,} kept={kept_total:,} kept%={pct:6.2f}%"
+            print(msg, end="", file=sys.stderr, flush=True)
+
+        # We iterate the raw PGN stream (unfiltered) so we can count total parsed games too.
+        if self.sha_check:
+            self._maybe_verify_sha256(self.root, self.source_path)
+
+        for game, parsed_total, kept_total in self._iterGamesWithCounters():
+            rows.append(self._game_to_row(game))
+            maybe_print()
+
+        if progress:
+            maybe_print(force=True)
+            print("", file=sys.stderr)  # newline after the \r line
 
         df = pl.DataFrame(rows) if rows else pl.DataFrame(
             schema={
@@ -135,14 +155,31 @@ class Parser:
         return out_path
 
     def printProfile(self) -> None:
-        """
-        Print internal PGN profiling (timings).
-        """
         print_pgn_profile()
 
-    # -------------------------
     # Internals
-    # -------------------------
+
+    def _iterGamesWithCounters(self) -> Iterable[Tuple[ParsedGame, int, int]]:
+        """
+        Iterate over the raw parse_games() stream, count parsed_total,
+        apply the same filters as iterGames(), and count kept_total.
+
+        Yields:
+          (game, parsed_total, kept_total) for each kept game.
+        """
+        parsed_total = 0
+        kept_total = 0
+
+        for g in parse_games(self.source_path):
+            parsed_total += 1
+
+            if self.eval_only and not g.has_eval:
+                continue
+            if self.only_time_control_selection and g.time_control not in self.ALLOWED_TIME_CONTROLS:
+                continue
+
+            kept_total += 1
+            yield g, parsed_total, kept_total
 
     def _resolve_source_path(self, source_file: Union[str, Path]) -> Path:
         p = Path(source_file)
@@ -171,7 +208,6 @@ class Parser:
             )
 
     def _output_basename(self, filename: str) -> str:
-        # "lichess_db_standard_rated_2013-01.pgn.zst" -> "lichess_db_standard_rated_2013-01"
         name = filename
         if name.endswith(".pgn.zst"):
             return name[: -len(".pgn.zst")]
@@ -182,7 +218,6 @@ class Parser:
         return name
 
     def _safe_year_from_utc_date(self, utc_date: str) -> Optional[int]:
-        # utc_date is "YYYY.MM.DD"
         try:
             return int(utc_date.split(".")[0])
         except Exception:

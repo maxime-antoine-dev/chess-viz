@@ -180,41 +180,74 @@ def _extract_eval_stats(movetext_flat: str) -> Tuple[bool, Optional[float], Opti
 
 # Extract PGN moves as an array of {"move": SAN, "eval": float|None}.
 def _extract_moves_with_eval(movetext_flat: str) -> List[Dict[str, Optional[float]]]:
-    # We walk the token stream in order and:
-    # - when we see a move, we append {"move": ..., "eval": None}
-    # - when we see a comment containing [%eval X], we attach it to the last move
+    # Single-pass parser:
+    # - avoids building a token list (big speed win)
+    # - keeps identical semantics: moves are SAN tokens, eval comes from the following comment
     t0 = time.perf_counter()
 
-    tokens = _tokenize_movetext(movetext_flat)
     moves: List[Dict[str, Optional[float]]] = []
-
     last_move_index: Optional[int] = None
 
-    for kind, val in tokens:
-        if kind == "TOKEN":
-            tok = val
+    n = len(movetext_flat)
+    i = 0
 
-            # Same filters as before: skip results, move numbers, and NAGs
-            if tok in ("1-0", "0-1", "1/2-1/2", "*"):
-                continue
-            if re.fullmatch(r"\d+\.+", tok):
-                continue
-            if tok.startswith("$"):
-                continue
+    def is_move_number(tok: str) -> bool:
+        # Matches "1." / "1..." / "23..." etc (same as re.fullmatch(r"\d+\.+", tok))
+        if not tok:
+            return False
+        # Must contain at least one dot and only digits/dots
+        if "." not in tok:
+            return False
+        for c in tok:
+            if not (c.isdigit() or c == "."):
+                return False
+        # Need at least one digit
+        return any(c.isdigit() for c in tok)
 
-            moves.append({"move": tok, "eval": None})
-            last_move_index = len(moves) - 1
+    while i < n:
+        c = movetext_flat[i]
 
-        else:  # COMMENT
-            if last_move_index is None:
-                continue
+        # Skip whitespace
+        if c.isspace():
+            i += 1
+            continue
 
-            m = EVAL_RE.search(val)
-            if not m:
-                continue
+        # Comment block: { ... }
+        if c == "{":
+            j = movetext_flat.find("}", i + 1)
+            if j == -1:
+                j = n - 1  # corrupted comment -> best effort
 
-            ev = _parse_eval_value(m.group(1))
-            moves[last_move_index]["eval"] = ev
+            if last_move_index is not None:
+                comment = movetext_flat[i + 1 : j]
+
+                # Fast guard: most comments don't contain eval
+                if "[%eval" in comment:
+                    m = EVAL_RE.search(comment)
+                    if m:
+                        ev = _parse_eval_value(m.group(1))
+                        moves[last_move_index]["eval"] = ev
+
+            i = j + 1
+            continue
+
+        # Token: read until whitespace or '{'
+        j = i
+        while j < n and (not movetext_flat[j].isspace()) and movetext_flat[j] != "{":
+            j += 1
+        tok = movetext_flat[i:j]
+        i = j
+
+        # Filters identical to previous implementation
+        if tok in ("1-0", "0-1", "1/2-1/2", "*"):
+            continue
+        if tok.startswith("$"):
+            continue
+        if is_move_number(tok):
+            continue
+
+        moves.append({"move": tok, "eval": None})
+        last_move_index = len(moves) - 1
 
     PGN_PROFILE["extract_moves"] += time.perf_counter() - t0
     return moves
