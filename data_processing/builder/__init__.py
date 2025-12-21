@@ -3,6 +3,8 @@ from .registry import get_builder, list_builders, register_builder
 
 # Import builders so they auto-register
 from .builders.stats_builder import StatsBuilder
+from .builders.opening_accuracy_heatmap_builder import OpeningAccuracyHeatmapBuilder  # noqa: F401
+
 
 __all__ = [
     "BaseBuilder",

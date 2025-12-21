@@ -47,12 +47,15 @@ def load() -> int:
 
 def run_builders() -> int:
     loader = Loader()
-    df = loader.loadFile("lichess_db_standard_rated_2013-02")
+    df = loader.load()
+    # df = loader.loadFile("lichess_db_standard_rated_2014-02")
 
-    Stats = get_builder("stats")
-    stats_builder = Stats()
-    out1 = stats_builder.export(df, filename="stats_2013_2014")
-    print(out1)
+    Cls = get_builder("opening_accuracy_heatmap")
+    b = Cls(
+        opening_moves=12,
+    )
+    out = b.export(df, filename="acc_heatmap")
+    print(out)
 
     return 0
 
