@@ -4,7 +4,7 @@ from parser.loader import Loader
 
 def export() -> int:
     p = Parser(
-        source_file="data/2013/lichess_db_standard_rated_2013-12.pgn.zst",
+        source_file="data/2014/lichess_db_standard_rated_2014-12.pgn.zst",
         eval_only=True,
         only_time_control_selection=True,
         sha_check=True,
@@ -26,7 +26,10 @@ def load() -> int:
 
     # Load all games
     # Takes around 1s for 2013
-    df = loader.load() # DataFrames
+    # df = loader.load() # DataFrames
+
+    # Load only games from a specific file (= 1 month)
+    df = loader.loadFile("lichess_db_standard_rated_2013-02") # DataFrames
 
     # Convert to game objects (optional)
     # Takes around 18s for 2013

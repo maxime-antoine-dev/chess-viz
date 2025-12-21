@@ -119,12 +119,16 @@ class Loader:
 
         return self.df
 
-    def loadFile(self, name: str) -> pl.DataFrame:
+    def loadFile(self, name: str, *, set_as_current: bool = True) -> pl.DataFrame:
         fname = name if name.endswith(".parquet") else f"{name}.parquet"
         path = self.parsed_dir / fname
         if not path.exists():
             raise FileNotFoundError(f"Parquet file not found: {path}")
-        return pl.read_parquet(path)
+
+        df = pl.read_parquet(path)
+        if set_as_current:
+            self.df = df
+        return df
 
     def stats(self) -> LoaderStats:
         if self.df is None:
