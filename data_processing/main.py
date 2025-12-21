@@ -1,6 +1,7 @@
 from __future__ import annotations
 from parser.parser import Parser
 from parser.loader import Loader
+from builder import get_builder
 
 def export() -> int:
     p = Parser(
@@ -44,5 +45,16 @@ def load() -> int:
 
     return 0
 
+def run_builders() -> int:
+    loader = Loader()
+    df = loader.loadFile("lichess_db_standard_rated_2013-02")
+
+    Stats = get_builder("stats")
+    stats_builder = Stats()
+    out1 = stats_builder.export(df, filename="stats_2013_2014")
+    print(out1)
+
+    return 0
+
 if __name__ == "__main__":
-    raise SystemExit(load())
+    raise SystemExit(run_builders())
