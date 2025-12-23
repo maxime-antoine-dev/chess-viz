@@ -3,7 +3,7 @@ import { PopularityVisualization } from './PopularityVisualization.js';
 import { AccuracyVisualization } from './AccuracyVisualization.js';
 
 let time_control = "rapid";
-let elo = "0_500";
+let elo = "0-500";
 const charts = init(time_control, elo);
 update(charts, time_control, elo);
 
@@ -20,14 +20,14 @@ document.getElementById("elo").addEventListener("change", function() {
 function init(time_control, elo) {
 	// Create charts object
 	let charts = {};
-	charts.openingExplorer = new OpeningExplorerVisualization("../data/openings_test.json", document.getElementById("opening_explorer"));
-	charts.popularity = new PopularityVisualization("../data/popularity_test.json", document.getElementById("popularity"));
-	charts.accuracy = new AccuracyVisualization("../data/accuracy_test.json", document.getElementById("accuracy"));
+	charts.openingExplorer = new OpeningExplorerVisualization("../data/openingExplorer.json", document.getElementById("opening_explorer"));
+	charts.popularity = new PopularityVisualization("../data/popularity.json", document.getElementById("popularity"));
+	charts.accuracy = new AccuracyVisualization("../data/accuracy.json", document.getElementById("accuracy"));
 
 	// Initialize charts
 	// charts.openingExplorer.render();
 	charts.popularity.render(time_control, elo);
-	// charts.accuracy.render(time_control, elo);
+	charts.accuracy.render(time_control, elo);
 
 	return charts;
 }
@@ -35,5 +35,5 @@ function init(time_control, elo) {
 function update(charts, time_control, elo) {
 	// charts.openingExplorer.render();
 	charts.popularity.render(time_control, elo);
-	// charts.accuracy.render(time_control, elo);
+	charts.accuracy.render(time_control, elo);
 }

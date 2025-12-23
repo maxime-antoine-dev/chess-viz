@@ -11,7 +11,6 @@
 
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		<script src="js/script.js" type="module" defer></script>
-		<script src="js/HeatMap.js" defer></script>
 	</head>
 
 	<body>
@@ -26,6 +25,7 @@
 				</select>
 				<label for="elo">Elo Range:</label>
 				<select id="elo">
+					<option value="0-500">0-500</option>
 					<option value="500-1000">500-1000</option>
 					<option value="1000-1500">1000-1500</option>
 					<option value="1500-2000">1500-2000</option>
@@ -35,6 +35,8 @@
 		</header>
 
 		<main>
+			<div id="tooltip"></div>
+
 			<section id="opening_explorer">
 			</section>
 
@@ -42,14 +44,9 @@
 			</section>
 
 			<section id="accuracy">
-				<h1 class="HeatMapTitle">HeatMap de Taux de Victoire</h1>
-				<div class="HeatMapContainer">
-					<div id="HeatMap"></div>
-					<div id="tooltip"></div>
-					
-					<div class="openingList">
-						<label for="opening">Ouverture:</label>
-						<select id="opening">
+				<div class="openingList">
+					<label for="opening">Ouverture:</label>
+					<select id="opening">
 						<option value="All">All</option>
 						<option value="Sicilian Defense">Sicilian Defense</option>
 						<option value="French Defense">French Defense</option>
@@ -91,8 +88,6 @@
 						<option value="Stonewall Attack">Stonewall Attack</option>
 						<option value="Other">Other</option>
 					</select>
-					</div>
-
 				</div>
 			</section>
 		</main>

@@ -24,10 +24,7 @@ class Visualization {
 		this.tooltip = null;
 		this.initialized = false;
 
-		this.filters = {
-			time_control: 'rapid',
-			elo: '0_500'
-		};
+		this.filters = {};
 
 		
 	}
@@ -118,10 +115,7 @@ class Visualization {
 	}
 
 	#createTooltip() {
-		if (this.tooltip) return;
-
-		this.tooltip = d3.select('body').append('div')
-			.attr('id', 'tooltip');
+		this.tooltip = d3.select("#tooltip");
 	}
 
 	showTooltip(html, event) {

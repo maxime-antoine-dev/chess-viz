@@ -28,9 +28,8 @@ class PopularityVisualization extends Visualization {
 
 	// preprocess loadedData according to this.filters
 	#preprocess() {
-		const filters = this.filters || {};
-		const cadence = filters.time_control || 'blitz';
-		const eloKey = filters.elo || '1000_1500';
+		const cadence = this.filters.time_control;
+		const eloKey = this.filters.elo;
 
 		const dataRoot = this.data;
 		if (!dataRoot || !dataRoot[cadence]) return [];
