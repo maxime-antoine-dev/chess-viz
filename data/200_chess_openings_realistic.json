@@ -11,7 +11,7 @@
         "win_rate": 0.39,
         "accuracy": 0.824,
         "elo_bands": {
-          "0-500": {
+          "0_500": {
             "nb_games": 4757,
             "win_rate": 0.39,
             "popularity": 0.064,
@@ -35,7 +35,7 @@
             "popularity": 0.348,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11269,
             "win_rate": 0.414,
             "popularity": 0.147,
@@ -73,7 +73,7 @@
             "popularity": 0.256,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6191,
             "win_rate": 0.424,
             "popularity": 0.111,
@@ -111,7 +111,7 @@
             "popularity": 0.211,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17848,
             "win_rate": 0.394,
             "popularity": 0.123,
@@ -157,7 +157,7 @@
             "popularity": 0.294,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11124,
             "win_rate": 0.444,
             "popularity": 0.169,
@@ -195,7 +195,7 @@
             "popularity": 0.253,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6080,
             "win_rate": 0.464,
             "popularity": 0.168,
@@ -233,7 +233,7 @@
             "popularity": 0.207,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15758,
             "win_rate": 0.424,
             "popularity": 0.178,
@@ -279,7 +279,7 @@
             "popularity": 0.331,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10644,
             "win_rate": 0.414,
             "popularity": 0.187,
@@ -317,7 +317,7 @@
             "popularity": 0.275,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5473,
             "win_rate": 0.434,
             "popularity": 0.194,
@@ -355,7 +355,7 @@
             "popularity": 0.245,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17435,
             "win_rate": 0.394,
             "popularity": 0.108,
@@ -401,7 +401,7 @@
             "popularity": 0.349,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13525,
             "win_rate": 0.414,
             "popularity": 0.103,
@@ -439,7 +439,7 @@
             "popularity": 0.316,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6105,
             "win_rate": 0.434,
             "popularity": 0.147,
@@ -477,7 +477,7 @@
             "popularity": 0.288,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13916,
             "win_rate": 0.394,
             "popularity": 0.118,
@@ -523,7 +523,7 @@
             "popularity": 0.345,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13448,
             "win_rate": 0.404,
             "popularity": 0.123,
@@ -561,7 +561,7 @@
             "popularity": 0.212,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5897,
             "win_rate": 0.424,
             "popularity": 0.189,
@@ -599,7 +599,7 @@
             "popularity": 0.288,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17046,
             "win_rate": 0.384,
             "popularity": 0.159,
@@ -645,7 +645,7 @@
             "popularity": 0.294,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11668,
             "win_rate": 0.464,
             "popularity": 0.171,
@@ -683,7 +683,7 @@
             "popularity": 0.277,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5786,
             "win_rate": 0.494,
             "popularity": 0.179,
@@ -721,7 +721,7 @@
             "popularity": 0.253,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18538,
             "win_rate": 0.444,
             "popularity": 0.183,
@@ -767,7 +767,7 @@
             "popularity": 0.291,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14607,
             "win_rate": 0.464,
             "popularity": 0.145,
@@ -805,7 +805,7 @@
             "popularity": 0.325,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7691,
             "win_rate": 0.484,
             "popularity": 0.173,
@@ -843,7 +843,7 @@
             "popularity": 0.242,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18714,
             "win_rate": 0.444,
             "popularity": 0.124,
@@ -889,7 +889,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14752,
             "win_rate": 0.464,
             "popularity": 0.171,
@@ -927,7 +927,7 @@
             "popularity": 0.228,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6443,
             "win_rate": 0.484,
             "popularity": 0.101,
@@ -965,7 +965,7 @@
             "popularity": 0.342,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19229,
             "win_rate": 0.434,
             "popularity": 0.12,
@@ -1011,7 +1011,7 @@
             "popularity": 0.22,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12909,
             "win_rate": 0.552,
             "popularity": 0.141,
@@ -1049,7 +1049,7 @@
             "popularity": 0.305,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7740,
             "win_rate": 0.572,
             "popularity": 0.159,
@@ -1087,7 +1087,7 @@
             "popularity": 0.343,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15554,
             "win_rate": 0.514,
             "popularity": 0.166,
@@ -1133,7 +1133,7 @@
             "popularity": 0.211,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12584,
             "win_rate": 0.524,
             "popularity": 0.16,
@@ -1171,7 +1171,7 @@
             "popularity": 0.208,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5808,
             "win_rate": 0.552,
             "popularity": 0.11,
@@ -1209,7 +1209,7 @@
             "popularity": 0.243,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19363,
             "win_rate": 0.494,
             "popularity": 0.147,
@@ -1255,7 +1255,7 @@
             "popularity": 0.253,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15296,
             "win_rate": 0.504,
             "popularity": 0.178,
@@ -1293,7 +1293,7 @@
             "popularity": 0.238,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5556,
             "win_rate": 0.542,
             "popularity": 0.141,
@@ -1331,7 +1331,7 @@
             "popularity": 0.227,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18576,
             "win_rate": 0.484,
             "popularity": 0.11,
@@ -1377,7 +1377,7 @@
             "popularity": 0.256,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10638,
             "win_rate": 0.562,
             "popularity": 0.148,
@@ -1415,7 +1415,7 @@
             "popularity": 0.229,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6131,
             "win_rate": 0.592,
             "popularity": 0.158,
@@ -1453,7 +1453,7 @@
             "popularity": 0.28,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18825,
             "win_rate": 0.542,
             "popularity": 0.121,
@@ -1499,7 +1499,7 @@
             "popularity": 0.235,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10434,
             "win_rate": 0.572,
             "popularity": 0.112,
@@ -1537,7 +1537,7 @@
             "popularity": 0.256,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6368,
             "win_rate": 0.602,
             "popularity": 0.125,
@@ -1575,7 +1575,7 @@
             "popularity": 0.332,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15618,
             "win_rate": 0.542,
             "popularity": 0.107,
@@ -1621,7 +1621,7 @@
             "popularity": 0.267,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12528,
             "win_rate": 0.562,
             "popularity": 0.106,
@@ -1659,7 +1659,7 @@
             "popularity": 0.303,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7269,
             "win_rate": 0.582,
             "popularity": 0.104,
@@ -1697,7 +1697,7 @@
             "popularity": 0.331,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17963,
             "win_rate": 0.524,
             "popularity": 0.151,
@@ -1743,7 +1743,7 @@
             "popularity": 0.317,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11805,
             "win_rate": 0.504,
             "popularity": 0.184,
@@ -1781,7 +1781,7 @@
             "popularity": 0.202,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7347,
             "win_rate": 0.524,
             "popularity": 0.196,
@@ -1819,7 +1819,7 @@
             "popularity": 0.345,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17569,
             "win_rate": 0.474,
             "popularity": 0.187,
@@ -1865,7 +1865,7 @@
             "popularity": 0.319,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12841,
             "win_rate": 0.542,
             "popularity": 0.161,
@@ -1903,7 +1903,7 @@
             "popularity": 0.228,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7322,
             "win_rate": 0.572,
             "popularity": 0.176,
@@ -1941,7 +1941,7 @@
             "popularity": 0.258,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15285,
             "win_rate": 0.514,
             "popularity": 0.116,
@@ -1987,7 +1987,7 @@
             "popularity": 0.201,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12263,
             "win_rate": 0.552,
             "popularity": 0.13,
@@ -2025,7 +2025,7 @@
             "popularity": 0.312,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6010,
             "win_rate": 0.572,
             "popularity": 0.127,
@@ -2063,7 +2063,7 @@
             "popularity": 0.277,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16686,
             "win_rate": 0.514,
             "popularity": 0.103,
@@ -2109,7 +2109,7 @@
             "popularity": 0.322,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10635,
             "win_rate": 0.494,
             "popularity": 0.177,
@@ -2147,7 +2147,7 @@
             "popularity": 0.254,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7558,
             "win_rate": 0.514,
             "popularity": 0.105,
@@ -2185,7 +2185,7 @@
             "popularity": 0.21,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16377,
             "win_rate": 0.464,
             "popularity": 0.14,
@@ -2231,7 +2231,7 @@
             "popularity": 0.336,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14947,
             "win_rate": 0.514,
             "popularity": 0.162,
@@ -2269,7 +2269,7 @@
             "popularity": 0.212,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6448,
             "win_rate": 0.542,
             "popularity": 0.165,
@@ -2307,7 +2307,7 @@
             "popularity": 0.218,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18607,
             "win_rate": 0.484,
             "popularity": 0.191,
@@ -2353,7 +2353,7 @@
             "popularity": 0.236,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12686,
             "win_rate": 0.524,
             "popularity": 0.122,
@@ -2391,7 +2391,7 @@
             "popularity": 0.293,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7591,
             "win_rate": 0.562,
             "popularity": 0.144,
@@ -2429,7 +2429,7 @@
             "popularity": 0.273,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13367,
             "win_rate": 0.504,
             "popularity": 0.158,
@@ -2475,7 +2475,7 @@
             "popularity": 0.308,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14627,
             "win_rate": 0.514,
             "popularity": 0.181,
@@ -2513,7 +2513,7 @@
             "popularity": 0.343,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7470,
             "win_rate": 0.542,
             "popularity": 0.158,
@@ -2551,7 +2551,7 @@
             "popularity": 0.281,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16398,
             "win_rate": 0.484,
             "popularity": 0.198,
@@ -2597,7 +2597,7 @@
             "popularity": 0.321,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14748,
             "win_rate": 0.552,
             "popularity": 0.11,
@@ -2635,7 +2635,7 @@
             "popularity": 0.251,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6503,
             "win_rate": 0.582,
             "popularity": 0.123,
@@ -2673,7 +2673,7 @@
             "popularity": 0.291,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15517,
             "win_rate": 0.514,
             "popularity": 0.172,
@@ -2719,7 +2719,7 @@
             "popularity": 0.235,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10752,
             "win_rate": 0.514,
             "popularity": 0.18,
@@ -2757,7 +2757,7 @@
             "popularity": 0.222,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6414,
             "win_rate": 0.552,
             "popularity": 0.189,
@@ -2795,7 +2795,7 @@
             "popularity": 0.251,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14972,
             "win_rate": 0.494,
             "popularity": 0.15,
@@ -2841,7 +2841,7 @@
             "popularity": 0.213,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13032,
             "win_rate": 0.494,
             "popularity": 0.189,
@@ -2879,7 +2879,7 @@
             "popularity": 0.201,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7223,
             "win_rate": 0.514,
             "popularity": 0.16,
@@ -2917,7 +2917,7 @@
             "popularity": 0.278,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14133,
             "win_rate": 0.474,
             "popularity": 0.144,
@@ -2963,7 +2963,7 @@
             "popularity": 0.26,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11685,
             "win_rate": 0.514,
             "popularity": 0.125,
@@ -3001,7 +3001,7 @@
             "popularity": 0.315,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7809,
             "win_rate": 0.552,
             "popularity": 0.166,
@@ -3039,7 +3039,7 @@
             "popularity": 0.236,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16818,
             "win_rate": 0.494,
             "popularity": 0.191,
@@ -3085,7 +3085,7 @@
             "popularity": 0.291,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14843,
             "win_rate": 0.514,
             "popularity": 0.115,
@@ -3123,7 +3123,7 @@
             "popularity": 0.331,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6320,
             "win_rate": 0.552,
             "popularity": 0.164,
@@ -3161,7 +3161,7 @@
             "popularity": 0.325,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13987,
             "win_rate": 0.494,
             "popularity": 0.175,
@@ -3207,7 +3207,7 @@
             "popularity": 0.348,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12090,
             "win_rate": 0.524,
             "popularity": 0.11,
@@ -3245,7 +3245,7 @@
             "popularity": 0.204,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7904,
             "win_rate": 0.552,
             "popularity": 0.155,
@@ -3283,7 +3283,7 @@
             "popularity": 0.343,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18514,
             "win_rate": 0.494,
             "popularity": 0.192,
@@ -3329,7 +3329,7 @@
             "popularity": 0.269,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15256,
             "win_rate": 0.494,
             "popularity": 0.165,
@@ -3367,7 +3367,7 @@
             "popularity": 0.279,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7783,
             "win_rate": 0.514,
             "popularity": 0.169,
@@ -3405,7 +3405,7 @@
             "popularity": 0.33,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16108,
             "win_rate": 0.464,
             "popularity": 0.181,
@@ -3451,7 +3451,7 @@
             "popularity": 0.334,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10879,
             "win_rate": 0.474,
             "popularity": 0.186,
@@ -3489,7 +3489,7 @@
             "popularity": 0.278,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7905,
             "win_rate": 0.494,
             "popularity": 0.142,
@@ -3527,7 +3527,7 @@
             "popularity": 0.24,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18941,
             "win_rate": 0.454,
             "popularity": 0.172,
@@ -3573,7 +3573,7 @@
             "popularity": 0.214,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10872,
             "win_rate": 0.494,
             "popularity": 0.17,
@@ -3611,7 +3611,7 @@
             "popularity": 0.211,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6784,
             "win_rate": 0.514,
             "popularity": 0.125,
@@ -3649,7 +3649,7 @@
             "popularity": 0.319,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16527,
             "win_rate": 0.474,
             "popularity": 0.135,
@@ -3695,7 +3695,7 @@
             "popularity": 0.257,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13687,
             "win_rate": 0.504,
             "popularity": 0.177,
@@ -3733,7 +3733,7 @@
             "popularity": 0.335,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6819,
             "win_rate": 0.524,
             "popularity": 0.107,
@@ -3771,7 +3771,7 @@
             "popularity": 0.224,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15355,
             "win_rate": 0.474,
             "popularity": 0.178,
@@ -3817,7 +3817,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10958,
             "win_rate": 0.514,
             "popularity": 0.136,
@@ -3855,7 +3855,7 @@
             "popularity": 0.329,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7809,
             "win_rate": 0.542,
             "popularity": 0.115,
@@ -3893,7 +3893,7 @@
             "popularity": 0.23,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15254,
             "win_rate": 0.484,
             "popularity": 0.142,
@@ -3939,7 +3939,7 @@
             "popularity": 0.248,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13773,
             "win_rate": 0.542,
             "popularity": 0.116,
@@ -3977,7 +3977,7 @@
             "popularity": 0.329,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7757,
             "win_rate": 0.562,
             "popularity": 0.152,
@@ -4015,7 +4015,7 @@
             "popularity": 0.237,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16473,
             "win_rate": 0.504,
             "popularity": 0.181,
@@ -4061,7 +4061,7 @@
             "popularity": 0.218,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11149,
             "win_rate": 0.504,
             "popularity": 0.131,
@@ -4099,7 +4099,7 @@
             "popularity": 0.263,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6984,
             "win_rate": 0.524,
             "popularity": 0.12,
@@ -4137,7 +4137,7 @@
             "popularity": 0.303,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19773,
             "win_rate": 0.474,
             "popularity": 0.103,
@@ -4183,7 +4183,7 @@
             "popularity": 0.292,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15218,
             "win_rate": 0.524,
             "popularity": 0.157,
@@ -4221,7 +4221,7 @@
             "popularity": 0.286,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7877,
             "win_rate": 0.562,
             "popularity": 0.149,
@@ -4259,7 +4259,7 @@
             "popularity": 0.331,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15997,
             "win_rate": 0.504,
             "popularity": 0.12,
@@ -4305,7 +4305,7 @@
             "popularity": 0.317,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10317,
             "win_rate": 0.552,
             "popularity": 0.132,
@@ -4343,7 +4343,7 @@
             "popularity": 0.235,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7605,
             "win_rate": 0.572,
             "popularity": 0.16,
@@ -4381,7 +4381,7 @@
             "popularity": 0.237,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17249,
             "win_rate": 0.514,
             "popularity": 0.198,
@@ -4427,7 +4427,7 @@
             "popularity": 0.32,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11024,
             "win_rate": 0.504,
             "popularity": 0.195,
@@ -4465,7 +4465,7 @@
             "popularity": 0.326,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5745,
             "win_rate": 0.524,
             "popularity": 0.145,
@@ -4503,7 +4503,7 @@
             "popularity": 0.306,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17360,
             "win_rate": 0.484,
             "popularity": 0.178,
@@ -4549,7 +4549,7 @@
             "popularity": 0.327,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12255,
             "win_rate": 0.474,
             "popularity": 0.12,
@@ -4587,7 +4587,7 @@
             "popularity": 0.337,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7723,
             "win_rate": 0.494,
             "popularity": 0.149,
@@ -4625,7 +4625,7 @@
             "popularity": 0.307,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13210,
             "win_rate": 0.444,
             "popularity": 0.176,
@@ -4671,7 +4671,7 @@
             "popularity": 0.348,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11404,
             "win_rate": 0.474,
             "popularity": 0.129,
@@ -4709,7 +4709,7 @@
             "popularity": 0.299,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6021,
             "win_rate": 0.494,
             "popularity": 0.184,
@@ -4747,7 +4747,7 @@
             "popularity": 0.248,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17733,
             "win_rate": 0.454,
             "popularity": 0.19,
@@ -4793,7 +4793,7 @@
             "popularity": 0.296,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12172,
             "win_rate": 0.484,
             "popularity": 0.165,
@@ -4831,7 +4831,7 @@
             "popularity": 0.263,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6061,
             "win_rate": 0.504,
             "popularity": 0.184,
@@ -4869,7 +4869,7 @@
             "popularity": 0.33,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14716,
             "win_rate": 0.464,
             "popularity": 0.101,
@@ -4915,7 +4915,7 @@
             "popularity": 0.208,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13856,
             "win_rate": 0.484,
             "popularity": 0.149,
@@ -4953,7 +4953,7 @@
             "popularity": 0.281,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7531,
             "win_rate": 0.504,
             "popularity": 0.193,
@@ -4991,7 +4991,7 @@
             "popularity": 0.331,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18822,
             "win_rate": 0.454,
             "popularity": 0.196,
@@ -5037,7 +5037,7 @@
             "popularity": 0.314,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15125,
             "win_rate": 0.514,
             "popularity": 0.109,
@@ -5075,7 +5075,7 @@
             "popularity": 0.337,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6733,
             "win_rate": 0.542,
             "popularity": 0.143,
@@ -5113,7 +5113,7 @@
             "popularity": 0.32,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15091,
             "win_rate": 0.484,
             "popularity": 0.197,
@@ -5159,7 +5159,7 @@
             "popularity": 0.326,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12667,
             "win_rate": 0.552,
             "popularity": 0.153,
@@ -5197,7 +5197,7 @@
             "popularity": 0.239,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6538,
             "win_rate": 0.572,
             "popularity": 0.181,
@@ -5235,7 +5235,7 @@
             "popularity": 0.29,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18576,
             "win_rate": 0.514,
             "popularity": 0.136,
@@ -5281,7 +5281,7 @@
             "popularity": 0.259,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14248,
             "win_rate": 0.572,
             "popularity": 0.131,
@@ -5319,7 +5319,7 @@
             "popularity": 0.315,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6581,
             "win_rate": 0.602,
             "popularity": 0.141,
@@ -5357,7 +5357,7 @@
             "popularity": 0.34,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15031,
             "win_rate": 0.542,
             "popularity": 0.141,
@@ -5403,7 +5403,7 @@
             "popularity": 0.207,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14068,
             "win_rate": 0.524,
             "popularity": 0.189,
@@ -5441,7 +5441,7 @@
             "popularity": 0.248,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6202,
             "win_rate": 0.552,
             "popularity": 0.102,
@@ -5479,7 +5479,7 @@
             "popularity": 0.227,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17607,
             "win_rate": 0.494,
             "popularity": 0.176,
@@ -5525,7 +5525,7 @@
             "popularity": 0.281,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10553,
             "win_rate": 0.514,
             "popularity": 0.121,
@@ -5563,7 +5563,7 @@
             "popularity": 0.344,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7573,
             "win_rate": 0.542,
             "popularity": 0.182,
@@ -5601,7 +5601,7 @@
             "popularity": 0.29,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19523,
             "win_rate": 0.494,
             "popularity": 0.155,
@@ -5647,7 +5647,7 @@
             "popularity": 0.285,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11014,
             "win_rate": 0.474,
             "popularity": 0.158,
@@ -5685,7 +5685,7 @@
             "popularity": 0.267,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7784,
             "win_rate": 0.494,
             "popularity": 0.125,
@@ -5723,7 +5723,7 @@
             "popularity": 0.274,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19625,
             "win_rate": 0.454,
             "popularity": 0.193,
@@ -5769,7 +5769,7 @@
             "popularity": 0.34,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13615,
             "win_rate": 0.504,
             "popularity": 0.156,
@@ -5807,7 +5807,7 @@
             "popularity": 0.212,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5412,
             "win_rate": 0.542,
             "popularity": 0.129,
@@ -5845,7 +5845,7 @@
             "popularity": 0.274,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16082,
             "win_rate": 0.484,
             "popularity": 0.116,
@@ -5891,7 +5891,7 @@
             "popularity": 0.295,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10866,
             "win_rate": 0.524,
             "popularity": 0.198,
@@ -5929,7 +5929,7 @@
             "popularity": 0.336,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 8016,
             "win_rate": 0.562,
             "popularity": 0.109,
@@ -5967,7 +5967,7 @@
             "popularity": 0.258,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14248,
             "win_rate": 0.494,
             "popularity": 0.126,
@@ -6013,7 +6013,7 @@
             "popularity": 0.275,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13828,
             "win_rate": 0.504,
             "popularity": 0.105,
@@ -6051,7 +6051,7 @@
             "popularity": 0.272,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5531,
             "win_rate": 0.524,
             "popularity": 0.149,
@@ -6089,7 +6089,7 @@
             "popularity": 0.229,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14798,
             "win_rate": 0.474,
             "popularity": 0.112,
@@ -6135,7 +6135,7 @@
             "popularity": 0.285,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13165,
             "win_rate": 0.514,
             "popularity": 0.17,
@@ -6173,7 +6173,7 @@
             "popularity": 0.241,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7727,
             "win_rate": 0.552,
             "popularity": 0.175,
@@ -6211,7 +6211,7 @@
             "popularity": 0.204,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15738,
             "win_rate": 0.494,
             "popularity": 0.195,
@@ -6257,7 +6257,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11334,
             "win_rate": 0.424,
             "popularity": 0.198,
@@ -6295,7 +6295,7 @@
             "popularity": 0.296,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7479,
             "win_rate": 0.444,
             "popularity": 0.143,
@@ -6333,7 +6333,7 @@
             "popularity": 0.266,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15732,
             "win_rate": 0.404,
             "popularity": 0.138,
@@ -6379,7 +6379,7 @@
             "popularity": 0.238,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15293,
             "win_rate": 0.524,
             "popularity": 0.188,
@@ -6417,7 +6417,7 @@
             "popularity": 0.287,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7712,
             "win_rate": 0.552,
             "popularity": 0.131,
@@ -6455,7 +6455,7 @@
             "popularity": 0.296,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17447,
             "win_rate": 0.494,
             "popularity": 0.135,
@@ -6501,7 +6501,7 @@
             "popularity": 0.209,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13233,
             "win_rate": 0.514,
             "popularity": 0.156,
@@ -6539,7 +6539,7 @@
             "popularity": 0.251,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5570,
             "win_rate": 0.542,
             "popularity": 0.1,
@@ -6577,7 +6577,7 @@
             "popularity": 0.233,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13849,
             "win_rate": 0.484,
             "popularity": 0.168,
@@ -6623,7 +6623,7 @@
             "popularity": 0.259,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14929,
             "win_rate": 0.494,
             "popularity": 0.135,
@@ -6661,7 +6661,7 @@
             "popularity": 0.347,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5795,
             "win_rate": 0.514,
             "popularity": 0.196,
@@ -6699,7 +6699,7 @@
             "popularity": 0.248,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16134,
             "win_rate": 0.464,
             "popularity": 0.163,
@@ -6745,7 +6745,7 @@
             "popularity": 0.241,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14818,
             "win_rate": 0.494,
             "popularity": 0.198,
@@ -6783,7 +6783,7 @@
             "popularity": 0.236,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6855,
             "win_rate": 0.524,
             "popularity": 0.177,
@@ -6821,7 +6821,7 @@
             "popularity": 0.283,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14394,
             "win_rate": 0.474,
             "popularity": 0.13,
@@ -6867,7 +6867,7 @@
             "popularity": 0.33,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12923,
             "win_rate": 0.504,
             "popularity": 0.194,
@@ -6905,7 +6905,7 @@
             "popularity": 0.279,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5555,
             "win_rate": 0.524,
             "popularity": 0.105,
@@ -6943,7 +6943,7 @@
             "popularity": 0.203,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15939,
             "win_rate": 0.474,
             "popularity": 0.115,
@@ -6989,7 +6989,7 @@
             "popularity": 0.203,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10683,
             "win_rate": 0.524,
             "popularity": 0.154,
@@ -7027,7 +7027,7 @@
             "popularity": 0.285,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5977,
             "win_rate": 0.552,
             "popularity": 0.193,
@@ -7065,7 +7065,7 @@
             "popularity": 0.295,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16449,
             "win_rate": 0.494,
             "popularity": 0.161,
@@ -7111,7 +7111,7 @@
             "popularity": 0.231,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13137,
             "win_rate": 0.514,
             "popularity": 0.109,
@@ -7149,7 +7149,7 @@
             "popularity": 0.281,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6332,
             "win_rate": 0.542,
             "popularity": 0.198,
@@ -7187,7 +7187,7 @@
             "popularity": 0.305,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17273,
             "win_rate": 0.494,
             "popularity": 0.17,
@@ -7233,7 +7233,7 @@
             "popularity": 0.292,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12001,
             "win_rate": 0.514,
             "popularity": 0.172,
@@ -7271,7 +7271,7 @@
             "popularity": 0.288,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6490,
             "win_rate": 0.552,
             "popularity": 0.153,
@@ -7309,7 +7309,7 @@
             "popularity": 0.34,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19478,
             "win_rate": 0.494,
             "popularity": 0.112,
@@ -7355,7 +7355,7 @@
             "popularity": 0.218,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15227,
             "win_rate": 0.542,
             "popularity": 0.144,
@@ -7393,7 +7393,7 @@
             "popularity": 0.315,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5985,
             "win_rate": 0.562,
             "popularity": 0.103,
@@ -7431,7 +7431,7 @@
             "popularity": 0.245,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15292,
             "win_rate": 0.504,
             "popularity": 0.133,
@@ -7477,7 +7477,7 @@
             "popularity": 0.307,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10551,
             "win_rate": 0.484,
             "popularity": 0.106,
@@ -7515,7 +7515,7 @@
             "popularity": 0.245,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7751,
             "win_rate": 0.504,
             "popularity": 0.169,
@@ -7553,7 +7553,7 @@
             "popularity": 0.302,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17207,
             "win_rate": 0.464,
             "popularity": 0.147,
@@ -7599,7 +7599,7 @@
             "popularity": 0.312,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14629,
             "win_rate": 0.504,
             "popularity": 0.164,
@@ -7637,7 +7637,7 @@
             "popularity": 0.277,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6896,
             "win_rate": 0.542,
             "popularity": 0.199,
@@ -7675,7 +7675,7 @@
             "popularity": 0.306,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16073,
             "win_rate": 0.484,
             "popularity": 0.182,
@@ -7721,7 +7721,7 @@
             "popularity": 0.218,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15061,
             "win_rate": 0.484,
             "popularity": 0.134,
@@ -7759,7 +7759,7 @@
             "popularity": 0.306,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5820,
             "win_rate": 0.504,
             "popularity": 0.139,
@@ -7797,7 +7797,7 @@
             "popularity": 0.345,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18271,
             "win_rate": 0.454,
             "popularity": 0.172,
@@ -7843,7 +7843,7 @@
             "popularity": 0.286,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14627,
             "win_rate": 0.484,
             "popularity": 0.161,
@@ -7881,7 +7881,7 @@
             "popularity": 0.279,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6572,
             "win_rate": 0.504,
             "popularity": 0.182,
@@ -7919,7 +7919,7 @@
             "popularity": 0.253,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14701,
             "win_rate": 0.454,
             "popularity": 0.115,
@@ -7965,7 +7965,7 @@
             "popularity": 0.251,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11262,
             "win_rate": 0.542,
             "popularity": 0.132,
@@ -8003,7 +8003,7 @@
             "popularity": 0.272,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7129,
             "win_rate": 0.562,
             "popularity": 0.191,
@@ -8041,7 +8041,7 @@
             "popularity": 0.287,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18860,
             "win_rate": 0.504,
             "popularity": 0.136,
@@ -8087,7 +8087,7 @@
             "popularity": 0.301,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15286,
             "win_rate": 0.514,
             "popularity": 0.103,
@@ -8125,7 +8125,7 @@
             "popularity": 0.295,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7595,
             "win_rate": 0.542,
             "popularity": 0.162,
@@ -8163,7 +8163,7 @@
             "popularity": 0.309,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17562,
             "win_rate": 0.484,
             "popularity": 0.198,
@@ -8209,7 +8209,7 @@
             "popularity": 0.298,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11437,
             "win_rate": 0.494,
             "popularity": 0.101,
@@ -8247,7 +8247,7 @@
             "popularity": 0.205,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6144,
             "win_rate": 0.524,
             "popularity": 0.155,
@@ -8285,7 +8285,7 @@
             "popularity": 0.324,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13571,
             "win_rate": 0.474,
             "popularity": 0.127,
@@ -8331,7 +8331,7 @@
             "popularity": 0.281,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12156,
             "win_rate": 0.582,
             "popularity": 0.138,
@@ -8369,7 +8369,7 @@
             "popularity": 0.276,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6019,
             "win_rate": 0.612,
             "popularity": 0.149,
@@ -8407,7 +8407,7 @@
             "popularity": 0.259,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13422,
             "win_rate": 0.552,
             "popularity": 0.119,
@@ -8453,7 +8453,7 @@
             "popularity": 0.304,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13909,
             "win_rate": 0.504,
             "popularity": 0.135,
@@ -8491,7 +8491,7 @@
             "popularity": 0.23,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6622,
             "win_rate": 0.524,
             "popularity": 0.126,
@@ -8529,7 +8529,7 @@
             "popularity": 0.297,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16137,
             "win_rate": 0.474,
             "popularity": 0.193,
@@ -8575,7 +8575,7 @@
             "popularity": 0.273,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10271,
             "win_rate": 0.474,
             "popularity": 0.15,
@@ -8613,7 +8613,7 @@
             "popularity": 0.337,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6597,
             "win_rate": 0.494,
             "popularity": 0.182,
@@ -8651,7 +8651,7 @@
             "popularity": 0.227,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19302,
             "win_rate": 0.444,
             "popularity": 0.174,
@@ -8697,7 +8697,7 @@
             "popularity": 0.315,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11637,
             "win_rate": 0.524,
             "popularity": 0.113,
@@ -8735,7 +8735,7 @@
             "popularity": 0.274,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6015,
             "win_rate": 0.562,
             "popularity": 0.182,
@@ -8773,7 +8773,7 @@
             "popularity": 0.314,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18401,
             "win_rate": 0.494,
             "popularity": 0.176,
@@ -8819,7 +8819,7 @@
             "popularity": 0.256,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14140,
             "win_rate": 0.524,
             "popularity": 0.143,
@@ -8857,7 +8857,7 @@
             "popularity": 0.321,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7942,
             "win_rate": 0.562,
             "popularity": 0.164,
@@ -8895,7 +8895,7 @@
             "popularity": 0.279,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15192,
             "win_rate": 0.504,
             "popularity": 0.188,
@@ -8941,7 +8941,7 @@
             "popularity": 0.217,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13483,
             "win_rate": 0.524,
             "popularity": 0.182,
@@ -8979,7 +8979,7 @@
             "popularity": 0.29,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6229,
             "win_rate": 0.552,
             "popularity": 0.103,
@@ -9017,7 +9017,7 @@
             "popularity": 0.313,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18016,
             "win_rate": 0.494,
             "popularity": 0.158,
@@ -9063,7 +9063,7 @@
             "popularity": 0.31,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12956,
             "win_rate": 0.514,
             "popularity": 0.186,
@@ -9101,7 +9101,7 @@
             "popularity": 0.205,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5899,
             "win_rate": 0.542,
             "popularity": 0.122,
@@ -9139,7 +9139,7 @@
             "popularity": 0.223,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16066,
             "win_rate": 0.484,
             "popularity": 0.109,
@@ -9185,7 +9185,7 @@
             "popularity": 0.281,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13638,
             "win_rate": 0.552,
             "popularity": 0.105,
@@ -9223,7 +9223,7 @@
             "popularity": 0.305,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5540,
             "win_rate": 0.572,
             "popularity": 0.182,
@@ -9261,7 +9261,7 @@
             "popularity": 0.254,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15496,
             "win_rate": 0.514,
             "popularity": 0.103,
@@ -9307,7 +9307,7 @@
             "popularity": 0.2,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14954,
             "win_rate": 0.474,
             "popularity": 0.148,
@@ -9345,7 +9345,7 @@
             "popularity": 0.318,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6220,
             "win_rate": 0.494,
             "popularity": 0.186,
@@ -9383,7 +9383,7 @@
             "popularity": 0.299,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15267,
             "win_rate": 0.454,
             "popularity": 0.196,
@@ -9429,7 +9429,7 @@
             "popularity": 0.249,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12359,
             "win_rate": 0.504,
             "popularity": 0.119,
@@ -9467,7 +9467,7 @@
             "popularity": 0.224,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6816,
             "win_rate": 0.524,
             "popularity": 0.181,
@@ -9505,7 +9505,7 @@
             "popularity": 0.319,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19244,
             "win_rate": 0.474,
             "popularity": 0.163,
@@ -9551,7 +9551,7 @@
             "popularity": 0.305,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14026,
             "win_rate": 0.504,
             "popularity": 0.115,
@@ -9589,7 +9589,7 @@
             "popularity": 0.319,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5511,
             "win_rate": 0.524,
             "popularity": 0.113,
@@ -9627,7 +9627,7 @@
             "popularity": 0.234,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16128,
             "win_rate": 0.474,
             "popularity": 0.103,
@@ -9673,7 +9673,7 @@
             "popularity": 0.233,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14628,
             "win_rate": 0.542,
             "popularity": 0.116,
@@ -9711,7 +9711,7 @@
             "popularity": 0.204,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6292,
             "win_rate": 0.562,
             "popularity": 0.158,
@@ -9749,7 +9749,7 @@
             "popularity": 0.311,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16904,
             "win_rate": 0.504,
             "popularity": 0.182,
@@ -9795,7 +9795,7 @@
             "popularity": 0.335,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15147,
             "win_rate": 0.504,
             "popularity": 0.166,
@@ -9833,7 +9833,7 @@
             "popularity": 0.201,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7725,
             "win_rate": 0.542,
             "popularity": 0.119,
@@ -9871,7 +9871,7 @@
             "popularity": 0.28,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15268,
             "win_rate": 0.484,
             "popularity": 0.144,
@@ -9917,7 +9917,7 @@
             "popularity": 0.252,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14966,
             "win_rate": 0.542,
             "popularity": 0.135,
@@ -9955,7 +9955,7 @@
             "popularity": 0.286,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6383,
             "win_rate": 0.572,
             "popularity": 0.138,
@@ -9993,7 +9993,7 @@
             "popularity": 0.208,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16453,
             "win_rate": 0.514,
             "popularity": 0.134,
@@ -10039,7 +10039,7 @@
             "popularity": 0.265,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14690,
             "win_rate": 0.504,
             "popularity": 0.113,
@@ -10077,7 +10077,7 @@
             "popularity": 0.339,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7079,
             "win_rate": 0.524,
             "popularity": 0.102,
@@ -10115,7 +10115,7 @@
             "popularity": 0.24,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16144,
             "win_rate": 0.474,
             "popularity": 0.112,
@@ -10161,7 +10161,7 @@
             "popularity": 0.328,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12416,
             "win_rate": 0.474,
             "popularity": 0.109,
@@ -10199,7 +10199,7 @@
             "popularity": 0.262,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6126,
             "win_rate": 0.504,
             "popularity": 0.159,
@@ -10237,7 +10237,7 @@
             "popularity": 0.342,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15110,
             "win_rate": 0.454,
             "popularity": 0.147,
@@ -10283,7 +10283,7 @@
             "popularity": 0.341,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12532,
             "win_rate": 0.542,
             "popularity": 0.157,
@@ -10321,7 +10321,7 @@
             "popularity": 0.247,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7603,
             "win_rate": 0.572,
             "popularity": 0.138,
@@ -10359,7 +10359,7 @@
             "popularity": 0.263,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13392,
             "win_rate": 0.514,
             "popularity": 0.117,
@@ -10405,7 +10405,7 @@
             "popularity": 0.341,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12923,
             "win_rate": 0.514,
             "popularity": 0.12,
@@ -10443,7 +10443,7 @@
             "popularity": 0.306,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5935,
             "win_rate": 0.552,
             "popularity": 0.12,
@@ -10481,7 +10481,7 @@
             "popularity": 0.288,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15925,
             "win_rate": 0.494,
             "popularity": 0.134,
@@ -10527,7 +10527,7 @@
             "popularity": 0.255,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10503,
             "win_rate": 0.474,
             "popularity": 0.167,
@@ -10565,7 +10565,7 @@
             "popularity": 0.201,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6131,
             "win_rate": 0.494,
             "popularity": 0.196,
@@ -10603,7 +10603,7 @@
             "popularity": 0.308,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18052,
             "win_rate": 0.454,
             "popularity": 0.198,
@@ -10649,7 +10649,7 @@
             "popularity": 0.302,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13730,
             "win_rate": 0.542,
             "popularity": 0.186,
@@ -10687,7 +10687,7 @@
             "popularity": 0.247,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7179,
             "win_rate": 0.572,
             "popularity": 0.189,
@@ -10725,7 +10725,7 @@
             "popularity": 0.306,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17914,
             "win_rate": 0.514,
             "popularity": 0.139,
@@ -10771,7 +10771,7 @@
             "popularity": 0.259,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10393,
             "win_rate": 0.474,
             "popularity": 0.177,
@@ -10809,7 +10809,7 @@
             "popularity": 0.27,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6467,
             "win_rate": 0.504,
             "popularity": 0.171,
@@ -10847,7 +10847,7 @@
             "popularity": 0.224,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19217,
             "win_rate": 0.454,
             "popularity": 0.181,
@@ -10893,7 +10893,7 @@
             "popularity": 0.302,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14590,
             "win_rate": 0.504,
             "popularity": 0.16,
@@ -10931,7 +10931,7 @@
             "popularity": 0.254,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7561,
             "win_rate": 0.524,
             "popularity": 0.175,
@@ -10969,7 +10969,7 @@
             "popularity": 0.225,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16534,
             "win_rate": 0.484,
             "popularity": 0.154,
@@ -11015,7 +11015,7 @@
             "popularity": 0.297,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14987,
             "win_rate": 0.474,
             "popularity": 0.165,
@@ -11053,7 +11053,7 @@
             "popularity": 0.229,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7263,
             "win_rate": 0.494,
             "popularity": 0.157,
@@ -11091,7 +11091,7 @@
             "popularity": 0.344,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14198,
             "win_rate": 0.454,
             "popularity": 0.169,
@@ -11137,7 +11137,7 @@
             "popularity": 0.285,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10549,
             "win_rate": 0.504,
             "popularity": 0.168,
@@ -11175,7 +11175,7 @@
             "popularity": 0.325,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7782,
             "win_rate": 0.542,
             "popularity": 0.182,
@@ -11213,7 +11213,7 @@
             "popularity": 0.306,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14553,
             "win_rate": 0.484,
             "popularity": 0.146,
@@ -11259,7 +11259,7 @@
             "popularity": 0.227,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11720,
             "win_rate": 0.494,
             "popularity": 0.182,
@@ -11297,7 +11297,7 @@
             "popularity": 0.242,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6638,
             "win_rate": 0.524,
             "popularity": 0.11,
@@ -11335,7 +11335,7 @@
             "popularity": 0.337,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15460,
             "win_rate": 0.474,
             "popularity": 0.143,
@@ -11381,7 +11381,7 @@
             "popularity": 0.263,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13518,
             "win_rate": 0.542,
             "popularity": 0.195,
@@ -11419,7 +11419,7 @@
             "popularity": 0.258,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7138,
             "win_rate": 0.562,
             "popularity": 0.124,
@@ -11457,7 +11457,7 @@
             "popularity": 0.312,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15986,
             "win_rate": 0.504,
             "popularity": 0.133,
@@ -11503,7 +11503,7 @@
             "popularity": 0.308,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12435,
             "win_rate": 0.542,
             "popularity": 0.106,
@@ -11541,7 +11541,7 @@
             "popularity": 0.24,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6606,
             "win_rate": 0.562,
             "popularity": 0.112,
@@ -11579,7 +11579,7 @@
             "popularity": 0.279,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17003,
             "win_rate": 0.504,
             "popularity": 0.168,
@@ -11625,7 +11625,7 @@
             "popularity": 0.27,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10499,
             "win_rate": 0.514,
             "popularity": 0.161,
@@ -11663,7 +11663,7 @@
             "popularity": 0.291,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7395,
             "win_rate": 0.552,
             "popularity": 0.134,
@@ -11701,7 +11701,7 @@
             "popularity": 0.336,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14743,
             "win_rate": 0.494,
             "popularity": 0.189,
@@ -11747,7 +11747,7 @@
             "popularity": 0.282,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10509,
             "win_rate": 0.474,
             "popularity": 0.185,
@@ -11785,7 +11785,7 @@
             "popularity": 0.296,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6404,
             "win_rate": 0.494,
             "popularity": 0.113,
@@ -11823,7 +11823,7 @@
             "popularity": 0.238,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13354,
             "win_rate": 0.454,
             "popularity": 0.135,
@@ -11869,7 +11869,7 @@
             "popularity": 0.268,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12254,
             "win_rate": 0.494,
             "popularity": 0.119,
@@ -11907,7 +11907,7 @@
             "popularity": 0.32,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6601,
             "win_rate": 0.514,
             "popularity": 0.104,
@@ -11945,7 +11945,7 @@
             "popularity": 0.218,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15192,
             "win_rate": 0.464,
             "popularity": 0.187,
@@ -11991,7 +11991,7 @@
             "popularity": 0.291,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14749,
             "win_rate": 0.514,
             "popularity": 0.108,
@@ -12029,7 +12029,7 @@
             "popularity": 0.215,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7281,
             "win_rate": 0.542,
             "popularity": 0.184,
@@ -12067,7 +12067,7 @@
             "popularity": 0.223,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15625,
             "win_rate": 0.484,
             "popularity": 0.117,
@@ -12113,7 +12113,7 @@
             "popularity": 0.207,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11893,
             "win_rate": 0.504,
             "popularity": 0.146,
@@ -12151,7 +12151,7 @@
             "popularity": 0.324,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6952,
             "win_rate": 0.524,
             "popularity": 0.114,
@@ -12189,7 +12189,7 @@
             "popularity": 0.246,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17509,
             "win_rate": 0.474,
             "popularity": 0.145,
@@ -12235,7 +12235,7 @@
             "popularity": 0.27,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14872,
             "win_rate": 0.514,
             "popularity": 0.19,
@@ -12273,7 +12273,7 @@
             "popularity": 0.293,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6638,
             "win_rate": 0.542,
             "popularity": 0.168,
@@ -12311,7 +12311,7 @@
             "popularity": 0.206,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19679,
             "win_rate": 0.494,
             "popularity": 0.109,
@@ -12357,7 +12357,7 @@
             "popularity": 0.344,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10816,
             "win_rate": 0.494,
             "popularity": 0.14,
@@ -12395,7 +12395,7 @@
             "popularity": 0.215,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7864,
             "win_rate": 0.514,
             "popularity": 0.111,
@@ -12433,7 +12433,7 @@
             "popularity": 0.249,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17392,
             "win_rate": 0.474,
             "popularity": 0.18,
@@ -12479,7 +12479,7 @@
             "popularity": 0.308,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13995,
             "win_rate": 0.504,
             "popularity": 0.104,
@@ -12517,7 +12517,7 @@
             "popularity": 0.306,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6796,
             "win_rate": 0.524,
             "popularity": 0.163,
@@ -12555,7 +12555,7 @@
             "popularity": 0.319,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14595,
             "win_rate": 0.484,
             "popularity": 0.142,
@@ -12601,7 +12601,7 @@
             "popularity": 0.349,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14833,
             "win_rate": 0.494,
             "popularity": 0.134,
@@ -12639,7 +12639,7 @@
             "popularity": 0.287,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6641,
             "win_rate": 0.524,
             "popularity": 0.183,
@@ -12677,7 +12677,7 @@
             "popularity": 0.25,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15212,
             "win_rate": 0.474,
             "popularity": 0.102,
@@ -12723,7 +12723,7 @@
             "popularity": 0.265,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13877,
             "win_rate": 0.524,
             "popularity": 0.182,
@@ -12761,7 +12761,7 @@
             "popularity": 0.331,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7448,
             "win_rate": 0.562,
             "popularity": 0.183,
@@ -12799,7 +12799,7 @@
             "popularity": 0.224,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15721,
             "win_rate": 0.504,
             "popularity": 0.168,
@@ -12845,7 +12845,7 @@
             "popularity": 0.23,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13698,
             "win_rate": 0.494,
             "popularity": 0.125,
@@ -12883,7 +12883,7 @@
             "popularity": 0.317,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7202,
             "win_rate": 0.514,
             "popularity": 0.152,
@@ -12921,7 +12921,7 @@
             "popularity": 0.329,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18478,
             "win_rate": 0.464,
             "popularity": 0.115,
@@ -12967,7 +12967,7 @@
             "popularity": 0.286,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11414,
             "win_rate": 0.514,
             "popularity": 0.143,
@@ -13005,7 +13005,7 @@
             "popularity": 0.26,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6334,
             "win_rate": 0.552,
             "popularity": 0.185,
@@ -13043,7 +13043,7 @@
             "popularity": 0.279,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16300,
             "win_rate": 0.494,
             "popularity": 0.154,
@@ -13089,7 +13089,7 @@
             "popularity": 0.248,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12674,
             "win_rate": 0.494,
             "popularity": 0.192,
@@ -13127,7 +13127,7 @@
             "popularity": 0.236,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 8054,
             "win_rate": 0.514,
             "popularity": 0.18,
@@ -13165,7 +13165,7 @@
             "popularity": 0.284,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19529,
             "win_rate": 0.474,
             "popularity": 0.137,
@@ -13211,7 +13211,7 @@
             "popularity": 0.216,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14684,
             "win_rate": 0.524,
             "popularity": 0.198,
@@ -13249,7 +13249,7 @@
             "popularity": 0.293,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7779,
             "win_rate": 0.552,
             "popularity": 0.184,
@@ -13287,7 +13287,7 @@
             "popularity": 0.248,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14660,
             "win_rate": 0.494,
             "popularity": 0.158,
@@ -13333,7 +13333,7 @@
             "popularity": 0.26,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12929,
             "win_rate": 0.494,
             "popularity": 0.177,
@@ -13371,7 +13371,7 @@
             "popularity": 0.345,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5615,
             "win_rate": 0.514,
             "popularity": 0.106,
@@ -13409,7 +13409,7 @@
             "popularity": 0.347,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15930,
             "win_rate": 0.474,
             "popularity": 0.139,
@@ -13455,7 +13455,7 @@
             "popularity": 0.261,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11912,
             "win_rate": 0.542,
             "popularity": 0.162,
@@ -13493,7 +13493,7 @@
             "popularity": 0.301,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7860,
             "win_rate": 0.572,
             "popularity": 0.148,
@@ -13531,7 +13531,7 @@
             "popularity": 0.272,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14349,
             "win_rate": 0.514,
             "popularity": 0.117,
@@ -13577,7 +13577,7 @@
             "popularity": 0.349,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11664,
             "win_rate": 0.552,
             "popularity": 0.159,
@@ -13615,7 +13615,7 @@
             "popularity": 0.233,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6588,
             "win_rate": 0.572,
             "popularity": 0.146,
@@ -13653,7 +13653,7 @@
             "popularity": 0.325,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15037,
             "win_rate": 0.514,
             "popularity": 0.129,
@@ -13699,7 +13699,7 @@
             "popularity": 0.265,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14818,
             "win_rate": 0.504,
             "popularity": 0.142,
@@ -13737,7 +13737,7 @@
             "popularity": 0.287,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6768,
             "win_rate": 0.524,
             "popularity": 0.132,
@@ -13775,7 +13775,7 @@
             "popularity": 0.242,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14595,
             "win_rate": 0.484,
             "popularity": 0.122,
@@ -13821,7 +13821,7 @@
             "popularity": 0.295,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10810,
             "win_rate": 0.524,
             "popularity": 0.143,
@@ -13859,7 +13859,7 @@
             "popularity": 0.202,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5510,
             "win_rate": 0.562,
             "popularity": 0.146,
@@ -13897,7 +13897,7 @@
             "popularity": 0.284,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15851,
             "win_rate": 0.494,
             "popularity": 0.109,
@@ -13943,7 +13943,7 @@
             "popularity": 0.303,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11691,
             "win_rate": 0.524,
             "popularity": 0.151,
@@ -13981,7 +13981,7 @@
             "popularity": 0.217,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7924,
             "win_rate": 0.562,
             "popularity": 0.17,
@@ -14019,7 +14019,7 @@
             "popularity": 0.209,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18697,
             "win_rate": 0.504,
             "popularity": 0.147,
@@ -14065,7 +14065,7 @@
             "popularity": 0.214,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12907,
             "win_rate": 0.484,
             "popularity": 0.161,
@@ -14103,7 +14103,7 @@
             "popularity": 0.218,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6644,
             "win_rate": 0.514,
             "popularity": 0.168,
@@ -14141,7 +14141,7 @@
             "popularity": 0.325,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14496,
             "win_rate": 0.464,
             "popularity": 0.158,
@@ -14187,7 +14187,7 @@
             "popularity": 0.331,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11440,
             "win_rate": 0.484,
             "popularity": 0.146,
@@ -14225,7 +14225,7 @@
             "popularity": 0.33,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6946,
             "win_rate": 0.504,
             "popularity": 0.133,
@@ -14263,7 +14263,7 @@
             "popularity": 0.34,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18736,
             "win_rate": 0.464,
             "popularity": 0.166,
@@ -14309,7 +14309,7 @@
             "popularity": 0.278,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12674,
             "win_rate": 0.494,
             "popularity": 0.166,
@@ -14347,7 +14347,7 @@
             "popularity": 0.21,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7216,
             "win_rate": 0.524,
             "popularity": 0.138,
@@ -14385,7 +14385,7 @@
             "popularity": 0.257,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18812,
             "win_rate": 0.474,
             "popularity": 0.104,
@@ -14431,7 +14431,7 @@
             "popularity": 0.311,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10472,
             "win_rate": 0.514,
             "popularity": 0.181,
@@ -14469,7 +14469,7 @@
             "popularity": 0.236,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5982,
             "win_rate": 0.552,
             "popularity": 0.164,
@@ -14507,7 +14507,7 @@
             "popularity": 0.246,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14645,
             "win_rate": 0.494,
             "popularity": 0.176,
@@ -14553,7 +14553,7 @@
             "popularity": 0.32,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10600,
             "win_rate": 0.542,
             "popularity": 0.187,
@@ -14591,7 +14591,7 @@
             "popularity": 0.24,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6156,
             "win_rate": 0.562,
             "popularity": 0.138,
@@ -14629,7 +14629,7 @@
             "popularity": 0.206,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15945,
             "win_rate": 0.504,
             "popularity": 0.159,
@@ -14675,7 +14675,7 @@
             "popularity": 0.304,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14953,
             "win_rate": 0.542,
             "popularity": 0.124,
@@ -14713,7 +14713,7 @@
             "popularity": 0.261,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6281,
             "win_rate": 0.572,
             "popularity": 0.186,
@@ -14751,7 +14751,7 @@
             "popularity": 0.294,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14887,
             "win_rate": 0.514,
             "popularity": 0.154,
@@ -14797,7 +14797,7 @@
             "popularity": 0.284,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14078,
             "win_rate": 0.494,
             "popularity": 0.124,
@@ -14835,7 +14835,7 @@
             "popularity": 0.255,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7827,
             "win_rate": 0.524,
             "popularity": 0.102,
@@ -14873,7 +14873,7 @@
             "popularity": 0.286,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18665,
             "win_rate": 0.474,
             "popularity": 0.132,
@@ -14919,7 +14919,7 @@
             "popularity": 0.273,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14353,
             "win_rate": 0.504,
             "popularity": 0.116,
@@ -14957,7 +14957,7 @@
             "popularity": 0.303,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6337,
             "win_rate": 0.542,
             "popularity": 0.189,
@@ -14995,7 +14995,7 @@
             "popularity": 0.226,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13537,
             "win_rate": 0.484,
             "popularity": 0.146,
@@ -15041,7 +15041,7 @@
             "popularity": 0.214,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14169,
             "win_rate": 0.484,
             "popularity": 0.172,
@@ -15079,7 +15079,7 @@
             "popularity": 0.258,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7098,
             "win_rate": 0.514,
             "popularity": 0.129,
@@ -15117,7 +15117,7 @@
             "popularity": 0.309,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16694,
             "win_rate": 0.464,
             "popularity": 0.174,
@@ -15163,7 +15163,7 @@
             "popularity": 0.229,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11407,
             "win_rate": 0.494,
             "popularity": 0.177,
@@ -15201,7 +15201,7 @@
             "popularity": 0.256,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7454,
             "win_rate": 0.524,
             "popularity": 0.145,
@@ -15239,7 +15239,7 @@
             "popularity": 0.271,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13996,
             "win_rate": 0.474,
             "popularity": 0.104,
@@ -15285,7 +15285,7 @@
             "popularity": 0.331,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14998,
             "win_rate": 0.444,
             "popularity": 0.169,
@@ -15323,7 +15323,7 @@
             "popularity": 0.205,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7193,
             "win_rate": 0.474,
             "popularity": 0.112,
@@ -15361,7 +15361,7 @@
             "popularity": 0.218,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15078,
             "win_rate": 0.424,
             "popularity": 0.104,
@@ -15407,7 +15407,7 @@
             "popularity": 0.217,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14884,
             "win_rate": 0.552,
             "popularity": 0.108,
@@ -15445,7 +15445,7 @@
             "popularity": 0.211,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7638,
             "win_rate": 0.572,
             "popularity": 0.189,
@@ -15483,7 +15483,7 @@
             "popularity": 0.338,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15326,
             "win_rate": 0.514,
             "popularity": 0.199,
@@ -15529,7 +15529,7 @@
             "popularity": 0.223,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12635,
             "win_rate": 0.494,
             "popularity": 0.2,
@@ -15567,7 +15567,7 @@
             "popularity": 0.252,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6789,
             "win_rate": 0.514,
             "popularity": 0.154,
@@ -15605,7 +15605,7 @@
             "popularity": 0.339,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16432,
             "win_rate": 0.464,
             "popularity": 0.16,
@@ -15651,7 +15651,7 @@
             "popularity": 0.342,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13278,
             "win_rate": 0.542,
             "popularity": 0.102,
@@ -15689,7 +15689,7 @@
             "popularity": 0.324,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7927,
             "win_rate": 0.562,
             "popularity": 0.187,
@@ -15727,7 +15727,7 @@
             "popularity": 0.321,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13243,
             "win_rate": 0.504,
             "popularity": 0.167,
@@ -15773,7 +15773,7 @@
             "popularity": 0.244,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13199,
             "win_rate": 0.514,
             "popularity": 0.116,
@@ -15811,7 +15811,7 @@
             "popularity": 0.298,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7340,
             "win_rate": 0.542,
             "popularity": 0.16,
@@ -15849,7 +15849,7 @@
             "popularity": 0.211,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17526,
             "win_rate": 0.484,
             "popularity": 0.181,
@@ -15895,7 +15895,7 @@
             "popularity": 0.335,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13331,
             "win_rate": 0.494,
             "popularity": 0.175,
@@ -15933,7 +15933,7 @@
             "popularity": 0.246,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6117,
             "win_rate": 0.514,
             "popularity": 0.11,
@@ -15971,7 +15971,7 @@
             "popularity": 0.34,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14412,
             "win_rate": 0.474,
             "popularity": 0.194,
@@ -16017,7 +16017,7 @@
             "popularity": 0.239,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13366,
             "win_rate": 0.484,
             "popularity": 0.14,
@@ -16055,7 +16055,7 @@
             "popularity": 0.229,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6035,
             "win_rate": 0.504,
             "popularity": 0.121,
@@ -16093,7 +16093,7 @@
             "popularity": 0.328,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19646,
             "win_rate": 0.464,
             "popularity": 0.192,
@@ -16139,7 +16139,7 @@
             "popularity": 0.246,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13114,
             "win_rate": 0.484,
             "popularity": 0.195,
@@ -16177,7 +16177,7 @@
             "popularity": 0.224,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6490,
             "win_rate": 0.514,
             "popularity": 0.192,
@@ -16215,7 +16215,7 @@
             "popularity": 0.337,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15926,
             "win_rate": 0.464,
             "popularity": 0.169,
@@ -16261,7 +16261,7 @@
             "popularity": 0.273,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11911,
             "win_rate": 0.484,
             "popularity": 0.105,
@@ -16299,7 +16299,7 @@
             "popularity": 0.281,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5755,
             "win_rate": 0.504,
             "popularity": 0.199,
@@ -16337,7 +16337,7 @@
             "popularity": 0.238,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18563,
             "win_rate": 0.454,
             "popularity": 0.151,
@@ -16383,7 +16383,7 @@
             "popularity": 0.24,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13914,
             "win_rate": 0.484,
             "popularity": 0.169,
@@ -16421,7 +16421,7 @@
             "popularity": 0.204,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5797,
             "win_rate": 0.504,
             "popularity": 0.165,
@@ -16459,7 +16459,7 @@
             "popularity": 0.321,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18462,
             "win_rate": 0.454,
             "popularity": 0.127,
@@ -16505,7 +16505,7 @@
             "popularity": 0.279,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12552,
             "win_rate": 0.464,
             "popularity": 0.199,
@@ -16543,7 +16543,7 @@
             "popularity": 0.247,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 8044,
             "win_rate": 0.494,
             "popularity": 0.153,
@@ -16581,7 +16581,7 @@
             "popularity": 0.279,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19464,
             "win_rate": 0.444,
             "popularity": 0.134,
@@ -16627,7 +16627,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15229,
             "win_rate": 0.542,
             "popularity": 0.116,
@@ -16665,7 +16665,7 @@
             "popularity": 0.268,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7878,
             "win_rate": 0.562,
             "popularity": 0.105,
@@ -16703,7 +16703,7 @@
             "popularity": 0.322,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17433,
             "win_rate": 0.504,
             "popularity": 0.162,
@@ -16749,7 +16749,7 @@
             "popularity": 0.284,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14702,
             "win_rate": 0.524,
             "popularity": 0.128,
@@ -16787,7 +16787,7 @@
             "popularity": 0.231,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7606,
             "win_rate": 0.562,
             "popularity": 0.126,
@@ -16825,7 +16825,7 @@
             "popularity": 0.266,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17941,
             "win_rate": 0.504,
             "popularity": 0.182,
@@ -16871,7 +16871,7 @@
             "popularity": 0.276,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12215,
             "win_rate": 0.552,
             "popularity": 0.189,
@@ -16909,7 +16909,7 @@
             "popularity": 0.273,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6444,
             "win_rate": 0.572,
             "popularity": 0.125,
@@ -16947,7 +16947,7 @@
             "popularity": 0.206,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13286,
             "win_rate": 0.514,
             "popularity": 0.175,
@@ -16993,7 +16993,7 @@
             "popularity": 0.31,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11370,
             "win_rate": 0.542,
             "popularity": 0.13,
@@ -17031,7 +17031,7 @@
             "popularity": 0.314,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7492,
             "win_rate": 0.572,
             "popularity": 0.18,
@@ -17069,7 +17069,7 @@
             "popularity": 0.304,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17609,
             "win_rate": 0.514,
             "popularity": 0.136,
@@ -17115,7 +17115,7 @@
             "popularity": 0.307,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15265,
             "win_rate": 0.524,
             "popularity": 0.191,
@@ -17153,7 +17153,7 @@
             "popularity": 0.316,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7303,
             "win_rate": 0.552,
             "popularity": 0.113,
@@ -17191,7 +17191,7 @@
             "popularity": 0.322,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16993,
             "win_rate": 0.494,
             "popularity": 0.175,
@@ -17237,7 +17237,7 @@
             "popularity": 0.314,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13739,
             "win_rate": 0.542,
             "popularity": 0.17,
@@ -17275,7 +17275,7 @@
             "popularity": 0.239,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7498,
             "win_rate": 0.562,
             "popularity": 0.114,
@@ -17313,7 +17313,7 @@
             "popularity": 0.292,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19522,
             "win_rate": 0.504,
             "popularity": 0.175,
@@ -17359,7 +17359,7 @@
             "popularity": 0.21,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13382,
             "win_rate": 0.474,
             "popularity": 0.133,
@@ -17397,7 +17397,7 @@
             "popularity": 0.313,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5546,
             "win_rate": 0.494,
             "popularity": 0.193,
@@ -17435,7 +17435,7 @@
             "popularity": 0.31,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18482,
             "win_rate": 0.454,
             "popularity": 0.151,
@@ -17481,7 +17481,7 @@
             "popularity": 0.321,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11131,
             "win_rate": 0.514,
             "popularity": 0.184,
@@ -17519,7 +17519,7 @@
             "popularity": 0.263,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6929,
             "win_rate": 0.552,
             "popularity": 0.158,
@@ -17557,7 +17557,7 @@
             "popularity": 0.24,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14575,
             "win_rate": 0.494,
             "popularity": 0.178,
@@ -17603,7 +17603,7 @@
             "popularity": 0.261,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14362,
             "win_rate": 0.514,
             "popularity": 0.159,
@@ -17641,7 +17641,7 @@
             "popularity": 0.308,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7864,
             "win_rate": 0.542,
             "popularity": 0.113,
@@ -17679,7 +17679,7 @@
             "popularity": 0.302,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15006,
             "win_rate": 0.484,
             "popularity": 0.153,
@@ -17725,7 +17725,7 @@
             "popularity": 0.33,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14292,
             "win_rate": 0.484,
             "popularity": 0.135,
@@ -17763,7 +17763,7 @@
             "popularity": 0.317,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6519,
             "win_rate": 0.504,
             "popularity": 0.124,
@@ -17801,7 +17801,7 @@
             "popularity": 0.324,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16783,
             "win_rate": 0.464,
             "popularity": 0.158,
@@ -17847,7 +17847,7 @@
             "popularity": 0.323,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10852,
             "win_rate": 0.504,
             "popularity": 0.125,
@@ -17885,7 +17885,7 @@
             "popularity": 0.279,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6752,
             "win_rate": 0.542,
             "popularity": 0.147,
@@ -17923,7 +17923,7 @@
             "popularity": 0.246,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15430,
             "win_rate": 0.484,
             "popularity": 0.158,
@@ -17969,7 +17969,7 @@
             "popularity": 0.266,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12375,
             "win_rate": 0.542,
             "popularity": 0.195,
@@ -18007,7 +18007,7 @@
             "popularity": 0.254,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7753,
             "win_rate": 0.562,
             "popularity": 0.12,
@@ -18045,7 +18045,7 @@
             "popularity": 0.258,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17613,
             "win_rate": 0.504,
             "popularity": 0.158,
@@ -18091,7 +18091,7 @@
             "popularity": 0.246,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14495,
             "win_rate": 0.494,
             "popularity": 0.168,
@@ -18129,7 +18129,7 @@
             "popularity": 0.269,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6871,
             "win_rate": 0.514,
             "popularity": 0.155,
@@ -18167,7 +18167,7 @@
             "popularity": 0.269,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17642,
             "win_rate": 0.474,
             "popularity": 0.167,
@@ -18213,7 +18213,7 @@
             "popularity": 0.206,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11466,
             "win_rate": 0.504,
             "popularity": 0.144,
@@ -18251,7 +18251,7 @@
             "popularity": 0.348,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7495,
             "win_rate": 0.542,
             "popularity": 0.142,
@@ -18289,7 +18289,7 @@
             "popularity": 0.348,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13678,
             "win_rate": 0.484,
             "popularity": 0.143,
@@ -18335,7 +18335,7 @@
             "popularity": 0.344,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11218,
             "win_rate": 0.552,
             "popularity": 0.127,
@@ -18373,7 +18373,7 @@
             "popularity": 0.203,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7730,
             "win_rate": 0.582,
             "popularity": 0.16,
@@ -18411,7 +18411,7 @@
             "popularity": 0.215,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13644,
             "win_rate": 0.524,
             "popularity": 0.166,
@@ -18457,7 +18457,7 @@
             "popularity": 0.293,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10951,
             "win_rate": 0.494,
             "popularity": 0.178,
@@ -18495,7 +18495,7 @@
             "popularity": 0.233,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7978,
             "win_rate": 0.514,
             "popularity": 0.158,
@@ -18533,7 +18533,7 @@
             "popularity": 0.263,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13932,
             "win_rate": 0.464,
             "popularity": 0.18,
@@ -18579,7 +18579,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13899,
             "win_rate": 0.524,
             "popularity": 0.196,
@@ -18617,7 +18617,7 @@
             "popularity": 0.226,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7724,
             "win_rate": 0.552,
             "popularity": 0.183,
@@ -18655,7 +18655,7 @@
             "popularity": 0.222,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18029,
             "win_rate": 0.494,
             "popularity": 0.147,
@@ -18701,7 +18701,7 @@
             "popularity": 0.275,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11216,
             "win_rate": 0.474,
             "popularity": 0.146,
@@ -18739,7 +18739,7 @@
             "popularity": 0.266,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5783,
             "win_rate": 0.494,
             "popularity": 0.118,
@@ -18777,7 +18777,7 @@
             "popularity": 0.298,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14868,
             "win_rate": 0.454,
             "popularity": 0.141,
@@ -18823,7 +18823,7 @@
             "popularity": 0.314,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12756,
             "win_rate": 0.504,
             "popularity": 0.142,
@@ -18861,7 +18861,7 @@
             "popularity": 0.331,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6377,
             "win_rate": 0.542,
             "popularity": 0.138,
@@ -18899,7 +18899,7 @@
             "popularity": 0.331,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13852,
             "win_rate": 0.484,
             "popularity": 0.174,
@@ -18945,7 +18945,7 @@
             "popularity": 0.24,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11208,
             "win_rate": 0.542,
             "popularity": 0.176,
@@ -18983,7 +18983,7 @@
             "popularity": 0.203,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7610,
             "win_rate": 0.562,
             "popularity": 0.169,
@@ -19021,7 +19021,7 @@
             "popularity": 0.276,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17148,
             "win_rate": 0.504,
             "popularity": 0.106,
@@ -19067,7 +19067,7 @@
             "popularity": 0.317,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11791,
             "win_rate": 0.494,
             "popularity": 0.15,
@@ -19105,7 +19105,7 @@
             "popularity": 0.22,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6858,
             "win_rate": 0.524,
             "popularity": 0.114,
@@ -19143,7 +19143,7 @@
             "popularity": 0.301,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15738,
             "win_rate": 0.474,
             "popularity": 0.112,
@@ -19189,7 +19189,7 @@
             "popularity": 0.34,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10908,
             "win_rate": 0.484,
             "popularity": 0.13,
@@ -19227,7 +19227,7 @@
             "popularity": 0.344,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6456,
             "win_rate": 0.514,
             "popularity": 0.184,
@@ -19265,7 +19265,7 @@
             "popularity": 0.327,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14534,
             "win_rate": 0.464,
             "popularity": 0.133,
@@ -19311,7 +19311,7 @@
             "popularity": 0.202,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12072,
             "win_rate": 0.542,
             "popularity": 0.115,
@@ -19349,7 +19349,7 @@
             "popularity": 0.323,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5634,
             "win_rate": 0.572,
             "popularity": 0.187,
@@ -19387,7 +19387,7 @@
             "popularity": 0.276,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17854,
             "win_rate": 0.504,
             "popularity": 0.15,
@@ -19433,7 +19433,7 @@
             "popularity": 0.214,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12911,
             "win_rate": 0.562,
             "popularity": 0.107,
@@ -19471,7 +19471,7 @@
             "popularity": 0.302,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6113,
             "win_rate": 0.582,
             "popularity": 0.156,
@@ -19509,7 +19509,7 @@
             "popularity": 0.253,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15445,
             "win_rate": 0.524,
             "popularity": 0.187,
@@ -19555,7 +19555,7 @@
             "popularity": 0.258,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11799,
             "win_rate": 0.474,
             "popularity": 0.155,
@@ -19593,7 +19593,7 @@
             "popularity": 0.211,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6504,
             "win_rate": 0.494,
             "popularity": 0.106,
@@ -19631,7 +19631,7 @@
             "popularity": 0.347,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17740,
             "win_rate": 0.454,
             "popularity": 0.11,
@@ -19677,7 +19677,7 @@
             "popularity": 0.293,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14114,
             "win_rate": 0.474,
             "popularity": 0.119,
@@ -19715,7 +19715,7 @@
             "popularity": 0.304,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6330,
             "win_rate": 0.494,
             "popularity": 0.129,
@@ -19753,7 +19753,7 @@
             "popularity": 0.207,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15423,
             "win_rate": 0.454,
             "popularity": 0.168,
@@ -19799,7 +19799,7 @@
             "popularity": 0.256,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14741,
             "win_rate": 0.552,
             "popularity": 0.191,
@@ -19837,7 +19837,7 @@
             "popularity": 0.341,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5477,
             "win_rate": 0.572,
             "popularity": 0.162,
@@ -19875,7 +19875,7 @@
             "popularity": 0.265,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16412,
             "win_rate": 0.514,
             "popularity": 0.166,
@@ -19921,7 +19921,7 @@
             "popularity": 0.304,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11505,
             "win_rate": 0.524,
             "popularity": 0.188,
@@ -19959,7 +19959,7 @@
             "popularity": 0.34,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6094,
             "win_rate": 0.552,
             "popularity": 0.14,
@@ -19997,7 +19997,7 @@
             "popularity": 0.334,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18056,
             "win_rate": 0.494,
             "popularity": 0.17,
@@ -20043,7 +20043,7 @@
             "popularity": 0.249,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15019,
             "win_rate": 0.454,
             "popularity": 0.178,
@@ -20081,7 +20081,7 @@
             "popularity": 0.307,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6792,
             "win_rate": 0.474,
             "popularity": 0.141,
@@ -20119,7 +20119,7 @@
             "popularity": 0.292,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17286,
             "win_rate": 0.424,
             "popularity": 0.174,
@@ -20165,7 +20165,7 @@
             "popularity": 0.343,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14053,
             "win_rate": 0.494,
             "popularity": 0.126,
@@ -20203,7 +20203,7 @@
             "popularity": 0.309,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6664,
             "win_rate": 0.524,
             "popularity": 0.145,
@@ -20241,7 +20241,7 @@
             "popularity": 0.247,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18369,
             "win_rate": 0.474,
             "popularity": 0.145,
@@ -20287,7 +20287,7 @@
             "popularity": 0.317,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11921,
             "win_rate": 0.542,
             "popularity": 0.122,
@@ -20325,7 +20325,7 @@
             "popularity": 0.332,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7135,
             "win_rate": 0.562,
             "popularity": 0.133,
@@ -20363,7 +20363,7 @@
             "popularity": 0.314,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14797,
             "win_rate": 0.504,
             "popularity": 0.185,
@@ -20409,7 +20409,7 @@
             "popularity": 0.321,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12285,
             "win_rate": 0.504,
             "popularity": 0.186,
@@ -20447,7 +20447,7 @@
             "popularity": 0.346,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6893,
             "win_rate": 0.542,
             "popularity": 0.131,
@@ -20485,7 +20485,7 @@
             "popularity": 0.211,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19498,
             "win_rate": 0.484,
             "popularity": 0.189,
@@ -20531,7 +20531,7 @@
             "popularity": 0.281,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12332,
             "win_rate": 0.552,
             "popularity": 0.109,
@@ -20569,7 +20569,7 @@
             "popularity": 0.246,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5481,
             "win_rate": 0.572,
             "popularity": 0.134,
@@ -20607,7 +20607,7 @@
             "popularity": 0.207,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13432,
             "win_rate": 0.514,
             "popularity": 0.195,
@@ -20653,7 +20653,7 @@
             "popularity": 0.329,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13543,
             "win_rate": 0.494,
             "popularity": 0.149,
@@ -20691,7 +20691,7 @@
             "popularity": 0.276,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7783,
             "win_rate": 0.524,
             "popularity": 0.168,
@@ -20729,7 +20729,7 @@
             "popularity": 0.202,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16081,
             "win_rate": 0.474,
             "popularity": 0.131,
@@ -20775,7 +20775,7 @@
             "popularity": 0.252,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13393,
             "win_rate": 0.524,
             "popularity": 0.195,
@@ -20813,7 +20813,7 @@
             "popularity": 0.33,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7560,
             "win_rate": 0.562,
             "popularity": 0.194,
@@ -20851,7 +20851,7 @@
             "popularity": 0.204,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15404,
             "win_rate": 0.504,
             "popularity": 0.147,
@@ -20897,7 +20897,7 @@
             "popularity": 0.267,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10776,
             "win_rate": 0.504,
             "popularity": 0.147,
@@ -20935,7 +20935,7 @@
             "popularity": 0.228,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6756,
             "win_rate": 0.524,
             "popularity": 0.15,
@@ -20973,7 +20973,7 @@
             "popularity": 0.335,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17952,
             "win_rate": 0.484,
             "popularity": 0.133,
@@ -21019,7 +21019,7 @@
             "popularity": 0.211,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13640,
             "win_rate": 0.542,
             "popularity": 0.137,
@@ -21057,7 +21057,7 @@
             "popularity": 0.325,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6096,
             "win_rate": 0.562,
             "popularity": 0.173,
@@ -21095,7 +21095,7 @@
             "popularity": 0.248,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17724,
             "win_rate": 0.504,
             "popularity": 0.113,
@@ -21141,7 +21141,7 @@
             "popularity": 0.287,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14473,
             "win_rate": 0.514,
             "popularity": 0.173,
@@ -21179,7 +21179,7 @@
             "popularity": 0.221,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6248,
             "win_rate": 0.552,
             "popularity": 0.172,
@@ -21217,7 +21217,7 @@
             "popularity": 0.321,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16486,
             "win_rate": 0.494,
             "popularity": 0.195,
@@ -21263,7 +21263,7 @@
             "popularity": 0.259,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11771,
             "win_rate": 0.552,
             "popularity": 0.102,
@@ -21301,7 +21301,7 @@
             "popularity": 0.306,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7270,
             "win_rate": 0.572,
             "popularity": 0.14,
@@ -21339,7 +21339,7 @@
             "popularity": 0.291,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17483,
             "win_rate": 0.514,
             "popularity": 0.132,
@@ -21385,7 +21385,7 @@
             "popularity": 0.243,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14845,
             "win_rate": 0.514,
             "popularity": 0.162,
@@ -21423,7 +21423,7 @@
             "popularity": 0.292,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5856,
             "win_rate": 0.552,
             "popularity": 0.111,
@@ -21461,7 +21461,7 @@
             "popularity": 0.346,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17792,
             "win_rate": 0.494,
             "popularity": 0.111,
@@ -21507,7 +21507,7 @@
             "popularity": 0.269,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11928,
             "win_rate": 0.484,
             "popularity": 0.175,
@@ -21545,7 +21545,7 @@
             "popularity": 0.316,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6415,
             "win_rate": 0.504,
             "popularity": 0.131,
@@ -21583,7 +21583,7 @@
             "popularity": 0.229,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19665,
             "win_rate": 0.464,
             "popularity": 0.165,
@@ -21629,7 +21629,7 @@
             "popularity": 0.205,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14926,
             "win_rate": 0.514,
             "popularity": 0.156,
@@ -21667,7 +21667,7 @@
             "popularity": 0.212,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7761,
             "win_rate": 0.552,
             "popularity": 0.1,
@@ -21705,7 +21705,7 @@
             "popularity": 0.258,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15265,
             "win_rate": 0.494,
             "popularity": 0.177,
@@ -21751,7 +21751,7 @@
             "popularity": 0.347,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13943,
             "win_rate": 0.474,
             "popularity": 0.112,
@@ -21789,7 +21789,7 @@
             "popularity": 0.223,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7275,
             "win_rate": 0.494,
             "popularity": 0.122,
@@ -21827,7 +21827,7 @@
             "popularity": 0.243,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14718,
             "win_rate": 0.454,
             "popularity": 0.158,
@@ -21873,7 +21873,7 @@
             "popularity": 0.321,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13599,
             "win_rate": 0.484,
             "popularity": 0.158,
@@ -21911,7 +21911,7 @@
             "popularity": 0.341,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6498,
             "win_rate": 0.504,
             "popularity": 0.123,
@@ -21949,7 +21949,7 @@
             "popularity": 0.325,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15766,
             "win_rate": 0.464,
             "popularity": 0.159,
@@ -21995,7 +21995,7 @@
             "popularity": 0.284,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11334,
             "win_rate": 0.552,
             "popularity": 0.122,
@@ -22033,7 +22033,7 @@
             "popularity": 0.26,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6296,
             "win_rate": 0.572,
             "popularity": 0.147,
@@ -22071,7 +22071,7 @@
             "popularity": 0.294,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14760,
             "win_rate": 0.514,
             "popularity": 0.171,
@@ -22117,7 +22117,7 @@
             "popularity": 0.338,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13760,
             "win_rate": 0.572,
             "popularity": 0.145,
@@ -22155,7 +22155,7 @@
             "popularity": 0.339,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5875,
             "win_rate": 0.592,
             "popularity": 0.114,
@@ -22193,7 +22193,7 @@
             "popularity": 0.23,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17897,
             "win_rate": 0.542,
             "popularity": 0.192,
@@ -22239,7 +22239,7 @@
             "popularity": 0.224,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14808,
             "win_rate": 0.552,
             "popularity": 0.119,
@@ -22277,7 +22277,7 @@
             "popularity": 0.299,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 5741,
             "win_rate": 0.572,
             "popularity": 0.157,
@@ -22315,7 +22315,7 @@
             "popularity": 0.32,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14297,
             "win_rate": 0.514,
             "popularity": 0.181,
@@ -22361,7 +22361,7 @@
             "popularity": 0.304,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13826,
             "win_rate": 0.494,
             "popularity": 0.163,
@@ -22399,7 +22399,7 @@
             "popularity": 0.239,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7688,
             "win_rate": 0.524,
             "popularity": 0.106,
@@ -22437,7 +22437,7 @@
             "popularity": 0.303,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18861,
             "win_rate": 0.474,
             "popularity": 0.107,
@@ -22483,7 +22483,7 @@
             "popularity": 0.305,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13900,
             "win_rate": 0.494,
             "popularity": 0.153,
@@ -22521,7 +22521,7 @@
             "popularity": 0.335,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6026,
             "win_rate": 0.514,
             "popularity": 0.111,
@@ -22559,7 +22559,7 @@
             "popularity": 0.235,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18668,
             "win_rate": 0.464,
             "popularity": 0.104,
@@ -22605,7 +22605,7 @@
             "popularity": 0.307,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11468,
             "win_rate": 0.514,
             "popularity": 0.115,
@@ -22643,7 +22643,7 @@
             "popularity": 0.35,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6268,
             "win_rate": 0.552,
             "popularity": 0.116,
@@ -22681,7 +22681,7 @@
             "popularity": 0.276,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14007,
             "win_rate": 0.494,
             "popularity": 0.165,
@@ -22727,7 +22727,7 @@
             "popularity": 0.211,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10786,
             "win_rate": 0.494,
             "popularity": 0.143,
@@ -22765,7 +22765,7 @@
             "popularity": 0.223,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7186,
             "win_rate": 0.514,
             "popularity": 0.152,
@@ -22803,7 +22803,7 @@
             "popularity": 0.332,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17616,
             "win_rate": 0.464,
             "popularity": 0.151,
@@ -22849,7 +22849,7 @@
             "popularity": 0.315,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10612,
             "win_rate": 0.524,
             "popularity": 0.129,
@@ -22887,7 +22887,7 @@
             "popularity": 0.235,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6825,
             "win_rate": 0.562,
             "popularity": 0.124,
@@ -22925,7 +22925,7 @@
             "popularity": 0.325,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14043,
             "win_rate": 0.494,
             "popularity": 0.147,
@@ -22971,7 +22971,7 @@
             "popularity": 0.323,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13968,
             "win_rate": 0.524,
             "popularity": 0.162,
@@ -23009,7 +23009,7 @@
             "popularity": 0.206,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7094,
             "win_rate": 0.562,
             "popularity": 0.192,
@@ -23047,7 +23047,7 @@
             "popularity": 0.302,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19422,
             "win_rate": 0.504,
             "popularity": 0.132,
@@ -23093,7 +23093,7 @@
             "popularity": 0.213,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13062,
             "win_rate": 0.542,
             "popularity": 0.157,
@@ -23131,7 +23131,7 @@
             "popularity": 0.254,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7134,
             "win_rate": 0.562,
             "popularity": 0.112,
@@ -23169,7 +23169,7 @@
             "popularity": 0.285,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16072,
             "win_rate": 0.504,
             "popularity": 0.154,
@@ -23215,7 +23215,7 @@
             "popularity": 0.235,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13280,
             "win_rate": 0.484,
             "popularity": 0.103,
@@ -23253,7 +23253,7 @@
             "popularity": 0.252,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6363,
             "win_rate": 0.504,
             "popularity": 0.11,
@@ -23291,7 +23291,7 @@
             "popularity": 0.321,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14978,
             "win_rate": 0.454,
             "popularity": 0.107,
@@ -23337,7 +23337,7 @@
             "popularity": 0.264,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14154,
             "win_rate": 0.474,
             "popularity": 0.174,
@@ -23375,7 +23375,7 @@
             "popularity": 0.315,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6935,
             "win_rate": 0.504,
             "popularity": 0.138,
@@ -23413,7 +23413,7 @@
             "popularity": 0.318,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14295,
             "win_rate": 0.454,
             "popularity": 0.161,
@@ -23459,7 +23459,7 @@
             "popularity": 0.299,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11943,
             "win_rate": 0.504,
             "popularity": 0.131,
@@ -23497,7 +23497,7 @@
             "popularity": 0.305,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6360,
             "win_rate": 0.542,
             "popularity": 0.136,
@@ -23535,7 +23535,7 @@
             "popularity": 0.228,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13285,
             "win_rate": 0.484,
             "popularity": 0.169,
@@ -23581,7 +23581,7 @@
             "popularity": 0.324,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 14013,
             "win_rate": 0.484,
             "popularity": 0.156,
@@ -23619,7 +23619,7 @@
             "popularity": 0.345,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7842,
             "win_rate": 0.504,
             "popularity": 0.183,
@@ -23657,7 +23657,7 @@
             "popularity": 0.302,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13840,
             "win_rate": 0.454,
             "popularity": 0.134,
@@ -23703,7 +23703,7 @@
             "popularity": 0.326,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12931,
             "win_rate": 0.484,
             "popularity": 0.12,
@@ -23741,7 +23741,7 @@
             "popularity": 0.314,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7114,
             "win_rate": 0.504,
             "popularity": 0.101,
@@ -23779,7 +23779,7 @@
             "popularity": 0.301,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 16091,
             "win_rate": 0.464,
             "popularity": 0.151,
@@ -23825,7 +23825,7 @@
             "popularity": 0.225,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 15145,
             "win_rate": 0.542,
             "popularity": 0.155,
@@ -23863,7 +23863,7 @@
             "popularity": 0.242,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6974,
             "win_rate": 0.572,
             "popularity": 0.137,
@@ -23901,7 +23901,7 @@
             "popularity": 0.32,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13715,
             "win_rate": 0.504,
             "popularity": 0.153,
@@ -23947,7 +23947,7 @@
             "popularity": 0.31,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 10711,
             "win_rate": 0.484,
             "popularity": 0.158,
@@ -23985,7 +23985,7 @@
             "popularity": 0.308,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6134,
             "win_rate": 0.504,
             "popularity": 0.16,
@@ -24023,7 +24023,7 @@
             "popularity": 0.3,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 18875,
             "win_rate": 0.454,
             "popularity": 0.126,
@@ -24069,7 +24069,7 @@
             "popularity": 0.255,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11158,
             "win_rate": 0.524,
             "popularity": 0.176,
@@ -24107,7 +24107,7 @@
             "popularity": 0.254,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6139,
             "win_rate": 0.562,
             "popularity": 0.199,
@@ -24145,7 +24145,7 @@
             "popularity": 0.236,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 19177,
             "win_rate": 0.494,
             "popularity": 0.121,
@@ -24191,7 +24191,7 @@
             "popularity": 0.265,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 12211,
             "win_rate": 0.524,
             "popularity": 0.128,
@@ -24229,7 +24229,7 @@
             "popularity": 0.285,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 6294,
             "win_rate": 0.562,
             "popularity": 0.181,
@@ -24267,7 +24267,7 @@
             "popularity": 0.344,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 17652,
             "win_rate": 0.504,
             "popularity": 0.159,
@@ -24313,7 +24313,7 @@
             "popularity": 0.263,
             "accuracy": 0.624
           },
-          "2000+": {
+          "2000": {
             "nb_games": 11900,
             "win_rate": 0.524,
             "popularity": 0.172,
@@ -24351,7 +24351,7 @@
             "popularity": 0.301,
             "accuracy": 0.671
           },
-          "2000+": {
+          "2000": {
             "nb_games": 7692,
             "win_rate": 0.552,
             "popularity": 0.115,
@@ -24389,7 +24389,7 @@
             "popularity": 0.276,
             "accuracy": 0.574
           },
-          "2000+": {
+          "2000": {
             "nb_games": 13328,
             "win_rate": 0.494,
             "popularity": 0.135,

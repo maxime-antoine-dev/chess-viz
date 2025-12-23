@@ -1,234 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Visualisation des Ouvertures d'Échecs</title>
+	<title>Visualisation des Ouvertures d'Échecs</title>
 
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-        header { margin-bottom: 20px; }
-        nav { display: flex; gap: 20px; align-items: center; background-color: #f0f0f0; padding: 10px; border-radius: 5px; }
-        
-        /* Style simple pour la boîte de survol (tooltip) */
-        .tooltip {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            border: 1px solid #333;
-            padding: 8px;
-            border-radius: 4px;
-            pointer-events: none; /* Important pour ne pas bloquer le survol des croix */
-            opacity: 0;
-            transition: opacity 0.2s;
-            line-height: 1.4;
-        }
-    </style>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<style>
+		body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
+		header { margin-bottom: 20px; }
+		nav { display: flex; gap: 20px; align-items: center; background-color: #f0f0f0; padding: 10px; border-radius: 5px; }
+
+		/* Style simple pour la boîte de survol (tooltip) */
+		.tooltip {
+			position: absolute;
+			background: rgba(255, 255, 255, 0.95);
+			border: 1px solid #333;
+			padding: 8px;
+			border-radius: 4px;
+			pointer-events: none; /* Important pour ne pas bloquer le survol des croix */
+			opacity: 0;
+			transition: opacity;
+			line-height: 1.4;
+		}
+	</style>
 </head>
 <body>
 
-    <header>
-        <h1>Ouvertures d'Échecs : Popularité vs Taux de Victoire</h1>
-        <nav>
-            <label for="time_control">Cadence (Time Control) :</label>
-            <select id="time_control">
-                <option value="blitz">Blitz</option>
-                <option value="rapid">Rapid</option>
-                <option value="bullet">Bullet</option>
-            </select>
-            
-            <label for="elo">Bande ELO :</label>
-            <select id="elo">
-                <option value="0_500">0-500</option>
-                <option value="500_1000">500-1000</option>
-                <option value="1000_1500" selected>1000-1500</option>
-                <option value="1500_2000">1500-2000</option>
-                <option value="2000">2000+</option>
-            </select>
-        </nav>
-    </header>
+	<header>
+		<h1>Ouvertures d'Échecs : Popularité vs Taux de Victoire</h1>
+		<nav>
+			<label for="time_control">Cadence (Time Control) :</label>
+			<select id="time_control">
+				<option value="blitz">Blitz</option>
+				<option value="rapid">Rapid</option>
+				<option value="bullet">Bullet</option>
+			</select>
 
-    <main>
-        <section id="opening_explorer"></section>
-    </main>
-    
-    <script>
-        
-        const LARGEUR = 700;
-        const HAUTEUR = 500;
-        const MARGES = { haut: 30, droit: 30, bas: 60, gauche: 60 };
-        const LARGEUR_INTERIEURE = LARGEUR - MARGES.gauche - MARGES.droit;
-        const HAUTEUR_INTERIEURE = HAUTEUR - MARGES.haut - MARGES.bas;
+			<label for="elo">Bande ELO :</label>
+			<select id="elo">
+				<option value="0_500">0-500</option>
+				<option value="500_1000">500-1000</option>
+				<option value="1000_1500" selected>1000-1500</option>
+				<option value="1500_2000">1500-2000</option>
+				<option value="2000">2000+</option>
+			</select>
+		</nav>
+	</header>
 
-        const CHEMIN_DONNEES = '200_chess_openings_realistic.json';
-        let donneesCompletes = []; 
-        let cadence = 'blitz';     
-        let elo = '1000-1500'; 
-        
-        // Taille des croix (X)
-        const CROSS_SIZE = 3; 
+	<main>
+		<section id="opening_explorer"></section>
+	</main>
 
-       
-        const svg = d3.select("#opening_explorer")
-            .append("svg")
-            .attr("width", LARGEUR)
-            .attr("height", HAUTEUR)
-            .append("g")
-            .attr("transform", `translate(${MARGES.gauche}, ${MARGES.haut})`);
-
-        // Création de la boîte de survol (tooltip)
-        const tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-       
-        
-        d3.json(CHEMIN_DONNEES).then(data => {
-            
-            donneesCompletes = data;
-            
-            d3.select("#time_control").property("value", cadence);
-            d3.select("#elo").property("value", elo.replace('-', '_'));
-
-            const updateChartLogic = () => {
-                
-                
-                cadence = d3.select("#time_control").property("value");
-                elo = d3.select("#elo").property("value").replace('_', '-');
-
-                
-                const pointsFiltres = [];
-                
-                donneesCompletes.forEach(ouverture => {
-                    try {
-                        const stats = ouverture['opening-explorer'][cadence]['elo_bands'][elo];
-                        
-                        if (stats && stats.nb_games > 0) {
-                            pointsFiltres.push({
-                                name: ouverture.name,
-                                popularity: stats.popularity,
-                                win_rate: stats.win_rate,
-                                nb_games: stats.nb_games
-                            });
-                        }
-                    } catch (e) {}
-                });
-
-                
-                svg.selectAll("*").remove();
-
-                // DÉFINITION DES ÉCHELLES X ET Y  
-                const maxPop = d3.max(pointsFiltres, d => d.popularity) || 0.1;
-                const minWin = d3.min(pointsFiltres, d => d.win_rate) || 0.4;
-                const maxWin = d3.max(pointsFiltres, d => d.win_rate) || 0.6;
-                
-                const x = d3.scaleLinear()
-                    .domain([0, maxPop * 1.1])
-                    .range([0, LARGEUR_INTERIEURE]);
-
-                const y = d3.scaleLinear()
-                    .domain([minWin * 0.95, maxWin * 1.05])
-                    .range([HAUTEUR_INTERIEURE, 0]);
-
-
-                //  DESSIN DES AXES ET LÉGENDES 
-                
-                // Axe X (Popularité)
-                svg.append("g")
-                    .attr("transform", `translate(0, ${HAUTEUR_INTERIEURE})`)
-                    .call(d3.axisBottom(x).tickFormat(d => `${(d * 100).toFixed(1)}%`))
-                    .append("text")
-                    .attr("y", MARGES.bas - 10)
-                    .attr("x", LARGEUR_INTERIEURE / 2)
-                    .attr("fill", "#000")
-                    .text(`Popularité (Part des parties)`);
-
-                // Axe Y (Taux de victoire)
-                svg.append("g")
-                    .call(d3.axisLeft(y).tickFormat(d => `${(d * 100).toFixed(1)}%`))
-                    .append("text")
-                    .attr("transform", "rotate(-90)")
-                    .attr("y", -MARGES.gauche + 15)
-                    .attr("x", -HAUTEUR_INTERIEURE / 2)
-                    .attr("fill", "#000")
-                    .attr("text-anchor", "middle")
-                    .text("Taux de victoire des Blancs");
-
-                
-
-                // DESSIN DES CROIX (X) 
-                const pointsGroup = svg.append('g').attr("class", "points");
-                
-                
-                const crosses = pointsGroup.selectAll('.cross')
-                    .data(pointsFiltres)
-                    .enter()
-                    .append('g')
-                    .attr('class', 'cross')
-                    // Positionnement du groupe de croix
-                    .attr("transform", d => `translate(${x(d.popularity)}, ${y(d.win_rate)})`)
-                    .attr("stroke", d => d.win_rate > 0.50 ? 'black' : (d.win_rate < 0.50 ? 'red' : 'grey'))
-                    .attr("stroke-width", 2);
-
-                // Ajout des deux lignes pour former le "X" à l'intérieur de chaque groupe
-                // Ligne diagonale 1 (\)
-                crosses.append('line')
-                    .attr("x1", -CROSS_SIZE)
-                    .attr("y1", -CROSS_SIZE)
-                    .attr("x2", CROSS_SIZE)
-                    .attr("y2", CROSS_SIZE);
-                
-                // Ligne diagonale 2 (/)
-                crosses.append('line')
-                    .attr("x1", -CROSS_SIZE)
-                    .attr("y1", CROSS_SIZE)
-                    .attr("x2", CROSS_SIZE)
-                    .attr("y2", -CROSS_SIZE);
-
-                // HOVER SIMPLE :
-                crosses
-                    .on("mouseover", function(event, d) {
-                        // Augmenter légèrement la taille de la croix au survol
-                        d3.select(this)
-                            .attr("stroke-width", 3)
-                            .attr("transform", `translate(${x(d.popularity)}, ${y(d.win_rate)}) scale(1.5)`);
-
-                        tooltip.transition().duration(200).style("opacity", .9);
-                        tooltip.html(`
-                            <strong>${d.name}</strong><br>
-                            Popularité: ${(d.popularity * 100).toFixed(2)}%<br>
-                            Victoire (Blancs): ${(d.win_rate * 100).toFixed(2)}%<br>
-                            Parties: ${d.nb_games.toLocaleString()}
-                        `)
-                        .style("left", (event.pageX + 10) + "px")
-                        .style("top", (event.pageY - 28) + "px");
-                    })
-                    .on("mouseout", function(event, d) {
-                        // Revenir à la taille initiale
-                        d3.select(this)
-                            .attr("stroke-width", 2)
-                            .attr("transform", `translate(${x(d.popularity)}, ${y(d.win_rate)}) scale(1)`);
-                            
-                        tooltip.transition().duration(500).style("opacity", 0);
-                    });
-            };
-        
-            updateChartLogic(); 
-
-            d3.select("#time_control").on("change", updateChartLogic);
-            d3.select("#elo").on("change", updateChartLogic);
-
-
-        }).catch(error => {
-            console.error("Erreur de chargement du JSON:", error);
-            svg.append("text")
-               .attr("x", LARGEUR_INTERIEURE / 2)
-               .attr("y", HAUTEUR_INTERIEURE / 2)
-               .attr("text-anchor", "middle")
-               .attr("fill", "red")
-               .text("Erreur: Le fichier JSON n'a pas pu être chargé. Lancez un serveur local.");
-        });
-    </script>
+	<script type="module" src="js/PopularityVisualization.js"></script>
 </body>
 </html>

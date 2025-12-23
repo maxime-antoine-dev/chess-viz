@@ -1,0 +1,122 @@
+{
+	"rapid": {
+		"0_500": [
+			{"name": "King's Pawn Game", "popularity": 0.55, "win_rate": 0.48},
+			{"name": "Queen's Pawn Game", "popularity": 0.20, "win_rate": 0.50},
+			{"name": "Italian Game", "popularity": 0.10, "win_rate": 0.52},
+			{"name": "Sicilian Defense", "popularity": 0.08, "win_rate": 0.47},
+			{"name": "French Defense", "popularity": 0.07, "win_rate": 0.46}
+		],
+		"500_1000": [
+			{"name": "King's Pawn Game", "popularity": 0.40, "win_rate": 0.49},
+			{"name": "Queen's Pawn Game", "popularity": 0.25, "win_rate": 0.51},
+			{"name": "Italian Game", "popularity": 0.15, "win_rate": 0.53},
+			{"name": "Sicilian Defense", "popularity": 0.12, "win_rate": 0.48},
+			{"name": "French Defense", "popularity": 0.08, "win_rate": 0.47}
+		],
+		"1000_1500": [
+			{"name": "Sicilian Defense", "popularity": 0.30, "win_rate": 0.50},
+			{"name": "Italian Game", "popularity": 0.20, "win_rate": 0.54},
+			{"name": "Queen's Gambit", "popularity": 0.18, "win_rate": 0.52},
+			{"name": "French Defense", "popularity": 0.15, "win_rate": 0.48},
+			{"name": "King's Indian Defense", "popularity": 0.10, "win_rate": 0.49},
+			{"name": "Caro-Kann Defense", "popularity": 0.07, "win_rate": 0.50}
+		],
+		"1500_2000": [
+			{"name": "Sicilian Defense", "popularity": 0.32, "win_rate": 0.51},
+			{"name": "Queen's Gambit", "popularity": 0.22, "win_rate": 0.53},
+			{"name": "French Defense", "popularity": 0.15, "win_rate": 0.49},
+			{"name": "Caro-Kann Defense", "popularity": 0.13, "win_rate": 0.51},
+			{"name": "King's Indian Defense", "popularity": 0.10, "win_rate": 0.50},
+			{"name": "Ruy Lopez", "popularity": 0.08, "win_rate": 0.54}
+		],
+		"2000": [
+			{"name": "Sicilian Defense", "popularity": 0.35, "win_rate": 0.52},
+			{"name": "Queen's Gambit", "popularity": 0.25, "win_rate": 0.54},
+			{"name": "French Defense", "popularity": 0.13, "win_rate": 0.50},
+			{"name": "Caro-Kann Defense", "popularity": 0.12, "win_rate": 0.52},
+			{"name": "King's Indian Defense", "popularity": 0.08, "win_rate": 0.51},
+			{"name": "Ruy Lopez", "popularity": 0.07, "win_rate": 0.55}
+		]
+	},
+	"blitz": {
+		"0_500": [
+			{"name": "King's Pawn Game", "popularity": 0.60, "win_rate": 0.47},
+			{"name": "Queen's Pawn Game", "popularity": 0.18, "win_rate": 0.48},
+			{"name": "Italian Game", "popularity": 0.10, "win_rate": 0.51},
+			{"name": "Sicilian Defense", "popularity": 0.07, "win_rate": 0.46},
+			{"name": "French Defense", "popularity": 0.05, "win_rate": 0.45}
+		],
+		"500_1000": [
+			{"name": "King's Pawn Game", "popularity": 0.42, "win_rate": 0.48},
+			{"name": "Queen's Pawn Game", "popularity": 0.22, "win_rate": 0.49},
+			{"name": "Italian Game", "popularity": 0.13, "win_rate": 0.52},
+			{"name": "Sicilian Defense", "popularity": 0.13, "win_rate": 0.47},
+			{"name": "French Defense", "popularity": 0.10, "win_rate": 0.46}
+		],
+		"1000_1500": [
+			{"name": "Sicilian Defense", "popularity": 0.28, "win_rate": 0.49},
+			{"name": "Italian Game", "popularity": 0.18, "win_rate": 0.53},
+			{"name": "Queen's Gambit", "popularity": 0.17, "win_rate": 0.51},
+			{"name": "French Defense", "popularity": 0.15, "win_rate": 0.47},
+			{"name": "King's Indian Defense", "popularity": 0.12, "win_rate": 0.48},
+			{"name": "Caro-Kann Defense", "popularity": 0.10, "win_rate": 0.49}
+		],
+		"1500_2000": [
+			{"name": "Sicilian Defense", "popularity": 0.33, "win_rate": 0.50},
+			{"name": "Queen's Gambit", "popularity": 0.20, "win_rate": 0.52},
+			{"name": "French Defense", "popularity": 0.16, "win_rate": 0.48},
+			{"name": "Caro-Kann Defense", "popularity": 0.13, "win_rate": 0.50},
+			{"name": "King's Indian Defense", "popularity": 0.10, "win_rate": 0.49},
+			{"name": "Ruy Lopez", "popularity": 0.08, "win_rate": 0.53}
+		],
+		"2000": [
+			{"name": "Sicilian Defense", "popularity": 0.36, "win_rate": 0.51},
+			{"name": "Queen's Gambit", "popularity": 0.23, "win_rate": 0.53},
+			{"name": "French Defense", "popularity": 0.14, "win_rate": 0.49},
+			{"name": "Caro-Kann Defense", "popularity": 0.13, "win_rate": 0.51},
+			{"name": "King's Indian Defense", "popularity": 0.08, "win_rate": 0.50},
+			{"name": "Ruy Lopez", "popularity": 0.06, "win_rate": 0.54}
+		]
+	},
+	"bullet": {
+		"0_500": [
+			{"name": "King's Pawn Game", "popularity": 0.62, "win_rate": 0.46},
+			{"name": "Queen's Pawn Game", "popularity": 0.17, "win_rate": 0.47},
+			{"name": "Italian Game", "popularity": 0.09, "win_rate": 0.50},
+			{"name": "Sicilian Defense", "popularity": 0.07, "win_rate": 0.45},
+			{"name": "French Defense", "popularity": 0.05, "win_rate": 0.44}
+		],
+		"500_1000": [
+			{"name": "King's Pawn Game", "popularity": 0.43, "win_rate": 0.47},
+			{"name": "Queen's Pawn Game", "popularity": 0.21, "win_rate": 0.48},
+			{"name": "Italian Game", "popularity": 0.13, "win_rate": 0.51},
+			{"name": "Sicilian Defense", "popularity": 0.13, "win_rate": 0.46},
+			{"name": "French Defense", "popularity": 0.10, "win_rate": 0.45}
+		],
+		"1000_1500": [
+			{"name": "Sicilian Defense", "popularity": 0.27, "win_rate": 0.48},
+			{"name": "Italian Game", "popularity": 0.17, "win_rate": 0.52},
+			{"name": "Queen's Gambit", "popularity": 0.16, "win_rate": 0.50},
+			{"name": "French Defense", "popularity": 0.16, "win_rate": 0.46},
+			{"name": "King's Indian Defense", "popularity": 0.13, "win_rate": 0.47},
+			{"name": "Caro-Kann Defense", "popularity": 0.11, "win_rate": 0.48}
+		],
+		"1500_2000": [
+			{"name": "Sicilian Defense", "popularity": 0.34, "win_rate": 0.49},
+			{"name": "Queen's Gambit", "popularity": 0.19, "win_rate": 0.51},
+			{"name": "French Defense", "popularity": 0.17, "win_rate": 0.47},
+			{"name": "Caro-Kann Defense", "popularity": 0.13, "win_rate": 0.49},
+			{"name": "King's Indian Defense", "popularity": 0.10, "win_rate": 0.48},
+			{"name": "Ruy Lopez", "popularity": 0.07, "win_rate": 0.52}
+		],
+		"2000": [
+			{"name": "Sicilian Defense", "popularity": 0.37, "win_rate": 0.50},
+			{"name": "Queen's Gambit", "popularity": 0.22, "win_rate": 0.52},
+			{"name": "French Defense", "popularity": 0.15, "win_rate": 0.48},
+			{"name": "Caro-Kann Defense", "popularity": 0.13, "win_rate": 0.50},
+			{"name": "King's Indian Defense", "popularity": 0.08, "win_rate": 0.49},
+			{"name": "Ruy Lopez", "popularity": 0.05, "win_rate": 0.53}
+		]
+	}
+}
