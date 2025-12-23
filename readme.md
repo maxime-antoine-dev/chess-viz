@@ -1,5 +1,15 @@
 # ChessViz
 
+## TODO
+
+- [ ] Front:
+  - [ ] Add titles to charts
+  - [ ] Add labels to axes
+  - [ ] Accuracy:
+    - [ ] translate axes to be aligned with the squares
+    - [ ] Try other color scales
+    - [ ] Repair opening selector
+
 ## Data processing
 
 This project turns raw Lichess PGN dumps into lighter datasets (parquet), then generates JSON assets (builders) for the front-end.
@@ -21,7 +31,7 @@ Key points:
 - Filtering options:
   - `eval_only=True`: keeps only games containing engine evaluations
   - `only_time_control_selection=True`: keeps only `RAPID`, `BLITZ`, `BULLET`
-- Exports the filtered result to:  
+- Exports the filtered result to:
   `parsed/<lichess_db_standard_rated_YYYY-MM>.parquet`
 
 Example:
@@ -117,6 +127,7 @@ Common concepts across builders:
   - Unlisted openings can be grouped into `"Other"`
 
 Opening whitelist :
+
 - Sicilian Defense
 - French Defense
 - Caro-Kann Defense
@@ -182,7 +193,7 @@ if __name__ == "__main__":
 
 ---
 
-**3.1 Builder: Opening accuracy heatmap (winrate)**
+#### 3.1 Builder: Opening accuracy heatmap (winrate)
 
 This builder creates a 10×10 heatmap where each cell corresponds to:
 
@@ -191,7 +202,7 @@ This builder creates a 10×10 heatmap where each cell corresponds to:
 
 Accuracy is computed per player using the cumulative accuracy curve:
 
-- Opening accuracy = value after the player's 12th move  
+- Opening accuracy = value after the player's 12th move
 - After-opening accuracy is recomputed from cumulative averages so it represents the *average accuracy of the remaining part of the game*, not just "the final cumulative value again".
 
 For a given opening group / time control / elo bracket:
