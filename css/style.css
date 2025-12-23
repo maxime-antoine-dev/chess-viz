@@ -1,6 +1,39 @@
 html {
 	font-family:Arial, Helvetica, sans-serif;
 
+	.HeatMapContainer{
+		position: relative;
+	}
+
+	.HeatMapTitle {
+		text-anchor: middle;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.openingList {
+		position: absolute;
+		top: -10px;
+		right: -10px;  
+		padding: 10px;
+		padding-right: 3em;
+	}
+
+	#tooltip {
+		position: absolute;
+		background-color: rgba(0, 0, 0, 0.8);
+		color: white;
+		padding: 8px 12px;
+		border-radius: 4px;
+		font-size: 13px;
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	#HeatMap {
+		text-align: center;
+	}
+
 	body {
 		margin:0;
 		padding:0;
