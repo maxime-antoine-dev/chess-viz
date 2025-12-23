@@ -1,14 +1,17 @@
 class Visualization {
-	constructor(data, container, options = {}) {
-		this.data = data;
+	/**
+	 * Constructor for Visualization base class
+	 * @param {string} dataPath - URL to JSON data
+	 * @param {HTMLElement} container - Container element
+	 * @param {object} margins - Margins object {top, right, bottom, left}
+	 */
+	constructor(dataPath, container, margins) {
+		this.dataPath = dataPath;
 		this.container = container;
-		this.options = Object.assign({
-			margins: { top: 30, right: 30, bottom: 60, left: 60 },
-			debounceMs: 80
-		}, options);
+		this.margins = margins;
+		this.debounceMs = 80;
 
-		this.margins = this.options.margins;
-
+		this.data = null;
 		this.width = 0;
 		this.height = 0;
 		this.innerW = 0;
@@ -20,7 +23,6 @@ class Visualization {
 		this.tooltip = null;
 		this.initialized = false;
 
-		this.loadedData = null; // parsed JSON or data array/object
 		this.filters = {
 			time_control: 'rapid',
 			elo: '0_500'
@@ -29,17 +31,30 @@ class Visualization {
 		this._ro = null;
 	}
 
-	init() {
+	/**
+	 * Initialize the visualization (load data, setup SVG, etc.)
+	 * @returns {void}
+	 */
+	async init() {
 		// Avoid re-initialization
-		if (this.initialized) return;
+		if (this.initialized) return this;
 
 		// normalize container element
 		const containerEl = (typeof this.container === 'string') ? document.querySelector(this.container) : this.container;
 		if (!containerEl) throw new Error('Container element not found');
 		this.container = containerEl;
 
-		this._measure();
+		// Attempt to load data first so renderers can rely on `this.data` synchronously after init
+		try {
+			const d = await d3.json(this.dataPath);
+			this.data = d;
+		} catch (err) {
+			console.error('Error during data loading from path: ' + this.dataPath, err);
+			this.data = null;
+		}
 
+		// Measure and setup SVG
+		this._measure();
 		if (!this.svg) {
 			this.svg = d3.select(this.container)
 				.append('svg')
@@ -60,12 +75,16 @@ class Visualization {
 		// this._installResizeObserver();
 
 		this.initialized = true;
-
-		// load data if needed
-		this._ensureDataLoaded();
+		return this;
 	}
 
-	// Subclasses must implement render()
+	/**
+	 * Render or update the visualization
+	 * @param {string} time_control - Time control filter
+	 * @param {string} elo - ELO range filter
+	 * @returns {void}
+	 * @throws {Error} If not implemented in subclass
+	 */
 	render(time_control, elo) {
 		throw new Error('Subclasses must implement render() method');
 	}
@@ -98,13 +117,10 @@ class Visualization {
 	}
 
 	_createTooltip() {
-		if (typeof d3 === 'undefined') return;
 		if (this.tooltip) return;
+
 		this.tooltip = d3.select('body').append('div')
-			.attr('class', 'tooltip')
-			.style('position', 'absolute')
-			.style('pointer-events', 'none')
-			.style('opacity', 0);
+			.attr('id', 'tooltip')
 	}
 
 	showTooltip(html, event) {
@@ -121,28 +137,6 @@ class Visualization {
 	}
 
 	formatPercent(v, digits = 2) { return (v * 100).toFixed(digits) + '%'; }
-
-	_ensureDataLoaded(forceReload = false) {
-		if (!this.data) return;
-		if (!forceReload && this.loadedData) return;
-
-		if (typeof this.data === 'string') {
-			d3.json(this.data).then(d => { this.loadedData = d; this.render(); }).catch(err => {
-				console.error('Erreur de chargement du JSON:', err);
-				if (this.root) {
-					this.root.append('text')
-						.attr('x', this.innerW / 2)
-						.attr('y', this.innerH / 2)
-						.attr('text-anchor', 'middle')
-						.attr('fill', 'red')
-						.text("Erreur: Le fichier JSON n'a pas pu être chargé. Lancez un serveur local.");
-				}
-			});
-		} else {
-			this.loadedData = this.data;
-			this.render();
-		}
-	}
 }
 
 export { Visualization };

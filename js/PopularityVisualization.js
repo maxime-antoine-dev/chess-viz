@@ -2,28 +2,29 @@ import { Visualization } from './Visualization.js';
 
 class PopularityVisualization extends Visualization {
 	constructor(data, container, options = {}) {
-		super(data, container, Object.assign({ margins: { top: 30, right: 30, bottom: 60, left: 60 } }, options));
+		super(data, container, { top: 30, right: 30, bottom: 60, left: 60 });
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
 	}
 
 	render(time_control, elo) {
-		this.init();
+		this.init().then(() => {
+			this.filters.time_control = time_control;
+			this.filters.elo = elo;
 
-		this.filters.time_control = time_control;
-		this.filters.elo = elo;
+			// clear previous axis/marks
+			this.g.axes.selectAll('*').remove();
+			this.g.marks.selectAll('*').remove();
 
-		if (!this.loadedData) { this._ensureDataLoaded(); return; }
-
-		// clear previous axis/marks
-		this.g.axes.selectAll('*').remove();
-		this.g.marks.selectAll('*').remove();
-
-		const filtered = this._preprocess();
-		this._computeScales(filtered);
-		this.drawAxes();
-		this.bindMarks(filtered);
+			const filtered = this._preprocess();
+			this._computeScales(filtered);
+			this._drawAxes();
+			this._bindMarks(filtered);
+		}).catch(err => console.error(err));
 	}
+
+
+	// === Private methods ===
 
 	// preprocess loadedData according to this.filters
 	_preprocess() {
@@ -31,7 +32,7 @@ class PopularityVisualization extends Visualization {
 		const cadence = filters.time_control || 'blitz';
 		const eloKey = filters.elo || '1000_1500';
 
-		const dataRoot = this.loadedData;
+		const dataRoot = this.data;
 		if (!dataRoot || !dataRoot[cadence]) return [];
 		const band = dataRoot[cadence][eloKey];
 		if (!Array.isArray(band)) return [];
@@ -50,20 +51,20 @@ class PopularityVisualization extends Visualization {
 		this.scales.y = d3.scaleLinear().domain([minWin * 0.95, maxWin * 1.05]).range([this.innerH, 0]);
 	}
 
-	drawAxes() {
+	_drawAxes() {
 		// X axis
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g').attr('class', 'x-axis')
 			.attr('transform', `translate(0, ${this.innerH})`)
-			.call(d3.axisBottom(this.scales.x).tickFormat(d => `${(d * 100).toFixed(1)}%`));
+			.call(d3.axisBottom(this.scales.x).tickFormat(d => this.formatPercent(d, 0)));
 
 		// Y axis
 		const yAxisG = this.g.axes.selectAll('.y-axis').data([0]);
 		yAxisG.join('g').attr('class', 'y-axis')
-			.call(d3.axisLeft(this.scales.y).tickFormat(d => `${(d * 100).toFixed(1)}%`));
+			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
 	}
 
-	bindMarks(data) {
+	_bindMarks(data) {
 		const crosses = this.g.marks.selectAll('.cross').data(data, d => d.name);
 
 		// exit
@@ -89,11 +90,14 @@ class PopularityVisualization extends Visualization {
 		// hover
 		merged
 			.on('mouseover', (event, d) => {
-				d3.select(event.currentTarget).attr('stroke-width', 3).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
+				// highlight the lines inside the group rather than setting attrs on the group
+				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 3);
+				d3.select(event.currentTarget).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
 				this.showTooltip(`<strong>${d.name}</strong><br>Popularité: ${this.formatPercent(d.popularity, 2)}<br>Victoire (Blancs): ${this.formatPercent(d.win_rate, 2)}`, event);
 			})
 			.on('mouseout', (event, d) => {
-				d3.select(event.currentTarget).attr('stroke-width', 2).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
+				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 2);
+				d3.select(event.currentTarget).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
 				this.hideTooltip();
 			});
 	}
