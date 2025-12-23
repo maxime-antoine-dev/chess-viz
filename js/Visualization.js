@@ -25,8 +25,6 @@ class Visualization {
 		this.initialized = false;
 
 		this.filters = {};
-
-		
 	}
 
 	/**
@@ -70,8 +68,6 @@ class Visualization {
 			this.#createTooltip();
 		}
 
-		// this.#installResizeObserver();
-
 		this.initialized = true;
 		return this;
 	}
@@ -99,19 +95,6 @@ class Visualization {
 		this.innerH = Math.max(1, this.height - this.margins.top - this.margins.bottom);
 		if (this.svg) this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
 		if (this.root) this.root.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
-	}
-
-	#installResizeObserver() {
-		const measureAndRender = () => { this.#measure(); this.render(); };
-		const debounced = (() => { let t; return () => { clearTimeout(t); t = setTimeout(measureAndRender, this.debounceMs); }; })();
-
-		if (this.#ro) return; // already installed
-		if (typeof ResizeObserver !== 'undefined') {
-			this.#ro = new ResizeObserver(debounced);
-			this.#ro.observe(this.container);
-		} else {
-			window.addEventListener('resize', debounced);
-		}
 	}
 
 	#createTooltip() {
