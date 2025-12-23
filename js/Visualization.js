@@ -1,4 +1,5 @@
 class Visualization {
+	#ro = null;
 	/**
 	 * Constructor for Visualization base class
 	 * @param {string} dataPath - URL to JSON data
@@ -28,7 +29,7 @@ class Visualization {
 			elo: '0_500'
 		};
 
-		this._ro = null;
+		
 	}
 
 	/**
@@ -54,7 +55,7 @@ class Visualization {
 		}
 
 		// Measure and setup SVG
-		this._measure();
+		this.#measure();
 		if (!this.svg) {
 			this.svg = d3.select(this.container)
 				.append('svg')
@@ -69,10 +70,10 @@ class Visualization {
 			this.g.axes = this.root.append('g').attr('class', 'axes');
 			this.g.marks = this.root.append('g').attr('class', 'marks');
 
-			this._createTooltip();
+			this.#createTooltip();
 		}
 
-		// this._installResizeObserver();
+		// this.#installResizeObserver();
 
 		this.initialized = true;
 		return this;
@@ -93,7 +94,7 @@ class Visualization {
 	// === Utility methods ===
 
 	// measure container and compute inner sizes
-	_measure() {
+	#measure() {
 		const rect = this.container.getBoundingClientRect();
 		this.width = Math.max(1, Math.round(rect.width));
 		this.height = Math.max(1, Math.round(rect.height));
@@ -103,28 +104,28 @@ class Visualization {
 		if (this.root) this.root.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
 	}
 
-	_installResizeObserver() {
-		const measureAndRender = () => { this._measure(); this.render(); };
-		const debounced = (() => { let t; return () => { clearTimeout(t); t = setTimeout(measureAndRender, this.options.debounceMs); }; })();
+	#installResizeObserver() {
+		const measureAndRender = () => { this.#measure(); this.render(); };
+		const debounced = (() => { let t; return () => { clearTimeout(t); t = setTimeout(measureAndRender, this.debounceMs); }; })();
 
-		if (this._ro) return; // already installed
+		if (this.#ro) return; // already installed
 		if (typeof ResizeObserver !== 'undefined') {
-			this._ro = new ResizeObserver(debounced);
-			this._ro.observe(this.container);
+			this.#ro = new ResizeObserver(debounced);
+			this.#ro.observe(this.container);
 		} else {
 			window.addEventListener('resize', debounced);
 		}
 	}
 
-	_createTooltip() {
+	#createTooltip() {
 		if (this.tooltip) return;
 
 		this.tooltip = d3.select('body').append('div')
-			.attr('id', 'tooltip')
+			.attr('id', 'tooltip');
 	}
 
 	showTooltip(html, event) {
-		if (!this.tooltip) this._createTooltip();
+		if (!this.tooltip) this.#createTooltip();
 		this.tooltip.transition().duration(150).style('opacity', 0.95);
 		this.tooltip.html(html)
 			.style('left', (event.pageX + 10) + 'px')

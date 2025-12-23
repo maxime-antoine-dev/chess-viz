@@ -16,10 +16,10 @@ class PopularityVisualization extends Visualization {
 			this.g.axes.selectAll('*').remove();
 			this.g.marks.selectAll('*').remove();
 
-			const filtered = this._preprocess();
-			this._computeScales(filtered);
-			this._drawAxes();
-			this._bindMarks(filtered);
+			const filtered = this.#preprocess();
+			this.#computeScales(filtered);
+			this.#drawAxes();
+			this.#bindMarks(filtered);
 		}).catch(err => console.error(err));
 	}
 
@@ -27,7 +27,7 @@ class PopularityVisualization extends Visualization {
 	// === Private methods ===
 
 	// preprocess loadedData according to this.filters
-	_preprocess() {
+	#preprocess() {
 		const filters = this.filters || {};
 		const cadence = filters.time_control || 'blitz';
 		const eloKey = filters.elo || '1000_1500';
@@ -42,7 +42,7 @@ class PopularityVisualization extends Visualization {
 			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate }));
 	}
 
-	_computeScales(data) {
+	#computeScales(data) {
 		const maxPop = d3.max(data, d => d.popularity) || 0.1;
 		const minWin = d3.min(data, d => d.win_rate) || 0.4;
 		const maxWin = d3.max(data, d => d.win_rate) || 0.6;
@@ -51,7 +51,7 @@ class PopularityVisualization extends Visualization {
 		this.scales.y = d3.scaleLinear().domain([minWin * 0.95, maxWin * 1.05]).range([this.innerH, 0]);
 	}
 
-	_drawAxes() {
+	#drawAxes() {
 		// X axis
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g').attr('class', 'x-axis')
@@ -64,7 +64,7 @@ class PopularityVisualization extends Visualization {
 			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
 	}
 
-	_bindMarks(data) {
+	#bindMarks(data) {
 		const crosses = this.g.marks.selectAll('.cross').data(data, d => d.name);
 
 		// exit
