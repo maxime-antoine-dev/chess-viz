@@ -1,6 +1,27 @@
 html {
 	font-family:Arial, Helvetica, sans-serif;
 
+	.HeatMapTitle {
+		text-anchor: middle;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	#tooltip {
+		position: absolute;
+		background-color: black;
+		color: white;
+		padding: 10px;
+		border-radius: 3px;
+		transition: opacity 0.1s;
+		text-align: center;
+		opacity: 0;
+	}
+
+	#HeatMap {
+		text-align: center;
+	}
+
 	body {
 		margin:0;
 		padding:0;
