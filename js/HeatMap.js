@@ -7,8 +7,11 @@ function update() {
   if (!globalData) return;
   const selectedElo = d3.select("#elo").property("value");
   const selectedCadence = d3.select("#time_control").property("value");
+  const opening = d3.select("#opening").property("value");
 
-  const matrice = globalData.payload[selectedCadence][selectedElo].All.heatmap;
+  const matrice = globalData.payload[selectedCadence][selectedElo][opening].heatmap;
+
+  const nb_games = globalData.payload[selectedCadence][selectedElo][opening].cell_samples;
 
   console.log(matrice);
 
@@ -21,7 +24,7 @@ function update() {
   const dataset = [];
   matrice.forEach((row, yIndex) => {
     row.forEach((winRate, xIndex) => {
-      dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate });
+      dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate, games: nb_games[yIndex][xIndex]});
     });
   });
 
@@ -37,18 +40,22 @@ function update() {
     .attr("y", (d) => yScale(d.y))
     .attr("width", xScale.bandwidth())
     .attr("height", yScale.bandwidth())
-    .style("fill", (d) => color(d.value))
+    .style("fill",(d) =>{
+        if (d.games === 0) {
+            return "#ccc";
+        }return color(d.value)})
     .style("stroke", "white");
 
   svg
     .selectAll("rect")
     .on("mouseover", function (event, d) {
       const tooltip = d3.select("#tooltip");
+      const [mouseX, mouseY] = d3.pointer(event, d3.select(".HeatMapContainer").node());
       tooltip.transition().duration(200).style("opacity", 0.9);
       tooltip
-        .html(`Taux de victoire : ${(d.value * 100).toFixed(1)}%`)
-        .style("left", event.pageX + 10 + "px")
-        .style("top", event.pageY - 20 + "px");
+        .html(`Taux de victoire : ${(d.value * 100).toFixed(1)}%<br/>Nombre de parties : ${d.games}`)
+        .style("left", mouseX + 10 + "px")
+        .style("top", mouseY - 20 + "px");
     })
     .on("mouseout", function () {
       d3.select("#tooltip").transition().duration(500).style("opacity", 0);
@@ -120,7 +127,7 @@ d3.json("./data_processing/json/opening_accuracy_heatmap/acc_heatmap.json")
       .text("Précision moyenne après l'ouverture");
 
 
-    d3.selectAll("#elo, #time_control").on("change", update);
+    d3.selectAll("#elo, #time_control, #opening").on("change", update);
 
     update();
   })

@@ -1,20 +1,32 @@
 html {
 	font-family:Arial, Helvetica, sans-serif;
 
+	.HeatMapContainer{
+		position: relative;
+	}
+
 	.HeatMapTitle {
 		text-anchor: middle;
 		font-weight: bold;
 		text-align: center;
 	}
 
+	.openingList {
+		position: absolute;
+		top: -10px;
+		right: -10px;  
+		padding: 10px;
+		padding-right: 3em;
+	}
+
 	#tooltip {
 		position: absolute;
-		background-color: black;
+		background-color: rgba(0, 0, 0, 0.8);
 		color: white;
-		padding: 10px;
-		border-radius: 3px;
-		transition: opacity 0.1s;
-		text-align: center;
+		padding: 8px 12px;
+		border-radius: 4px;
+		font-size: 13px;
+		pointer-events: none;
 		opacity: 0;
 	}
 
