@@ -65,10 +65,29 @@ class AccuracyVisualization extends Visualization {
 			.attr('transform', `translate(0, ${this.innerH})`)
 			.call(d3.axisBottom(this.scales.x).tickValues(this.scales.x.domain()).tickFormat(d => `${d}%`));
 
+		// X axis label
+		this.g.axes.selectAll('.x-label').data([0]).join('text')
+			.attr('class', 'x-label')
+			.attr('x', this.innerW / 2)
+			.attr('y', this.innerH + this.margins.bottom - 20)
+			.attr('text-anchor', 'middle')
+			.style('font-size', '14px')
+			.text('Mean accuracy during opening');
+
 		// Y axis
 		const yAxisG = this.g.axes.selectAll('.y-axis').data([0]);
 		yAxisG.join('g').attr('class', 'y-axis')
 			.call(d3.axisLeft(this.scales.y).tickValues(this.scales.y.domain()).tickFormat(d => `${d}%`));
+
+		// Y axis label
+		this.g.axes.selectAll('.y-label').data([0]).join('text')
+			.attr('class', 'y-label')
+			.attr('transform', 'rotate(-90)')
+			.attr('x', -(this.innerH / 2))
+			.attr('y', -this.margins.left + 15)
+			.attr('text-anchor', 'middle')
+			.style('font-size', '14px')
+			.text("Mean accuracy after opening");
 	}
 
 	#drawSquares(data) {

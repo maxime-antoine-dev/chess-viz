@@ -4,7 +4,12 @@
 
 - [ ] Front:
   - [ ] Add titles to charts
-  - [ ] Add labels to axes
+  - [x] Add labels to axes
+  - [ ] Made update methods to not recreate everything when filtering
+  - [ ] Add documentation
+  - [ ] Improve uniformisation and optimization of the code
+  - [ ] Improve styling
+  - [ ] Translation everything to English
   - [ ] Accuracy:
     - [ ] translate axes to be aligned with the squares
     - [ ] Try other color scales
