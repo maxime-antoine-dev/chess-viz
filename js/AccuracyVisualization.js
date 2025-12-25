@@ -42,7 +42,7 @@ class AccuracyVisualization extends Visualization {
 		const dataset = [];
 		matrice.forEach((row, yIndex) => {
 			row.forEach((winRate, xIndex) => {
-				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate, games: nb_games?.[yIndex]?.[xIndex] || 0 });
+				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate[0], games: nb_games?.[yIndex]?.[xIndex][0] || 0 });
 			});
 		});
 
