@@ -28,17 +28,23 @@ class PopularityVisualization extends Visualization {
 
 	// preprocess loadedData according to this.filters
 	#preprocess() {
-		const cadence = this.filters.time_control;
+		const cadence = this.filters.time_control.toLowerCase()
 		const eloKey = this.filters.elo;
 
-		const dataRoot = this.data;
-		if (!dataRoot || !dataRoot[cadence]) return [];
+		if (!this.data) {
+        console.error("Données manquantes (this.data est null)");
+        return [];
+    }
+		if (!this.data || !this.data.payload) return [];
+		const dataRoot = this.data.payload;
+		if (!dataRoot[cadence] || !dataRoot[cadence][eloKey]) return [];
+
 		const band = dataRoot[cadence][eloKey];
 		if (!Array.isArray(band)) return [];
 
 		// return items with required fields
-		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
-			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate }));
+		return band.filter(d => d && d.popularity !== undefined && d.win_rate[0] !== undefined)
+			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[0] }));
 	}
 
 	#computeScales(data) {

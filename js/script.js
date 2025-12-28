@@ -21,7 +21,7 @@ function init(time_control, elo) {
 	// Create charts object
 	let charts = {};
 	charts.openingExplorer = new OpeningExplorerVisualization("../data/openingExplorer.json", document.getElementById("opening_explorer"));
-	charts.popularity = new PopularityVisualization("../data/popularity.json", document.getElementById("popularity"));
+	charts.popularity = new PopularityVisualization("../data/popularity2.json", document.getElementById("popularity"));
 	charts.accuracy = new AccuracyVisualization("../data/accuracy.json", document.getElementById("accuracy"));
 
 	// Initialize charts
