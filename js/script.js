@@ -4,40 +4,41 @@ import { AccuracyVisualization } from './AccuracyVisualization.js';
 
 let time_control = "rapid";
 let elo = "500-1000";
-const charts = init(time_control, elo);
-update(charts, time_control, elo);
+let color = "0"; // both
+let opening = "All";
+const charts = init();
+update(charts, time_control, elo, color, opening);
 
 document.getElementById("time_control").addEventListener("change", function() {
 	time_control = this.value;
-	update(charts, time_control, elo);
+	update(charts, time_control, elo, color, opening);
 });
 
 document.getElementById("elo").addEventListener("change", function() {
 	elo = this.value;
-	update(charts, time_control, elo);
+	update(charts, time_control, elo, color, opening);
+});
+
+document.getElementById("color").addEventListener("change", function() {
+	color = this.value;
+	update(charts, time_control, elo, color, opening);
 });
 
 document.getElementById("opening").addEventListener("change", function() {
-    charts.accuracy.render(time_control, elo);
+    opening = this.value;
+    update(charts, time_control, elo, color, opening);
 })
 
-function init(time_control, elo) {
-	// Create charts object
+function init() {
 	let charts = {};
 	charts.openingExplorer = new OpeningExplorerVisualization("../data/openingExplorer.json", document.getElementById("opening_explorer"));
 	charts.popularity = new PopularityVisualization("../data/popularity.json", document.getElementById("popularity"));
 	charts.accuracy = new AccuracyVisualization("../data/accuracy.json", document.getElementById("accuracy"));
-
-	// Initialize charts
-	// charts.openingExplorer.render();
-	charts.popularity.render(time_control, elo);
-	charts.accuracy.render(time_control, elo);
-
 	return charts;
 }
 
-function update(charts, time_control, elo) {
+function update(charts, time_control, elo, color, opening) {
 	// charts.openingExplorer.render();
-	charts.popularity.render(time_control, elo);
-	charts.accuracy.render(time_control, elo);
+	charts.popularity.render(time_control, elo, color, opening);
+	charts.accuracy.render(time_control, elo, color, opening);
 }

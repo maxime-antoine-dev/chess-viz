@@ -9,7 +9,7 @@ html {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			padding: 1em;
+			padding: 16px;
 			background-color: #f0f0f0;
 
 			h1 {
@@ -17,12 +17,15 @@ html {
 			}
 
 			nav {
-				display: flex;
-				align-items: center;
-				gap: 0.5em;
+				& > div {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 0.5em;
 
-				select {
-					font-size: 16px;
+					select, option {
+						font-size: 16px;
+					}
 				}
 			}
 		}
@@ -31,7 +34,7 @@ html {
 			display: grid;
 			grid-template-columns: repeat(12, 1fr);
 			grid-template-rows: 1fr 1fr;
-			height: calc(100vh - 69px - 50px);
+			height: calc(100vh - 74.5px - 50.75px);
 
 			#tooltip {
 				position: absolute;
@@ -92,11 +95,12 @@ html {
 
 		footer {
 			text-align: center;
-			padding: 1em;
+			padding: 16px;
 			background-color: #f0f0f0;
 
 			p {
 				margin: 0;
+				font-size: 16px;
 			}
 		}
 	}

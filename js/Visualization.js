@@ -1,5 +1,4 @@
 class Visualization {
-	#ro = null;
 	/**
 	 * Constructor for Visualization base class
 	 * @param {string} dataPath - URL to JSON data
@@ -76,10 +75,12 @@ class Visualization {
 	 * Render or update the visualization
 	 * @param {string} time_control - Time control filter
 	 * @param {string} elo - ELO range filter
+	 * @param {string} color - Color filter
+	 * @param {string} opening - Opening filter
 	 * @returns {void}
 	 * @throws {Error} If not implemented in subclass
 	 */
-	render(time_control, elo) {
+	render(time_control, elo, color, opening) {
 		throw new Error('Subclasses must implement render() method');
 	}
 
