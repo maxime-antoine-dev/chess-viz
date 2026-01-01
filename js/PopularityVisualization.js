@@ -1,16 +1,18 @@
 import { Visualization } from './Visualization.js';
 
 class PopularityVisualization extends Visualization {
-	constructor(data, container, options = {}) {
-		super(data, container, { top: 30, right: 30, bottom: 60, left: 60 });
+	constructor(data, container) {
+		super(data, container, {top: 30, right: 30, bottom: 60, left: 60});
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
 	}
 
-	render(time_control, elo) {
+	render(time_control, elo, color, opening) {
 		this.init().then(() => {
 			this.filters.time_control = time_control;
 			this.filters.elo = elo;
+			this.filters.color = Number.parseInt(color);
+			this.filters.opening = opening;
 
 			// clear previous axis/marks
 			this.g.axes.selectAll('*').remove();
@@ -30,15 +32,15 @@ class PopularityVisualization extends Visualization {
 	#preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
+		const color = this.filters.color;
+		const opening = this.filters.opening;
 
-		const dataRoot = this.data;
-		if (!dataRoot || !dataRoot[cadence]) return [];
-		const band = dataRoot[cadence][eloKey];
+		const band = this.data?.payload?.[cadence]?.[eloKey];
 		if (!Array.isArray(band)) return [];
 
 		// return items with required fields
 		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
-			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate }));
+			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[color] }));
 	}
 
 	#computeScales(data) {
@@ -72,6 +74,7 @@ class PopularityVisualization extends Visualization {
 			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
 
 		// Y axis label
+		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		this.g.axes.selectAll('.y-label').data([0]).join('text')
 			.attr('class', 'y-label')
 			.attr('transform', 'rotate(-90)')
@@ -79,7 +82,7 @@ class PopularityVisualization extends Visualization {
 			.attr('y', -this.margins.left + 15)
 			.attr('text-anchor', 'middle')
 			.style('font-size', '14px')
-			.text('Win rate (White)');
+			.text(`Win rate (${color})`);
 	}
 
 	#bindMarks(data) {
@@ -90,8 +93,8 @@ class PopularityVisualization extends Visualization {
 
 		// enter
 		const enter = crosses.enter().append('g').attr('class', 'cross').style('opacity', 0);
-		enter.append('line').attr('class', 'cross-a').attr('stroke', 'black').attr('stroke-width', 2);
-		enter.append('line').attr('class', 'cross-b').attr('stroke', 'black').attr('stroke-width', 2);
+		enter.append('line').attr('class', 'cross-a').attr('stroke-width', 2);
+		enter.append('line').attr('class', 'cross-b').attr('stroke-width', 2);
 
 		const merged = enter.merge(crosses);
 
@@ -105,13 +108,18 @@ class PopularityVisualization extends Visualization {
 			.attr('x1', -this.crossSize).attr('y1', this.crossSize)
 			.attr('x2', this.crossSize).attr('y2', -this.crossSize);
 
-		// hover
+		// Highlight the selected opening (if any)
+		merged.selectAll('line')
+			.attr('stroke', d => (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening) ? 'red' : 'black');
+
+		// Hover interaction
+		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		merged
 			.on('mouseover', (event, d) => {
-				// highlight the lines inside the group rather than setting attrs on the group
+				// highlight the lines (increase width) and scale group; keep stroke color as set
 				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 3);
 				d3.select(event.currentTarget).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
-				this.showTooltip(`<strong>${d.name}</strong><br>Popularité: ${this.formatPercent(d.popularity, 2)}<br>Victoire (Blancs): ${this.formatPercent(d.win_rate, 2)}`, event);
+				this.showTooltip(`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`, event);
 			})
 			.on('mouseout', (event, d) => {
 				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 2);
@@ -119,8 +127,6 @@ class PopularityVisualization extends Visualization {
 				this.hideTooltip();
 			});
 	}
-
-
 }
 
 export { PopularityVisualization };
