@@ -1,14 +1,16 @@
 import { Visualization } from './Visualization.js';
 
 class AccuracyVisualization extends Visualization {
-	constructor(data, container, options = {}) {
-		super(data, container, { top: 20, right: 30, bottom: 60, left: 60 });
+	constructor(data, container) {
+		super(data, container, {top: 20, right: 30, bottom: 60, left: 60});
 	}
 
-	render(time_control, elo) {
+	render(time_control, elo, color, opening) {
 		this.init().then(() => {
 			this.filters.time_control = time_control;
 			this.filters.elo = elo;
+			this.filters.color = Number.parseInt(color);
+			this.filters.opening = opening;
 
 			// clear previous axis/marks
 			this.g.axes.selectAll('*').remove();
@@ -27,11 +29,12 @@ class AccuracyVisualization extends Visualization {
 	#preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
-		const opening = d3.select('#opening').property('value');
+		const color = this.filters.color;
+		const opening = this.filters.opening;
 
-		if (!this.data || !this.data.payload) return [];
+		if (!this.data?.payload) return [];
 		const payload = this.data.payload;
-		if (!payload[cadence] || !payload[cadence][eloKey] || !payload[cadence][eloKey][opening]) return [];
+		if (!payload?.[cadence]?.[eloKey]?.[opening]) return [];
 
 		const entry = payload[cadence][eloKey][opening];
 		const matrice = entry.heatmap;
@@ -42,7 +45,7 @@ class AccuracyVisualization extends Visualization {
 		const dataset = [];
 		matrice.forEach((row, yIndex) => {
 			row.forEach((winRate, xIndex) => {
-				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate[0], games: nb_games?.[yIndex]?.[xIndex][0] || 0 });
+				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate[color], games: nb_games?.[yIndex]?.[xIndex][color] || 0 });
 			});
 		});
 
@@ -105,10 +108,10 @@ class AccuracyVisualization extends Visualization {
 			.style('fill', d => d.games === 0 ? '#ccc' : this.scales.color(d.value))
 			.style('stroke', 'white');
 
-		// interaction
+		// Hover interaction
 		this.g.marks.selectAll('rect')
 			.on('mouseover', (event, d) => {
-				this.showTooltip(`Taux de victoire : ${(d.value * 100).toFixed(1)}%<br/>Nombre de parties : ${d.games}`, event);
+				this.showTooltip(`Win rate : ${(d.value * 100).toFixed(1)}%<br/>Number of games : ${d.games}`, event);
 				d3.select(event.currentTarget).raise();
 			})
 			.on('mouseout', () => this.hideTooltip());
