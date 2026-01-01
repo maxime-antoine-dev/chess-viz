@@ -38,7 +38,7 @@ function init() {
 }
 
 function update(charts, time_control, elo, color, opening) {
-	// charts.openingExplorer.render();
+	charts.openingExplorer.render(time_control, elo, color, opening);
 	charts.popularity.render(time_control, elo, color, opening);
 	charts.accuracy.render(time_control, elo, color, opening);
 }
