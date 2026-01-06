@@ -1,8 +1,8 @@
 import { Visualization } from './Visualization.js';
 
 class PopularityVisualization extends Visualization {
-	constructor(data, container) {
-		super(data, container, {top: 30, right: 30, bottom: 60, left: 60});
+	constructor(dataPath, container) {
+		super(dataPath, container, {top: 30, right: 30, bottom: 60, left: 60});
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
 	}
@@ -14,45 +14,43 @@ class PopularityVisualization extends Visualization {
 			this.filters.color = Number.parseInt(color);
 			this.filters.opening = opening;
 
-			// clear previous axis/marks
-			this.g.axes.selectAll('*').remove();
-			this.g.marks.selectAll('*').remove();
-
-			const filtered = this.#preprocess();
-			this.#computeScales(filtered);
-			this.#drawAxes();
-			this.#bindMarks(filtered);
+			const filtered = this.preprocess();
+			this.bindMarks(filtered);
 		}).catch(err => console.error(err));
 	}
 
 
 	// === Private methods ===
 
-	// preprocess loadedData according to this.filters
-	#preprocess() {
-		const cadence = this.filters.time_control;
-		const eloKey = this.filters.elo;
-		const color = this.filters.color;
-		const opening = this.filters.opening;
+	computeScales() {
+		const payload = this.data.payload;
+		let maxPop = -Infinity;
+		let minWin = Infinity;
+		let maxWin = -Infinity;
 
-		const band = this.data?.payload?.[cadence]?.[eloKey];
-		if (!Array.isArray(band)) return [];
+		for (const cadenceKey in payload) {
+			const cadence = payload[cadenceKey];
+			for (const eloKey in cadence) {
+				const band = cadence[eloKey];
+				band.forEach(d => {
+					maxPop = Math.max(maxPop, d.popularity);
+					d.win_rate.forEach(w => {
+						minWin = Math.min(minWin, w);
+						maxWin = Math.max(maxWin, w);
+					});
+				});
+			}
+		}
 
-		// return items with required fields
-		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
-			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[color] }));
-	}
-
-	#computeScales(data) {
-		const maxPop = d3.max(data, d => d.popularity) || 0.1;
-		const minWin = d3.min(data, d => d.win_rate) || 0.4;
-		const maxWin = d3.max(data, d => d.win_rate) || 0.6;
+		if (!Number.isFinite(maxPop) || maxPop <= 0) maxPop = 1;
+		if (!Number.isFinite(minWin)) minWin = 0;
+		if (!Number.isFinite(maxWin)) maxWin = 1;
 
 		this.scales.x = d3.scaleLinear().domain([0, maxPop * 1.1]).range([0, this.innerW]);
 		this.scales.y = d3.scaleLinear().domain([minWin * 0.95, maxWin * 1.05]).range([this.innerH, 0]);
 	}
 
-	#drawAxes() {
+	drawAxes() {
 		// X axis
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g').attr('class', 'x-axis')
@@ -85,7 +83,22 @@ class PopularityVisualization extends Visualization {
 			.text(`Win rate (${color})`);
 	}
 
-	#bindMarks(data) {
+	preprocess() {
+		const cadence = this.filters.time_control;
+		const eloKey = this.filters.elo;
+		const color = this.filters.color;
+
+		const band = this.data?.payload?.[cadence]?.[eloKey];
+		if (!Array.isArray(band)) return [];
+
+		// return items with required fields
+		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
+			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[color] }));
+	}
+
+	bindMarks(data) {
+		this.g.marks.selectAll('*').remove();
+
 		const crosses = this.g.marks.selectAll('.cross').data(data, d => d.name);
 
 		// exit

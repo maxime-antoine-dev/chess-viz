@@ -67,6 +67,10 @@ class Visualization {
 			this.#createTooltip();
 		}
 
+		// Compute scales and draw axes
+		this.computeScales();
+		this.drawAxes();
+
 		this.initialized = true;
 		return this;
 	}
@@ -82,6 +86,24 @@ class Visualization {
 	 */
 	render(time_control, elo, color, opening) {
 		throw new Error('Subclasses must implement render() method');
+	}
+
+	/**
+	 * Draw axes for the visualization
+	 * @returns {void}
+	 * @throws {Error} If not implemented in subclass
+	 */
+	drawAxes() {
+		throw new Error('Subclasses must implement drawAxes() method');
+	}
+
+	/**
+	 * Compute scales for the visualization
+	 * @returns {void}
+	 * @throws {Error} If not implemented in subclass
+	 */
+	computeScales() {
+		throw new Error('Subclasses must implement computeScales() method');
 	}
 
 
