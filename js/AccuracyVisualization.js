@@ -1,8 +1,8 @@
 import { Visualization } from './Visualization.js';
 
 class AccuracyVisualization extends Visualization {
-	constructor(data, container) {
-		super(data, container, {top: 20, right: 30, bottom: 60, left: 60});
+	constructor(dataPath, container) {
+		super(dataPath, container, {top: 20, right: 30, bottom: 60, left: 60});
 	}
 
 	render(time_control, elo, color, opening) {
@@ -12,48 +12,15 @@ class AccuracyVisualization extends Visualization {
 			this.filters.color = Number.parseInt(color);
 			this.filters.opening = opening;
 
-			// clear previous axis/marks
-			this.g.axes.selectAll('*').remove();
-			this.g.marks.selectAll('*').remove();
-
-			const filtered = this.#preprocess();
-			this.#computeScales(filtered);
-			this.#drawAxes();
-			this.#drawSquares(filtered);
+			const filtered = this.preprocess();
+			this.drawSquares(filtered);
 		}).catch(err => console.error(err));
 	}
 
 
 	// === Private methods ===
 
-	#preprocess() {
-		const cadence = this.filters.time_control;
-		const eloKey = this.filters.elo;
-		const color = this.filters.color;
-		const opening = this.filters.opening;
-
-		if (!this.data?.payload) return [];
-		const payload = this.data.payload;
-		if (!payload?.[cadence]?.[eloKey]?.[opening]) return [];
-
-		const entry = payload[cadence][eloKey][opening];
-		const matrice = entry.heatmap;
-		const nb_games = entry.cell_samples;
-
-		if (!matrice || matrice.length === 0) return [];
-
-		const dataset = [];
-		matrice.forEach((row, yIndex) => {
-			row.forEach((winRate, xIndex) => {
-				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate[color], games: nb_games?.[yIndex]?.[xIndex][color] || 0 });
-			});
-		});
-
-		return dataset;
-	}
-
-	#computeScales(data) {
-		// build band scales for 0..100 step 10
+	computeScales() {
 		const domain = d3.range(0, 110, 10);
 		this.scales = this.scales || {};
 		this.scales.x = d3.scaleBand().range([0, this.innerW]).domain(domain).padding(0.02);
@@ -61,7 +28,7 @@ class AccuracyVisualization extends Visualization {
 		this.scales.color = d3.scaleSequential().interpolator(d3.interpolateRdYlGn).domain([0, 1]);
 	}
 
-	#drawAxes() {
+	drawAxes() {
 		// X axis
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g').attr('class', 'x-axis')
@@ -93,7 +60,33 @@ class AccuracyVisualization extends Visualization {
 			.text("Mean accuracy after opening");
 	}
 
-	#drawSquares(data) {
+	preprocess() {
+		const cadence = this.filters.time_control;
+		const eloKey = this.filters.elo;
+		const color = this.filters.color;
+		const opening = this.filters.opening;
+
+		if (!this.data?.payload) return [];
+		const payload = this.data.payload;
+		if (!payload?.[cadence]?.[eloKey]?.[opening]) return [];
+
+		const entry = payload[cadence][eloKey][opening];
+		const matrice = entry.heatmap;
+		const nb_games = entry.cell_samples;
+
+		if (!matrice || matrice.length === 0) return [];
+
+		const dataset = [];
+		matrice.forEach((row, yIndex) => {
+			row.forEach((winRate, xIndex) => {
+				dataset.push({ x: xIndex * 10, y: yIndex * 10, value: winRate[color], games: nb_games?.[yIndex]?.[xIndex][color] || 0 });
+			});
+		});
+
+		return dataset;
+	}
+
+	drawSquares(data) {
 		const rects = this.g.marks.selectAll('rect').data(data, d => `${d.x}-${d.y}`);
 
 		// enter + update
