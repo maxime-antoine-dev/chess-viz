@@ -6,1903 +6,1310 @@
       "1500-2000": [
         {
           "name": "Sicilian Defense",
-          "popularity": 0.1004,
-          "win_rate": [
-            0.4669,
-            0.4669,
-            0.5331
-          ]
+          "popularity": 0.1477,
+          "color": "black",
+          "count": 51209,
+          "win_rate": [0.439, 0.439, 0.561]
         },
         {
           "name": "French Defense",
-          "popularity": 0.0784,
-          "win_rate": [
-            0.499,
-            0.499,
-            0.501
-          ]
-        },
-        {
-          "name": "Scandinavian Defense",
-          "popularity": 0.0598,
-          "win_rate": [
-            0.3953,
-            0.3953,
-            0.6047
-          ]
-        },
-        {
-          "name": "Caro-Kann Defense",
-          "popularity": 0.0397,
-          "win_rate": [
-            0.5039,
-            0.5039,
-            0.4961
-          ]
-        },
-        {
-          "name": "Modern Defense",
-          "popularity": 0.0375,
-          "win_rate": [
-            0.4856,
-            0.4856,
-            0.5144
-          ]
-        },
-        {
-          "name": "Owen Defense",
-          "popularity": 0.0334,
-          "win_rate": [
-            0.5231,
-            0.5231,
-            0.4769
-          ]
-        },
-        {
-          "name": "English Opening",
-          "popularity": 0.0301,
-          "win_rate": [
-            0.5385,
-            0.5385,
-            0.4615
-          ]
+          "popularity": 0.0684,
+          "color": "black",
+          "count": 23704,
+          "win_rate": [0.4705, 0.4705, 0.5295]
         },
         {
           "name": "Italian Game",
-          "popularity": 0.0165,
-          "win_rate": [
-            0.5935,
-            0.5935,
-            0.4065
-          ]
-        },
-        {
-          "name": "Alekhine Defense",
-          "popularity": 0.0145,
-          "win_rate": [
-            0.5266,
-            0.5266,
-            0.4734
-          ]
-        },
-        {
-          "name": "Slav Defense",
-          "popularity": 0.0107,
-          "win_rate": [
-            0.587,
-            0.587,
-            0.413
-          ]
-        },
-        {
-          "name": "Bird Opening",
-          "popularity": 0.0096,
-          "win_rate": [
-            0.5242,
-            0.5242,
-            0.4758
-          ]
-        },
-        {
-          "name": "Scotch Game",
-          "popularity": 0.0094,
-          "win_rate": [
-            0.5738,
-            0.5738,
-            0.4262
-          ]
+          "popularity": 0.0428,
+          "color": "white",
+          "count": 14840,
+          "win_rate": [0.4919, 0.4919, 0.5081]
         },
         {
           "name": "Ruy Lopez",
-          "popularity": 0.0093,
-          "win_rate": [
-            0.5333,
-            0.5333,
-            0.4667
-          ]
+          "popularity": 0.0393,
+          "color": "white",
+          "count": 13618,
+          "win_rate": [0.5274, 0.5274, 0.4726]
         },
         {
-          "name": "King's Indian Defense",
-          "popularity": 0.0086,
-          "win_rate": [
-            0.5357,
-            0.5357,
-            0.4643
-          ]
+          "name": "Caro-Kann Defense",
+          "popularity": 0.0343,
+          "color": "black",
+          "count": 11894,
+          "win_rate": [0.4458, 0.4458, 0.5542]
         },
         {
-          "name": "Semi-Slav Defense",
-          "popularity": 0.0082,
-          "win_rate": [
-            0.5094,
-            0.5094,
-            0.4906
-          ]
+          "name": "English Opening",
+          "popularity": 0.0341,
+          "color": "white",
+          "count": 11824,
+          "win_rate": [0.5137, 0.5137, 0.4863]
         },
         {
-          "name": "Vienna Game",
-          "popularity": 0.0077,
-          "win_rate": [
-            0.64,
-            0.64,
-            0.36
-          ]
+          "name": "Scandinavian Defense",
+          "popularity": 0.0287,
+          "color": "black",
+          "count": 9954,
+          "win_rate": [0.4996, 0.4996, 0.5004]
+        },
+        {
+          "name": "Scotch Game",
+          "popularity": 0.0233,
+          "color": "white",
+          "count": 8080,
+          "win_rate": [0.5341, 0.5341, 0.4659]
         },
         {
           "name": "Philidor Defense",
-          "popularity": 0.0076,
-          "win_rate": [
-            0.602,
-            0.602,
-            0.398
-          ]
+          "popularity": 0.0164,
+          "color": "black",
+          "count": 5701,
+          "win_rate": [0.608, 0.608, 0.392]
         },
         {
           "name": "Four Knights Game",
-          "popularity": 0.0073,
-          "win_rate": [
-            0.5745,
-            0.5745,
-            0.4255
-          ]
+          "popularity": 0.0149,
+          "color": "white",
+          "count": 5160,
+          "win_rate": [0.4427, 0.4427, 0.5573]
         },
         {
-          "name": "Benoni Defense",
+          "name": "Modern Defense",
+          "popularity": 0.014,
+          "color": "black",
+          "count": 4856,
+          "win_rate": [0.4923, 0.4923, 0.5077]
+        },
+        {
+          "name": "Slav Defense",
+          "popularity": 0.0115,
+          "color": "black",
+          "count": 3988,
+          "win_rate": [0.5107, 0.5107, 0.4893]
+        },
+        {
+          "name": "King's Indian Defense",
+          "popularity": 0.0096,
+          "color": "black",
+          "count": 3314,
+          "win_rate": [0.5018, 0.5018, 0.4982]
+        },
+        {
+          "name": "Owen Defense",
+          "popularity": 0.0088,
+          "color": "black",
+          "count": 3048,
+          "win_rate": [0.5116, 0.5116, 0.4884]
+        },
+        {
+          "name": "Alekhine Defense",
+          "popularity": 0.0084,
+          "color": "black",
+          "count": 2925,
+          "win_rate": [0.4159, 0.4159, 0.5841]
+        },
+        {
+          "name": "Vienna Game",
+          "popularity": 0.0083,
+          "color": "white",
+          "count": 2882,
+          "win_rate": [0.5026, 0.5026, 0.4974]
+        },
+        {
+          "name": "Semi-Slav Defense",
+          "popularity": 0.0075,
+          "color": "black",
+          "count": 2587,
+          "win_rate": [0.528, 0.528, 0.472]
+        },
+        {
+          "name": "Nimzo-Indian Defense",
           "popularity": 0.0069,
-          "win_rate": [
-            0.3111,
-            0.3111,
-            0.6889
-          ]
+          "color": "black",
+          "count": 2395,
+          "win_rate": [0.5023, 0.5023, 0.4977]
         },
         {
-          "name": "Pirc Defense",
-          "popularity": 0.0057,
-          "win_rate": [
-            0.6622,
-            0.6622,
-            0.3378
-          ]
+          "name": "Bird Opening",
+          "popularity": 0.0068,
+          "color": "white",
+          "count": 2353,
+          "win_rate": [0.4794, 0.4794, 0.5206]
+        },
+        {
+          "name": "Dutch Defense",
+          "popularity": 0.0065,
+          "color": "black",
+          "count": 2248,
+          "win_rate": [0.458, 0.458, 0.542]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0057,
           "color": "white",
           "count": 1993,
-          "win_rate": [
-            0.4333,
-            0.4333,
-            0.5667
-          ]
+          "win_rate": [0.4333, 0.4333, 0.5667]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0048,
           "color": "black",
           "count": 1656,
-          "win_rate": [
-            0.4484,
-            0.4484,
-            0.5516
-          ]
+          "win_rate": [0.4484, 0.4484, 0.5516]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0048,
           "color": "black",
           "count": 1679,
-          "win_rate": [
-            0.4774,
-            0.4774,
-            0.5226
-          ]
+          "win_rate": [0.4774, 0.4774, 0.5226]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0037,
           "color": "white",
           "count": 1286,
-          "win_rate": [
-            0.6349,
-            0.6349,
-            0.3651
-          ]
+          "win_rate": [0.6349, 0.6349, 0.3651]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0022,
           "color": "white",
           "count": 755,
-          "win_rate": [
-            0.3993,
-            0.3993,
-            0.6007
-          ]
+          "win_rate": [0.3993, 0.3993, 0.6007]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0016,
           "color": "black",
           "count": 549,
-          "win_rate": [
-            0.4262,
-            0.4262,
-            0.5738
-          ]
+          "win_rate": [0.4262, 0.4262, 0.5738]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0013,
           "color": "black",
           "count": 438,
-          "win_rate": [
-            0.4463,
-            0.4463,
-            0.5537
-          ]
+          "win_rate": [0.4463, 0.4463, 0.5537]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.001,
           "color": "white",
           "count": 353,
-          "win_rate": [
-            0.6926,
-            0.6926,
-            0.3074
-          ]
+          "win_rate": [0.6926, 0.6926, 0.3074]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0006,
           "color": "white",
           "count": 215,
-          "win_rate": [
-            0.3628,
-            0.3628,
-            0.6372
-          ]
+          "win_rate": [0.3628, 0.3628, 0.6372]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0005,
           "color": "black",
           "count": 180,
-          "win_rate": [
-            0.525,
-            0.525,
-            0.475
-          ]
+          "win_rate": [0.525, 0.525, 0.475]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0005,
           "color": "white",
           "count": 187,
-          "win_rate": [
-            0.5775,
-            0.5775,
-            0.4225
-          ]
+          "win_rate": [0.5775, 0.5775, 0.4225]
         },
         {
           "name": "London System",
           "popularity": 0.0004,
           "color": "white",
           "count": 143,
-          "win_rate": [
-            0.4371,
-            0.4371,
-            0.5629
-          ]
+          "win_rate": [0.4371, 0.4371, 0.5629]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0004,
           "color": "black",
           "count": 129,
-          "win_rate": [
-            0.3837,
-            0.3837,
-            0.6163
-          ]
+          "win_rate": [0.3837, 0.3837, 0.6163]
         }
       ],
-      "1000-1500": [
+      "2000+": [
         {
           "name": "Sicilian Defense",
           "popularity": 0.203,
           "color": "black",
           "count": 2241,
-          "win_rate": [
-            0.4904,
-            0.4904,
-            0.5096
-          ]
+          "win_rate": [0.4904, 0.4904, 0.5096]
         },
         {
           "name": "French Defense",
           "popularity": 0.0764,
           "color": "black",
           "count": 843,
-          "win_rate": [
-            0.5196,
-            0.5196,
-            0.4804
-          ]
+          "win_rate": [0.5196, 0.5196, 0.4804]
         },
         {
           "name": "English Opening",
           "popularity": 0.0517,
           "color": "white",
           "count": 571,
-          "win_rate": [
-            0.5315,
-            0.5315,
-            0.4685
-          ]
+          "win_rate": [0.5315, 0.5315, 0.4685]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0423,
           "color": "black",
           "count": 467,
-          "win_rate": [
-            0.4775,
-            0.4775,
-            0.5225
-          ]
+          "win_rate": [0.4775, 0.4775, 0.5225]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.042,
           "color": "white",
           "count": 464,
-          "win_rate": [
-            0.4806,
-            0.4806,
-            0.5194
-          ]
+          "win_rate": [0.4806, 0.4806, 0.5194]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0282,
           "color": "black",
           "count": 311,
-          "win_rate": [
-            0.5386,
-            0.5386,
-            0.4614
-          ]
+          "win_rate": [0.5386, 0.5386, 0.4614]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0267,
           "color": "white",
           "count": 295,
-          "win_rate": [
-            0.4407,
-            0.4407,
-            0.5593
-          ]
+          "win_rate": [0.4407, 0.4407, 0.5593]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.0222,
           "color": "black",
           "count": 245,
-          "win_rate": [
-            0.5449,
-            0.5449,
-            0.4551
-          ]
+          "win_rate": [0.5449, 0.5449, 0.4551]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0183,
           "color": "white",
           "count": 202,
-          "win_rate": [
-            0.4505,
-            0.4505,
-            0.5495
-          ]
+          "win_rate": [0.4505, 0.4505, 0.5495]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0171,
           "color": "black",
           "count": 189,
-          "win_rate": [
-            0.5661,
-            0.5661,
-            0.4339
-          ]
+          "win_rate": [0.5661, 0.5661, 0.4339]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0168,
           "color": "black",
           "count": 185,
-          "win_rate": [
-            0.5757,
-            0.5757,
-            0.4243
-          ]
+          "win_rate": [0.5757, 0.5757, 0.4243]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0154,
           "color": "black",
           "count": 170,
-          "win_rate": [
-            0.4941,
-            0.4941,
-            0.5059
-          ]
+          "win_rate": [0.4941, 0.4941, 0.5059]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0151,
           "color": "black",
           "count": 167,
-          "win_rate": [
-            0.3922,
-            0.3922,
-            0.6078
-          ]
+          "win_rate": [0.3922, 0.3922, 0.6078]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.015,
           "color": "black",
           "count": 166,
-          "win_rate": [
-            0.4578,
-            0.4578,
-            0.5422
-          ]
+          "win_rate": [0.4578, 0.4578, 0.5422]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0113,
           "color": "black",
           "count": 125,
-          "win_rate": [
-            0.58,
-            0.58,
-            0.42
-          ]
+          "win_rate": [0.58, 0.58, 0.42]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0111,
           "color": "white",
           "count": 123,
-          "win_rate": [
-            0.6057,
-            0.6057,
-            0.3943
-          ]
+          "win_rate": [0.6057, 0.6057, 0.3943]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0108,
           "color": "white",
           "count": 119,
-          "win_rate": [
-            0.3655,
-            0.3655,
-            0.6345
-          ]
+          "win_rate": [0.3655, 0.3655, 0.6345]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0099,
           "color": "black",
           "count": 109,
-          "win_rate": [
-            0.5367,
-            0.5367,
-            0.4633
-          ]
+          "win_rate": [0.5367, 0.5367, 0.4633]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0089,
           "color": "black",
           "count": 98,
-          "win_rate": [
-            0.5306,
-            0.5306,
-            0.4694
-          ]
+          "win_rate": [0.5306, 0.5306, 0.4694]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0075,
           "color": "black",
           "count": 83,
-          "win_rate": [
-            0.7229,
-            0.7229,
-            0.2771
-          ]
+          "win_rate": [0.7229, 0.7229, 0.2771]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0058,
           "color": "white",
           "count": 64,
-          "win_rate": [
-            0.4453,
-            0.4453,
-            0.5547
-          ]
+          "win_rate": [0.4453, 0.4453, 0.5547]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0055,
           "color": "black",
           "count": 61,
-          "win_rate": [
-            0.4672,
-            0.4672,
-            0.5328
-          ]
+          "win_rate": [0.4672, 0.4672, 0.5328]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0034,
           "color": "white",
           "count": 37,
-          "win_rate": [
-            0.5811,
-            0.5811,
-            0.4189
-          ]
+          "win_rate": [0.5811, 0.5811, 0.4189]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.003,
           "color": "black",
           "count": 33,
-          "win_rate": [
-            0.3485,
-            0.3485,
-            0.6515
-          ]
+          "win_rate": [0.3485, 0.3485, 0.6515]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0029,
           "color": "white",
           "count": 32,
-          "win_rate": [
-            0.4375,
-            0.4375,
-            0.5625
-          ]
+          "win_rate": [0.4375, 0.4375, 0.5625]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0026,
           "color": "white",
           "count": 29,
-          "win_rate": [
-            0.6379,
-            0.6379,
-            0.3621
-          ]
+          "win_rate": [0.6379, 0.6379, 0.3621]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0015,
           "color": "black",
           "count": 17,
-          "win_rate": [
-            0.4118,
-            0.4118,
-            0.5882
-          ]
+          "win_rate": [0.4118, 0.4118, 0.5882]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0012,
           "color": "black",
           "count": 13,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.001,
           "color": "white",
           "count": 11,
-          "win_rate": [
-            0.5909,
-            0.5909,
-            0.4091
-          ]
+          "win_rate": [0.5909, 0.5909, 0.4091]
         },
         {
           "name": "London System",
           "popularity": 0.0009,
           "color": "white",
           "count": 10,
-          "win_rate": [
-            0.65,
-            0.65,
-            0.35
-          ]
+          "win_rate": [0.65, 0.65, 0.35]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0007,
           "color": "white",
           "count": 8,
-          "win_rate": [
-            0.4375,
-            0.4375,
-            0.5625
-          ]
+          "win_rate": [0.4375, 0.4375, 0.5625]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0005,
           "color": "black",
           "count": 6,
-          "win_rate": [
-            0.3333,
-            0.3333,
-            0.6667
-          ]
+          "win_rate": [0.3333, 0.3333, 0.6667]
         },
         {
-          "name": "Petrov's Defense",
-          "popularity": 0.0017,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "name": "Queen's Gambit",
+          "popularity": 0.0002,
+          "color": "white",
+          "count": 2,
+          "win_rate": [1.0, 1.0, 0.0]
+        }
+      ],
+      "500-1000": [
+        {
+          "name": "French Defense",
+          "popularity": 0.043,
+          "color": "black",
+          "count": 12,
+          "win_rate": [0.6667, 0.6667, 0.3333]
+        },
+        {
+          "name": "Vienna Game",
+          "popularity": 0.0358,
+          "color": "white",
+          "count": 10,
+          "win_rate": [0.8, 0.8, 0.2]
+        },
+        {
+          "name": "Scandinavian Defense",
+          "popularity": 0.0358,
+          "color": "black",
+          "count": 10,
+          "win_rate": [0.1, 0.1, 0.9]
+        },
+        {
+          "name": "Sicilian Defense",
+          "popularity": 0.0323,
+          "color": "black",
+          "count": 9,
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0179,
           "color": "white",
           "count": 5,
-          "win_rate": [
-            0.2,
-            0.2,
-            0.8
-          ]
+          "win_rate": [0.2, 0.2, 0.8]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0143,
           "color": "black",
           "count": 4,
-          "win_rate": [
-            0.25,
-            0.25,
-            0.75
-          ]
+          "win_rate": [0.25, 0.25, 0.75]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0143,
           "color": "black",
           "count": 4,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0143,
           "color": "white",
           "count": 4,
-          "win_rate": [
-            0.25,
-            0.25,
-            0.75
-          ]
+          "win_rate": [0.25, 0.25, 0.75]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0143,
           "color": "white",
           "count": 4,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "win_rate": [0.75, 0.75, 0.25]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0108,
           "color": "white",
           "count": 3,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0108,
           "color": "black",
           "count": 3,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "English Opening",
           "popularity": 0.0108,
           "color": "white",
           "count": 3,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0072,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0072,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0072,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "win_rate": [0.75, 0.75, 0.25]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0036,
           "color": "black",
           "count": 1,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
+        },
+        {
+          "name": "Benoni Defense",
+          "popularity": 0.0036,
+          "color": "black",
+          "count": 1,
+          "win_rate": [0.0, 0.0, 1.0]
+        },
+        {
+          "name": "Bogo-Indian Defense",
+          "popularity": 0.0036,
+          "color": "black",
+          "count": 1,
+          "win_rate": [1.0, 1.0, 0.0]
+        },
+        {
+          "name": "Polish Opening",
+          "popularity": 0.0036,
+          "color": "white",
+          "count": 1,
+          "win_rate": [0.0, 0.0, 1.0]
+        },
+        {
+          "name": "Trompowsky Attack",
+          "popularity": 0.0036,
+          "color": "white",
+          "count": 1,
+          "win_rate": [0.0, 0.0, 1.0]
         }
       ],
-      "2000+": [
+      "1000-1500": [
         {
           "name": "Sicilian Defense",
           "popularity": 0.0934,
           "color": "black",
           "count": 15729,
-          "win_rate": [
-            0.4141,
-            0.4141,
-            0.5859
-          ]
+          "win_rate": [0.4141, 0.4141, 0.5859]
         },
         {
           "name": "French Defense",
           "popularity": 0.0524,
           "color": "black",
           "count": 8830,
-          "win_rate": [
-            0.5128,
-            0.5128,
-            0.4872
-          ]
+          "win_rate": [0.5128, 0.5128, 0.4872]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0425,
           "color": "black",
           "count": 7149,
-          "win_rate": [
-            0.5276,
-            0.5276,
-            0.4724
-          ]
+          "win_rate": [0.5276, 0.5276, 0.4724]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0409,
           "color": "white",
           "count": 6890,
-          "win_rate": [
-            0.5327,
-            0.5327,
-            0.4673
-          ]
+          "win_rate": [0.5327, 0.5327, 0.4673]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0341,
           "color": "white",
           "count": 5746,
-          "win_rate": [
-            0.5265,
-            0.5265,
-            0.4735
-          ]
+          "win_rate": [0.5265, 0.5265, 0.4735]
         },
         {
           "name": "English Opening",
           "popularity": 0.0249,
           "color": "white",
           "count": 4185,
-          "win_rate": [
-            0.5332,
-            0.5332,
-            0.4668
-          ]
+          "win_rate": [0.5332, 0.5332, 0.4668]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0243,
           "color": "black",
           "count": 4088,
-          "win_rate": [
-            0.4533,
-            0.4533,
-            0.5467
-          ]
+          "win_rate": [0.4533, 0.4533, 0.5467]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0234,
           "color": "white",
           "count": 3932,
-          "win_rate": [
-            0.5314,
-            0.5314,
-            0.4686
-          ]
+          "win_rate": [0.5314, 0.5314, 0.4686]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0215,
           "color": "white",
           "count": 3625,
-          "win_rate": [
-            0.4902,
-            0.4902,
-            0.5098
-          ]
+          "win_rate": [0.4902, 0.4902, 0.5098]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0187,
           "color": "black",
           "count": 3151,
-          "win_rate": [
-            0.5824,
-            0.5824,
-            0.4176
-          ]
+          "win_rate": [0.5824, 0.5824, 0.4176]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0127,
           "color": "black",
           "count": 2133,
-          "win_rate": [
-            0.5321,
-            0.5321,
-            0.4679
-          ]
+          "win_rate": [0.5321, 0.5321, 0.4679]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0124,
           "color": "white",
           "count": 2085,
-          "win_rate": [
-            0.4753,
-            0.4753,
-            0.5247
-          ]
+          "win_rate": [0.4753, 0.4753, 0.5247]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0105,
           "color": "black",
           "count": 1773,
-          "win_rate": [
-            0.5671,
-            0.5671,
-            0.4329
-          ]
+          "win_rate": [0.5671, 0.5671, 0.4329]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.009,
           "color": "black",
           "count": 1523,
-          "win_rate": [
-            0.5571,
-            0.5571,
-            0.4429
-          ]
+          "win_rate": [0.5571, 0.5571, 0.4429]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.0064,
           "color": "black",
           "count": 1077,
-          "win_rate": [
-            0.5344,
-            0.5344,
-            0.4656
-          ]
+          "win_rate": [0.5344, 0.5344, 0.4656]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0057,
           "color": "white",
           "count": 965,
-          "win_rate": [
-            0.4699,
-            0.4699,
-            0.5301
-          ]
+          "win_rate": [0.4699, 0.4699, 0.5301]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0044,
           "color": "white",
           "count": 745,
-          "win_rate": [
-            0.4295,
-            0.4295,
-            0.5705
-          ]
+          "win_rate": [0.4295, 0.4295, 0.5705]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.003,
           "color": "black",
           "count": 501,
-          "win_rate": [
-            0.484,
-            0.484,
-            0.516
-          ]
+          "win_rate": [0.484, 0.484, 0.516]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0029,
           "color": "white",
           "count": 492,
-          "win_rate": [
-            0.624,
-            0.624,
-            0.376
-          ]
+          "win_rate": [0.624, 0.624, 0.376]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0029,
           "color": "black",
           "count": 481,
-          "win_rate": [
-            0.5208,
-            0.5208,
-            0.4792
-          ]
+          "win_rate": [0.5208, 0.5208, 0.4792]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0026,
           "color": "black",
           "count": 439,
-          "win_rate": [
-            0.41,
-            0.41,
-            0.59
-          ]
+          "win_rate": [0.41, 0.41, 0.59]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0024,
           "color": "black",
           "count": 412,
-          "win_rate": [
-            0.5898,
-            0.5898,
-            0.4102
-          ]
+          "win_rate": [0.5898, 0.5898, 0.4102]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0024,
           "color": "black",
           "count": 408,
-          "win_rate": [
-            0.5025,
-            0.5025,
-            0.4975
-          ]
+          "win_rate": [0.5025, 0.5025, 0.4975]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0021,
           "color": "black",
           "count": 356,
-          "win_rate": [
-            0.5407,
-            0.5407,
-            0.4593
-          ]
+          "win_rate": [0.5407, 0.5407, 0.4593]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0019,
           "color": "black",
           "count": 326,
-          "win_rate": [
-            0.5291,
-            0.5291,
-            0.4709
-          ]
+          "win_rate": [0.5291, 0.5291, 0.4709]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.0013,
           "color": "white",
           "count": 220,
-          "win_rate": [
-            0.5886,
-            0.5886,
-            0.4114
-          ]
+          "win_rate": [0.5886, 0.5886, 0.4114]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0011,
           "color": "white",
           "count": 178,
-          "win_rate": [
-            0.4326,
-            0.4326,
-            0.5674
-          ]
+          "win_rate": [0.4326, 0.4326, 0.5674]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0003,
           "color": "black",
           "count": 57,
-          "win_rate": [
-            0.386,
-            0.386,
-            0.614
-          ]
+          "win_rate": [0.386, 0.386, 0.614]
         },
         {
           "name": "London System",
           "popularity": 0.0002,
           "color": "white",
           "count": 38,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0002,
           "color": "black",
           "count": 32,
-          "win_rate": [
-            0.3906,
-            0.3906,
-            0.6094
-          ]
+          "win_rate": [0.3906, 0.3906, 0.6094]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0002,
           "color": "white",
           "count": 28,
-          "win_rate": [
-            0.5714,
-            0.5714,
-            0.4286
-          ]
+          "win_rate": [0.5714, 0.5714, 0.4286]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0001,
           "color": "white",
           "count": 19,
-          "win_rate": [
-            0.4737,
-            0.4737,
-            0.5263
-          ]
+          "win_rate": [0.4737, 0.4737, 0.5263]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0001,
           "color": "black",
           "count": 19,
-          "win_rate": [
-            0.6579,
-            0.6579,
-            0.3421
-          ]
+          "win_rate": [0.6579, 0.6579, 0.3421]
         }
       ]
     },
-    "rapid": {
-      "1000-1500": [
+    "bullet": {
+      "1500-2000": [
         {
           "name": "Sicilian Defense",
           "popularity": 0.09,
           "color": "black",
           "count": 23862,
-          "win_rate": [
-            0.4596,
-            0.4596,
-            0.5404
-          ]
+          "win_rate": [0.4596, 0.4596, 0.5404]
         },
         {
           "name": "French Defense",
           "popularity": 0.064,
           "color": "black",
           "count": 16974,
-          "win_rate": [
-            0.4846,
-            0.4846,
-            0.5154
-          ]
+          "win_rate": [0.4846, 0.4846, 0.5154]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0458,
           "color": "black",
           "count": 12141,
-          "win_rate": [
-            0.4489,
-            0.4489,
-            0.5511
-          ]
+          "win_rate": [0.4489, 0.4489, 0.5511]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0384,
           "color": "black",
           "count": 10185,
-          "win_rate": [
-            0.4614,
-            0.4614,
-            0.5386
-          ]
+          "win_rate": [0.4614, 0.4614, 0.5386]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0368,
           "color": "black",
           "count": 9749,
-          "win_rate": [
-            0.484,
-            0.484,
-            0.516
-          ]
+          "win_rate": [0.484, 0.484, 0.516]
         },
         {
           "name": "English Opening",
           "popularity": 0.0325,
           "color": "white",
           "count": 8605,
-          "win_rate": [
-            0.5089,
-            0.5089,
-            0.4911
-          ]
+          "win_rate": [0.5089, 0.5089, 0.4911]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0199,
           "color": "black",
           "count": 5263,
-          "win_rate": [
-            0.5137,
-            0.5137,
-            0.4863
-          ]
+          "win_rate": [0.5137, 0.5137, 0.4863]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0164,
           "color": "white",
           "count": 4355,
-          "win_rate": [
-            0.5363,
-            0.5363,
-            0.4637
-          ]
+          "win_rate": [0.5363, 0.5363, 0.4637]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.012,
           "color": "black",
           "count": 3169,
-          "win_rate": [
-            0.4358,
-            0.4358,
-            0.5642
-          ]
+          "win_rate": [0.4358, 0.4358, 0.5642]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0103,
           "color": "white",
           "count": 2731,
-          "win_rate": [
-            0.4841,
-            0.4841,
-            0.5159
-          ]
+          "win_rate": [0.4841, 0.4841, 0.5159]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.01,
           "color": "black",
           "count": 2663,
-          "win_rate": [
-            0.4737,
-            0.4737,
-            0.5263
-          ]
+          "win_rate": [0.4737, 0.4737, 0.5263]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0092,
           "color": "black",
           "count": 2444,
-          "win_rate": [
-            0.5094,
-            0.5094,
-            0.4906
-          ]
+          "win_rate": [0.5094, 0.5094, 0.4906]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.009,
           "color": "white",
           "count": 2389,
-          "win_rate": [
-            0.517,
-            0.517,
-            0.483
-          ]
+          "win_rate": [0.517, 0.517, 0.483]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0083,
           "color": "white",
           "count": 2205,
-          "win_rate": [
-            0.5712,
-            0.5712,
-            0.4288
-          ]
+          "win_rate": [0.5712, 0.5712, 0.4288]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0082,
           "color": "white",
           "count": 2168,
-          "win_rate": [
-            0.5028,
-            0.5028,
-            0.4972
-          ]
+          "win_rate": [0.5028, 0.5028, 0.4972]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0078,
           "color": "black",
           "count": 2067,
-          "win_rate": [
-            0.4756,
-            0.4756,
-            0.5244
-          ]
+          "win_rate": [0.4756, 0.4756, 0.5244]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0072,
           "color": "black",
           "count": 1903,
-          "win_rate": [
-            0.5381,
-            0.5381,
-            0.4619
-          ]
+          "win_rate": [0.5381, 0.5381, 0.4619]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0067,
           "color": "white",
           "count": 1766,
-          "win_rate": [
-            0.4238,
-            0.4238,
-            0.5762
-          ]
+          "win_rate": [0.4238, 0.4238, 0.5762]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0067,
           "color": "black",
           "count": 1783,
-          "win_rate": [
-            0.4776,
-            0.4776,
-            0.5224
-          ]
+          "win_rate": [0.4776, 0.4776, 0.5224]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.006,
           "color": "black",
           "count": 1579,
-          "win_rate": [
-            0.4079,
-            0.4079,
-            0.5921
-          ]
+          "win_rate": [0.4079, 0.4079, 0.5921]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.005,
           "color": "black",
           "count": 1336,
-          "win_rate": [
-            0.4278,
-            0.4278,
-            0.5722
-          ]
+          "win_rate": [0.4278, 0.4278, 0.5722]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.005,
           "color": "white",
           "count": 1334,
-          "win_rate": [
-            0.5064,
-            0.5064,
-            0.4936
-          ]
+          "win_rate": [0.5064, 0.5064, 0.4936]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0047,
           "color": "black",
           "count": 1247,
-          "win_rate": [
-            0.4948,
-            0.4948,
-            0.5052
-          ]
+          "win_rate": [0.4948, 0.4948, 0.5052]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0025,
           "color": "white",
           "count": 669,
-          "win_rate": [
-            0.4723,
-            0.4723,
-            0.5277
-          ]
+          "win_rate": [0.4723, 0.4723, 0.5277]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0018,
           "color": "white",
           "count": 465,
-          "win_rate": [
-            0.5634,
-            0.5634,
-            0.4366
-          ]
+          "win_rate": [0.5634, 0.5634, 0.4366]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0009,
           "color": "black",
           "count": 248,
-          "win_rate": [
-            0.4718,
-            0.4718,
-            0.5282
-          ]
+          "win_rate": [0.4718, 0.4718, 0.5282]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.0009,
           "color": "white",
           "count": 234,
-          "win_rate": [
-            0.5128,
-            0.5128,
-            0.4872
-          ]
+          "win_rate": [0.5128, 0.5128, 0.4872]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0007,
           "color": "black",
           "count": 182,
-          "win_rate": [
-            0.4698,
-            0.4698,
-            0.5302
-          ]
+          "win_rate": [0.4698, 0.4698, 0.5302]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0007,
           "color": "black",
           "count": 192,
-          "win_rate": [
-            0.3932,
-            0.3932,
-            0.6068
-          ]
+          "win_rate": [0.3932, 0.3932, 0.6068]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0005,
           "color": "white",
           "count": 128,
-          "win_rate": [
-            0.6055,
-            0.6055,
-            0.3945
-          ]
+          "win_rate": [0.6055, 0.6055, 0.3945]
         },
         {
           "name": "London System",
           "popularity": 0.0004,
           "color": "white",
           "count": 93,
-          "win_rate": [
-            0.4731,
-            0.4731,
-            0.5269
-          ]
+          "win_rate": [0.4731, 0.4731, 0.5269]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0003,
           "color": "white",
           "count": 78,
-          "win_rate": [
-            0.3462,
-            0.3462,
-            0.6538
-          ]
+          "win_rate": [0.3462, 0.3462, 0.6538]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0002,
           "color": "black",
           "count": 57,
-          "win_rate": [
-            0.4561,
-            0.4561,
-            0.5439
-          ]
+          "win_rate": [0.4561, 0.4561, 0.5439]
         }
       ],
       "1000-1500": [
         {
           "name": "Sicilian Defense",
-          "popularity": 0.148,
-          "win_rate": [
-            0.4473,
-            0.4473,
-            0.5527
-          ]
+          "popularity": 0.0839,
+          "color": "black",
+          "count": 5567,
+          "win_rate": [0.3995, 0.3995, 0.6005]
         },
         {
           "name": "French Defense",
-          "popularity": 0.0731,
-          "win_rate": [
-            0.4402,
-            0.4402,
-            0.5598
-          ]
-        },
-        {
-          "name": "Ruy Lopez",
-          "popularity": 0.0499,
-          "win_rate": [
-            0.5784,
-            0.5784,
-            0.4216
-          ]
-        },
-        {
-          "name": "Italian Game",
-          "popularity": 0.0473,
-          "win_rate": [
-            0.5126,
-            0.5126,
-            0.4874
-          ]
-        },
-        {
-          "name": "Caro-Kann Defense",
-          "popularity": 0.0372,
-          "win_rate": [
-            0.466,
-            0.466,
-            0.534
-          ]
-        },
-        {
-          "name": "English Opening",
-          "popularity": 0.0285,
-          "win_rate": [
-            0.5792,
-            0.5792,
-            0.4208
-          ]
+          "popularity": 0.0677,
+          "color": "black",
+          "count": 4489,
+          "win_rate": [0.4466, 0.4466, 0.5534]
         },
         {
           "name": "Scandinavian Defense",
-          "popularity": 0.0262,
-          "win_rate": [
-            0.5018,
-            0.5018,
-            0.4982
-          ]
+          "popularity": 0.0371,
+          "color": "black",
+          "count": 2461,
+          "win_rate": [0.4265, 0.4265, 0.5735]
         },
         {
-          "name": "Scotch Game",
-          "popularity": 0.0248,
-          "win_rate": [
-            0.5046,
-            0.5046,
-            0.4954
-          ]
-        },
-        {
-          "name": "Four Knights Game",
-          "popularity": 0.0176,
-          "win_rate": [
-            0.4856,
-            0.4856,
-            0.5144
-          ]
-        },
-        {
-          "name": "Philidor Defense",
-          "popularity": 0.0169,
-          "win_rate": [
-            0.6526,
-            0.6526,
-            0.3474
-          ]
+          "name": "Caro-Kann Defense",
+          "popularity": 0.0306,
+          "color": "black",
+          "count": 2029,
+          "win_rate": [0.397, 0.397, 0.603]
         },
         {
           "name": "Modern Defense",
-          "popularity": 0.0121,
-          "win_rate": [
-            0.5019,
-            0.5019,
-            0.4981
-          ]
+          "popularity": 0.0278,
+          "color": "black",
+          "count": 1845,
+          "win_rate": [0.4393, 0.4393, 0.5607]
         },
         {
-          "name": "Slav Defense",
-          "popularity": 0.0098,
-          "win_rate": [
-            0.5399,
-            0.5399,
-            0.4601
-          ]
+          "name": "English Opening",
+          "popularity": 0.0233,
+          "color": "white",
+          "count": 1546,
+          "win_rate": [0.5136, 0.5136, 0.4864]
         },
         {
-          "name": "Dutch Defense",
-          "popularity": 0.0093,
-          "win_rate": [
-            0.4409,
-            0.4409,
-            0.5591
-          ]
+          "name": "Owen Defense",
+          "popularity": 0.0222,
+          "color": "black",
+          "count": 1471,
+          "win_rate": [0.4337, 0.4337, 0.5663]
+        },
+        {
+          "name": "Italian Game",
+          "popularity": 0.0179,
+          "color": "white",
+          "count": 1187,
+          "win_rate": [0.473, 0.473, 0.527]
+        },
+        {
+          "name": "Ruy Lopez",
+          "popularity": 0.0135,
+          "color": "white",
+          "count": 893,
+          "win_rate": [0.4737, 0.4737, 0.5263]
+        },
+        {
+          "name": "Scotch Game",
+          "popularity": 0.0132,
+          "color": "white",
+          "count": 878,
+          "win_rate": [0.5285, 0.5285, 0.4715]
+        },
+        {
+          "name": "Philidor Defense",
+          "popularity": 0.0103,
+          "color": "black",
+          "count": 680,
+          "win_rate": [0.5272, 0.5272, 0.4728]
+        },
+        {
+          "name": "Vienna Game",
+          "popularity": 0.0095,
+          "color": "white",
+          "count": 630,
+          "win_rate": [0.4952, 0.4952, 0.5048]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0087,
           "color": "white",
           "count": 576,
-          "win_rate": [
-            0.4939,
-            0.4939,
-            0.5061
-          ]
+          "win_rate": [0.4939, 0.4939, 0.5061]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0086,
           "color": "white",
           "count": 570,
-          "win_rate": [
-            0.4737,
-            0.4737,
-            0.5263
-          ]
+          "win_rate": [0.4737, 0.4737, 0.5263]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0074,
           "color": "black",
           "count": 491,
-          "win_rate": [
-            0.442,
-            0.442,
-            0.558
-          ]
+          "win_rate": [0.442, 0.442, 0.558]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.0073,
           "color": "black",
           "count": 486,
-          "win_rate": [
-            0.3837,
-            0.3837,
-            0.6163
-          ]
+          "win_rate": [0.3837, 0.3837, 0.6163]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0055,
           "color": "white",
           "count": 363,
-          "win_rate": [
-            0.4917,
-            0.4917,
-            0.5083
-          ]
+          "win_rate": [0.4917, 0.4917, 0.5083]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0052,
           "color": "black",
           "count": 348,
-          "win_rate": [
-            0.4698,
-            0.4698,
-            0.5302
-          ]
+          "win_rate": [0.4698, 0.4698, 0.5302]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0049,
           "color": "black",
           "count": 327,
-          "win_rate": [
-            0.4373,
-            0.4373,
-            0.5627
-          ]
+          "win_rate": [0.4373, 0.4373, 0.5627]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.004,
           "color": "black",
           "count": 266,
-          "win_rate": [
-            0.4605,
-            0.4605,
-            0.5395
-          ]
+          "win_rate": [0.4605, 0.4605, 0.5395]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0037,
           "color": "white",
           "count": 244,
-          "win_rate": [
-            0.6209,
-            0.6209,
-            0.3791
-          ]
+          "win_rate": [0.6209, 0.6209, 0.3791]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0036,
           "color": "black",
           "count": 239,
-          "win_rate": [
-            0.4414,
-            0.4414,
-            0.5586
-          ]
+          "win_rate": [0.4414, 0.4414, 0.5586]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.003,
           "color": "black",
           "count": 198,
-          "win_rate": [
-            0.4419,
-            0.4419,
-            0.5581
-          ]
+          "win_rate": [0.4419, 0.4419, 0.5581]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0028,
           "color": "black",
           "count": 183,
-          "win_rate": [
-            0.4098,
-            0.4098,
-            0.5902
-          ]
+          "win_rate": [0.4098, 0.4098, 0.5902]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0014,
           "color": "black",
           "count": 95,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0013,
           "color": "white",
           "count": 83,
-          "win_rate": [
-            0.4277,
-            0.4277,
-            0.5723
-          ]
+          "win_rate": [0.4277, 0.4277, 0.5723]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.001,
           "color": "white",
           "count": 65,
-          "win_rate": [
-            0.4923,
-            0.4923,
-            0.5077
-          ]
+          "win_rate": [0.4923, 0.4923, 0.5077]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0004,
           "color": "black",
           "count": 27,
-          "win_rate": [
-            0.3704,
-            0.3704,
-            0.6296
-          ]
+          "win_rate": [0.3704, 0.3704, 0.6296]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0002,
           "color": "white",
           "count": 14,
-          "win_rate": [
-            0.3929,
-            0.3929,
-            0.6071
-          ]
+          "win_rate": [0.3929, 0.3929, 0.6071]
         },
         {
           "name": "London System",
           "popularity": 0.0002,
           "color": "white",
           "count": 16,
-          "win_rate": [
-            0.4688,
-            0.4688,
-            0.5312
-          ]
+          "win_rate": [0.4688, 0.4688, 0.5312]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0001,
           "color": "black",
           "count": 4,
-          "win_rate": [
-            0.25,
-            0.25,
-            0.75
-          ]
+          "win_rate": [0.25, 0.25, 0.75]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0001,
           "color": "white",
           "count": 9,
-          "win_rate": [
-            0.3333,
-            0.3333,
-            0.6667
-          ]
+          "win_rate": [0.3333, 0.3333, 0.6667]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0001,
           "color": "black",
           "count": 9,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         }
       ],
       "2000+": [
@@ -1911,469 +1318,324 @@
           "popularity": 0.0898,
           "color": "black",
           "count": 3356,
-          "win_rate": [
-            0.4928,
-            0.4928,
-            0.5072
-          ]
+          "win_rate": [0.4928, 0.4928, 0.5072]
         },
         {
           "name": "French Defense",
-          "popularity": 0.1567,
-          "win_rate": [
-            0.5851,
-            0.5851,
-            0.4149
-          ]
+          "popularity": 0.0551,
+          "color": "black",
+          "count": 2059,
+          "win_rate": [0.5214, 0.5214, 0.4786]
         },
         {
-          "name": "Sicilian Defense",
-          "popularity": 0.14,
-          "win_rate": [
-            0.5714,
-            0.5714,
-            0.4286
-          ]
+          "name": "Modern Defense",
+          "popularity": 0.0456,
+          "color": "black",
+          "count": 1705,
+          "win_rate": [0.4933, 0.4933, 0.5067]
+        },
+        {
+          "name": "English Opening",
+          "popularity": 0.0424,
+          "color": "white",
+          "count": 1585,
+          "win_rate": [0.5022, 0.5022, 0.4978]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0414,
           "color": "black",
           "count": 1547,
-          "win_rate": [
-            0.5078,
-            0.5078,
-            0.4922
-          ]
+          "win_rate": [0.5078, 0.5078, 0.4922]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0332,
           "color": "black",
           "count": 1241,
-          "win_rate": [
-            0.5153,
-            0.5153,
-            0.4847
-          ]
+          "win_rate": [0.5153, 0.5153, 0.4847]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0149,
           "color": "black",
           "count": 557,
-          "win_rate": [
-            0.412,
-            0.412,
-            0.588
-          ]
+          "win_rate": [0.412, 0.412, 0.588]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0145,
           "color": "white",
           "count": 542,
-          "win_rate": [
-            0.3819,
-            0.3819,
-            0.6181
-          ]
+          "win_rate": [0.3819, 0.3819, 0.6181]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0121,
           "color": "black",
           "count": 452,
-          "win_rate": [
-            0.5243,
-            0.5243,
-            0.4757
-          ]
+          "win_rate": [0.5243, 0.5243, 0.4757]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.0121,
           "color": "black",
           "count": 452,
-          "win_rate": [
-            0.5376,
-            0.5376,
-            0.4624
-          ]
+          "win_rate": [0.5376, 0.5376, 0.4624]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0115,
           "color": "black",
           "count": 429,
-          "win_rate": [
-            0.5233,
-            0.5233,
-            0.4767
-          ]
+          "win_rate": [0.5233, 0.5233, 0.4767]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0097,
           "color": "white",
           "count": 361,
-          "win_rate": [
-            0.4792,
-            0.4792,
-            0.5208
-          ]
+          "win_rate": [0.4792, 0.4792, 0.5208]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0092,
           "color": "white",
           "count": 344,
-          "win_rate": [
-            0.4404,
-            0.4404,
-            0.5596
-          ]
+          "win_rate": [0.4404, 0.4404, 0.5596]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0091,
           "color": "black",
           "count": 341,
-          "win_rate": [
-            0.544,
-            0.544,
-            0.456
-          ]
+          "win_rate": [0.544, 0.544, 0.456]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0091,
           "color": "white",
           "count": 339,
-          "win_rate": [
-            0.4838,
-            0.4838,
-            0.5162
-          ]
+          "win_rate": [0.4838, 0.4838, 0.5162]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0088,
           "color": "black",
           "count": 328,
-          "win_rate": [
-            0.4405,
-            0.4405,
-            0.5595
-          ]
+          "win_rate": [0.4405, 0.4405, 0.5595]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0084,
           "color": "black",
           "count": 313,
-          "win_rate": [
-            0.5479,
-            0.5479,
-            0.4521
-          ]
+          "win_rate": [0.5479, 0.5479, 0.4521]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0082,
           "color": "white",
           "count": 306,
-          "win_rate": [
-            0.4477,
-            0.4477,
-            0.5523
-          ]
+          "win_rate": [0.4477, 0.4477, 0.5523]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0082,
           "color": "white",
           "count": 308,
-          "win_rate": [
-            0.4286,
-            0.4286,
-            0.5714
-          ]
+          "win_rate": [0.4286, 0.4286, 0.5714]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0062,
           "color": "black",
           "count": 232,
-          "win_rate": [
-            0.4483,
-            0.4483,
-            0.5517
-          ]
+          "win_rate": [0.4483, 0.4483, 0.5517]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0061,
           "color": "black",
           "count": 228,
-          "win_rate": [
-            0.4693,
-            0.4693,
-            0.5307
-          ]
+          "win_rate": [0.4693, 0.4693, 0.5307]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0048,
           "color": "black",
           "count": 181,
-          "win_rate": [
-            0.4503,
-            0.4503,
-            0.5497
-          ]
+          "win_rate": [0.4503, 0.4503, 0.5497]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.004,
           "color": "white",
           "count": 149,
-          "win_rate": [
-            0.443,
-            0.443,
-            0.557
-          ]
+          "win_rate": [0.443, 0.443, 0.557]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0028,
           "color": "black",
           "count": 106,
-          "win_rate": [
-            0.5519,
-            0.5519,
-            0.4481
-          ]
+          "win_rate": [0.5519, 0.5519, 0.4481]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0023,
           "color": "black",
           "count": 86,
-          "win_rate": [
-            0.4302,
-            0.4302,
-            0.5698
-          ]
+          "win_rate": [0.4302, 0.4302, 0.5698]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0017,
           "color": "white",
           "count": 62,
-          "win_rate": [
-            0.5484,
-            0.5484,
-            0.4516
-          ]
+          "win_rate": [0.5484, 0.5484, 0.4516]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0015,
           "color": "white",
           "count": 55,
-          "win_rate": [
-            0.4364,
-            0.4364,
-            0.5636
-          ]
+          "win_rate": [0.4364, 0.4364, 0.5636]
         },
         {
           "name": "London System",
           "popularity": 0.0011,
           "color": "white",
           "count": 40,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0004,
           "color": "white",
           "count": 16,
-          "win_rate": [
-            0.4375,
-            0.4375,
-            0.5625
-          ]
+          "win_rate": [0.4375, 0.4375, 0.5625]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0003,
           "color": "black",
           "count": 10,
-          "win_rate": [
-            0.6,
-            0.6,
-            0.4
-          ]
+          "win_rate": [0.6, 0.6, 0.4]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0002,
           "color": "black",
           "count": 9,
-          "win_rate": [
-            0.4444,
-            0.4444,
-            0.5556
-          ]
+          "win_rate": [0.4444, 0.4444, 0.5556]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0002,
           "color": "white",
           "count": 9,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
+        },
+        {
+          "name": "Queen's Gambit",
+          "popularity": 0.0001,
+          "color": "white",
+          "count": 4,
+          "win_rate": [0.5, 0.5, 0.5]
+        }
+      ],
+      "500-1000": [
+        {
+          "name": "French Defense",
+          "popularity": 0.0672,
+          "color": "black",
+          "count": 8,
+          "win_rate": [0.375, 0.375, 0.625]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0504,
           "color": "white",
           "count": 6,
-          "win_rate": [
-            0.3333,
-            0.3333,
-            0.6667
-          ]
+          "win_rate": [0.3333, 0.3333, 0.6667]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.042,
           "color": "white",
           "count": 5,
-          "win_rate": [
-            0.6,
-            0.6,
-            0.4
-          ]
+          "win_rate": [0.6, 0.6, 0.4]
         },
         {
           "name": "English Opening",
           "popularity": 0.0336,
           "color": "white",
           "count": 4,
-          "win_rate": [
-            0.25,
-            0.25,
-            0.75
-          ]
+          "win_rate": [0.25, 0.25, 0.75]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0252,
           "color": "black",
           "count": 3,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0252,
           "color": "white",
           "count": 3,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0168,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Sicilian Defense",
           "popularity": 0.0168,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0168,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0084,
           "color": "black",
           "count": 1,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0084,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0084,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0084,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         }
       ]
     },
@@ -2381,1304 +1643,863 @@
       "1000-1500": [
         {
           "name": "Sicilian Defense",
-          "popularity": 0.1436,
-          "win_rate": [
-            0.4737,
-            0.4737,
-            0.5263
-          ]
-        },
-        {
-          "name": "English Opening",
-          "popularity": 0.0806,
-          "win_rate": [
-            0.5703,
-            0.5703,
-            0.4297
-          ]
+          "popularity": 0.1084,
+          "color": "black",
+          "count": 17030,
+          "win_rate": [0.4013, 0.4013, 0.5987]
         },
         {
           "name": "French Defense",
-          "popularity": 0.0718,
-          "win_rate": [
-            0.5175,
-            0.5175,
-            0.4825
-          ]
-        },
-        {
-          "name": "Alekhine Defense",
-          "popularity": 0.0416,
-          "win_rate": [
-            0.4697,
-            0.4697,
-            0.5303
-          ]
-        },
-        {
-          "name": "Caro-Kann Defense",
-          "popularity": 0.0365,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "popularity": 0.0641,
+          "color": "black",
+          "count": 10061,
+          "win_rate": [0.4708, 0.4708, 0.5292]
         },
         {
           "name": "Scandinavian Defense",
-          "popularity": 0.0264,
-          "win_rate": [
-            0.4524,
-            0.4524,
-            0.5476
-          ]
-        },
-        {
-          "name": "Slav Defense",
-          "popularity": 0.0264,
-          "win_rate": [
-            0.5238,
-            0.5238,
-            0.4762
-          ]
-        },
-        {
-          "name": "Polish Opening",
-          "popularity": 0.0252,
-          "win_rate": [
-            0.6,
-            0.6,
-            0.4
-          ]
-        },
-        {
-          "name": "Ruy Lopez",
-          "popularity": 0.0214,
-          "win_rate": [
-            0.6471,
-            0.6471,
-            0.3529
-          ]
-        },
-        {
-          "name": "Semi-Slav Defense",
-          "popularity": 0.0202,
-          "win_rate": [
-            0.625,
-            0.625,
-            0.375
-          ]
-        },
-        {
-          "name": "Nimzo-Indian Defense",
-          "popularity": 0.0202,
-          "win_rate": [
-            0.4062,
-            0.4062,
-            0.5938
-          ]
-        },
-        {
-          "name": "King's Indian Defense",
-          "popularity": 0.0176,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "popularity": 0.039,
+          "color": "black",
+          "count": 6132,
+          "win_rate": [0.4998, 0.4998, 0.5002]
         },
         {
           "name": "Italian Game",
-          "popularity": 0.0151,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "popularity": 0.0374,
+          "color": "white",
+          "count": 5877,
+          "win_rate": [0.5217, 0.5217, 0.4783]
+        },
+        {
+          "name": "English Opening",
+          "popularity": 0.0304,
+          "color": "white",
+          "count": 4774,
+          "win_rate": [0.4517, 0.4517, 0.5483]
+        },
+        {
+          "name": "Ruy Lopez",
+          "popularity": 0.03,
+          "color": "white",
+          "count": 4716,
+          "win_rate": [0.4981, 0.4981, 0.5019]
+        },
+        {
+          "name": "Caro-Kann Defense",
+          "popularity": 0.0245,
+          "color": "black",
+          "count": 3845,
+          "win_rate": [0.4153, 0.4153, 0.5847]
+        },
+        {
+          "name": "Scotch Game",
+          "popularity": 0.0194,
+          "color": "white",
+          "count": 3050,
+          "win_rate": [0.5287, 0.5287, 0.4713]
+        },
+        {
+          "name": "Philidor Defense",
+          "popularity": 0.0176,
+          "color": "black",
+          "count": 2763,
+          "win_rate": [0.5843, 0.5843, 0.4157]
         },
         {
           "name": "Modern Defense",
-          "popularity": 0.0126,
-          "win_rate": [
-            0.55,
-            0.55,
-            0.45
-          ]
+          "popularity": 0.0164,
+          "color": "black",
+          "count": 2577,
+          "win_rate": [0.4397, 0.4397, 0.5603]
         },
         {
-          "name": "Queen's Indian Defense",
-          "popularity": 0.0126,
-          "win_rate": [
-            0.65,
-            0.65,
-            0.35
-          ]
-        },
-        {
-          "name": "Benoni Defense",
-          "popularity": 0.0113,
-          "win_rate": [
-            0.1667,
-            0.1667,
-            0.8333
-          ]
+          "name": "Owen Defense",
+          "popularity": 0.0149,
+          "color": "black",
+          "count": 2341,
+          "win_rate": [0.4932, 0.4932, 0.5068]
         },
         {
           "name": "Four Knights Game",
-          "popularity": 0.0113,
-          "win_rate": [
-            0.4444,
-            0.4444,
-            0.5556
-          ]
+          "popularity": 0.0149,
+          "color": "white",
+          "count": 2344,
+          "win_rate": [0.4492, 0.4492, 0.5508]
+        },
+        {
+          "name": "Vienna Game",
+          "popularity": 0.0089,
+          "color": "white",
+          "count": 1395,
+          "win_rate": [0.4513, 0.4513, 0.5487]
+        },
+        {
+          "name": "Bird Opening",
+          "popularity": 0.008,
+          "color": "white",
+          "count": 1258,
+          "win_rate": [0.4714, 0.4714, 0.5286]
+        },
+        {
+          "name": "Alekhine Defense",
+          "popularity": 0.0075,
+          "color": "black",
+          "count": 1177,
+          "win_rate": [0.446, 0.446, 0.554]
+        },
+        {
+          "name": "Slav Defense",
+          "popularity": 0.0073,
+          "color": "black",
+          "count": 1140,
+          "win_rate": [0.4925, 0.4925, 0.5075]
+        },
+        {
+          "name": "Polish Opening",
+          "popularity": 0.0048,
+          "color": "white",
+          "count": 755,
+          "win_rate": [0.453, 0.453, 0.547]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0046,
           "color": "black",
           "count": 728,
-          "win_rate": [
-            0.4286,
-            0.4286,
-            0.5714
-          ]
+          "win_rate": [0.4286, 0.4286, 0.5714]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0039,
           "color": "black",
           "count": 608,
-          "win_rate": [
-            0.4539,
-            0.4539,
-            0.5461
-          ]
+          "win_rate": [0.4539, 0.4539, 0.5461]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0037,
           "color": "white",
           "count": 581,
-          "win_rate": [
-            0.6601,
-            0.6601,
-            0.3399
-          ]
+          "win_rate": [0.6601, 0.6601, 0.3399]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0036,
           "color": "black",
           "count": 562,
-          "win_rate": [
-            0.5463,
-            0.5463,
-            0.4537
-          ]
+          "win_rate": [0.5463, 0.5463, 0.4537]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0034,
           "color": "black",
           "count": 535,
-          "win_rate": [
-            0.4243,
-            0.4243,
-            0.5757
-          ]
+          "win_rate": [0.4243, 0.4243, 0.5757]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0032,
           "color": "black",
           "count": 497,
-          "win_rate": [
-            0.5171,
-            0.5171,
-            0.4829
-          ]
+          "win_rate": [0.5171, 0.5171, 0.4829]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0025,
           "color": "black",
           "count": 387,
-          "win_rate": [
-            0.4264,
-            0.4264,
-            0.5736
-          ]
+          "win_rate": [0.4264, 0.4264, 0.5736]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.002,
           "color": "black",
           "count": 316,
-          "win_rate": [
-            0.4604,
-            0.4604,
-            0.5396
-          ]
+          "win_rate": [0.4604, 0.4604, 0.5396]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0016,
           "color": "white",
           "count": 245,
-          "win_rate": [
-            0.3612,
-            0.3612,
-            0.6388
-          ]
+          "win_rate": [0.3612, 0.3612, 0.6388]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.001,
           "color": "white",
           "count": 150,
-          "win_rate": [
-            0.63,
-            0.63,
-            0.37
-          ]
+          "win_rate": [0.63, 0.63, 0.37]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0004,
           "color": "black",
           "count": 68,
-          "win_rate": [
-            0.4632,
-            0.4632,
-            0.5368
-          ]
+          "win_rate": [0.4632, 0.4632, 0.5368]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0002,
           "color": "white",
           "count": 32,
-          "win_rate": [
-            0.5469,
-            0.5469,
-            0.4531
-          ]
+          "win_rate": [0.5469, 0.5469, 0.4531]
         },
         {
           "name": "London System",
           "popularity": 0.0002,
           "color": "white",
           "count": 35,
-          "win_rate": [
-            0.4714,
-            0.4714,
-            0.5286
-          ]
+          "win_rate": [0.4714, 0.4714, 0.5286]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0002,
           "color": "black",
           "count": 33,
-          "win_rate": [
-            0.6515,
-            0.6515,
-            0.3485
-          ]
+          "win_rate": [0.6515, 0.6515, 0.3485]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0002,
           "color": "white",
           "count": 39,
-          "win_rate": [
-            0.2436,
-            0.2436,
-            0.7564
-          ]
+          "win_rate": [0.2436, 0.2436, 0.7564]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0002,
           "color": "black",
           "count": 26,
-          "win_rate": [
-            0.6154,
-            0.6154,
-            0.3846
-          ]
+          "win_rate": [0.6154, 0.6154, 0.3846]
         }
       ],
       "1500-2000": [
-        {
-          "name": "Other",
-          "popularity": 0.4239,
-          "color": "white",
-          "count": 190036,
-          "win_rate": [
-            0.4499,
-            0.4499,
-            0.5501
-          ]
-        },
         {
           "name": "Sicilian Defense",
           "popularity": 0.1479,
           "color": "black",
           "count": 66307,
-          "win_rate": [
-            0.4202,
-            0.4202,
-            0.5798
-          ]
+          "win_rate": [0.4202, 0.4202, 0.5798]
         },
         {
           "name": "French Defense",
           "popularity": 0.0741,
           "color": "black",
           "count": 33216,
-          "win_rate": [
-            0.4625,
-            0.4625,
-            0.5375
-          ]
+          "win_rate": [0.4625, 0.4625, 0.5375]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0412,
           "color": "black",
           "count": 18474,
-          "win_rate": [
-            0.4292,
-            0.4292,
-            0.5708
-          ]
+          "win_rate": [0.4292, 0.4292, 0.5708]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0359,
           "color": "black",
           "count": 16095,
-          "win_rate": [
-            0.4292,
-            0.4292,
-            0.5708
-          ]
+          "win_rate": [0.4292, 0.4292, 0.5708]
         },
         {
           "name": "English Opening",
           "popularity": 0.0333,
           "color": "white",
           "count": 14928,
-          "win_rate": [
-            0.4644,
-            0.4644,
-            0.5356
-          ]
+          "win_rate": [0.4644, 0.4644, 0.5356]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0287,
           "color": "white",
           "count": 12873,
-          "win_rate": [
-            0.4581,
-            0.4581,
-            0.5419
-          ]
+          "win_rate": [0.4581, 0.4581, 0.5419]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.027,
           "color": "white",
           "count": 12101,
-          "win_rate": [
-            0.4919,
-            0.4919,
-            0.5081
-          ]
+          "win_rate": [0.4919, 0.4919, 0.5081]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.021,
           "color": "black",
           "count": 9409,
-          "win_rate": [
-            0.4762,
-            0.4762,
-            0.5238
-          ]
+          "win_rate": [0.4762, 0.4762, 0.5238]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0183,
           "color": "white",
           "count": 8203,
-          "win_rate": [
-            0.4923,
-            0.4923,
-            0.5077
-          ]
+          "win_rate": [0.4923, 0.4923, 0.5077]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0135,
           "color": "black",
           "count": 6055,
-          "win_rate": [
-            0.5681,
-            0.5681,
-            0.4319
-          ]
+          "win_rate": [0.5681, 0.5681, 0.4319]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.013,
           "color": "black",
           "count": 5806,
-          "win_rate": [
-            0.4817,
-            0.4817,
-            0.5183
-          ]
+          "win_rate": [0.4817, 0.4817, 0.5183]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0129,
           "color": "black",
           "count": 5792,
-          "win_rate": [
-            0.4604,
-            0.4604,
-            0.5396
-          ]
+          "win_rate": [0.4604, 0.4604, 0.5396]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0122,
           "color": "white",
           "count": 5478,
-          "win_rate": [
-            0.4168,
-            0.4168,
-            0.5832
-          ]
+          "win_rate": [0.4168, 0.4168, 0.5832]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0108,
           "color": "black",
           "count": 4850,
-          "win_rate": [
-            0.4087,
-            0.4087,
-            0.5913
-          ]
+          "win_rate": [0.4087, 0.4087, 0.5913]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0107,
           "color": "black",
           "count": 4811,
-          "win_rate": [
-            0.4868,
-            0.4868,
-            0.5132
-          ]
+          "win_rate": [0.4868, 0.4868, 0.5132]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0102,
           "color": "black",
           "count": 4574,
-          "win_rate": [
-            0.5209,
-            0.5209,
-            0.4791
-          ]
+          "win_rate": [0.5209, 0.5209, 0.4791]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0097,
           "color": "white",
           "count": 4333,
-          "win_rate": [
-            0.4226,
-            0.4226,
-            0.5774
-          ]
+          "win_rate": [0.4226, 0.4226, 0.5774]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0088,
           "color": "black",
           "count": 3930,
-          "win_rate": [
-            0.469,
-            0.469,
-            0.531
-          ]
+          "win_rate": [0.469, 0.469, 0.531]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0082,
           "color": "black",
           "count": 3698,
-          "win_rate": [
-            0.4282,
-            0.4282,
-            0.5718
-          ]
+          "win_rate": [0.4282, 0.4282, 0.5718]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0077,
           "color": "black",
           "count": 3436,
-          "win_rate": [
-            0.3941,
-            0.3941,
-            0.6059
-          ]
+          "win_rate": [0.3941, 0.3941, 0.6059]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0069,
           "color": "white",
           "count": 3072,
-          "win_rate": [
-            0.4826,
-            0.4826,
-            0.5174
-          ]
+          "win_rate": [0.4826, 0.4826, 0.5174]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0063,
           "color": "black",
           "count": 2831,
-          "win_rate": [
-            0.4472,
-            0.4472,
-            0.5528
-          ]
+          "win_rate": [0.4472, 0.4472, 0.5528]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0051,
           "color": "white",
           "count": 2301,
-          "win_rate": [
-            0.4087,
-            0.4087,
-            0.5913
-          ]
+          "win_rate": [0.4087, 0.4087, 0.5913]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0027,
           "color": "white",
           "count": 1210,
-          "win_rate": [
-            0.5401,
-            0.5401,
-            0.4599
-          ]
+          "win_rate": [0.5401, 0.5401, 0.4599]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0027,
           "color": "white",
           "count": 1191,
-          "win_rate": [
-            0.4324,
-            0.4324,
-            0.5676
-          ]
+          "win_rate": [0.4324, 0.4324, 0.5676]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0016,
           "color": "black",
           "count": 697,
-          "win_rate": [
-            0.4484,
-            0.4484,
-            0.5516
-          ]
+          "win_rate": [0.4484, 0.4484, 0.5516]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0013,
           "color": "white",
           "count": 599,
-          "win_rate": [
-            0.3406,
-            0.3406,
-            0.6594
-          ]
+          "win_rate": [0.3406, 0.3406, 0.6594]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0011,
           "color": "black",
           "count": 481,
-          "win_rate": [
-            0.3555,
-            0.3555,
-            0.6445
-          ]
+          "win_rate": [0.3555, 0.3555, 0.6445]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0009,
           "color": "white",
           "count": 411,
-          "win_rate": [
-            0.5657,
-            0.5657,
-            0.4343
-          ]
+          "win_rate": [0.5657, 0.5657, 0.4343]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0007,
           "color": "black",
           "count": 298,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "London System",
           "popularity": 0.0007,
           "color": "white",
           "count": 336,
-          "win_rate": [
-            0.3438,
-            0.3438,
-            0.6562
-          ]
+          "win_rate": [0.3438, 0.3438, 0.6562]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0006,
           "color": "black",
           "count": 258,
-          "win_rate": [
-            0.4516,
-            0.4516,
-            0.5484
-          ]
+          "win_rate": [0.4516, 0.4516, 0.5484]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.0005,
           "color": "white",
           "count": 211,
-          "win_rate": [
-            0.5829,
-            0.5829,
-            0.4171
-          ]
+          "win_rate": [0.5829, 0.5829, 0.4171]
         },
         {
           "name": "Veresov Opening",
           "popularity": 0.0,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         }
       ],
-      "1000-1500": [
+      "2000+": [
         {
           "name": "Sicilian Defense",
           "popularity": 0.1828,
           "color": "black",
           "count": 4934,
-          "win_rate": [
-            0.4418,
-            0.4418,
-            0.5582
-          ]
+          "win_rate": [0.4418, 0.4418, 0.5582]
         },
         {
           "name": "French Defense",
           "popularity": 0.0606,
           "color": "black",
           "count": 1634,
-          "win_rate": [
-            0.5046,
-            0.5046,
-            0.4954
-          ]
+          "win_rate": [0.5046, 0.5046, 0.4954]
         },
         {
           "name": "English Opening",
           "popularity": 0.0522,
           "color": "white",
           "count": 1409,
-          "win_rate": [
-            0.4784,
-            0.4784,
-            0.5216
-          ]
+          "win_rate": [0.4784, 0.4784, 0.5216]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0476,
           "color": "black",
           "count": 1284,
-          "win_rate": [
-            0.456,
-            0.456,
-            0.544
-          ]
+          "win_rate": [0.456, 0.456, 0.544]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0367,
           "color": "black",
           "count": 990,
-          "win_rate": [
-            0.4934,
-            0.4934,
-            0.5066
-          ]
+          "win_rate": [0.4934, 0.4934, 0.5066]
         },
         {
           "name": "King's Indian Defense",
           "popularity": 0.0321,
           "color": "black",
           "count": 866,
-          "win_rate": [
-            0.4648,
-            0.4648,
-            0.5352
-          ]
+          "win_rate": [0.4648, 0.4648, 0.5352]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0312,
           "color": "white",
           "count": 843,
-          "win_rate": [
-            0.4395,
-            0.4395,
-            0.5605
-          ]
+          "win_rate": [0.4395, 0.4395, 0.5605]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.021,
           "color": "black",
           "count": 566,
-          "win_rate": [
-            0.4514,
-            0.4514,
-            0.5486
-          ]
+          "win_rate": [0.4514, 0.4514, 0.5486]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0174,
           "color": "white",
           "count": 469,
-          "win_rate": [
-            0.452,
-            0.452,
-            0.548
-          ]
+          "win_rate": [0.452, 0.452, 0.548]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.0173,
           "color": "black",
           "count": 468,
-          "win_rate": [
-            0.4915,
-            0.4915,
-            0.5085
-          ]
+          "win_rate": [0.4915, 0.4915, 0.5085]
         },
         {
           "name": "Nimzo-Indian Defense",
           "popularity": 0.0166,
           "color": "black",
           "count": 448,
-          "win_rate": [
-            0.4375,
-            0.4375,
-            0.5625
-          ]
+          "win_rate": [0.4375, 0.4375, 0.5625]
         },
         {
           "name": "Semi-Slav Defense",
           "popularity": 0.0148,
           "color": "black",
           "count": 399,
-          "win_rate": [
-            0.5188,
-            0.5188,
-            0.4812
-          ]
+          "win_rate": [0.5188, 0.5188, 0.4812]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.0146,
           "color": "white",
           "count": 393,
-          "win_rate": [
-            0.4122,
-            0.4122,
-            0.5878
-          ]
+          "win_rate": [0.4122, 0.4122, 0.5878]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0137,
           "color": "black",
           "count": 370,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Pirc Defense",
           "popularity": 0.0131,
           "color": "black",
           "count": 353,
-          "win_rate": [
-            0.4603,
-            0.4603,
-            0.5397
-          ]
+          "win_rate": [0.4603, 0.4603, 0.5397]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.0129,
           "color": "black",
           "count": 349,
-          "win_rate": [
-            0.49,
-            0.49,
-            0.51
-          ]
+          "win_rate": [0.49, 0.49, 0.51]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.0112,
           "color": "white",
           "count": 301,
-          "win_rate": [
-            0.4086,
-            0.4086,
-            0.5914
-          ]
+          "win_rate": [0.4086, 0.4086, 0.5914]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.0103,
           "color": "black",
           "count": 277,
-          "win_rate": [
-            0.491,
-            0.491,
-            0.509
-          ]
+          "win_rate": [0.491, 0.491, 0.509]
         },
         {
           "name": "Trompowsky Attack",
           "popularity": 0.0094,
           "color": "white",
           "count": 254,
-          "win_rate": [
-            0.5118,
-            0.5118,
-            0.4882
-          ]
+          "win_rate": [0.5118, 0.5118, 0.4882]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0076,
           "color": "white",
           "count": 206,
-          "win_rate": [
-            0.4393,
-            0.4393,
-            0.5607
-          ]
+          "win_rate": [0.4393, 0.4393, 0.5607]
         },
         {
           "name": "Queen's Indian Defense",
           "popularity": 0.0074,
           "color": "black",
           "count": 199,
-          "win_rate": [
-            0.5025,
-            0.5025,
-            0.4975
-          ]
+          "win_rate": [0.5025, 0.5025, 0.4975]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.0064,
           "color": "white",
           "count": 174,
-          "win_rate": [
-            0.5489,
-            0.5489,
-            0.4511
-          ]
+          "win_rate": [0.5489, 0.5489, 0.4511]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0063,
           "color": "white",
           "count": 171,
-          "win_rate": [
-            0.5468,
-            0.5468,
-            0.4532
-          ]
+          "win_rate": [0.5468, 0.5468, 0.4532]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.0053,
           "color": "black",
           "count": 143,
-          "win_rate": [
-            0.5175,
-            0.5175,
-            0.4825
-          ]
+          "win_rate": [0.5175, 0.5175, 0.4825]
         },
         {
           "name": "Czech Defense",
           "popularity": 0.0045,
           "color": "black",
           "count": 121,
-          "win_rate": [
-            0.5041,
-            0.5041,
-            0.4959
-          ]
+          "win_rate": [0.5041, 0.5041, 0.4959]
         },
         {
           "name": "Catalan Opening",
           "popularity": 0.0042,
           "color": "white",
           "count": 112,
-          "win_rate": [
-            0.5536,
-            0.5536,
-            0.4464
-          ]
+          "win_rate": [0.5536, 0.5536, 0.4464]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.0031,
           "color": "black",
           "count": 85,
-          "win_rate": [
-            0.4647,
-            0.4647,
-            0.5353
-          ]
+          "win_rate": [0.4647, 0.4647, 0.5353]
         },
         {
           "name": "Bogo-Indian Defense",
           "popularity": 0.0021,
           "color": "black",
           "count": 56,
-          "win_rate": [
-            0.5893,
-            0.5893,
-            0.4107
-          ]
+          "win_rate": [0.5893, 0.5893, 0.4107]
         },
         {
           "name": "Benko Gambit",
           "popularity": 0.0017,
           "color": "white",
           "count": 47,
-          "win_rate": [
-            0.4574,
-            0.4574,
-            0.5426
-          ]
+          "win_rate": [0.4574, 0.4574, 0.5426]
         },
         {
           "name": "London System",
           "popularity": 0.0011,
           "color": "white",
           "count": 30,
-          "win_rate": [
-            0.4,
-            0.4,
-            0.6
-          ]
+          "win_rate": [0.4, 0.4, 0.6]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0005,
           "color": "black",
           "count": 13,
-          "win_rate": [
-            0.3077,
-            0.3077,
-            0.6923
-          ]
+          "win_rate": [0.3077, 0.3077, 0.6923]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.0003,
           "color": "white",
           "count": 7,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "win_rate": [0.8571, 0.8571, 0.1429]
+        },
+        {
+          "name": "Queen's Gambit",
+          "popularity": 0.0001,
+          "color": "white",
+          "count": 2,
+          "win_rate": [0.5, 0.5, 0.5]
+        }
+      ],
+      "500-1000": [
+        {
+          "name": "French Defense",
+          "popularity": 0.0343,
+          "color": "black",
+          "count": 17,
+          "win_rate": [0.3235, 0.3235, 0.6765]
         },
         {
           "name": "Scandinavian Defense",
           "popularity": 0.0323,
           "color": "black",
           "count": 16,
-          "win_rate": [
-            0.3438,
-            0.3438,
-            0.6562
-          ]
+          "win_rate": [0.3438, 0.3438, 0.6562]
         },
         {
           "name": "English Opening",
           "popularity": 0.0283,
           "color": "white",
           "count": 14,
-          "win_rate": [
-            0.5357,
-            0.5357,
-            0.4643
-          ]
+          "win_rate": [0.5357, 0.5357, 0.4643]
         },
         {
           "name": "Sicilian Defense",
           "popularity": 0.0222,
           "color": "black",
           "count": 11,
-          "win_rate": [
-            0.4091,
-            0.4091,
-            0.5909
-          ]
+          "win_rate": [0.4091, 0.4091, 0.5909]
         },
         {
           "name": "Vienna Game",
           "popularity": 0.0222,
           "color": "white",
           "count": 11,
-          "win_rate": [
-            0.6364,
-            0.6364,
-            0.3636
-          ]
+          "win_rate": [0.6364, 0.6364, 0.3636]
         },
         {
           "name": "Alekhine Defense",
           "popularity": 0.0162,
           "color": "black",
           "count": 8,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Caro-Kann Defense",
           "popularity": 0.0162,
           "color": "black",
           "count": 8,
-          "win_rate": [
-            0.375,
-            0.375,
-            0.625
-          ]
+          "win_rate": [0.375, 0.375, 0.625]
         },
         {
           "name": "Ruy Lopez",
           "popularity": 0.0121,
           "color": "white",
           "count": 6,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         },
         {
           "name": "Italian Game",
           "popularity": 0.0101,
           "color": "white",
           "count": 5,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Petrov's Defense",
           "popularity": 0.0081,
           "color": "black",
           "count": 4,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Modern Defense",
           "popularity": 0.0081,
           "color": "black",
           "count": 4,
-          "win_rate": [
-            0.75,
-            0.75,
-            0.25
-          ]
+          "win_rate": [0.75, 0.75, 0.25]
         },
         {
           "name": "Four Knights Game",
           "popularity": 0.0061,
           "color": "white",
           "count": 3,
-          "win_rate": [
-            0.6667,
-            0.6667,
-            0.3333
-          ]
+          "win_rate": [0.6667, 0.6667, 0.3333]
         },
         {
           "name": "Dutch Defense",
           "popularity": 0.004,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Owen Defense",
           "popularity": 0.004,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            0.5,
-            0.5,
-            0.5
-          ]
+          "win_rate": [0.5, 0.5, 0.5]
         },
         {
           "name": "Bird Opening",
           "popularity": 0.004,
           "color": "white",
           "count": 2,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "Queen's Gambit",
           "popularity": 0.004,
           "color": "white",
           "count": 2,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Philidor Defense",
           "popularity": 0.004,
           "color": "black",
           "count": 2,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Polish Opening",
           "popularity": 0.004,
           "color": "white",
           "count": 2,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         },
         {
           "name": "King's Gambit",
           "popularity": 0.002,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Benoni Defense",
           "popularity": 0.002,
           "color": "black",
           "count": 1,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Slav Defense",
           "popularity": 0.002,
           "color": "black",
           "count": 1,
-          "win_rate": [
-            1.0,
-            1.0,
-            0.0
-          ]
+          "win_rate": [1.0, 1.0, 0.0]
         },
         {
           "name": "Scotch Game",
           "popularity": 0.002,
           "color": "white",
           "count": 1,
-          "win_rate": [
-            0.0,
-            0.0,
-            1.0
-          ]
+          "win_rate": [0.0, 0.0, 1.0]
         }
       ]
     }
