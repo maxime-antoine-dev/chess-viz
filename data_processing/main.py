@@ -58,6 +58,14 @@ def run_builders() -> int:
     print(out)
 
     return 0
+def run_popularity_report():
+    loader = Loader()
+    df = loader.load()
+    # df = loader.loadFile("lichess_db_standard_rated_2014-02")
+    Cls = get_builder("opening_popularity")
+    builder = Cls() 
+    out_path = builder.export(df, filename="popularity_results")
+    print(f"Report generated at: {out_path}")
 
 if __name__ == "__main__":
-    raise SystemExit(run_builders())
+    raise SystemExit(run_popularity_report())
