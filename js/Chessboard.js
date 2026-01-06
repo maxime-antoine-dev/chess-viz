@@ -64,6 +64,18 @@ class ChessboardWidget {
 		this.#renderBoard();
 	}
 
+	setOrientation(orientation) {
+		if (orientation !== 'white' && orientation !== 'black') return;
+		if (this._orientation === orientation) return;
+		this._orientation = orientation;
+		this.#clearSelection();
+		this.#renderBoard();
+	}
+
+	getOrientation() {
+		return this._orientation;
+	}
+
 	// Chess.js loading / PGN sync
 
 	static _chessModulePromise = null;
