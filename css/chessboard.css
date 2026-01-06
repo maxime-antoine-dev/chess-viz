@@ -1,0 +1,37 @@
+.cbw-board {
+	width: min(400px, 100%);
+	aspect-ratio: 1 / 1;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	border-radius: 8px;
+	overflow: hidden;
+	user-select: none;
+}
+
+.cbw-square {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	font-size: clamp(18px, 4.2vw, 34px);
+    width: 50px;
+    height: 50px;
+}
+
+.cbw-light {
+	background: #f0d9b5;
+}
+.cbw-dark {
+	background: #b58863;
+}
+
+.cbw-square.cbw-selected {
+	outline: 3px solid rgba(255, 230, 0, 0.634);
+	outline-offset: -3px;
+}
+.cbw-square.cbw-legal {
+	box-shadow: inset 0 0 0 3px rgba(33, 255, 33, 0.514);
+}
+.cbw-square.cbw-last {
+	box-shadow: inset 0 0 0 3px rgba(8, 131, 255, 0.488);
+}

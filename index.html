@@ -8,6 +8,7 @@
 		<title>Chess opening visualization</title>
 
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/chessboard.css" />
 
 		<script src="https://d3js.org/d3.v7.min.js"></script>
 		<script src="js/script.js" type="module" defer></script>
@@ -98,6 +99,23 @@
 			<div id="tooltip"></div>
 
 			<section id="opening_explorer">
+				<div class="opening-explorer-wrapper">
+					<div class="oe-sunburst" id="oe-sunburst">
+						
+					</div>
+
+					<div class="oe-bottom">
+						<div class="oe-board-wrap">
+						<div id="oe-board" class="cbw-board"></div>
+						<div id="oe-status" class="cbw-status"></div>
+						</div>
+
+						<div class="oe-actions">
+						<button id="oe-reset" type="button" class="oe-btn">Reset</button>
+						<button id="oe-flip" type="button" class="oe-btn">Flip</button>
+						</div>
+					</div>
+				</div>
 			</section>
 
 			<section id="popularity">
