@@ -13,7 +13,6 @@ class OpeningExplorerVisualization extends Visualization {
 		this._lastOpeningApplied = null;
 		this._lastColorApplied = null;
 
-		this._suppressApplyOpeningOnce = false;
 		this._unsub = null;
 
 		this._Chess = null;
@@ -33,25 +32,18 @@ class OpeningExplorerVisualization extends Visualization {
 					this._lastColorApplied = color;
 					const ori = String(color) === "2" ? "black" : "white";
 					this._boardWidget.setOrientation(ori);
-				}
+        }
 
 				// Opening selection drives PGN (unless it came from board detection)
 				if (this._lastOpeningApplied !== opening) {
 					this._lastOpeningApplied = opening;
-
-					if (this._suppressApplyOpeningOnce) {
-						this._suppressApplyOpeningOnce = false;
-						return;
-					}
 
 					let pgn = "";
 					if (opening && opening !== "All") {
 						pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
 					}
 
-					// fallback reset if not found or invalid
-					const valid = await this.#isValidMovetextPGN(pgn);
-					openingExplorerState.setPGN(valid ? pgn : "", { source: "opening-select" });
+					openingExplorerState.setPGN( pgn);
 				}
 			})
 			.catch((err) => console.error(err));
@@ -116,7 +108,6 @@ class OpeningExplorerVisualization extends Visualization {
 			// Reset rule: empty pgn => opening All + color Both
 			if (!s) {
 				if (openingSelect.value !== "All") {
-					this._suppressApplyOpeningOnce = true;
 					openingSelect.value = "All";
 					openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
 				}
@@ -131,7 +122,6 @@ class OpeningExplorerVisualization extends Visualization {
 			const detected = this.#detectOpeningFromPgnPrefix(s);
 
 			if (detected && openingSelect.value !== detected) {
-				this._suppressApplyOpeningOnce = true; // prevent overwriting the played PGN
 				openingSelect.value = detected;
 				openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
 			}
@@ -150,28 +140,6 @@ class OpeningExplorerVisualization extends Visualization {
 			if (pgnMovetext.startsWith(prefix)) return name;
 		}
 		return null;
-	}
-
-	async #isValidMovetextPGN(pgn) {
-		const s = (pgn ?? "").toString().trim();
-		if (!s) return true;
-
-		try {
-			if (!this._chessImportPromise) {
-				this._chessImportPromise = import("https://unpkg.com/chess.js@1.4.0/dist/esm/chess.js");
-			}
-			const mod = await this._chessImportPromise;
-			this._Chess = mod?.Chess;
-
-			if (!this._Chess) return false;
-			const g = new this._Chess();
-
-			if (typeof g.loadPgn === "function") return !!g.loadPgn(s, { sloppy: true });
-			if (typeof g.load_pgn === "function") return !!g.load_pgn(s, { sloppy: true });
-			return false;
-		} catch {
-			return false;
-		}
 	}
 }
 

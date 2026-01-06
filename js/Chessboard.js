@@ -1,6 +1,28 @@
 const DEFAULT_CHESS_JS_ESM_URL = 'https://unpkg.com/chess.js@1.4.0/dist/esm/chess.js';
 
-const PIECES = {
+const PIECE_IMG_BASE_URL = 'img/pieces/';
+
+const PIECE_IMAGES = {
+	w: {
+		k: `${PIECE_IMG_BASE_URL}wk.png`,
+		q: `${PIECE_IMG_BASE_URL}wq.png`,
+		r: `${PIECE_IMG_BASE_URL}wr.png`,
+		b: `${PIECE_IMG_BASE_URL}wb.png`,
+		n: `${PIECE_IMG_BASE_URL}wn.png`,
+		p: `${PIECE_IMG_BASE_URL}wp.png`,
+	},
+	b: {
+		k: `${PIECE_IMG_BASE_URL}bk.png`,
+		q: `${PIECE_IMG_BASE_URL}bq.png`,
+		r: `${PIECE_IMG_BASE_URL}br.png`,
+		b: `${PIECE_IMG_BASE_URL}bb.png`,
+		n: `${PIECE_IMG_BASE_URL}bn.png`,
+		p: `${PIECE_IMG_BASE_URL}bp.png`,
+	},
+};
+
+// Optional fallback if an image is missing
+const PIECES_FALLBACK = {
 	w: { k: '♔', q: '♕', r: '♖', b: '♗', n: '♘', p: '♙' },
 	b: { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟' },
 };
@@ -137,6 +159,10 @@ class ChessboardWidget {
 
 	// Rendering & interactions
 
+	#getPieceImageSrc(piece) {
+		return PIECE_IMAGES?.[piece?.color]?.[piece?.type] ?? '';
+	}
+
 	#renderBoard() {
 		if (!this._ui?.boardEl || !this._game) return;
 
@@ -150,7 +176,21 @@ class ChessboardWidget {
 			cell.dataset.square = sq;
 
 			const piece = this._game.get(sq);
-			if (piece) cell.textContent = PIECES[piece.color]?.[piece.type] ?? '';
+			if (piece) {
+				const src = this.#getPieceImageSrc(piece);
+
+				if (src) {
+					const img = document.createElement('img');
+					img.className = 'cbw-piece';
+					img.src = src;
+					img.alt = `${piece.color}${piece.type}`;
+					img.draggable = false;
+					img.style.pointerEvents = 'none';
+					cell.appendChild(img);
+				} else {
+					cell.textContent = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
+				}
+			}
 
 			if (this._selectedFrom === sq) cell.classList.add('cbw-selected');
 			if (this._legalTargets.has(sq)) cell.classList.add('cbw-legal');

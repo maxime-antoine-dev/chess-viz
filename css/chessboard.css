@@ -6,6 +6,7 @@
 	border-radius: 8px;
 	overflow: hidden;
 	user-select: none;
+	transition: 0.25s ease;
 }
 
 .cbw-square {
@@ -16,6 +17,11 @@
 	font-size: clamp(18px, 4.2vw, 34px);
     width: 50px;
     height: 50px;
+	transition: 0.25s ease;
+
+	img{
+		width: 95%;
+	}
 }
 
 .cbw-light {
