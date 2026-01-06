@@ -92,6 +92,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 			colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
 			openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
+      openingExplorerState.setPGN("", { source:"reset", force:true })
 		});
 
 		btnFlip.addEventListener("click", () => {

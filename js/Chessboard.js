@@ -93,8 +93,6 @@ class ChessboardWidget {
 	}
 
 	#applyPGNToGame(pgn, source) {
-		this.#setMessage('');
-
 		if (!this._game) return;
 
 		if (!pgn.trim()) {
@@ -116,19 +114,11 @@ class ChessboardWidget {
 			ok = false;
 		}
 
-		if (!ok) {
-			this.#setMessage('⚠️ Invalid PGN');
-			return;
-		}
-
 		this._game = next;
 		this._lastMove = null;
 		this.#clearSelection();
 		this.#renderBoard();
 		this.#renderStatus();
-
-		// pas de message “board updated...” (UI simplifiée)
-		if (source === 'reset') this.#setMessage('');
 	}
 
 	#commitBoardToStore() {
@@ -172,8 +162,6 @@ class ChessboardWidget {
 	}
 
 	#onSquareClick(square) {
-		this.#setMessage('');
-
 		const piece = this._game.get(square);
 		const turn = this._game.turn(); // 'w' | 'b'
 
@@ -204,7 +192,6 @@ class ChessboardWidget {
 
 		const move = this._game.move({ from, to, promotion: 'q' });
 		if (!move) {
-			this.#setMessage('⚠️ Illegal move');
 			this.#computeLegals(from);
 			this.#renderBoard();
 			return;
@@ -268,11 +255,6 @@ class ChessboardWidget {
 		const file = square.charCodeAt(0) - 'a'.charCodeAt(0);
 		const rank = parseInt(square[1], 10) - 1;
 		return (file + rank) % 2 === 0;
-	}
-
-	#setMessage(msg) {
-		if (!this._ui?.messageEl) return;
-		this._ui.messageEl.textContent = msg || '';
 	}
 }
 
