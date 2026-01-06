@@ -126,10 +126,20 @@ class Visualization {
 
 	showTooltip(html, event) {
 		if (!this.tooltip) this.#createTooltip();
-		this.tooltip.transition().duration(150).style('opacity', 0.95);
-		this.tooltip.html(html)
-			.style('left', (event.pageX + 10) + 'px')
-			.style('top', (event.pageY - 28) + 'px');
+		this.tooltip.html(html);
+		const node = this.tooltip.node();
+		const w = node ? node.offsetWidth : 0;
+		const padding = 10;
+		const minLeft = 8;
+		const left = Math.max(minLeft, event.pageX - w - padding);
+		const top = Math.max(8, event.pageY - 28);
+
+		this.tooltip
+			.style('left', left + 'px')
+			.style('top', top + 'px')
+			.transition()
+			.duration(150)
+			.style('opacity', 0.95);
 	}
 
 	hideTooltip() {
