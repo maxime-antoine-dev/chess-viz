@@ -19,8 +19,7 @@ class PopularityVisualization extends Visualization {
 		}).catch(err => console.error(err));
 	}
 
-
-	// === Private methods ===
+	// Private methods
 
 	computeScales() {
 		const payload = this.data.payload;
@@ -57,13 +56,13 @@ class PopularityVisualization extends Visualization {
 			.attr('transform', `translate(0, ${this.innerH})`)
 			.call(d3.axisBottom(this.scales.x).tickFormat(d => this.formatPercent(d, 0)));
 
-		// X axis label
 		this.g.axes.selectAll('.x-label').data([0]).join('text')
 			.attr('class', 'x-label')
 			.attr('x', this.innerW / 2)
 			.attr('y', this.innerH + this.margins.bottom - 20)
 			.attr('text-anchor', 'middle')
 			.style('font-size', '14px')
+			.style('fill', '#ffffff')
 			.text('Popularity (% of games played)');
 
 		// Y axis
@@ -71,7 +70,6 @@ class PopularityVisualization extends Visualization {
 		yAxisG.join('g').attr('class', 'y-axis')
 			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
 
-		// Y axis label
 		this.g.axes.selectAll('.y-label').data([0]).join('text')
 			.attr('class', 'y-label')
 			.attr('transform', 'rotate(-90)')
@@ -79,7 +77,29 @@ class PopularityVisualization extends Visualization {
 			.attr('y', -this.margins.left + 15)
 			.attr('text-anchor', 'middle')
 			.style('font-size', '14px')
+			.style('fill', '#ffffff')
 			.text('Win rate');
+	}
+
+	#ensureGlowFilter() {
+		if (!this.svg) return;
+		const defs = this.svg.select('defs').empty() ? this.svg.append('defs') : this.svg.select('defs');
+
+		if (!defs.select('#opening-glow').empty()) return;
+
+		const filter = defs.append('filter')
+			.attr('id', 'opening-glow')
+			.attr('x', '-50%')
+			.attr('y', '-50%')
+			.attr('width', '200%')
+			.attr('height', '200%');
+
+		filter.append('feDropShadow')
+			.attr('dx', 0)
+			.attr('dy', 0)
+			.attr('stdDeviation', 3)
+			.attr('flood-color', '#7ca9ff')
+			.attr('flood-opacity', 0.95);
 	}
 
 	preprocess() {
@@ -96,6 +116,8 @@ class PopularityVisualization extends Visualization {
 	}
 
 	bindMarks(data) {
+		this.#ensureGlowFilter();
+
 		this.g.marks.selectAll('*').remove();
 
 		const crosses = this.g.marks.selectAll('.cross').data(data, d => d.name);
@@ -112,11 +134,16 @@ class PopularityVisualization extends Visualization {
 		merged.transition().duration(200).style('opacity', 1)
 			.attr('transform', d => `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)})`);
 
-		let isSelected = (d) => (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening)
+		const isSelected = (d) =>
+			(this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening);
+
 		merged.select('circle')
-			.attr('fill', d => isSelected(d) ? '#3777ffff' : 'black')
-			.attr('fill-opacity', d => isSelected(d) ? 0.6 : 0.4)
+			.attr('fill', d => isSelected(d) ? '#3777ffff' : 'white')
+			.attr('fill-opacity', d => isSelected(d) ? 0.8 : 0.5)
 			.attr('r', d => isSelected(d) ? 8 : 6)
+			.attr('filter', d => isSelected(d) ? 'url(#opening-glow)' : null)
+			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : 'none')
+			.attr('stroke-width', d => isSelected(d) ? 2 : 0)
 			.style('cursor', 'pointer')
 			.style('transition', 'fill 0.5s ease, transform 0.5s ease');
 
@@ -124,16 +151,28 @@ class PopularityVisualization extends Visualization {
 		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		merged
 			.on('mouseover', (event, d) => {
-				d3.select(event.currentTarget).select('circle').attr('fill', '#0036abff');
+				d3.select(event.currentTarget).select('circle')
+					.attr('fill', '#3777ffff')
+					.attr('fill-opacity', 0.8)
+
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
-				this.showTooltip(`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`, event);
+
+				this.showTooltip(
+					`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`,
+					event
+				);
 			})
 			.on('mouseout', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
-					.attr('fill', (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening) ? '#3777ffff' : 'black');
+					.attr('fill', isSelected(d) ? '#3777ffff' : 'white')
+					.attr('filter', isSelected(d) ? 'url(#opening-glow)' : null)
+					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5)
+
+
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
+
 				this.hideTooltip();
 			})
 			.on('click', (event, d) => {

@@ -3,10 +3,13 @@
 	aspect-ratio: 1 / 1;
 	display: grid;
 	grid-template-columns: repeat(8, 1fr);
-	border-radius: 8px;
+	border-radius: 10px;
 	overflow: hidden;
 	user-select: none;
 	transition: 0.25s ease;
+
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
 }
 
 .cbw-square {
@@ -15,29 +18,34 @@
 	justify-content: center;
 	cursor: pointer;
 	font-size: clamp(18px, 4.2vw, 34px);
-    width: 50px;
-    height: 50px;
-	transition: 0.25s ease;
+	width: 50px;
+	height: 50px;
+	transition: 0.18s ease;
+
+	&:hover {
+		filter: brightness(1.1);
+	}
 
 	img{
 		width: 95%;
+		filter: drop-shadow(0 10px 14px rgba(0,0,0,0.35));
 	}
 }
 
 .cbw-light {
-	background: #f0d9b5;
+	background: #4f78d0; 
 }
 .cbw-dark {
-	background: #b58863;
+	background: #214da5;
 }
 
 .cbw-square.cbw-selected {
-	outline: 3px solid rgba(255, 230, 0, 0.634);
+	outline: 3px solid rgba(124, 169, 255, 0.85);
 	outline-offset: -3px;
 }
 .cbw-square.cbw-legal {
-	box-shadow: inset 0 0 0 3px rgba(33, 255, 33, 0.514);
+	box-shadow: inset 0 0 0 3px rgba(52, 211, 153, 0.55);
 }
 .cbw-square.cbw-last {
-	box-shadow: inset 0 0 0 3px rgba(8, 131, 255, 0.488);
+	box-shadow: inset 0 0 0 3px rgba(56, 189, 248, 0.55);
 }
