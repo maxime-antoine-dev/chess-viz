@@ -72,7 +72,6 @@ class PopularityVisualization extends Visualization {
 			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
 
 		// Y axis label
-		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		this.g.axes.selectAll('.y-label').data([0]).join('text')
 			.attr('class', 'y-label')
 			.attr('transform', 'rotate(-90)')
@@ -80,7 +79,7 @@ class PopularityVisualization extends Visualization {
 			.attr('y', -this.margins.left + 15)
 			.attr('text-anchor', 'middle')
 			.style('font-size', '14px')
-			.text(`Win rate (${color})`);
+			.text('Win rate');
 	}
 
 	preprocess() {
