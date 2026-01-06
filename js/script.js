@@ -3,7 +3,7 @@ import { PopularityVisualization } from './PopularityVisualization.js';
 import { AccuracyVisualization } from './AccuracyVisualization.js';
 
 let time_control = "rapid";
-let elo = "500-1000";
+let elo = "1000-1500";
 let color = "0"; // both
 let opening = "All";
 const charts = init();

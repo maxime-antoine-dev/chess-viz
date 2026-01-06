@@ -93,38 +93,43 @@ class PopularityVisualization extends Visualization {
 
 		// enter
 		const enter = crosses.enter().append('g').attr('class', 'cross').style('opacity', 0);
-		enter.append('line').attr('class', 'cross-a').attr('stroke-width', 2);
-		enter.append('line').attr('class', 'cross-b').attr('stroke-width', 2);
+		enter.append('circle').attr('class', 'bubble');
 
 		const merged = enter.merge(crosses);
 
 		merged.transition().duration(200).style('opacity', 1)
 			.attr('transform', d => `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)})`);
 
-		merged.select('.cross-a')
-			.attr('x1', -this.crossSize).attr('y1', -this.crossSize)
-			.attr('x2', this.crossSize).attr('y2', this.crossSize);
-		merged.select('.cross-b')
-			.attr('x1', -this.crossSize).attr('y1', this.crossSize)
-			.attr('x2', this.crossSize).attr('y2', -this.crossSize);
-
-		// Highlight the selected opening (if any)
-		merged.selectAll('line')
-			.attr('stroke', d => (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening) ? 'red' : 'black');
+		let isSelected = (d) => (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening)
+		merged.select('circle')
+			.attr('fill', d => isSelected(d) ? '#3777ffff' : 'black')
+			.attr('fill-opacity', d => isSelected(d) ? 0.6 : 0.4)
+			.attr('r', d => isSelected(d) ? 8 : 6)
+			.style('cursor', 'pointer')
+			.style('transition', 'fill 0.5s ease, transform 0.5s ease');
 
 		// Hover interaction
 		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		merged
 			.on('mouseover', (event, d) => {
-				// highlight the lines (increase width) and scale group; keep stroke color as set
-				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 3);
-				d3.select(event.currentTarget).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
+				d3.select(event.currentTarget).select('circle').attr('fill', '#0036abff');
+				d3.select(event.currentTarget)
+					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
 				this.showTooltip(`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`, event);
 			})
 			.on('mouseout', (event, d) => {
-				d3.select(event.currentTarget).selectAll('line').attr('stroke-width', 2);
-				d3.select(event.currentTarget).attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
+				d3.select(event.currentTarget).select('circle')
+					.attr('fill', (this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening) ? '#3777ffff' : 'black');
+				d3.select(event.currentTarget)
+					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
 				this.hideTooltip();
+			})
+			.on('click', (event, d) => {
+				const select = document.getElementById('opening');
+				if (!select) return;
+				const hasOption = Array.from(select.options).some((o) => o.value === d.name);
+				select.value = hasOption ? d.name : 'All';
+				select.dispatchEvent(new Event('change', { bubbles: true }));
 			});
 	}
 }
