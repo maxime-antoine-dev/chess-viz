@@ -48,24 +48,18 @@ def load() -> int:
 def run_builders() -> int:
     loader = Loader()
     df = loader.load()
-    # df = loader.loadFile("lichess_db_standard_rated_2014-02")
 
     Cls = get_builder("opening_accuracy_heatmap")
-    b = Cls(
-        opening_moves=12,
-    )
-    out = b.export(df, filename="acc_heatmap")
-    print(out)
-
-    return 0
-def run_popularity_report():
-    loader = Loader()
-    df = loader.load()
-    # df = loader.loadFile("lichess_db_standard_rated_2014-02")
+    builder = Cls() 
+    out_path = builder.export(df, filename="opening_accuracy_heatmap")
+    print(f"opening_accuracy_heatmap report generated at: {out_path}")
+    
     Cls = get_builder("opening_popularity")
     builder = Cls() 
     out_path = builder.export(df, filename="popularity_results")
-    print(f"Report generated at: {out_path}")
+    print(f"popularity_results report generated at: {out_path}")
+
+    return 0
 
 if __name__ == "__main__":
-    raise SystemExit(run_popularity_report())
+    raise SystemExit(run_builders())

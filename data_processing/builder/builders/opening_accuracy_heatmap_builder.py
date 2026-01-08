@@ -6,6 +6,7 @@ from typing import Any, Dict, List, Optional, Tuple
 import polars as pl
 
 from ..base import BaseBuilder
+from ..openings import OPENING_WHITELIST
 from ..registry import register_builder
 
 # x = opening accuracy bin (0–10, …, 90–100)
@@ -166,47 +167,6 @@ class OpeningAccuracyHeatmapBuilder(BaseBuilder):
     ALLOWED_TIME_CONTROLS = {"BLITZ", "RAPID", "BULLET"}
     ELO_BRACKETS = ["0-500", "500-1000", "1000-1500", "1500-2000", "2000+"]
 
-    OPENING_WHITELIST = {
-        "Sicilian Defense",
-        "French Defense",
-        "Caro-Kann Defense",
-        "Scandinavian Defense",
-        "Alekhine Defense",
-        "Pirc Defense",
-        "Modern Defense",
-        "Dutch Defense",
-        "Philidor Defense",
-        "Petrov's Defense",
-        "Italian Game",
-        "Ruy Lopez",
-        "Scotch Game",
-        "Four Knights Game",
-        "Vienna Game",
-        "King's Gambit",
-        "English Opening",
-        "Queen's Gambit",
-        "Slav Defense",
-        "Semi-Slav Defense",
-        "Nimzo-Indian Defense",
-        "Queen's Indian Defense",
-        "Bogo-Indian Defense",
-        "King's Indian Defense",
-        "Grünfeld Defense",
-        "Benoni Defense",
-        "Benko Gambit",
-        "London System",
-        "Catalan Opening",
-        "Réti Opening",
-        "Bird Opening",
-        "Polish Opening",
-        "Owen Defense",
-        "Czech Defense",
-        "Trompowsky Attack",
-        "Veresov Opening",
-        "Jobava London System",
-        "Stonewall Attack",
-    }
-
     def __init__(
         self,
         *,
@@ -303,7 +263,7 @@ class OpeningAccuracyHeatmapBuilder(BaseBuilder):
             if not family:
                 return False, ""
 
-            if family in self.OPENING_WHITELIST:
+            if family in OPENING_WHITELIST:
                 return True, family
 
             if self.group_unlisted_to_other:

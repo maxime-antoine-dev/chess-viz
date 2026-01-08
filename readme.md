@@ -157,7 +157,6 @@ Opening whitelist :
 - Queen's Indian Defense
 - Bogo-Indian Defense
 - King's Indian Defense
-- Grünfeld Defense
 - Benoni Defense
 - Benko Gambit
 - London System

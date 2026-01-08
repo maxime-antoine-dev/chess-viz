@@ -1,26 +1,15 @@
 import polars as pl
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 from ..base import BaseBuilder
+from ..openings import OPENING_WHITELIST
 from ..registry import register_builder
+
 @register_builder
 class PopularityBuilder(BaseBuilder):
     name = "opening_popularity"
 
     ALLOWED_TIME_CONTROLS = {"BLITZ", "RAPID", "BULLET"}
     ELO_BRACKETS = ["0-500", "500-1000", "1000-1500", "1500-2000", "2000+"]
-
-    OPENING_WHITELIST = {
-        "Sicilian Defense", "French Defense", "Caro-Kann Defense", "Scandinavian Defense",
-        "Alekhine Defense", "Pirc Defense", "Modern Defense", "Dutch Defense",
-        "Philidor Defense", "Petrov's Defense", "Italian Game", "Ruy Lopez",
-        "Scotch Game", "Four Knights Game", "Vienna Game", "King's Gambit",
-        "English Opening", "Queen's Gambit", "Slav Defense", "Semi-Slav Defense",
-        "Nimzo-Indian Defense", "Queen's Indian Defense", "Bogo-Indian Defense",
-        "King's Indian Defense", "Grünfeld Defense", "Benoni Defense", "Benko Gambit",
-        "London System", "Catalan Opening", "Réti Opening", "Bird Opening",
-        "Polish Opening", "Owen Defense", "Czech Defense", "Trompowsky Attack",
-        "Veresov Opening", "Jobava London System", "Stonewall Attack",
-    }
 
     def __init__(
         self,
@@ -42,10 +31,13 @@ class PopularityBuilder(BaseBuilder):
         df = df.with_columns(
             opening_root=pl.col("opening").str.split(":").list.get(0).str.strip_chars()
         ).with_columns(
-            opening_name=pl.when(pl.col("opening_root").is_in(self.OPENING_WHITELIST))
+            opening_name=pl.when(pl.col("opening_root").is_in(OPENING_WHITELIST))
             .then(pl.col("opening_root"))
             .otherwise(pl.lit(self.other_label) if self.group_unlisted_to_other else pl.col("opening_root"))
         )
+
+        # remove Other category from export
+        df = df.filter(pl.col("opening_name") != self.other_label)
 
         df = df.with_columns(
             color=pl.when(pl.col("opening_name").str.contains("(?i)Defense|Indian|Scandinavian|Pirc|Caro-Kann|Benoni|Czech|Owen|Philidor|Petrov|Alekhine|Modern|Dutch|Slav"))
@@ -94,7 +86,7 @@ class PopularityBuilder(BaseBuilder):
                 group_df.filter(pl.col("count") >= self.min_samples_per_opening)
                 .sort("popularity", descending=True)
             )
-            
+
             if self.max_openings_per_bucket is not None:
                 processed_group = processed_group.head(self.max_openings_per_bucket)
 

@@ -4,7 +4,7 @@ import { AccuracyVisualization } from './AccuracyVisualization.js';
 
 let time_control = "rapid";
 let elo = "1500-2000";
-let color = "0"; // both
+let color = "1"; // White
 let opening = "All";
 const charts = init();
 update(charts, time_control, elo, color, opening);

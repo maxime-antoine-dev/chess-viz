@@ -79,7 +79,7 @@ class OpeningExplorerVisualization extends Visualization {
 			const colorSelect = document.getElementById("color");
 			if (!openingSelect || !colorSelect) return;
 
-			colorSelect.value = "0";
+			colorSelect.value = "1";
 			openingSelect.value = "All";
 
 			colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
@@ -111,10 +111,9 @@ class OpeningExplorerVisualization extends Visualization {
 					openingSelect.value = "All";
 					openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
 				}
-				if (colorSelect.value !== "0") {
-					colorSelect.value = "0";
-					colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
-				}
+				
+				colorSelect.value = "1";
+				colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
 				return;
 			}
 
