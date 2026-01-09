@@ -4,10 +4,12 @@ import { ChessboardWidget } from "./Chessboard.js";
 import { OPENING_FIRST_MOVES } from "./openings.js";
 
 class OpeningExplorerVisualization extends Visualization {
+
+	// === Public methods ===
+
 	constructor(data, container) {
 		super(data, container, { top: 0, right: 0, bottom: 0, left: 0 });
 
-		this._initialized = false;
 		this._boardWidget = null;
 
 		this._lastOpeningApplied = null;
@@ -19,52 +21,66 @@ class OpeningExplorerVisualization extends Visualization {
 		this._chessImportPromise = null;
 	}
 
-	render(time_control, elo, color, opening) {
-		this.#initOnce()
-			.then(async () => {
-				this.filters.time_control = time_control;
-				this.filters.elo = elo;
-				this.filters.color = Number.parseInt(color);
-				this.filters.opening = opening;
+	async init() {
+		// Avoid re-initialization
+		if (this.initialized) return this;
 
-				// Orientation follows color
-				if (this._lastColorApplied !== color) {
-					this._lastColorApplied = color;
-					const ori = String(color) === "2" ? "black" : "white";
-					this._boardWidget.setOrientation(ori);
-        }
+		// Initialize base visualization
+		this.loadData()
+		this.measure();
+		this.setupSVG();
+		// this.computeScales();
+		// this.drawAxes();
 
-				// Opening selection drives PGN (unless it came from board detection)
-				if (this._lastOpeningApplied !== opening) {
-					this._lastOpeningApplied = opening;
+		// Initialize board widget
+		await this.initBoardWidget();
 
-					let pgn = "";
-					if (opening && opening !== "All") {
-						pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
-					}
-
-					openingExplorerState.setPGN( pgn);
-				}
-			})
-			.catch((err) => console.error(err));
+		this.initialized = true;
+		return this;
 	}
 
-	async #initOnce() {
-		if (this._initialized) return;
+	render(time_control, elo, color, opening) {
+		this.init().then(() => {
+			this.filters.time_control = time_control;
+			this.filters.elo = elo;
+			this.filters.color = Number.parseInt(color);
+			this.filters.opening = opening;
 
-		const containerEl =
-			typeof this.container === "string"
-				? document.querySelector(this.container)
-				: this.container;
+			// Orientation follows color
+			if (this._lastColorApplied !== color) {
+				this._lastColorApplied = color;
+				const ori = String(color) === "2" ? "black" : "white";
+				this._boardWidget.setOrientation(ori);
+			}
 
-		if (!containerEl) throw new Error("OpeningExplorer container not found");
-		this.container = containerEl;
+			// Opening selection drives PGN (unless it came from board detection)
+			if (this._lastOpeningApplied !== opening) {
+				this._lastOpeningApplied = opening;
 
+				let pgn = "";
+				if (opening && opening !== "All") {
+					pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
+				}
+
+				openingExplorerState.setPGN(pgn);
+			}
+		})
+		.catch((err) => console.error(err));
+	}
+
+
+	// === Private methods ===
+
+	/**
+	 * Initialize the embedded chessboard widget
+	 * @returns {Promise<void>}
+	 * @throws {Error} If HTML elements are missing
+	 */
+	async initBoardWidget() {
 		// Grab HTML elements
 		const boardEl = this.container.querySelector("#oe-board");
 		const btnReset = this.container.querySelector("#oe-reset");
 		const btnFlip = this.container.querySelector("#oe-flip");
-
 		if (!boardEl || !btnReset || !btnFlip) {
 			throw new Error("OpeningExplorer HTML elements missing in #opening_explorer");
 		}
@@ -73,7 +89,7 @@ class OpeningExplorerVisualization extends Visualization {
 		this._boardWidget = new ChessboardWidget({ store: openingExplorerState });
 		await this._boardWidget.mount({ boardEl });
 
-		// Buttons -> update selects (so script.js updates everything)
+		// Reset button (update selects which triggers script.js updates)
 		btnReset.addEventListener("click", () => {
 			const openingSelect = document.getElementById("opening");
 			const colorSelect = document.getElementById("color");
@@ -84,9 +100,10 @@ class OpeningExplorerVisualization extends Visualization {
 
 			colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
 			openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
-      openingExplorerState.setPGN("", { source:"reset", force:true })
+			openingExplorerState.setPGN("", { source:"reset", force:true })
 		});
 
+		// Flip button (update color select which triggers script.js updates)
 		btnFlip.addEventListener("click", () => {
 			const colorSelect = document.getElementById("color");
 			if (!colorSelect) return;
@@ -97,7 +114,7 @@ class OpeningExplorerVisualization extends Visualization {
 			colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
 		});
 
-		// Board play -> update opening select (and reset behavior)
+		// Subscribe to PGN changes for opening detection
 		this._unsub = openingExplorerState.onPGNChange(({ pgn, source }) => {
 			const openingSelect = document.getElementById("opening");
 			const colorSelect = document.getElementById("color");
@@ -111,25 +128,28 @@ class OpeningExplorerVisualization extends Visualization {
 					openingSelect.value = "All";
 					openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
 				}
-				
+
 				colorSelect.value = "1";
 				colorSelect.dispatchEvent(new Event("change", { bubbles: true }));
 				return;
 			}
 
 			// Detect opening from PGN prefix (dictionary)
-			const detected = this.#detectOpeningFromPgnPrefix(s);
+			const detected = this.detectOpeningFromPgnPrefix(s);
 
 			if (detected && openingSelect.value !== detected) {
 				openingSelect.value = detected;
 				openingSelect.dispatchEvent(new Event("change", { bubbles: true }));
 			}
 		});
-
-		this._initialized = true;
 	}
 
-	#detectOpeningFromPgnPrefix(pgnMovetext) {
+	/**
+	 * Detect opening name from PGN movetext prefix
+	 * @param {string} pgnMovetext
+	 * @returns {string|null} Opening name or null if not found
+	 */
+	detectOpeningFromPgnPrefix(pgnMovetext) {
 		// longest match wins
 		const entries = Object.entries(OPENING_FIRST_MOVES || {})
 			.filter(([k, v]) => k !== "All" && typeof v === "string" && v.trim().length > 0)

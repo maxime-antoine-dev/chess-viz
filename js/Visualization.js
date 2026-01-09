@@ -37,9 +37,9 @@ class Visualization {
 		// Avoid re-initialization
 		if (this.initialized) return this;
 
-		await this.#loadData();
-		this.#measure();
-		this.#setupSVG();
+		await this.loadData();
+		this.measure();
+		this.setupSVG();
 		this.computeScales();
 		this.drawAxes();
 
@@ -59,6 +59,9 @@ class Visualization {
 	render(time_control, elo, color, opening) {
 		throw new Error('Subclasses must implement render() method');
 	}
+
+
+	// === Protected methods ===
 
 	/**
 	 * Draw axes for the visualization
@@ -85,7 +88,7 @@ class Visualization {
 	 * @returns {void}
 	 */
 	showTooltip(html, event) {
-		if (!this.tooltip) this.#createTooltip();
+		if (!this.tooltip) this.createTooltip();
 		this.tooltip.html(html);
 		const node = this.tooltip.node();
 		const w = node ? node.offsetWidth : 0;
@@ -132,14 +135,11 @@ class Visualization {
 		return (v * 100).toFixed(digits) + '%';
 	}
 
-
-	// === Private methods ===
-
 	/**
 	 * Load data from the specified data path
 	 * @returns {Promise<void>}
 	 */
-	async #loadData() {
+	async loadData() {
 		try {
 			const d = await d3.json(this.dataPath);
 			this.data = d;
@@ -153,7 +153,7 @@ class Visualization {
 	 * Setup SVG elements
 	 * @returns {void}
 	 */
-	#setupSVG() {
+	setupSVG() {
 		if (!this.svg) {
 			this.svg = d3.select(this.container)
 				.append('svg')
@@ -168,7 +168,7 @@ class Visualization {
 			this.g.axes = this.root.append('g').attr('class', 'axes');
 			this.g.marks = this.root.append('g').attr('class', 'marks');
 
-			this.#createTooltip();
+			this.createTooltip();
 		}
 	}
 
@@ -176,7 +176,7 @@ class Visualization {
 	 * Measure container dimensions and update width/height
 	 * @returns {void}
 	 */
-	#measure() {
+	measure() {
 		const rect = this.container.getBoundingClientRect();
 		this.width = Math.max(1, Math.round(rect.width));
 		this.height = Math.max(1, Math.round(rect.height));
@@ -190,7 +190,7 @@ class Visualization {
 	 * Create tooltip element
 	 * @returns {void}
 	 */
-	#createTooltip() {
+	createTooltip() {
 		this.tooltip = d3.select("#tooltip");
 	}
 }
