@@ -1,1 +1,1272 @@
-{}
+{
+	"builder": "",
+	"created_at_unix": 0,
+	"payload": {
+		"blitz": {
+			"500-1000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1000-1500": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1500-2000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"2000+": {
+				"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			}
+		},
+		"rapid": {
+			"500-1000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1000-1500": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1500-2000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"2000+": {
+				"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			}
+		},
+		"bullet": {
+			"500-1000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1000-1500": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"1500-2000": {
+								"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			},
+			"2000+": {
+				"e4": {
+					"name": "e4",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"e5": {
+							"name": "e5",
+							"white_win": 0.50,
+							"black_win": 0.30,
+							"next_moves": {
+								"Nf3": {"name":"Nf3","white_win":0.51,"black_win":0.29,"next_moves":{}},
+								"Nc6": {"name":"Nc6","white_win":0.47,"black_win":0.33,"next_moves":{}}
+							}
+						},
+						"c5": {"name":"c5","white_win":0.43,"black_win":0.37,"next_moves":{}}
+					}
+				},
+				"d4": {
+					"name": "d4",
+					"white_win": 0.47,
+					"black_win": 0.33,
+					"next_moves": {
+						"d5": {"name":"d5","white_win":0.48,"black_win":0.32,"next_moves":{}},
+						"Nf6": {"name":"Nf6","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"c4": {"name":"c4","white_win":0.46,"black_win":0.34,"next_moves":{}},
+				"Nf3": {"name":"Nf3","white_win":0.45,"black_win":0.35,"next_moves":{}},
+
+				"Sicilian Defense": {
+					"name": "Sicilian Defense",
+					"first_moves": "1. e4 c5",
+					"white_win": 0.44,
+					"black_win": 0.36,
+					"next_moves": {
+						"Open": {"name":"Open Sicilian (2. Nf3)","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Closed": {"name":"Closed Sicilian (2. Nc3)","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"French Defense": {
+					"name": "French Defense",
+					"first_moves": "1. e4 e6",
+					"white_win": 0.43,
+					"black_win": 0.37,
+					"next_moves": {
+						"Advance": {"name":"Advance Variation","white_win":0.44,"black_win":0.36,"next_moves":{}},
+						"Exchange": {"name":"Exchange Variation","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"Caro-Kann Defense": {
+					"name": "Caro-Kann Defense",
+					"first_moves": "1. e4 c6",
+					"white_win": 0.45,
+					"black_win": 0.35,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.46,"black_win":0.34,"next_moves":{}},
+						"Advance": {"name":"Advance","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Ruy Lopez": {
+					"name": "Ruy Lopez",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bb5",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {
+						"Closed": {"name":"Closed","white_win":0.50,"black_win":0.30,"next_moves":{}},
+						"Open": {"name":"Open","white_win":0.47,"black_win":0.33,"next_moves":{}}
+					}
+				},
+				"Queen's Gambit": {
+					"name": "Queen's Gambit",
+					"first_moves": "1. d4 d5 2. c4",
+					"white_win": 0.50,
+					"black_win": 0.30,
+					"next_moves": {
+						"Accepted": {"name":"QGA","white_win":0.49,"black_win":0.31,"next_moves":{}},
+						"Declined": {"name":"QGD","white_win":0.51,"black_win":0.29,"next_moves":{}}
+					}
+				},
+				"King's Indian Defense": {
+					"name": "King's Indian Defense",
+					"first_moves": "1. d4 Nf6 2. c4 g6",
+					"white_win": 0.46,
+					"black_win": 0.34,
+					"next_moves": {
+						"Classical": {"name":"Classical","white_win":0.47,"black_win":0.33,"next_moves":{}},
+						"Fianchetto": {"name":"Fianchetto","white_win":0.45,"black_win":0.35,"next_moves":{}}
+					}
+				},
+				"English Opening": {
+					"name": "English Opening",
+					"first_moves": "1. c4",
+					"white_win": 0.48,
+					"black_win": 0.32,
+					"next_moves": {}
+				},
+				"Italian Game": {
+					"name": "Italian Game",
+					"first_moves": "1. e4 e5 2. Nf3 Nc6 3. Bc4",
+					"white_win": 0.49,
+					"black_win": 0.31,
+					"next_moves": {}
+				}
+			}
+		}
+	}
+}
