@@ -26,6 +26,9 @@ class Visualization {
 		this.filters = {};
 	}
 
+
+	// === Public methods ===
+
 	/**
 	 * Initialize the visualization (load data, setup SVG, etc.)
 	 * @returns {void}
@@ -34,40 +37,9 @@ class Visualization {
 		// Avoid re-initialization
 		if (this.initialized) return this;
 
-		// normalize container element
-		const containerEl = (typeof this.container === 'string') ? document.querySelector(this.container) : this.container;
-		if (!containerEl) throw new Error('Container element not found');
-		this.container = containerEl;
-
-		// Attempt to load data first so renderers can rely on `this.data` synchronously after init
-		try {
-			const d = await d3.json(this.dataPath);
-			this.data = d;
-		} catch (err) {
-			console.error('Error during data loading from path: ' + this.dataPath, err);
-			this.data = null;
-		}
-
-		// Measure and setup SVG
+		await this.#loadData();
 		this.#measure();
-		if (!this.svg) {
-			this.svg = d3.select(this.container)
-				.append('svg')
-				.style('width', '100%')
-				.style('height', '100%')
-				.attr('preserveAspectRatio', 'xMidYMid meet')
-				.attr('viewBox', `0 0 ${this.width} ${this.height}`);
-
-			this.root = this.svg.append('g').attr('class', 'root')
-				.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
-
-			this.g.axes = this.root.append('g').attr('class', 'axes');
-			this.g.marks = this.root.append('g').attr('class', 'marks');
-
-			this.#createTooltip();
-		}
-
-		// Compute scales and draw axes
+		this.#setupSVG();
 		this.computeScales();
 		this.drawAxes();
 
@@ -106,24 +78,12 @@ class Visualization {
 		throw new Error('Subclasses must implement computeScales() method');
 	}
 
-
-	// === Utility methods ===
-
-	// measure container and compute inner sizes
-	#measure() {
-		const rect = this.container.getBoundingClientRect();
-		this.width = Math.max(1, Math.round(rect.width));
-		this.height = Math.max(1, Math.round(rect.height));
-		this.innerW = Math.max(1, this.width - this.margins.left - this.margins.right);
-		this.innerH = Math.max(1, this.height - this.margins.top - this.margins.bottom);
-		if (this.svg) this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
-		if (this.root) this.root.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
-	}
-
-	#createTooltip() {
-		this.tooltip = d3.select("#tooltip");
-	}
-
+	/**
+	 * Show tooltip at mouse position
+	 * @param {string} html - HTML content for the tooltip
+	 * @param {MouseEvent} event - Mouse event for positioning
+	 * @returns {void}
+	 */
 	showTooltip(html, event) {
 		if (!this.tooltip) this.#createTooltip();
 		this.tooltip.html(html);
@@ -131,7 +91,18 @@ class Visualization {
 		const w = node ? node.offsetWidth : 0;
 		const padding = 10;
 		const minLeft = 8;
-		const left = Math.max(minLeft, event.pageX - w - padding);
+		const viewportW = window.innerWidth || document.documentElement.clientWidth;
+		const cursorX = event.pageX;
+
+		let left;
+		if (cursorX > viewportW / 2) {	// tooltip on the left side
+			left = cursorX - w - padding;
+			left = Math.max(minLeft, left);
+		} else {						// tooltip on the right side
+			left = cursorX + padding;
+			const maxLeft = Math.max(minLeft, viewportW - w - padding);
+			left = Math.min(Math.max(minLeft, left), maxLeft);
+		}
 		const top = Math.max(8, event.pageY - 28);
 
 		this.tooltip
@@ -142,12 +113,86 @@ class Visualization {
 			.style('opacity', 0.95);
 	}
 
+	/**
+	 * Hide tooltip
+	 * @returns {void}
+	 */
 	hideTooltip() {
 		if (!this.tooltip) return;
 		this.tooltip.transition().duration(250).style('opacity', 0);
 	}
 
-	formatPercent(v, digits = 2) { return (v * 100).toFixed(digits) + '%'; }
+	/**
+	 * Format a number as a percentage string
+	 * @param {number} v - Value to format
+	 * @param {number} digits - Number of decimal digits
+	 * @returns {string} Formatted percentage string
+	 */
+	formatPercent(v, digits = 2) {
+		return (v * 100).toFixed(digits) + '%';
+	}
+
+
+	// === Private methods ===
+
+	/**
+	 * Load data from the specified data path
+	 * @returns {Promise<void>}
+	 */
+	async #loadData() {
+		try {
+			const d = await d3.json(this.dataPath);
+			this.data = d;
+		} catch (err) {
+			console.error('Error during data loading from path: ' + this.dataPath, err);
+			this.data = null;
+		}
+	}
+
+	/**
+	 * Setup SVG elements
+	 * @returns {void}
+	 */
+	#setupSVG() {
+		if (!this.svg) {
+			this.svg = d3.select(this.container)
+				.append('svg')
+				.style('width', '100%')
+				.style('height', '100%')
+				.attr('preserveAspectRatio', 'xMidYMid meet')
+				.attr('viewBox', `0 0 ${this.width} ${this.height}`);
+
+			this.root = this.svg.append('g').attr('class', 'root')
+				.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
+
+			this.g.axes = this.root.append('g').attr('class', 'axes');
+			this.g.marks = this.root.append('g').attr('class', 'marks');
+
+			this.#createTooltip();
+		}
+	}
+
+	/**
+	 * Measure container dimensions and update width/height
+	 * @returns {void}
+	 */
+	#measure() {
+		const rect = this.container.getBoundingClientRect();
+		this.width = Math.max(1, Math.round(rect.width));
+		this.height = Math.max(1, Math.round(rect.height));
+		this.innerW = Math.max(1, this.width - this.margins.left - this.margins.right);
+		this.innerH = Math.max(1, this.height - this.margins.top - this.margins.bottom);
+		if (this.svg) this.svg.attr('viewBox', `0 0 ${this.width} ${this.height}`);
+		if (this.root) this.root.attr('transform', `translate(${this.margins.left},${this.margins.top})`);
+	}
+
+	/**
+	 * Create tooltip element
+	 * @returns {void}
+	 */
+	#createTooltip() {
+		this.tooltip = d3.select("#tooltip");
+	}
 }
 
 export { Visualization };
