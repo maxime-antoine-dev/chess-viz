@@ -309,43 +309,6 @@ class OpeningExplorerVisualization extends Visualization {
 	}
 
 	/**
-
-
-	/**
-	 * Build hierarchical JSON structure from CSV data
-	 * @param {Array} csv Array of CSV rows
-	 * @returns {Object} Hierarchical JSON data
-	 * @private
-	 */
-	_sun_buildHierarchy(csv) {
-		let root = { "name": "root", "children": [] };
-		for (const element of csv) {
-			let sequence = element[0];
-			let size = +element[1];
-			if (Number.isNaN(size)) continue;
-			let parts = sequence.split("-");
-			let currentNode = root;
-			for (let j = 0; j < parts.length; j++) {
-				let children = currentNode["children"];
-				let nodeName = parts[j];
-				let childNode;
-				if (j + 1 < parts.length) {
-					let foundChild = false;
-					for (const ch of children) {
-						if (ch["name"] == nodeName) { childNode = ch; foundChild = true; break; }
-					}
-					if (!foundChild) { childNode = { "name": nodeName, "children": [] }; children.push(childNode); }
-					currentNode = childNode;
-				} else {
-					childNode = { "name": nodeName, "size": size };
-					children.push(childNode);
-				}
-			}
-		}
-		return root;
-	}
-
-	/**
 	 * Build a d3-compatible hierarchical JSON from this.data.payload
 	 * @param {string} time_control
 	 * @param {string} elo
