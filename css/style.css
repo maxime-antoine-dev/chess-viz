@@ -71,9 +71,9 @@ html {
     main {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: 1fr 1fr;
-      height: calc(100vh - 63px - 44px);
-      overflow: hidden;
+      grid-template-rows: auto auto; /* Changé 1fr 1fr en auto pour s'adapter au contenu */
+      min-height: calc(100vh - 63px - 44px); /* Changé height en min-height */
+      overflow: visible; /* Changé hidden en visible pour permettre le scroll */
 
       #tooltip {
         position: absolute;
