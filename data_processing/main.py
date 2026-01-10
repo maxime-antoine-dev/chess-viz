@@ -67,5 +67,13 @@ def run_popularity_report():
     out_path = builder.export(df, filename="popularity_results")
     print(f"Report generated at: {out_path}")
 
+def run_explorer_report():
+    loader = Loader()
+    df = loader.load()
+    Cls = get_builder("opening_explorer")
+    builder = Cls() 
+    out_path = builder.export(df, filename="explorer_results")
+    print(f"Report generated at: {out_path}")
+
 if __name__ == "__main__":
     raise SystemExit(run_popularity_report())
