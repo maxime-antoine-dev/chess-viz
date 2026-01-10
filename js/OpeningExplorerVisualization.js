@@ -138,14 +138,40 @@ class OpeningExplorerVisualization extends Visualization {
             .outerRadius(d => d.y1);
 
         const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
+		let selectedNode = null;
 
-        this._sun_vis.selectAll("path")
+        const path = this._sun_vis.selectAll("path")
             .data(root.descendants().filter(d => d.depth && (d.x1 - d.x0 > 0.001)))
             .enter().append("path")
             .attr("d", arc)
+			.style("cursor", "pointer")
             .style("fill", d => colorScale(d.ancestors().reverse()[1]?.data.name))
             .style("stroke", "#0b1220")
             .style("opacity", 0.8)
+			.on("click", (event, d) => {
+				console.log("Clicked on:", d.data.name);
+				selectedNode = (d === selectedNode) ? null : d;
+				console.log("Selected node:", selectedNode ? selectedNode.data.name : "none");
+				if (selectedNode) {
+					const ancestors = selectedNode.ancestors();
+					path.transition().duration(200).style("opacity", node => ancestors.includes(node) ? 1 : 0.3);
+					const nodeName = selectedNode.data.name;
+					let pgnToApply = "";
+					if (OPENING_FIRST_MOVES && OPENING_FIRST_MOVES[nodeName]) {
+						pgnToApply = OPENING_FIRST_MOVES[nodeName];
+					}else{
+						pgnToApply = selectedNode.ancestors().reverse().slice(1).map(n => n.data.name).join(" ");
+					}
+					
+					console.log("Move list to set in OpeningExplorerState:", pgnToApply);
+					if (openingExplorerState) {
+						openingExplorerState.setPGN(pgnToApply, { source: "sunburst" });
+					} 
+				} else {
+					path.transition().duration(200).style("opacity", 0.8);
+				}
+				event.stopPropagation(event);
+			})
             .on("mouseover", (event, d) => {
                 const tooltip = document.getElementById("tooltip");
                 if (tooltip) {
