@@ -18,7 +18,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 	async init() {
 		if (!this.initialized) {
-			this.loadData();
+			await this.loadData();
 			this.measure();
 			this.setupSVG();
 			await this.initBoardWidget();
