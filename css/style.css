@@ -23,7 +23,7 @@ html {
       }
 
       nav {
-        & > div {
+        &>div {
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -71,9 +71,8 @@ html {
     main {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: auto auto; /* Changé 1fr 1fr en auto pour s'adapter au contenu */
-      min-height: calc(100vh - 63px - 44px); /* Changé height en min-height */
-      overflow: visible; /* Changé hidden en visible pour permettre le scroll */
+      grid-template-rows: 1fr 1fr;
+      height: calc(100vh - 63px - 44px);
 
       #tooltip {
         position: absolute;
@@ -94,76 +93,68 @@ html {
         backdrop-filter: blur(6px);
       }
 
-      section {
-        /* Visualisation 1: Opening Explorer */
-        &#opening_explorer {
-          grid-column: 1 / 7;
-          grid-row: 1 / 3;
+      #opening_explorer {
+        grid-column: 1 / 7;
+        grid-row: 1 / 2;
 
-          .opening-explorer-wrapper {
+        .opening-explorer-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          height: 100%;
+
+          .oe-bottom {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            height: 100%;
+          }
+        }
+      }
 
-            .oe-bottom {
-              display: flex;
-              flex-direction: column;
-              gap: 10px;
-            }
+      #popularity {
+        grid-column: 7 / 13;
+        grid-row: 1 / 2;
+      }
 
-            .oe-board-wrap {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              gap: 8px;
-            }
+      #chessboard {
+        grid-column: 1 / 7;
+        grid-row: 2 / 3;
+        max-height: calc((100vh - 63px - 44px) / 2);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
 
-            #oe-status,
-            .oe-pgn {
-              display: flex;
-              flex-direction: column;
-              gap: 6px;
-              width: 100%;
-            }
 
-            .oe-actions {
-              display: flex;
-              gap: 10px;
-              justify-content: center;
-            }
+        .oe-actions {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
 
-            .oe-btn {
-              color: #fff;
-              border: 1px solid rgba(124, 169, 255, 0.35);
-              background: linear-gradient(180deg, rgba(124, 169, 255, 0.16), rgba(124, 169, 255, 0.08));
-              border-radius: 12px;
-              padding: 9px 14px;
-              cursor: pointer;
-              font-size: 12px;
-              letter-spacing: 0.2px;
-              box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-              transition: 0.18s ease;
-            }
+          .oe-btn {
+            color: #fff;
+            border: 1px solid rgba(124, 169, 255, 0.35);
+            background: linear-gradient(180deg, rgba(124, 169, 255, 0.16), rgba(124, 169, 255, 0.08));
+            border-radius: 12px;
+            padding: 9px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+            transition: 0.18s ease;
 
-            .oe-btn:hover {
+            &:hover {
               border-color: rgba(124, 169, 255, 0.65);
               filter: brightness(1.06);
             }
           }
         }
+      }
 
-        /* Visualisation 2: Popularity plot */
-        &#popularity {
-          grid-column: 7 / 13;
-          grid-row: 1 / 2;
-        }
-
-        /* Visualisation 3: Accuracy plot */
-        &#accuracy {
-          grid-column: 7 / 13;
-          grid-row: 2 / 3;
-        }
+      #accuracy {
+        grid-column: 7 / 13;
+        grid-row: 2 / 3;
       }
     }
 

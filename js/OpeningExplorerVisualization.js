@@ -5,7 +5,7 @@ import { OPENING_FIRST_MOVES } from "./openings.js";
 
 class OpeningExplorerVisualization extends Visualization {
 
-    constructor(data, container) {
+	constructor(data, container, chessboardContainer) {
         super(data, container, { top: 0, right: 0, bottom: 0, left: 0 });
         this._boardWidget = null;
         this._lastOpeningApplied = null;

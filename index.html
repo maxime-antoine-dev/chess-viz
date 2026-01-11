@@ -1,126 +1,121 @@
 <!DOCTYPE html>
 
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<title>Chess opening visualization</title>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<link rel="stylesheet" href="css/style.css" />
-		<link rel="stylesheet" href="css/chessboard.css" />
+	<title>Chess opening visualization</title>
 
-		<script src="https://d3js.org/d3.v7.min.js"></script>
-		<script src="js/script.js" type="module" defer></script>
-	</head>
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="css/chessboard.css" />
 
-	<body>
-		<header>
-			<h1>Chess Opening Visualization</h1>
-			<nav>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script src="js/script.js" type="module" defer></script>
+</head>
+
+<body>
+	<header>
+		<h1>Chess Opening Visualization</h1>
+		<nav>
+			<div>
 				<div>
-					<div>
-						<label for="time_control">Time Control</label>
-						<select id="time_control">
-							<option value="rapid">Rapid</option>
-							<option value="blitz">Blitz</option>
-							<option value="bullet">Bullet</option>
-						</select>
-					</div>
-					<div>
-						<label for="elo">Elo Range</label>
-						<select id="elo">
-							<option value="500-1000">500-1000</option>
-							<option value="1000-1500"selected>1000-1500</option>
-							<option value="1500-2000" >1500-2000</option>
-							<option value="2000+">2000+</option>
-						</select>
-					</div>
-					<div>
-						<label for="color">Color</label>
-						<select id="color">
-							<!-- <option value="0">Both</option> -->
-							<option value="1">White</option>
-							<option value="2">Black</option>
-						</select>
-					</div>
-					<div>
-						<label for="opening">Opening</label>
-						<select id="opening">
-							<option value="All">All</option>
-							<option value="Sicilian Defense">Sicilian Defense</option>
-							<option value="French Defense">French Defense</option>
-							<option value="Caro-Kann Defense">Caro-Kann Defense</option>
-							<option value="Scandinavian Defense">Scandinavian Defense</option>
-							<option value="Alekhine Defense">Alekhine Defense</option>
-							<option value="Pirc Defense">Pirc Defense</option>
-							<option value="Modern Defense">Modern Defense</option>
-							<option value="Dutch Defense">Dutch Defense</option>
-							<option value="Philidor Defense">Philidor Defense</option>
-							<option value="Petrov's Defense">Petrov's Defense</option>
-							<option value="Italian Game">Italian Game</option>
-							<option value="Ruy Lopez">Ruy Lopez</option>
-							<option value="Scotch Game">Scotch Game</option>
-							<option value="Four Knights Game">Four Knights Game</option>
-							<option value="Vienna Game">Vienna Game</option>
-							<option value="King's Gambit">King's Gambit</option>
-							<option value="English Opening">English Opening</option>
-							<option value="Queen's Gambit">Queen's Gambit</option>
-							<option value="Slav Defense">Slav Defense</option>
-							<option value="Semi-Slav Defense">Semi-Slav Defense</option>
-							<option value="Nimzo-Indian Defense">Nimzo-Indian Defense</option>
-							<option value="Queen's Indian Defense">Queen's Indian Defense</option>
-							<option value="Bogo-Indian Defense">Bogo-Indian Defense</option>
-							<option value="King's Indian Defense">King's Indian Defense</option>
-							<option value="Benoni Defense">Benoni Defense</option>
-							<option value="Benko Gambit">Benko Gambit</option>
-							<option value="London System">London System</option>
-							<option value="Catalan Opening">Catalan Opening</option>
-							<option value="Reti Opening">Réti Opening</option>
-							<option value="Bird Opening">Bird Opening</option>
-							<option value="Polish Opening">Polish Opening</option>
-							<option value="Owen Defense">Owen Defense</option>
-							<option value="Czech Defense">Czech Defense</option>
-							<option value="Trompowsky Attack">Trompowsky Attack</option>
-							<option value="Veresov Opening">Veresov Opening</option>
-							<option value="Jobava London System">Jobava London System</option>
-							<option value="Stonewall Attack">Stonewall Attack</option>
-						</select>
-					</div>
+					<label for="time_control">Time Control</label>
+					<select id="time_control">
+						<option value="rapid">Rapid</option>
+						<option value="blitz">Blitz</option>
+						<option value="bullet">Bullet</option>
+					</select>
 				</div>
-			</nav>
-		</header>
-
-		<main>
-			<div id="tooltip"></div>
-
-			<section id="opening_explorer">
-				<div class="opening-explorer-wrapper">
-					<div class="oe-sunburst" id="oe-sunburst"></div>
-
-					<div class="oe-bottom">
-						<div class="oe-board-wrap">
-						<div id="oe-board" class="cbw-board"></div>
-						<div id="oe-status" class="cbw-status"></div>
-						</div>
-
-						<div class="oe-actions">
-						<button id="oe-reset" type="button" class="oe-btn">Reset</button>
-						<button id="oe-flip" type="button" class="oe-btn">Flip</button>
-						</div>
-					</div>
+				<div>
+					<label for="elo">Elo Range</label>
+					<select id="elo">
+						<option value="500-1000">500-1000</option>
+						<option value="1000-1500" selected>1000-1500</option>
+						<option value="1500-2000">1500-2000</option>
+						<option value="2000+">2000+</option>
+					</select>
 				</div>
-			</section>
+				<div>
+					<label for="color">Color</label>
+					<select id="color">
+						<option value="1">White</option>
+						<option value="2">Black</option>
+					</select>
+				</div>
+				<div>
+					<label for="opening">Opening</label>
+					<select id="opening">
+						<option value="All">All</option>
+						<option value="Sicilian Defense">Sicilian Defense</option>
+						<option value="French Defense">French Defense</option>
+						<option value="Caro-Kann Defense">Caro-Kann Defense</option>
+						<option value="Scandinavian Defense">Scandinavian Defense</option>
+						<option value="Alekhine Defense">Alekhine Defense</option>
+						<option value="Pirc Defense">Pirc Defense</option>
+						<option value="Modern Defense">Modern Defense</option>
+						<option value="Dutch Defense">Dutch Defense</option>
+						<option value="Philidor Defense">Philidor Defense</option>
+						<option value="Petrov's Defense">Petrov's Defense</option>
+						<option value="Italian Game">Italian Game</option>
+						<option value="Ruy Lopez">Ruy Lopez</option>
+						<option value="Scotch Game">Scotch Game</option>
+						<option value="Four Knights Game">Four Knights Game</option>
+						<option value="Vienna Game">Vienna Game</option>
+						<option value="King's Gambit">King's Gambit</option>
+						<option value="English Opening">English Opening</option>
+						<option value="Queen's Gambit">Queen's Gambit</option>
+						<option value="Slav Defense">Slav Defense</option>
+						<option value="Semi-Slav Defense">Semi-Slav Defense</option>
+						<option value="Nimzo-Indian Defense">Nimzo-Indian Defense</option>
+						<option value="Queen's Indian Defense">Queen's Indian Defense</option>
+						<option value="Bogo-Indian Defense">Bogo-Indian Defense</option>
+						<option value="King's Indian Defense">King's Indian Defense</option>
+						<option value="Benoni Defense">Benoni Defense</option>
+						<option value="Benko Gambit">Benko Gambit</option>
+						<option value="London System">London System</option>
+						<option value="Catalan Opening">Catalan Opening</option>
+						<option value="Reti Opening">Réti Opening</option>
+						<option value="Bird Opening">Bird Opening</option>
+						<option value="Polish Opening">Polish Opening</option>
+						<option value="Owen Defense">Owen Defense</option>
+						<option value="Czech Defense">Czech Defense</option>
+						<option value="Trompowsky Attack">Trompowsky Attack</option>
+						<option value="Veresov Opening">Veresov Opening</option>
+						<option value="Jobava London System">Jobava London System</option>
+						<option value="Stonewall Attack">Stonewall Attack</option>
+					</select>
+				</div>
+			</div>
+		</nav>
+	</header>
 
-			<section id="popularity">
-			</section>
+	<main>
+		<div id="tooltip"></div>
 
-			<section id="accuracy">
-			</section>
-		</main>
+		<section id="opening_explorer">
+		</section>
 
-		<footer>
-			<p>Made by Dorian, Jessica, Maxime, Mustapha and Salim using data from <a href="https://database.lichess.org/">Lichess</a>. Source code available on <a href="https://github.com/maxime-antoine-dev/chess-viz">GitHub</a>.</p>
-		</footer>
-	</body>
+		<section id="popularity"></section>
+
+		<section id="chessboard">
+			<div id="oe-board" class="cbw-board"></div>
+
+			<div class="oe-actions">
+				<button id="oe-reset" type="button" class="oe-btn">Reset</button>
+				<button id="oe-flip" type="button" class="oe-btn">Flip</button>
+			</div>
+		</section>
+
+		<section id="accuracy"></section>
+	</main>
+
+	<footer>
+		<p>Made by Dorian, Jessica, Maxime, Mustapha and Salim using data from <a
+				href="https://database.lichess.org/">Lichess</a>. Source code available on <a
+				href="https://github.com/maxime-antoine-dev/chess-viz">GitHub</a>.</p>
+	</footer>
+</body>
+
 </html>
