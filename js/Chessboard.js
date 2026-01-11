@@ -127,15 +127,6 @@ class ChessboardWidget {
 		}
 
 		const next = new this._Chess();
-		let ok = false;
-
-		try {
-			if (typeof next.loadPgn === 'function') ok = next.loadPgn(pgn, { sloppy: true });
-			else if (typeof next.load_pgn === 'function') ok = next.load_pgn(pgn, { sloppy: true });
-		} catch {
-			ok = false;
-		}
-
 		this._game = next;
 		this._lastMove = null;
 		this.#clearSelection();
@@ -292,8 +283,8 @@ class ChessboardWidget {
 	}
 
 	#isLightSquare(square) {
-		const file = square.charCodeAt(0) - 'a'.charCodeAt(0);
-		const rank = parseInt(square[1], 10) - 1;
+		const file = square.codePointAt(0) - 'a'.codePointAt(0);
+		const rank = Number.parseInt(square[1], 10) - 1;
 		return (file + rank) % 2 === 0;
 	}
 }
