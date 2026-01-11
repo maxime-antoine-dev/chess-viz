@@ -47,7 +47,7 @@ class OpeningExplorerVisualization extends Visualization {
 				if (opening && opening !== "All") {
 					pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
 				}
-				openingExplorerState.setPGN(pgn);
+				openingExplorerState.setPGN(pgn, { source: "filter", force: true });
 			}
 			await this.initSunburst();
 
@@ -57,20 +57,18 @@ class OpeningExplorerVisualization extends Visualization {
 
 
     async initSunburst() {
-		const chartEl = this.container.querySelector("opening_explorer");
+		const chartEl = this.container;
 		if (!chartEl || !this.data) return;
 
 		d3.select(chartEl).selectAll("*").remove();
 
-		const width = 500;
-		const height = 500;
-		this._sun_radius = Math.min(width, height) / 2;
+		this._sun_radius = Math.min(this.width, this.height) / 2;
 
 		this._sun_vis = d3.select(chartEl)
 			.append("svg")
-			.attr("viewBox", `0 0 ${width} ${height}`)
+			.attr("viewBox",  `0 0 ${this.width} ${this.height}`)
 			.append("g")
-			.attr("transform", `translate(${width / 2},${height / 2})`);
+			.attr("transform", `translate(${this.width / 2},${this.height / 2})`);
 
 		const tc = this.filters.time_control;
 		const elo = this.filters.elo;
@@ -166,7 +164,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._current_root = root;
         d3.partition()(root);
-		const nodes = root.descendants();
+		const nodes = root.descendants().filter(d => d.depth && (d.x1 - d.x0 > 0.001));
 
         const arc = d3.arc()
         .startAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x0))))
@@ -176,8 +174,6 @@ class OpeningExplorerVisualization extends Visualization {
 
 
 		const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
-		let selectedNode = null;
-
         const path = this._sun_vis.selectAll("path")
             .data(nodes)
             .enter().append("path")
