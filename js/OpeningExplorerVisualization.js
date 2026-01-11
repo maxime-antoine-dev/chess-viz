@@ -17,7 +17,7 @@ class OpeningExplorerVisualization extends Visualization {
 
     async init() {
         if (!this.initialized) {
-            this.loadData();
+            await this.loadData();
             this.measure();
             this.setupSVG();
             await this.initBoardWidget();
@@ -55,55 +55,59 @@ class OpeningExplorerVisualization extends Visualization {
 
 
     async initSunburst() {
-    const chartEl = this.container.querySelector("#oe-sunburst");
-    if (!chartEl || !this.data) return;
+		const chartEl = this.container.querySelector("#oe-sunburst");
+		if (!chartEl || !this.data) return;
 
-    d3.select(chartEl).selectAll("*").remove();
+		d3.select(chartEl).selectAll("*").remove();
 
-    const width = 500;
-    const height = 500;
-    const radius = Math.min(width, height) / 2;
+		const width = 500;
+		const height = 500;
+		const radius = Math.min(width, height) / 2;
 
-    this._sun_vis = d3.select(chartEl)
-        .append("svg")
-        .attr("viewBox", `0 0 ${width} ${height}`)
-        .append("g")
-        .attr("transform", `translate(${width / 2},${height / 2})`);
+		this._sun_vis = d3.select(chartEl)
+			.append("svg")
+			.attr("viewBox", `0 0 ${width} ${height}`)
+			.append("g")
+			.attr("transform", `translate(${width / 2},${height / 2})`);
 
-    const tc = this.filters.time_control;
-    const elo = this.filters.elo;
-    const opening = this.filters.opening;
+		const tc = this.filters.time_control;
+		const elo = this.filters.elo;
+		const opening = this.filters.opening;
 
-  
-    let rawData = this.data?.payload?.[tc]?.[elo];
+		this._center_label = this._sun_vis.append("text")
+			.attr("text-anchor", "middle")
+			.style("fill", "white")
+			.style("pointer-events", "none");
 
-    if (!rawData || !Array.isArray(rawData)) {
-        this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("No data");
-        return;
-    }
+		let rawData = this.data?.payload?.[tc]?.[elo];
 
-    let hierarchyData;
+		if (!rawData || !Array.isArray(rawData)) {
+			this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("No data");
+			return;
+		}
 
-    if (opening && opening !== "All") {
-        const targetData = rawData.find(d => d.name === opening);
-        if (!targetData) {
-            this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("Opening not found");
-            return;
-        }
-        hierarchyData = {
-            name: opening,
-            children: [this._sun_recursiveTransform(targetData)]
-        };
-    } else {
-        // "All Openings" root
-        hierarchyData = {
-            name: "All Openings",
-            children: rawData.map(v => this._sun_recursiveTransform(v))
-        };
-    }
+		let hierarchyData;
 
-    this._sun_createVisualization(hierarchyData, radius);
-}
+		if (opening && opening !== "All") {
+			const targetData = rawData.find(d => d.name === opening);
+			if (!targetData) {
+				this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("Opening not found");
+				return;
+			}
+			hierarchyData = {
+				name: opening,
+				children: [this._sun_recursiveTransform(targetData)]
+			};
+		} else {
+			// "All Openings" root
+			hierarchyData = {
+				name: "All Openings",
+				children: rawData.map(v => this._sun_recursiveTransform(v))
+			};
+		}
+
+		this._sun_createVisualization(hierarchyData, radius);
+	}
 
     _sun_recursiveTransform(data) {
     const node = { 
@@ -120,55 +124,90 @@ class OpeningExplorerVisualization extends Visualization {
     return node;
 }
 
+	_sun_zoom(event, d, arc, radius) {
+		event.stopPropagation();
+
+		if (this._current_root === d && d.parent) {
+			d = d.parent;
+		}
+		this._current_root = d;
+
+		const pgnToApply = d.ancestors().reverse().slice(1).map(n => n.data.name).join(" ");
+		openingExplorerState.setPGN(pgnToApply, { source: "sunburst_zoom" });
+
+		const transition = this._sun_vis.transition().duration(750);
+
+		const xd = d3.interpolate(this._sun_x.domain(), [d.x0, d.x1]);
+		const yd = d3.interpolate(this._sun_y.domain(), [d.y0, 1]);
+		const yr = d3.interpolate(this._sun_y.range(), [0, radius]);
+
+		// Mise à jour des segments
+		this._sun_vis.selectAll("path")
+			.transition(transition)
+			.attrTween("d", node => t => {
+				this._sun_x.domain(xd(t));
+				this._sun_y.domain(yd(t)).range(yr(t));
+				return arc(node);
+			})
+			.style("display", node => {
+				return node.ancestors().includes(d) ? null : "none";
+			});
+	}
+
+
     _sun_createVisualization(json, radius) {
-        const partition = d3.partition().size([2 * Math.PI, radius]);
+		this._sun_x = d3.scaleLinear().range([0, 2 * Math.PI]);
+    	this._sun_y = d3.scaleSqrt().range([0, radius]);
         const root = d3.hierarchy(json)
             .sum(d => d.size || 0)
             .sort((a, b) => b.value - a.value);
 
-        partition(root);
+		this._current_root = root;
+        d3.partition()(root);
+		const nodes = root.descendants();
 
         const arc = d3.arc()
-            .startAngle(d => d.x0)
-            .endAngle(d => d.x1)
-            .innerRadius(d => d.y0)
-            .outerRadius(d => d.y1);
+        .startAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x0))))
+        .endAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x1))))
+        .innerRadius(d => Math.max(0, this._sun_y(d.y0)))
+        .outerRadius(d => Math.max(0, this._sun_y(d.y1)));
 
         const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
 		let selectedNode = null;
 
         const path = this._sun_vis.selectAll("path")
-            .data(root.descendants().filter(d => d.depth && (d.x1 - d.x0 > 0.001)))
+            .data(nodes)
             .enter().append("path")
             .attr("d", arc)
 			.style("cursor", "pointer")
             .style("fill", d => colorScale(d.ancestors().reverse()[1]?.data.name))
             .style("stroke", "#0b1220")
-            .style("opacity", 0.8)
-			.on("click", (event, d) => {
-				console.log("Clicked on:", d.data.name);
-				selectedNode = (d === selectedNode) ? null : d;
-				console.log("Selected node:", selectedNode ? selectedNode.data.name : "none");
-				if (selectedNode) {
-					const ancestors = selectedNode.ancestors();
-					path.transition().duration(200).style("opacity", node => ancestors.includes(node) ? 1 : 0.3);
-					const nodeName = selectedNode.data.name;
-					let pgnToApply = "";
-					if (OPENING_FIRST_MOVES && OPENING_FIRST_MOVES[nodeName]) {
-						pgnToApply = OPENING_FIRST_MOVES[nodeName];
-					}else{
-						pgnToApply = selectedNode.ancestors().reverse().slice(1).map(n => n.data.name).join(" ");
-					}
+			.style("display", d => d.depth > 0 ? null : "none") 
+        	.on("click", (event, d) => this._sun_zoom(event, d, arc,radius))
+			// .on("click", (event, d) => {
+			// 	console.log("Clicked on:", d.data.name);
+			// 	selectedNode = (d === selectedNode) ? null : d;
+			// 	console.log("Selected node:", selectedNode ? selectedNode.data.name : "none");
+			// 	if (selectedNode) {
+			// 		const ancestors = selectedNode.ancestors();
+			// 		path.transition().duration(200).style("opacity", node => ancestors.includes(node) ? 1 : 0.3);
+			// 		const nodeName = selectedNode.data.name;
+			// 		let pgnToApply = "";
+			// 		if (OPENING_FIRST_MOVES && OPENING_FIRST_MOVES[nodeName]) {
+			// 			pgnToApply = OPENING_FIRST_MOVES[nodeName];
+			// 		}else{
+			// 			pgnToApply = selectedNode.ancestors().reverse().slice(1).map(n => n.data.name).join(" ");
+			// 		}
 					
-					console.log("Move list to set in OpeningExplorerState:", pgnToApply);
-					if (openingExplorerState) {
-						openingExplorerState.setPGN(pgnToApply, { source: "sunburst" });
-					} 
-				} else {
-					path.transition().duration(200).style("opacity", 0.8);
-				}
-				event.stopPropagation(event);
-			})
+			// 		console.log("Move list to set in OpeningExplorerState:", pgnToApply);
+			// 		if (openingExplorerState) {
+			// 			openingExplorerState.setPGN(pgnToApply, { source: "sunburst" });
+			// 		} 
+			// 	} else {
+			// 		path.transition().duration(200).style("opacity", 0.8);
+			// 	}
+			// 	event.stopPropagation(event);
+			// })
             .on("mouseover", (event, d) => {
                 const tooltip = document.getElementById("tooltip");
                 if (tooltip) {
