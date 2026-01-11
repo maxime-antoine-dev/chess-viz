@@ -1,7 +1,9 @@
 import polars as pl
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Optional
 from ..base import BaseBuilder
+from ..openings import OPENING_WHITELIST
 from ..registry import register_builder
+
 
 @register_builder
 class PopularityBuilder(BaseBuilder):
@@ -107,7 +109,7 @@ class PopularityBuilder(BaseBuilder):
             r_draw=(pl.col("draws") / pl.col("count")).round(4),
             r_black=(pl.col("b_wins") / pl.col("count")).round(4),
         ).with_columns(
-            win_rate_triplet=pl.concat_list([pl.col("r_white"), pl.col("r_draw"), pl.col("r_black")])
+            win_rate_triplet=pl.concat_list([pl.col("r_draw"), pl.col("r_white"), pl.col("r_black")])
         )
 
         output = {}
@@ -120,7 +122,7 @@ class PopularityBuilder(BaseBuilder):
                 group_df.filter(pl.col("count") >= self.min_samples_per_opening)
                 .sort("popularity", descending=True)
             )
-            
+
             if self.max_openings_per_bucket is not None:
                 processed_group = processed_group.head(self.max_openings_per_bucket)
 

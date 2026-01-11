@@ -3,37 +3,42 @@ import { PopularityVisualization } from './PopularityVisualization.js';
 import { AccuracyVisualization } from './AccuracyVisualization.js';
 
 let time_control = "rapid";
-let elo = "0-500";
-const charts = init(time_control, elo);
-update(charts, time_control, elo);
+let elo = "1500-2000";
+let color = "1"; // White
+let opening = "All";
+const charts = init();
+update(charts, time_control, elo, color, opening);
 
 document.getElementById("time_control").addEventListener("change", function() {
 	time_control = this.value;
-	update(charts, time_control, elo);
+	update(charts, time_control, elo, color, opening);
 });
 
 document.getElementById("elo").addEventListener("change", function() {
 	elo = this.value;
-	update(charts, time_control, elo);
+	update(charts, time_control, elo, color, opening);
 });
 
-function init(time_control, elo) {
-	// Create charts object
+document.getElementById("color").addEventListener("change", function() {
+	color = this.value;
+	update(charts, time_control, elo, color, opening);
+});
+
+document.getElementById("opening").addEventListener("change", function() {
+    opening = this.value;
+    update(charts, time_control, elo, color, opening);
+})
+
+function init() {
 	let charts = {};
-	charts.openingExplorer = new OpeningExplorerVisualization("../data/openingExplorer.json", document.getElementById("opening_explorer"));
-	charts.popularity = new PopularityVisualization("../data/popularity.json", document.getElementById("popularity"));
-	charts.accuracy = new AccuracyVisualization("../data/accuracy.json", document.getElementById("accuracy"));
-
-	// Initialize charts
-	// charts.openingExplorer.render();
-	charts.popularity.render(time_control, elo);
-	charts.accuracy.render(time_control, elo);
-
+	charts.openingExplorer = new OpeningExplorerVisualization("./data/openingExplorer.json", document.getElementById("opening_explorer"));
+	charts.popularity = new PopularityVisualization("./data/popularity.json", document.getElementById("popularity"));
+	charts.accuracy = new AccuracyVisualization("./data/accuracy.json", document.getElementById("accuracy"));
 	return charts;
 }
 
-function update(charts, time_control, elo) {
-	// charts.openingExplorer.render();
-	charts.popularity.render(time_control, elo);
-	charts.accuracy.render(time_control, elo);
+function update(charts, time_control, elo, color, opening) {
+	charts.openingExplorer.render(time_control, elo, color, opening);
+	charts.popularity.render(time_control, elo, color, opening);
+	charts.accuracy.render(time_control, elo, color, opening);
 }

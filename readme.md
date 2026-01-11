@@ -11,9 +11,9 @@
   - [ ] Improve styling
   - [ ] Translation everything to English
   - [ ] Accuracy:
-    - [ ] translate axes to be aligned with the squares
-    - [ ] Try other color scales
-    - [ ] Repair opening selector
+    - [x] translate axes to be aligned with the squares
+    - [x] Try other color scales
+    - [x] Repair opening selector
 
 ## Data processing
 
@@ -157,7 +157,6 @@ Opening whitelist :
 - Queen's Indian Defense
 - Bogo-Indian Defense
 - King's Indian Defense
-- Grünfeld Defense
 - Benoni Defense
 - Benko Gambit
 - London System
