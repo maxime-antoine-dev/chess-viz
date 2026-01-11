@@ -27,21 +27,18 @@ class OpeningExplorerVisualization extends Visualization {
     }
 
     render(time_control, elo, color, opening) {
-        // 1. Mise à jour des filtres locaux
         this.filters.time_control = time_control;
         this.filters.elo = elo;
         this.filters.color = Number.parseInt(color);
         this.filters.opening = opening;
 
         this.init().then(async () => {
-            // 2. Gestion de l'orientation du plateau
             if (this._lastColorApplied !== color) {
                 this._lastColorApplied = color;
                 const ori = String(color) === "2" ? "black" : "white";
                 this._boardWidget.setOrientation(ori);
             }
 
-            // 3. Gestion de l'ouverture (PGN)
             if (this._lastOpeningApplied !== opening) {
                 this._lastOpeningApplied = opening;
                 let pgn = "";
@@ -50,78 +47,78 @@ class OpeningExplorerVisualization extends Visualization {
                 }
                 openingExplorerState.setPGN(pgn);
             }
-
-            // 4. MISE À JOUR DU GRAPHIQUE 
             await this.initSunburst();
 
         }).catch((err) => console.error("Render error:", err));
     }
 
-    // === Logique Sunburst ===
+
 
     async initSunburst() {
-        const chartEl = this.container.querySelector("#oe-sunburst");
-        if (!chartEl) return;
+    const chartEl = this.container.querySelector("#oe-sunburst");
+    if (!chartEl || !this.data) return;
 
-        //  rafraîchissement des données
-        d3.select(chartEl).selectAll("*").remove();
+    d3.select(chartEl).selectAll("*").remove();
 
-        const width = 500;
-        const height = 500;
-        const radius = Math.min(width, height) / 2;
+    const width = 500;
+    const height = 500;
+    const radius = Math.min(width, height) / 2;
 
-        this._sun_vis = d3.select(chartEl)
-            .append("svg")
-            .attr("viewBox", `0 0 ${width} ${height}`)
-            .style("width", "100%")
-            .style("height", "auto")
-            .append("g")
-            .attr("transform", `translate(${width / 2},${height / 2})`);
+    this._sun_vis = d3.select(chartEl)
+        .append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
 
-        const tc = this.filters.time_control;
-        const elo = this.filters.elo;
-        const opening = this.filters.opening;
+    const tc = this.filters.time_control;
+    const elo = this.filters.elo;
+    const opening = this.filters.opening;
 
-        // Accès aux données filtrées
-        let rawData = this.data?.payload?.[tc]?.[elo];
+  
+    let rawData = this.data?.payload?.[tc]?.[elo];
 
-        if (!rawData) {
-            this._sun_vis.append("text").attr("text-anchor", "middle").text("No data");
+    if (!rawData || !Array.isArray(rawData)) {
+        this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("No data");
+        return;
+    }
+
+    let hierarchyData;
+
+    if (opening && opening !== "All") {
+        const targetData = rawData.find(d => d.name === opening);
+        if (!targetData) {
+            this._sun_vis.append("text").attr("text-anchor", "middle").style("fill", "white").text("Opening not found");
             return;
         }
-
-        let targetData;
-        let rootName;
-
-        if (opening && opening !== "All" && rawData[opening]) {
-            targetData = rawData[opening];
-            rootName = opening;
-        } else {
-            targetData = rawData;
-            rootName = "All Openings";
-        }
-
-        // Transformation hiérarchique
-        const hierarchyData = {
-            name: rootName,
-            children: (rootName === "All Openings") 
-                ? Object.entries(targetData).map(([k, v]) => this._sun_recursiveTransform(k, v))
-                : [this._sun_recursiveTransform(rootName, targetData)]
+        hierarchyData = {
+            name: opening,
+            children: [this._sun_recursiveTransform(targetData)]
         };
-
-        this._sun_createVisualization(hierarchyData, radius);
+    } else {
+        // "All Openings" root
+        hierarchyData = {
+            name: "All Openings",
+            children: rawData.map(v => this._sun_recursiveTransform(v))
+        };
     }
 
-    _sun_recursiveTransform(key, data) {
-        const node = { name: data.name || key };
-        if (data.next_moves && Object.keys(data.next_moves).length > 0) {
-            node.children = Object.entries(data.next_moves).map(([ck, cv]) => this._sun_recursiveTransform(ck, cv));
-        } else {
-            node.size = data.count || 1;
-        }
-        if (data.count) node.value = data.count;
-        return node;
+    this._sun_createVisualization(hierarchyData, radius);
+}
+
+    _sun_recursiveTransform(data) {
+    const node = { 
+        name: data.move || data.name || "???" 
+    };
+
+    if (data.children && Array.isArray(data.children) && data.children.length > 0) {
+        node.children = data.children.map(cv => this._sun_recursiveTransform(cv));
+    } else {
+        node.size = data.count || 1;
     }
+
+    if (data.count) node.value = data.count;
+    return node;
+}
 
     _sun_createVisualization(json, radius) {
         const partition = d3.partition().size([2 * Math.PI, radius]);
