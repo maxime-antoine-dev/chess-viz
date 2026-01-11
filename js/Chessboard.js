@@ -1,6 +1,6 @@
 const DEFAULT_CHESS_JS_ESM_URL = 'https://unpkg.com/chess.js@1.4.0/dist/esm/chess.js';
 
-const PIECE_IMG_BASE_URL = 'img/pieces/';
+const PIECE_IMG_BASE_URL = '../img/pieces/';
 
 const PIECE_IMAGES = {
 	w: {
