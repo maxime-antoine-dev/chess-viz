@@ -14,6 +14,7 @@ class OpeningExplorerVisualization extends Visualization {
 		this._unsub = null;
 		this.initialized = false;
 		this._sun_vis = null;
+		this._sun_radius = 0;
 	}
 
     async init() {
@@ -56,14 +57,14 @@ class OpeningExplorerVisualization extends Visualization {
 
 
     async initSunburst() {
-		const chartEl = this.container.querySelector("#oe-sunburst");
+		const chartEl = this.container.querySelector("opening_explorer");
 		if (!chartEl || !this.data) return;
 
 		d3.select(chartEl).selectAll("*").remove();
 
 		const width = 500;
 		const height = 500;
-		const radius = Math.min(width, height) / 2;
+		this._sun_radius = Math.min(width, height) / 2;
 
 		this._sun_vis = d3.select(chartEl)
 			.append("svg")
@@ -107,7 +108,7 @@ class OpeningExplorerVisualization extends Visualization {
 			};
 		}
 
-		this._sun_createVisualization(hierarchyData, radius);
+		this._sun_createVisualization(hierarchyData, this._sun_radius);
 	}
 
 	_sun_recursiveTransform(data) {
@@ -140,7 +141,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		const xd = d3.interpolate(this._sun_x.domain(), [d.x0, d.x1]);
 		const yd = d3.interpolate(this._sun_y.domain(), [d.y0, 1]);
-		const yr = d3.interpolate(this._sun_y.range(), [0, radius]);
+		const yr = d3.interpolate(this._sun_y.range(), [0, this._sun_radius]);
 
 		// Mise à jour des segments
 		this._sun_vis.selectAll("path")
