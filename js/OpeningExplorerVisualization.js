@@ -6,14 +6,15 @@ import { OPENING_FIRST_MOVES } from "./openings.js";
 class OpeningExplorerVisualization extends Visualization {
 
 	constructor(data, container, chessboardContainer) {
-        super(data, container, { top: 0, right: 0, bottom: 0, left: 0 });
-        this._boardWidget = null;
-        this._lastOpeningApplied = null;
-        this._lastColorApplied = null;
-        this._unsub = null;
-        this.initialized = false;
-        this._sun_vis = null;
-    }
+		super(data, container, { top: 0, right: 0, bottom: 0, left: 0 });
+		this.chessboardContainer = chessboardContainer;
+		this._boardWidget = null;
+		this._lastOpeningApplied = null;
+		this._lastColorApplied = null;
+		this._unsub = null;
+		this.initialized = false;
+		this._sun_vis = null;
+	}
 
     async init() {
         if (!this.initialized) {
@@ -26,31 +27,31 @@ class OpeningExplorerVisualization extends Visualization {
         return this;
     }
 
-    render(time_control, elo, color, opening) {
-        this.filters.time_control = time_control;
-        this.filters.elo = elo;
-        this.filters.color = Number.parseInt(color);
-        this.filters.opening = opening;
+	render(time_control, elo, color, opening) {
+		this.filters.time_control = time_control;
+		this.filters.elo = elo;
+		this.filters.color = Number.parseInt(color);
+		this.filters.opening = opening;
 
-        this.init().then(async () => {
-            if (this._lastColorApplied !== color) {
-                this._lastColorApplied = color;
-                const ori = String(color) === "2" ? "black" : "white";
-                this._boardWidget.setOrientation(ori);
-            }
+		this.init().then(async () => {
+			if (this._lastColorApplied !== color) {
+				this._lastColorApplied = color;
+				const ori = String(color) === "2" ? "black" : "white";
+				this._boardWidget.setOrientation(ori);
+			}
 
-            if (this._lastOpeningApplied !== opening) {
-                this._lastOpeningApplied = opening;
-                let pgn = "";
-                if (opening && opening !== "All") {
-                    pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
-                }
-                openingExplorerState.setPGN(pgn);
-            }
-            await this.initSunburst();
+			if (this._lastOpeningApplied !== opening) {
+				this._lastOpeningApplied = opening;
+				let pgn = "";
+				if (opening && opening !== "All") {
+					pgn = OPENING_FIRST_MOVES?.[opening] ?? "";
+				}
+				openingExplorerState.setPGN(pgn);
+			}
+			await this.initSunburst();
 
-        }).catch((err) => console.error("Render error:", err));
-    }
+		}).catch((err) => console.error("Render error:", err));
+	}
 
 
 
@@ -109,20 +110,20 @@ class OpeningExplorerVisualization extends Visualization {
 		this._sun_createVisualization(hierarchyData, radius);
 	}
 
-    _sun_recursiveTransform(data) {
-    const node = { 
-        name: data.move || data.name || "???" 
-    };
+	_sun_recursiveTransform(data) {
+		const node = {
+			name: data.move || data.name || "???"
+		};
 
-    if (data.children && Array.isArray(data.children) && data.children.length > 0) {
-        node.children = data.children.map(cv => this._sun_recursiveTransform(cv));
-    } else {
-        node.size = data.count || 1;
-    }
+		if (data.children && Array.isArray(data.children) && data.children.length > 0) {
+			node.children = data.children.map(cv => this._sun_recursiveTransform(cv));
+		} else {
+			node.size = data.count || 1;
+		}
 
-    if (data.count) node.value = data.count;
-    return node;
-}
+		if (data.count) node.value = data.count;
+		return node;
+	}
 
 	_sun_zoom(event, d, arc, radius) {
 		event.stopPropagation();
@@ -172,7 +173,8 @@ class OpeningExplorerVisualization extends Visualization {
         .innerRadius(d => Math.max(0, this._sun_y(d.y0)))
         .outerRadius(d => Math.max(0, this._sun_y(d.y1)));
 
-        const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
+
+		const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
 		let selectedNode = null;
 
         const path = this._sun_vis.selectAll("path")
@@ -228,43 +230,43 @@ class OpeningExplorerVisualization extends Visualization {
             });
     }
 
-    // === Chessboard===
+	// === Chessboard===
 
-    async initBoardWidget() {
-        const boardEl = this.container.querySelector("#oe-board");
-        const btnReset = this.container.querySelector("#oe-reset");
-        const btnFlip = this.container.querySelector("#oe-flip");
+	async initBoardWidget() {
+		const boardEl = this.chessboardContainer.querySelector("#oe-board");
+		const btnReset = this.chessboardContainer.querySelector("#oe-reset");
+		const btnFlip = this.chessboardContainer.querySelector("#oe-flip");
 
-        if (!boardEl) return;
+		if (!boardEl) return;
 
-        this._boardWidget = new ChessboardWidget({ store: openingExplorerState });
-        await this._boardWidget.mount({ boardEl });
+		this._boardWidget = new ChessboardWidget({ store: openingExplorerState });
+		await this._boardWidget.mount({ boardEl });
 
-        if (btnReset) {
-            btnReset.addEventListener("click", () => {
-                document.getElementById("opening").value = "All";
-                openingExplorerState.setPGN("", { source: "reset", force: true });
-            });
-        }
-        if (btnFlip) btnFlip.addEventListener("click", () => this._boardWidget.flip());
+		if (btnReset) {
+			btnReset.addEventListener("click", () => {
+				document.getElementById("opening").value = "All";
+				openingExplorerState.setPGN("", { source: "reset", force: true });
+			});
+		}
+		if (btnFlip) btnFlip.addEventListener("click", () => this._boardWidget.flip());
 
-        this._unsub = openingExplorerState.onPGNChange(({ pgn }) => {
-            const detected = this.detectOpeningFromPgnPrefix(pgn || "");
-            const opSel = document.getElementById("opening");
-            if (detected && opSel) opSel.value = detected;
-        });
-    }
+		this._unsub = openingExplorerState.onPGNChange(({ pgn }) => {
+			const detected = this.detectOpeningFromPgnPrefix(pgn || "");
+			const opSel = document.getElementById("opening");
+			if (detected && opSel) opSel.value = detected;
+		});
+	}
 
-    detectOpeningFromPgnPrefix(pgnMovetext) {
-        const entries = Object.entries(OPENING_FIRST_MOVES || {})
-            .filter(([k, v]) => k !== "All" && v)
-            .sort((a, b) => b[1].length - a[1].length);
+	detectOpeningFromPgnPrefix(pgnMovetext) {
+		const entries = Object.entries(OPENING_FIRST_MOVES || {})
+			.filter(([k, v]) => k !== "All" && v)
+			.sort((a, b) => b[1].length - a[1].length);
 
-        for (const [name, prefix] of entries) {
-            if (pgnMovetext.startsWith(prefix)) return name;
-        }
-        return null;
-    }
+		for (const [name, prefix] of entries) {
+			if (pgnMovetext.startsWith(prefix)) return name;
+		}
+		return null;
+	}
 }
 
 export { OpeningExplorerVisualization };
