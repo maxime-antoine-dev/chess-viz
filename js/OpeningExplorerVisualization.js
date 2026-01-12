@@ -15,18 +15,19 @@ class OpeningExplorerVisualization extends Visualization {
 		this.initialized = false;
 		this._sun_vis = null;
 		this._sun_radius = 0;
+		this.last_hovered_node = null;
 	}
 
-    async init() {
-        if (!this.initialized) {
-            await this.loadData();
-            this.measure();
-            this.setupSVG();
-            await this.initBoardWidget();
-            this.initialized = true;
-        }
-        return this;
-    }
+	async init() {
+		if (!this.initialized) {
+			await this.loadData();
+			this.measure();
+			this.setupSVG();
+			await this.initBoardWidget();
+			this.initialized = true;
+		}
+		return this;
+	}
 
 	render(time_control, elo, color, opening) {
 		this.filters.time_control = time_control;
@@ -56,7 +57,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 
 
-    async initSunburst() {
+	async initSunburst() {
 		const chartEl = this.container;
 		if (!chartEl || !this.data) return;
 
@@ -66,7 +67,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._sun_vis = d3.select(chartEl)
 			.append("svg")
-			.attr("viewBox",  `0 0 ${this.width} ${this.height}`)
+			.attr("viewBox", `0 0 ${this.width} ${this.height}`)
 			.append("g")
 			.attr("transform", `translate(${this.width / 2},${this.height / 2})`);
 
@@ -111,7 +112,8 @@ class OpeningExplorerVisualization extends Visualization {
 
 	_sun_recursiveTransform(data) {
 		const node = {
-			name: data.move || data.name || "???"
+			name: data.name || "Unknown",
+			variant: data.variant || "Unknown"
 		};
 
 		if (data.children && Array.isArray(data.children) && data.children.length > 0) {
@@ -154,35 +156,34 @@ class OpeningExplorerVisualization extends Visualization {
 			});
 	}
 
-
-    _sun_createVisualization(json, radius) {
+	_sun_createVisualization(json, radius) {
 		this._sun_x = d3.scaleLinear().range([0, 2 * Math.PI]);
-    	this._sun_y = d3.scaleSqrt().range([0, radius]);
-        const root = d3.hierarchy(json)
-            .sum(d => d.size || 0)
-            .sort((a, b) => b.value - a.value);
+		this._sun_y = d3.scaleSqrt().range([0, radius]);
+		const root = d3.hierarchy(json)
+			.sum(d => d.size || 0)
+			.sort((a, b) => b.value - a.value);
 
 		this._current_root = root;
-        d3.partition()(root);
+		d3.partition()(root);
 		const nodes = root.descendants().filter(d => d.depth && (d.x1 - d.x0 > 0.001));
 
-        const arc = d3.arc()
-        .startAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x0))))
-        .endAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x1))))
-        .innerRadius(d => Math.max(0, this._sun_y(d.y0)))
-        .outerRadius(d => Math.max(0, this._sun_y(d.y1)));
+		const arc = d3.arc()
+			.startAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x0))))
+			.endAngle(d => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x1))))
+			.innerRadius(d => Math.max(0, this._sun_y(d.y0)))
+			.outerRadius(d => Math.max(0, this._sun_y(d.y1)));
 
 
 		const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
-        const path = this._sun_vis.selectAll("path")
-            .data(nodes)
-            .enter().append("path")
-            .attr("d", arc)
+		const path = this._sun_vis.selectAll("path")
+			.data(nodes)
+			.enter().append("path")
+			.attr("d", arc)
 			.style("cursor", "pointer")
-            .style("fill", d => colorScale(d.ancestors().reverse()[1]?.data.name))
-            .style("stroke", "#0b1220")
-			.style("display", d => d.depth > 0 ? null : "none") 
-        	.on("click", (event, d) => this._sun_zoom(event, d, arc,radius))
+			.style("fill", d => colorScale(d.ancestors().reverse()[1]?.data.name))
+			.style("stroke", "#0b1220")
+			.style("display", d => d.depth > 0 ? null : "none")
+			.on("click", (event, d) => this._sun_zoom(event, d, arc, radius))
 			// .on("click", (event, d) => {
 			// 	console.log("Clicked on:", d.data.name);
 			// 	selectedNode = (d === selectedNode) ? null : d;
@@ -197,7 +198,7 @@ class OpeningExplorerVisualization extends Visualization {
 			// 		}else{
 			// 			pgnToApply = selectedNode.ancestors().reverse().slice(1).map(n => n.data.name).join(" ");
 			// 		}
-					
+
 			// 		console.log("Move list to set in OpeningExplorerState:", pgnToApply);
 			// 		if (openingExplorerState) {
 			// 			openingExplorerState.setPGN(pgnToApply, { source: "sunburst" });
@@ -207,25 +208,31 @@ class OpeningExplorerVisualization extends Visualization {
 			// 	}
 			// 	event.stopPropagation(event);
 			// })
-            .on("mouseover", (event, d) => {
-                const tooltip = document.getElementById("tooltip");
-                if (tooltip) {
-                    tooltip.style.opacity = 1;
-                    tooltip.innerHTML = `<strong>${d.data.name}</strong><br>Games: ${d.value}`;
-                }
-            })
-            .on("mousemove", (event) => {
-                const tooltip = document.getElementById("tooltip");
-                if (tooltip) {
-                    tooltip.style.left = (event.pageX + 10) + "px";
-                    tooltip.style.top = (event.pageY - 10) + "px";
-                }
-            })
-            .on("mouseleave", () => {
-                const tooltip = document.getElementById("tooltip");
-                if (tooltip) tooltip.style.opacity = 0;
-            });
-    }
+			.on("mouseover", (event, d) => {
+				const tooltip = document.getElementById("tooltip");
+				if (tooltip) {
+					tooltip.style.opacity = 1;
+					tooltip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.variant}<br>Games: ${d.value}`;
+				}
+				if (this.last_hovered_node) {
+					this.last_hovered_node.style("opacity", 1);
+				}
+				this.last_hovered_node = d3.select(event.currentTarget);
+				this.last_hovered_node.style("opacity", 0.8);
+			})
+			.on("mousemove", (event) => {
+				const tooltip = document.getElementById("tooltip");
+				if (tooltip) {
+					tooltip.style.left = (event.pageX + 10) + "px";
+					tooltip.style.top = (event.pageY - 10) + "px";
+				}
+			})
+			.on("mouseleave", () => {
+				const tooltip = document.getElementById("tooltip");
+				if (tooltip) tooltip.style.opacity = 0;
+			});
+	}
+
 
 	// === Chessboard===
 
