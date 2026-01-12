@@ -4,7 +4,6 @@ import { AccuracyVisualization } from './AccuracyVisualization.js';
 import { openingExplorerState } from './OpeningExplorerState.js';
 import { OPENING_FIRST_MOVES } from './openings.js';
 
-
 let time_control = "rapid";
 let elo = "1500-2000";
 let color = "1"; // White
@@ -12,6 +11,7 @@ let opening = "All";
 
 const charts = init();
 update(charts, time_control, elo, color, opening);
+updateBoardDetails();
 
 // ===== central helpers =====
 
@@ -30,6 +30,26 @@ function syncSelect(id, value) {
 	const el = document.getElementById(id);
 	if (!el) return;
 	if (el.value !== value) el.value = value;
+}
+
+// ===== details panel (title/variant/pgn next to buttons) =====
+
+function updateBoardDetails() {
+	const titleEl = document.getElementById("oe-opening-title");
+	const variantEl = document.getElementById("oe-opening-variant");
+	const pgnEl = document.getElementById("oe-current-pgn");
+	if (!titleEl || !variantEl || !pgnEl) return;
+
+	const pgn = (openingExplorerState.getPGN?.() ?? "").trim().replaceAll("*", "");
+
+	let info = { title: (opening !== "All" ? opening : "All Openings"), variant: "" };
+	if (charts?.openingExplorer?.getDisplayedOpeningInfo) {
+		info = charts.openingExplorer.getDisplayedOpeningInfo(pgn) || info;
+	}
+
+	titleEl.textContent = info.title || (opening !== "All" ? opening : "All Openings");
+	variantEl.textContent = `${info.variant ? info.variant : ""}`;
+	pgnEl.textContent = pgn ? pgn : "";
 }
 
 // set filters + update charts
@@ -53,13 +73,14 @@ function setExplorerFilters(partial = {}, meta = {}) {
 	}
 
 	update(charts, time_control, elo, color, opening);
+	updateBoardDetails();
 }
 
 // set PGN (board/sunburst/reset) + ensure charts are re-rendered if needed
 function setExplorerPGN(pgn, meta = {}) {
 	openingExplorerState.setPGN(pgn ?? "", { source: meta.source ?? "external", force: !!meta.force });
-	// OpeningExplorer will rebuild sunburst on update; other charts only depend on filters anyway.
 	update(charts, time_control, elo, color, opening);
+	updateBoardDetails();
 }
 
 // expose for other visualizations (minimal change)
@@ -68,19 +89,19 @@ window.setExplorerPGN = setExplorerPGN;
 
 // ===== UI listeners (keep your behavior) =====
 
-document.getElementById("time_control").addEventListener("change", function() {
+document.getElementById("time_control").addEventListener("change", function () {
 	setExplorerFilters({ time_control: this.value }, { source: "ui_time" });
 });
 
-document.getElementById("elo").addEventListener("change", function() {
+document.getElementById("elo").addEventListener("change", function () {
 	setExplorerFilters({ elo: this.value }, { source: "ui_elo" });
 });
 
-document.getElementById("color").addEventListener("change", function() {
+document.getElementById("color").addEventListener("change", function () {
 	setExplorerFilters({ color: this.value }, { source: "ui_color" });
 });
 
-document.getElementById("opening").addEventListener("change", function() {
+document.getElementById("opening").addEventListener("change", function () {
 	// user explicitly picked an opening -> we load base PGN
 	setExplorerFilters({ opening: this.value }, { source: "ui_opening", setBasePGN: true });
 });
@@ -92,6 +113,7 @@ openingExplorerState.onPGNChange(({ pgn, source }) => {
 	// reset case
 	if (!pgn || !pgn.trim()) {
 		if (opening !== "All") setExplorerFilters({ opening: "All" }, { source: "pgn_reset" });
+		updateBoardDetails();
 		return;
 	}
 
@@ -99,7 +121,11 @@ openingExplorerState.onPGNChange(({ pgn, source }) => {
 	// BUT do NOT load base PGN (otherwise you overwrite exact moves)
 	if (detected && detected !== opening) {
 		setExplorerFilters({ opening: detected }, { source: "pgn_detect", setBasePGN: false });
+		updateBoardDetails();
+		return;
 	}
+
+	updateBoardDetails();
 });
 
 function init() {

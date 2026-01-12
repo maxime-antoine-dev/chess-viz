@@ -475,6 +475,40 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 		return null;
 	}
+
+	getDisplayedOpeningInfo(pgnMovetext) {
+		const openingTitle =
+			this.filters?.opening && this.filters.opening !== "All"
+				? this.filters.opening
+				: "All Openings";
+
+		// Default
+		let variant = "";
+		let title = openingTitle;
+
+		if (!this._sun_root) {
+			return { title, variant };
+		}
+
+		let sans = this.#tokenizeMovetextToSans(pgnMovetext || "");
+
+		// subtree mode: strip subtree root move if present (same logic as focus)
+		if (this.filters.opening && this.filters.opening !== "All") {
+			if (this._subtreeRootSan && sans[0] === this._subtreeRootSan) {
+				sans = sans.slice(1);
+			}
+		}
+
+		const node = this.#findNodeForSansSequence(sans);
+		if (node?.data) {
+			// node.data.name is usually the opening/line name in your JSON
+			if (node.data.name && node.data.name !== "Unknown") title = node.data.name;
+			if (node.data.variant && node.data.variant !== "Unknown") variant = node.data.variant;
+		}
+
+		return { title, variant };
+	}
+
 }
 
 export { OpeningExplorerVisualization };
