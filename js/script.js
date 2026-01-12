@@ -36,7 +36,7 @@ function init() {
 		document.getElementById("opening_explorer"), document.getElementById("chessboard")
 	);
 	charts.popularity = new PopularityVisualization("./data/popularity.json", document.getElementById("popularity"));
-	charts.accuracy = new AccuracyVisualization("./data/accuracy.json", document.getElementById("accuracy"));
+	charts.accuracy = new AccuracyVisualization("https://drive.google.com/uc?export=download&id=1OxwwK87g4LCJyBGaBqDmblHPMEz0MFAh", document.getElementById("accuracy"));
 	return charts;
 }
 
