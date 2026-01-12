@@ -2,7 +2,7 @@ import { Visualization } from './Visualization.js';
 
 class PopularityVisualization extends Visualization {
 	constructor(dataPath, container) {
-		super(dataPath, container, {top: 30, right: 30, bottom: 60, left: 60});
+		super(dataPath, container, { top: 30, right: 30, bottom: 60, left: 60 });
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
 	}
@@ -105,14 +105,25 @@ class PopularityVisualization extends Visualization {
 	preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
-		const color = this.filters.color;
+		const colorFilter = this.filters.color; 
 
 		const band = this.data?.payload?.[cadence]?.[eloKey];
 		if (!Array.isArray(band)) return [];
 
-		// return items with required fields
 		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
-			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[color] }));
+			.map(d => {
+				let winRateValue;
+				if (colorFilter === 1) winRateValue = d.win_rate[1];
+				else if (colorFilter === 2) winRateValue = d.win_rate[2]; 
+				else winRateValue = d.win_rate[0];
+
+				return {
+					name: d.name,
+					popularity: d.popularity,
+					win_rate: winRateValue,
+					color: d.color 
+				};
+			});
 	}
 
 	bindMarks(data) {
@@ -137,13 +148,17 @@ class PopularityVisualization extends Visualization {
 		const isSelected = (d) =>
 			(this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening);
 
+		const getFill = (d) => {
+			if (isSelected(d)) return '#3777ffff';
+			return d.color === 'black' ? '#555555' : '#ffffff';
+		};
 		merged.select('circle')
-			.attr('fill', d => isSelected(d) ? '#3777ffff' : 'white')
+			.attr('fill', d => getFill(d))
 			.attr('fill-opacity', d => isSelected(d) ? 0.8 : 0.5)
 			.attr('r', d => isSelected(d) ? 8 : 6)
 			.attr('filter', d => isSelected(d) ? 'url(#opening-glow)' : null)
-			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : 'none')
-			.attr('stroke-width', d => isSelected(d) ? 2 : 0)
+			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : '#eee')
+			.attr('stroke-width', d => isSelected(d) ? 2 : 0.25)
 			.style('cursor', 'pointer')
 			.style('transition', 'fill 0.5s ease, transform 0.5s ease');
 
@@ -165,7 +180,7 @@ class PopularityVisualization extends Visualization {
 			})
 			.on('mouseout', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
-					.attr('fill', isSelected(d) ? '#3777ffff' : 'white')
+					.attr('fill', d=> getFill(d))
 					.attr('filter', isSelected(d) ? 'url(#opening-glow)' : null)
 					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5)
 
