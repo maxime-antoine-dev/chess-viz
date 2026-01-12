@@ -48,6 +48,20 @@ class OpeningExplorerVisualization extends Visualization {
 		window.__suppressOpeningToPGN = false;
 	}
 
+	// "1. e4 e5 2. Nf3 Nc6 3. Bb5"
+	#formatSansMovesToNumberedPgn(moves) {
+		const mv = Array.isArray(moves) ? moves.filter(Boolean) : [];
+		if (mv.length === 0) return "";
+
+		const out = [];
+		for (let i = 0; i < mv.length; i += 2) {
+			const moveNo = Math.floor(i / 2) + 1;
+			out.push(`${moveNo}. ${mv[i]}`);
+			if (mv[i + 1]) out.push(mv[i + 1]);
+		}
+		return out.join(" ");
+	}
+
 	async init() {
 		if (!this.initialized) {
 			await this.loadData();
@@ -271,7 +285,7 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 
 		for (const san of sans) {
-			const next = (cur.children || []).find((c) => c?.data?.name === san);
+			const next = (cur.children || []).find((c) => c?.data?.move === san);
 			if (!next) return null;
 			cur = next;
 		}
@@ -355,7 +369,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.reverse()
 			.slice(1)
 			.filter((n) => n?.data?._isMove)
-			.map((n) => n.data.name);
+			.map((n) => n.data.move);
 
 		// If user goes back to root and we trigger opening=All (=> rerender),
 		// do NOT zoom on stale nodes.
@@ -365,7 +379,8 @@ class OpeningExplorerVisualization extends Visualization {
 			return;
 		}
 
-		openingExplorerState.setPGN(moves.join(" "), { source: "sunburst_zoom" });
+		const numbered = this.#formatSansMovesToNumberedPgn(moves);
+		openingExplorerState.setPGN(numbered, { source: "sunburst_zoom" });
 
 		// safe zoom (token-guarded)
 		this.#applyZoomToNode(d, arc, radius, 650, this._sunRenderToken);
@@ -403,7 +418,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.append("path")
 			.attr("d", arc)
 			.style("cursor", "pointer")
-			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.name))
+			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.move))
 			.style("stroke", "#0b1220")
 			.style("display", (d) => (d.depth > 0 ? null : "none"))
 			.on("click", (event, d) => this._sun_zoom(event, d, arc, radius))
@@ -475,6 +490,40 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 		return null;
 	}
+
+	getDisplayedOpeningInfo(pgnMovetext) {
+		const openingTitle =
+			this.filters?.opening && this.filters.opening !== "All"
+				? this.filters.opening
+				: "All Openings";
+
+		// Default
+		let variant = "";
+		let title = openingTitle;
+
+		if (!this._sun_root) {
+			return { title, variant };
+		}
+
+		let sans = this.#tokenizeMovetextToSans(pgnMovetext || "");
+
+		// subtree mode: strip subtree root move if present (same logic as focus)
+		if (this.filters.opening && this.filters.opening !== "All") {
+			if (this._subtreeRootSan && sans[0] === this._subtreeRootSan) {
+				sans = sans.slice(1);
+			}
+		}
+
+		const node = this.#findNodeForSansSequence(sans);
+		if (node?.data) {
+			// node.data.name is usually the opening/line name in your JSON
+			if (node.data.name && node.data.name !== "Unknown") title = node.data.name;
+			if (node.data.variant && node.data.variant !== "Unknown") variant = node.data.variant;
+		}
+
+		return { title, variant };
+	}
+
 }
 
 export { OpeningExplorerVisualization };

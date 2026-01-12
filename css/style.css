@@ -155,6 +155,14 @@ html {
       #details {
         grid-column: 9 / 13;
         grid-row: 1 / 2;
+        position: relative;
+        padding-right: 24px;
+        padding-top: 24px;
+        box-sizing: border-box;
+
+        .wrap {
+          display:flex; gap:8px; flex-wrap:wrap;
+        }
 
         .oe-btn {
           color: #fff;
@@ -167,11 +175,30 @@ html {
           letter-spacing: 0.2px;
           box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
           transition: 0.18s ease;
+          margin-top: 16px;
 
           &:hover {
             border-color: rgba(124, 169, 255, 0.65);
             filter: brightness(1.06);
           }
+        }
+
+        #oe-opening-variant {
+          margin-top: 8px;
+        }
+
+        #oe-current-pgn {
+          box-sizing: border-box;
+          margin-top: 16px;
+          width:100%;
+          max-height:110px;
+          overflow:auto;
+          white-space:pre-wrap;
+          color:white;
+          background:rgba(255,255,255,.06);
+          border:1px solid rgba(255,255,255,.12);
+          border-radius:10px;
+          padding:10px;
         }
       }
 
