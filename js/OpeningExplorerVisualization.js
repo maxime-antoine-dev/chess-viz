@@ -229,8 +229,9 @@ class OpeningExplorerVisualization extends Visualization {
 	_sun_recursiveTransform(data) {
 		const isMove = !!data.move;
 		const node = {
-			name: data.move || data.name || "Unknown",
-			variant: data.variant || "Unknown",
+			move: data.move,
+			name: data.name || "Unknown",
+			variant: data.variant || null,
 			_isMove: isMove,
 		};
 
@@ -410,7 +411,8 @@ class OpeningExplorerVisualization extends Visualization {
 				const tooltip = document.getElementById("tooltip");
 				if (tooltip) {
 					tooltip.style.opacity = 1;
-					tooltip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.variant}<br>Games: ${d.value}`;
+					if (d.data.variant) tooltip.innerHTML = `<strong>${d.data.name}</strong><br>Move: ${d.data.move}<br>${d.data.variant}<br>Games: ${d.value}`;
+					else tooltip.innerHTML = `<strong>${d.data.name}</strong><br>Move: ${d.data.move}<br>Games: ${d.value}`;
 				}
 				if (this.last_hovered_node) this.last_hovered_node.style("opacity", 1);
 				this.last_hovered_node = d3.select(event.currentTarget);
