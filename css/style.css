@@ -20,6 +20,15 @@ html {
         margin: 0;
         font-size: 20px;
         letter-spacing: 0.2px;
+
+        a {
+          color: white;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       nav {
@@ -93,7 +102,6 @@ html {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       grid-template-rows: 1fr 1fr;
-      /* Ajustement de la hauteur pour éviter le scroll inutile */
       height: calc(100vh - 63px - 44px);
 
       #tooltip {
