@@ -28,11 +28,11 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._lastColorApplied = null;
 
-		// ✅ stability: avoid rebuilding on every move + kill stale transitions safely
+		// stability: avoid rebuilding on every move + kill stale transitions safely
 		this._sunRenderToken = 0;
 		this._lastSunburstKey = null;
 
-		// ✅ subtree mode (opening != All): first move is the subtree root, must be stripped on focus
+		// subtree mode (opening != All): first move is the subtree root, must be stripped on focus
 		this._subtreeRootSan = null;
 	}
 
@@ -55,7 +55,7 @@ class OpeningExplorerVisualization extends Visualization {
 			this.setupSVG();
 			await this.initBoardWidget();
 
-			// ✅ Sunburst should react to board moves / reset WITHOUT rebuilding everything:
+			// Sunburst should react to board moves / reset WITHOUT rebuilding everything:
 			// focus (zoom) only, and ignore stale renders.
 			if (!this._pgnUnsub) {
 				this._pgnUnsub = openingExplorerState.onPGNChange(({ pgn }) => {
@@ -90,14 +90,14 @@ class OpeningExplorerVisualization extends Visualization {
 					this._boardWidget?.setOrientation(ori);
 				}
 
-				// ✅ Only rebuild when the dataset slice changes (not on every move)
+				// Only rebuild when the dataset slice changes (not on every move)
 				const sunburstKey = `${this.filters.time_control}|${this.filters.elo}|${this.filters.opening}`;
 				if (sunburstKey !== this._lastSunburstKey) {
 					this._lastSunburstKey = sunburstKey;
 					await this.initSunburst();
 				}
 
-				// ✅ Always focus to current PGN (works for moves + reset)
+				// Always focus to current PGN (works for moves + reset)
 				const pgnNow = (openingExplorerState.getPGN?.() ?? "").trim();
 				this._lastFocusedPgn = pgnNow;
 				this.#focusSunburstFromPgn(pgnNow, 0, this._sunRenderToken);
@@ -141,10 +141,9 @@ class OpeningExplorerVisualization extends Visualization {
 		const chartEl = this.container;
 		if (!chartEl || !this.data) return;
 
-		// ✅ NEW RENDER TOKEN (invalidates old transitions/end-callbacks)
 		const myToken = ++this._sunRenderToken;
 
-		// ✅ interrupt any running transitions before destroying DOM
+		// interrupt any running transitions before destroying DOM
 		try {
 			d3.select(chartEl).selectAll("*").interrupt();
 		} catch (_) {}
@@ -220,7 +219,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._sun_createVisualization(hierarchyData, this._sun_radius);
 
-		// ✅ focus only if still the current render
+		// focus only if still the current render
 		if (myToken === this._sunRenderToken && opening && opening !== "All") {
 			this._lastFocusedPgn = focusMoves;
 			this.#focusSunburstFromPgn(focusMoves, 0, myToken);
@@ -280,11 +279,11 @@ class OpeningExplorerVisualization extends Visualization {
 	}
 
 	#applyZoomToNode(d, arc, radius, durationMs, token) {
-		// ✅ ignore stale transitions
+		// ignore stale transitions
 		if (token !== this._sunRenderToken) return;
 		if (!this._sun_vis || !this._sun_x || !this._sun_y) return;
 
-		// ✅ cancel any running zoom transition before starting a new one
+		// cancel any running zoom transition before starting a new one
 		try {
 			this._sun_vis.interrupt();
 		} catch (_) {}
@@ -304,7 +303,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.selectAll("path")
 			.transition(transition)
 			.attrTween("d", (node) => (t) => {
-				// ✅ if a new render happened mid-transition, stop mutating scales
+				// if a new render happened mid-transition, stop mutating scales
 				if (token !== this._sunRenderToken) return arc(node);
 				this._sun_x.domain(xd(t));
 				this._sun_y.domain(yd(t)).range(yr(t));
@@ -330,7 +329,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		let sans = this.#tokenizeMovetextToSans(pgnMovetext);
 
-		// ✅ subtree mode: strip the subtree root move if present
+		// subtree mode: strip the subtree root move if present
 		if (this.filters.opening && this.filters.opening !== "All") {
 			if (this._subtreeRootSan && sans[0] === this._subtreeRootSan) {
 				sans = sans.slice(1);
@@ -357,7 +356,6 @@ class OpeningExplorerVisualization extends Visualization {
 			.filter((n) => n?.data?._isMove)
 			.map((n) => n.data.name);
 
-		// ✅ CRITICAL STABILITY FIX:
 		// If user goes back to root and we trigger opening=All (=> rerender),
 		// do NOT zoom on stale nodes.
 		if (moves.length === 0) {
