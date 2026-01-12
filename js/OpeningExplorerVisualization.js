@@ -27,6 +27,7 @@ class OpeningExplorerVisualization extends Visualization {
 		this._pgnUnsub = null;
 
 		this._lastColorApplied = null;
+		this._winRateBar = null;
 
 		// stability: avoid rebuilding on every move + kill stale transitions safely
 		this._sunRenderToken = 0;
@@ -46,6 +47,20 @@ class OpeningExplorerVisualization extends Visualization {
 		el.value = value;
 		el.dispatchEvent(new Event("change", { bubbles: true }));
 		window.__suppressOpeningToPGN = false;
+	}
+
+	// "1. e4 e5 2. Nf3 Nc6 3. Bb5"
+	#formatSansMovesToNumberedPgn(moves) {
+		const mv = Array.isArray(moves) ? moves.filter(Boolean) : [];
+		if (mv.length === 0) return "";
+
+		const out = [];
+		for (let i = 0; i < mv.length; i += 2) {
+			const moveNo = Math.floor(i / 2) + 1;
+			out.push(`${moveNo}. ${mv[i]}`);
+			if (mv[i + 1]) out.push(mv[i + 1]);
+		}
+		return out.join(" ");
 	}
 
 	async init() {
@@ -69,6 +84,7 @@ class OpeningExplorerVisualization extends Visualization {
 					this.#focusSunburstFromPgn(next, 250, tokenAtCall);
 				});
 			}
+			this._winRateBar = document.getElementById("oe-winrate-bar");
 
 			this.initialized = true;
 		}
@@ -146,7 +162,7 @@ class OpeningExplorerVisualization extends Visualization {
 		// interrupt any running transitions before destroying DOM
 		try {
 			d3.select(chartEl).selectAll("*").interrupt();
-		} catch (_) {}
+		} catch (_) { }
 
 		// drop references to avoid using stale selections
 		this._sun_vis = null;
@@ -211,7 +227,7 @@ class OpeningExplorerVisualization extends Visualization {
 		} else {
 			hierarchyData = {
 				name: "All Openings",
-				variant: "Root",
+				variant: "",
 				_isMove: false,
 				children: rawData.map((v) => this._sun_recursiveTransform(v)),
 			};
@@ -233,6 +249,9 @@ class OpeningExplorerVisualization extends Visualization {
 			name: data.name || "Unknown",
 			variant: data.variant || null,
 			_isMove: isMove,
+			// keep raw stats (white wins, draws, black wins) when present
+			stats: Array.isArray(data.stats) ? data.stats.slice(0, 3) : [0, 0, 0],
+			games: data.count || 0,
 		};
 
 		if (data.children && Array.isArray(data.children) && data.children.length > 0) {
@@ -271,7 +290,7 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 
 		for (const san of sans) {
-			const next = (cur.children || []).find((c) => c?.data?.name === san);
+			const next = (cur.children || []).find((c) => c?.data?.move === san);
 			if (!next) return null;
 			cur = next;
 		}
@@ -287,7 +306,7 @@ class OpeningExplorerVisualization extends Visualization {
 		// cancel any running zoom transition before starting a new one
 		try {
 			this._sun_vis.interrupt();
-		} catch (_) {}
+		} catch (_) { }
 
 		this._current_root = d;
 
@@ -325,6 +344,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		if (!pgnMovetext || !pgnMovetext.trim()) {
 			this.#applyZoomToNode(this._sun_root, this._sun_arc, this._sun_radius, durationMs, token);
+			if (this._winRateBar) d3.select(this._winRateBar).selectAll("*").remove();
 			return;
 		}
 
@@ -339,6 +359,13 @@ class OpeningExplorerVisualization extends Visualization {
 
 		const target = this.#findNodeForSansSequence(sans);
 		if (!target) return;
+
+		// update win-rate bar for focused node
+		try {
+			if (target?.data) this._drawWinRateBar(target.data);
+		} catch (e) {
+			console.error('Error drawing win-rate bar:', e);
+		}
 
 		this.#applyZoomToNode(target, this._sun_arc, this._sun_radius, durationMs, token);
 	}
@@ -355,7 +382,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.reverse()
 			.slice(1)
 			.filter((n) => n?.data?._isMove)
-			.map((n) => n.data.name);
+			.map((n) => n.data.move);
 
 		// If user goes back to root and we trigger opening=All (=> rerender),
 		// do NOT zoom on stale nodes.
@@ -365,7 +392,8 @@ class OpeningExplorerVisualization extends Visualization {
 			return;
 		}
 
-		openingExplorerState.setPGN(moves.join(" "), { source: "sunburst_zoom" });
+		const numbered = this.#formatSansMovesToNumberedPgn(moves);
+		openingExplorerState.setPGN(numbered, { source: "sunburst_zoom" });
 
 		// safe zoom (token-guarded)
 		this.#applyZoomToNode(d, arc, radius, 650, this._sunRenderToken);
@@ -403,10 +431,13 @@ class OpeningExplorerVisualization extends Visualization {
 			.append("path")
 			.attr("d", arc)
 			.style("cursor", "pointer")
-			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.name))
+			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.move))
 			.style("stroke", "#0b1220")
 			.style("display", (d) => (d.depth > 0 ? null : "none"))
-			.on("click", (event, d) => this._sun_zoom(event, d, arc, radius))
+			.on("click", (event, d) => {
+				this._drawWinRateBar(d.data);
+				this._sun_zoom(event, d, arc, radius);
+			})
 			.on("mouseover", (event, d) => {
 				const tooltip = document.getElementById("tooltip");
 				if (tooltip) {
@@ -428,10 +459,81 @@ class OpeningExplorerVisualization extends Visualization {
 			.on("mouseleave", () => {
 				const tooltip = document.getElementById("tooltip");
 				if (tooltip) tooltip.style.opacity = 0;
+				if (this.last_hovered_node) this.last_hovered_node.style("opacity", 1);
+				this.last_hovered_node = null;
 			});
 	}
 
+	_drawWinRateBar(data) {
+		const container = this._winRateBar;
+		console.log("Drawing win rate bar in container:", container, "with data:", data);
+		if (!container) return;
+		// clear previous content
+		d3.select(container).selectAll("*").remove();
+
+		const stats = Array.isArray(data?.stats) ? data.stats.slice(0, 3) : [0, 0, 0];
+		const total = stats.reduce((s, v) => s + (Number(v) || 0), 0);
+		if (!total) {
+			d3.select(container)
+				.append("div")
+				.style("color", "#ffffff")
+				.style("font-size", "12px")
+				.text("No games available");
+			return;
+		}
+
+		const pct = stats.map((v) => (Number(v) || 0) / total);
+		const width = this.width - 24;
+		const height = 40;
+
+		const svg = d3
+			.select(container)
+			.append("svg")
+			.attr("width", width)
+			.attr("height", height);
+
+		const colors = ["#ffffff", "#9e9e9e", "#000000"]; // white wins, draws, black wins
+
+		let x = 0;
+		const g = svg.append("g");
+		for (let i = 0; i < 3; i++) {
+			const w = Math.round(pct[i] * width);
+			g.append("rect")
+				.attr("x", x)
+				.attr("y", 2)
+				.attr("width", w)
+				.attr("height", height - 4)
+				.style("fill", colors[i])
+				.style("stroke", "#222")
+				.style("stroke-width", "1px");
+
+			const label = `${Math.round(pct[i] * 100)}%`;
+			if (w > 36) {
+				g.append("text")
+					.attr("x", x + w / 2)
+					.attr("y", height / 2 + 4)
+					.attr("text-anchor", "middle")
+					.style("font-size", "11px")
+					.style("pointer-events", "none")
+					.style("fill", i === 0 ? "#000" : "#fff")
+					.text(label);
+			} else if (w > 0) {
+				g.append("text")
+					.attr("x", x + w + 6)
+					.attr("y", height / 2 + 4)
+					.style("font-size", "11px")
+					.style("pointer-events", "none")
+					.style("fill", "#fff")
+					.text(label);
+			}
+
+			x += w;
+		}
+	}
+
+
 	// === Chessboard ===
+
 	async initBoardWidget() {
 		const boardEl = document.getElementById("oe-board");
 		const btnReset = document.getElementById("oe-reset");
@@ -446,6 +548,8 @@ class OpeningExplorerVisualization extends Visualization {
 			btnReset.addEventListener("click", () => {
 				openingExplorerState.setPGN("", { source: "reset" });
 				this.#setSelectValue("opening", "All");
+				document.getElementById("oe-opening-title").textContent = "All Openings";
+				document.getElementById("oe-opening-variant").textContent = "";
 			});
 		}
 
@@ -474,6 +578,39 @@ class OpeningExplorerVisualization extends Visualization {
 			if ((pgnMovetext || "").startsWith(prefix)) return name;
 		}
 		return null;
+	}
+
+	getDisplayedOpeningInfo(pgnMovetext) {
+		const openingTitle =
+			this.filters?.opening && this.filters.opening !== "All"
+				? this.filters.opening
+				: "All Openings";
+
+		// Default
+		let variant = "";
+		let title = openingTitle;
+
+		if (!this._sun_root) {
+			return { title, variant };
+		}
+
+		let sans = this.#tokenizeMovetextToSans(pgnMovetext || "");
+
+		// subtree mode: strip subtree root move if present (same logic as focus)
+		if (this.filters.opening && this.filters.opening !== "All") {
+			if (this._subtreeRootSan && sans[0] === this._subtreeRootSan) {
+				sans = sans.slice(1);
+			}
+		}
+
+		const node = this.#findNodeForSansSequence(sans);
+		if (node?.data) {
+			// node.data.name is usually the opening/line name in your JSON
+			if (node.data.name && node.data.name !== "Unknown") title = node.data.name;
+			if (node.data.variant && node.data.variant !== "Unknown") variant = node.data.variant;
+		}
+
+		return { title, variant };
 	}
 }
 
