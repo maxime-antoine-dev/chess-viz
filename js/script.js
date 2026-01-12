@@ -31,7 +31,10 @@ document.getElementById("opening").addEventListener("change", function() {
 
 function init() {
 	let charts = {};
-	charts.openingExplorer = new OpeningExplorerVisualization("./data/openingExplorer.json", document.getElementById("opening_explorer"));
+	charts.openingExplorer = new OpeningExplorerVisualization(
+		"./data/openingExplorer.json",
+		document.getElementById("opening_explorer"), document.getElementById("chessboard")
+	);
 	charts.popularity = new PopularityVisualization("./data/popularity.json", document.getElementById("popularity"));
 	charts.accuracy = new AccuracyVisualization("./data/accuracy.json", document.getElementById("accuracy"));
 	return charts;

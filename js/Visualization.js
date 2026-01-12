@@ -31,7 +31,7 @@ class Visualization {
 
 	/**
 	 * Initialize the visualization (load data, setup SVG, etc.)
-	 * @returns {void}
+	 * @returns {Promise<Visualization>} The initialized visualization instance
 	 */
 	async init() {
 		// Avoid re-initialization

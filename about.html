@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contexte du projet – Chess Viz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles issus de l'index */
+        html {
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            background: #0b1220;
+            color: #e6edf7;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Menu de navigation identique à l'index */
+        .top-menu {
+            display: flex;
+            gap: 22px;
+            padding: 12px 16px;
+            background: #0e1a33;
+            border-bottom: 1px solid rgba(124, 169, 255, 0.25);
+        }
+
+        .top-menu a {
+            color: rgba(230, 237, 247, 0.85);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.18s ease;
+        }
+
+        .top-menu a:hover, .top-menu a.active {
+            color: #fff;
+            background: rgba(124, 169, 255, 0.12);
+            border: 1px solid rgba(124, 169, 255, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Conteneur de contenu spécifique à la page Contexte */
+        main {
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .content-card {
+            background: #0e1a33;
+            border: 1px solid rgba(124, 169, 255, 0.2);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #fff;
+            margin-top: 0;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: rgba(124, 169, 255, 0.8);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #fff;
+            margin-top: 30px;
+            border-left: 3px solid rgba(124, 169, 255, 0.6);
+            padding-left: 15px;
+        }
+
+        p {
+            line-height: 1.7;
+            color: rgba(230, 237, 247, 0.85);
+            font-size: 15px;
+        }
+
+        ul {
+            padding-left: 20px;
+            color: rgba(230, 237, 247, 0.85);
+        }
+
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: rgba(124, 169, 255, 1);
+        }
+
+        .chess-divider {
+            text-align: center;
+            font-size: 24px;
+            margin: 40px 0;
+            opacity: 0.3;
+            letter-spacing: 15px;
+        }
+
+        a {
+            color: rgba(124, 169, 255, 0.9);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(124, 169, 255, 0.35);
+            transition: 0.18s ease;
+        }
+
+        a:hover {
+            color: rgba(160, 198, 255, 1);
+            border-bottom-color: rgba(160, 198, 255, 0.6);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: rgba(230, 237, 247, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-menu">
+        <a href="index.html">Visualisation</a>
+        <a href="about.html" class="active">Contexte</a>
+        <a href="data.html">Données</a>
+        <a href="story.html">Storytelling</a>
+    </nav>
+
+    <main>
+        <div class="content-card">
+            <h1>Contexte du projet</h1>
+            <div class="subtitle">Étude analytique des ouvertures aux échecs</div>
+
+            <div class="chess-divider">♟ ♞ ♜</div>
+
+            <section>
+                <h2>Problématique</h2>
+                <p>
+                    Notre projet vise à mieux comprendre le rôle de l'ouverture dans le résultat des parties d'échecs en ligne,
+                    ainsi que son impact sur la précision des joueurs.
+                </p>
+                <p>Nous cherchons notamment à répondre aux questions suivantes :</p>
+                <ul>
+                    <li>Quelles sont les ouvertures les plus jouées et quels résultats donnent-elles ?</li>
+                    <li>Quelle est la précision des joueurs lors de l'ouverture ?</li>
+                    <li>En perdant l’avantage dans l’ouverture, peut-on revenir dans la partie ?</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>À qui s’adresse la visualisation ?</h2>
+                <p>
+                    La visualisation s’adresse aux joueurs d’échecs souhaitant progresser dans leurs ouvertures,
+                    construire un répertoire cohérent et mieux comprendre les tendances globales.
+                </p>
+                <ul>
+                    <li><strong>Analyse stratégique :</strong> Quelles ouvertures sont les plus jouées selon l’Elo ?</li>
+                    <li><strong>Répertoire :</strong> Quelles défenses sont les plus fréquentes contre mon ouverture ?</li>
+                    <li><strong>Impact :</strong> À quel point l’ouverture influence-t-elle le résultat final ?</li>
+                </ul>
+            </section>
+
+            <div class="chess-divider">♚ ♛ ♚</div>
+
+            <section>
+                <h2>Sources de données</h2>
+                <p>
+                    Nous utilisons les données open source de <strong>Lichess</strong> (<a href="https://database.lichess.org/" target="_blank">database.lichess.org</a>). 
+                    Compte tenu du volume massif (2 To+), nous nous concentrons sur un échantillon représentatif incluant :
+                </p>
+                <ul>
+                    <li><strong>Result :</strong> Résultat final de la rencontre.</li>
+                    <li><strong>Elo :</strong> Niveau relatif des deux adversaires.</li>
+                    <li><strong>ECO & Opening :</strong> Classification standardisée des ouvertures.</li>
+                    <li><strong>Moves :</strong> Liste complète des coups avec évaluations moteur (disponibles sur ~6% des parties).</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>Travaux liés</h2>
+                <p>Plusieurs projets existants ont guidé notre réflexion :</p>
+                <ul>
+                    <li><strong>ChessRoots</strong> – Exploration d’arbres interactifs.</li>
+                    <li><strong>Chessbook</strong> – Outil pédagogique de construction de répertoire.</li>
+                    <li><strong>Lichess Explorer</strong> – La référence en termes de base de données statistique.</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Chess Viz Project - Réalisé avec passion pour le jeu des rois</p>
+    </footer>
+
+</body>
+</html>
