@@ -50,7 +50,7 @@ html {
             padding: 6px 14px;
             transition: 0.18s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            margin-left: 10px; /* Espace par rapport aux filtres */
+            margin-left: 16px;
           }
 
           .nav-link:hover {
@@ -160,26 +160,38 @@ html {
         padding-top: 24px;
         box-sizing: border-box;
 
-        .wrap {
-          display:flex; gap:8px; flex-wrap:wrap;
+        #oe-opening-title {
+          font-weight: 700;
+          color: white;
         }
 
-        .oe-btn {
-          color: #fff;
-          border: 1px solid rgba(124, 169, 255, 0.35);
-          background: linear-gradient(180deg, rgba(124, 169, 255, 0.16), rgba(124, 169, 255, 0.08));
-          border-radius: 12px;
-          padding: 9px 14px;
-          cursor: pointer;
-          font-size: 12px;
-          letter-spacing: 0.2px;
-          box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
-          transition: 0.18s ease;
-          margin-top: 16px;
+        #oe-opening-variant {
+          opacity: 0.85;
+          color: white;
+        }
 
-          &:hover {
-            border-color: rgba(124, 169, 255, 0.65);
-            filter: brightness(1.06);
+        .wrap {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+
+          button {
+            color: #fff;
+            border: 1px solid rgba(124, 169, 255, 0.35);
+            background: linear-gradient(180deg, rgba(124, 169, 255, 0.16), rgba(124, 169, 255, 0.08));
+            border-radius: 12px;
+            padding: 9px 14px;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 0.2px;
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
+            transition: 0.18s ease;
+            margin-top: 16px;
+
+            &:hover {
+              border-color: rgba(124, 169, 255, 0.65);
+              filter: brightness(1.06);
+            }
           }
         }
 
@@ -190,15 +202,15 @@ html {
         #oe-current-pgn {
           box-sizing: border-box;
           margin-top: 16px;
-          width:100%;
-          max-height:110px;
-          overflow:auto;
-          white-space:pre-wrap;
-          color:white;
-          background:rgba(255,255,255,.06);
-          border:1px solid rgba(255,255,255,.12);
-          border-radius:10px;
-          padding:10px;
+          width: 100%;
+          max-height: 110px;
+          overflow: auto;
+          white-space: pre-wrap;
+          color: white;
+          background: rgba(255, 255, 255, .06);
+          border: 1px solid rgba(255, 255, 255, .12);
+          border-radius: 10px;
+          padding: 10px;
         }
       }
 
