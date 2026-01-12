@@ -271,7 +271,7 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 
 		for (const san of sans) {
-			const next = (cur.children || []).find((c) => c?.data?.name === san);
+			const next = (cur.children || []).find((c) => c?.data?.move === san);
 			if (!next) return null;
 			cur = next;
 		}
@@ -355,7 +355,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.reverse()
 			.slice(1)
 			.filter((n) => n?.data?._isMove)
-			.map((n) => n.data.name);
+			.map((n) => n.data.move);
 
 		// If user goes back to root and we trigger opening=All (=> rerender),
 		// do NOT zoom on stale nodes.
