@@ -52,10 +52,14 @@ class ChessboardWidget {
 
 		this._applyingFromBoard = false;
 
-		// ✅ New: stable layers + piece map (for smooth movement)
+		// layers + piece map (smooth movement)
 		this._squaresLayer = null;
 		this._piecesLayer = null;
 		this._pieceElsBySquare = new Map(); // square -> element (img/span)
+
+		// ✅ new: external PGN animation control
+		this._pgnAnimToken = 0;
+		this._isAnimating = false;
 	}
 
 	async mount(els) {
@@ -82,7 +86,7 @@ class ChessboardWidget {
 	flip() {
 		this._orientation = this._orientation === 'white' ? 'black' : 'white';
 		this.#clearSelection();
-		this.#renderBoard(false); // no anim on flip
+		this.#renderBoard(false);
 	}
 
 	setOrientation(orientation) {
@@ -90,7 +94,7 @@ class ChessboardWidget {
 		if (this._orientation === orientation) return;
 		this._orientation = orientation;
 		this.#clearSelection();
-		this.#renderBoard(false); // no anim on orientation changes
+		this.#renderBoard(false);
 	}
 
 	getOrientation() {
@@ -174,22 +178,78 @@ class ChessboardWidget {
 		} catch {}
 	}
 
+	// smooth external PGN apply (sunburst/select): replay SAN from start quickly
+	async #animateToSanSequence(sans, animToken) {
+		if (!this._Chess) return;
+		this._isAnimating = true;
+
+		// start from initial position
+		this._game = new this._Chess();
+		this._lastMove = null;
+		this.#clearSelection();
+		this.#renderBoard(false);
+		this.#renderStatus();
+
+		if (!sans.length) {
+			this._isAnimating = false;
+			return;
+		}
+
+		// keep total duration reasonable
+		const maxTotalMs = 1200;
+		const stepMs = Math.min(140, Math.max(35, Math.floor(maxTotalMs / sans.length)));
+
+		for (const san of sans) {
+			if (animToken !== this._pgnAnimToken) {
+				this._isAnimating = false;
+				return; // cancelled by a new PGN update
+			}
+
+			const mv = this._game.move(san, { sloppy: true });
+			if (!mv) break;
+
+			this._lastMove = { from: mv.from, to: mv.to };
+			this.#clearSelection();
+			this.#renderBoard(true);
+			this.#renderStatus();
+
+			// wait a bit between steps
+			// eslint-disable-next-line no-await-in-loop
+			await new Promise((r) => setTimeout(r, stepMs));
+		}
+
+		if (animToken === this._pgnAnimToken) {
+			this.#recomputeLastMoveFromHistory();
+			this.#clearSelection();
+			this.#renderBoard(false);
+			this.#renderStatus();
+		}
+
+		this._isAnimating = false;
+	}
+
 	#applyPGNToGame(pgn, source) {
-		if (!this._game || !this._Chess) return;
+		if (!this._Chess) return;
+
+		// cancel any ongoing animation
+		this._pgnAnimToken += 1;
+		const myToken = this._pgnAnimToken;
 
 		const trimmed = (pgn ?? '').trim();
 
+		// reset: instant
 		if (!trimmed) {
-			this._game.reset();
+			this._isAnimating = false;
+			this._game = new this._Chess();
 			this._lastMove = null;
 			this.#clearSelection();
-			this.#renderBoard(false); // no anim on external reset
+			this.#renderBoard(false);
 			this.#renderStatus();
 			return;
 		}
 
+		// validate / normalize by trying to build final position
 		const next = new this._Chess();
-
 		let ok = this.#tryLoadPgn(next, trimmed);
 
 		if (!ok) {
@@ -199,12 +259,23 @@ class ChessboardWidget {
 
 		if (!ok) return;
 
+		// If PGN comes from outside the board, animate it (sunburst/select/etc)
+		const shouldAnimateExternal =
+			source !== 'board' && source !== 'init' && source !== 'reset' && source !== 'flip';
+
+		if (shouldAnimateExternal) {
+			const sans = this.#tokenizeMovetextToSans(trimmed);
+			// play from start; super stable and always animates nicely
+			this.#animateToSanSequence(sans, myToken);
+			return;
+		}
+
+		// board-driven or init: apply instantly (board moves are already animated in #onSquareClick)
+		this._isAnimating = false;
 		this._game = next;
-
 		this.#recomputeLastMoveFromHistory();
-
 		this.#clearSelection();
-		this.#renderBoard(false); // PGN updates are "teleport" (stable), user moves are animated
+		this.#renderBoard(false);
 		this.#renderStatus();
 	}
 
@@ -232,7 +303,6 @@ class ChessboardWidget {
 
 		if (this._squaresLayer && this._piecesLayer) return;
 
-		// clear once and create two layers:
 		boardEl.innerHTML = '';
 
 		const squares = document.createElement('div');
@@ -256,14 +326,12 @@ class ChessboardWidget {
 	}
 
 	#squareToGridXY(square) {
-		// returns { col: 0..7, row: 0..7 } where row 0 is top
-		const file = square.codePointAt(0) - 'a'.codePointAt(0); // 0..7
-		const rank = Number.parseInt(square[1], 10); // 1..8
+		const file = square.codePointAt(0) - 'a'.codePointAt(0);
+		const rank = Number.parseInt(square[1], 10);
 
 		if (this._orientation === 'white') {
 			return { col: file, row: 8 - rank };
 		}
-		// black orientation
 		return { col: 7 - file, row: rank - 1 };
 	}
 
@@ -271,7 +339,6 @@ class ChessboardWidget {
 		if (!this._ui?.boardEl) return;
 		const boardEl = this._ui.boardEl;
 		boardEl.classList.add('cbw-no-anim');
-		// re-enable next frame
 		requestAnimationFrame(() => {
 			boardEl.classList.remove('cbw-no-anim');
 		});
@@ -280,14 +347,12 @@ class ChessboardWidget {
 	#syncPieces({ animateMove } = {}) {
 		if (!this._piecesLayer || !this._game) return;
 
-		// if not animating, disable transitions for this pass
 		if (!animateMove) this.#disablePieceAnimOnce();
 
-		// If this render comes right after a user move, reuse the DOM element from "from" -> "to"
+		// reuse DOM element from from->to so CSS transition actually animates
 		if (animateMove && this._lastMove?.from && this._lastMove?.to) {
 			const { from, to } = this._lastMove;
 
-			// capture: remove the piece that used to be on 'to' (from previous position map)
 			const captured = this._pieceElsBySquare.get(to);
 			if (captured) {
 				captured.remove();
@@ -302,7 +367,6 @@ class ChessboardWidget {
 			}
 		}
 
-		// Ensure every occupied square has a piece element, and remove the rest
 		const neededSquares = new Set();
 
 		for (const sq of this.#allSquares()) {
@@ -336,23 +400,19 @@ class ChessboardWidget {
 				this._piecesLayer.appendChild(el);
 				this._pieceElsBySquare.set(sq, el);
 			} else {
-				// update piece visuals if needed (promotion etc.)
 				if (el.tagName === 'IMG') {
 					if (src && el.src !== src) el.src = src;
 				} else {
-					// fallback span
 					const txt = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
 					if (el.textContent !== txt) el.textContent = txt;
 				}
 			}
 
-			// update position (this is what animates)
 			const { col, row } = this.#squareToGridXY(sq);
 			el.style.left = `${col * 12.5}%`;
 			el.style.top = `${row * 12.5}%`;
 		}
 
-		// Remove pieces that are no longer on the board
 		for (const [sq, el] of this._pieceElsBySquare.entries()) {
 			if (neededSquares.has(sq)) continue;
 			el.remove();
@@ -372,7 +432,6 @@ class ChessboardWidget {
 			cell.className = `cbw-square ${this.#isLightSquare(sq) ? 'cbw-light' : 'cbw-dark'}`;
 			cell.dataset.square = sq;
 
-			// selection / targets / last move highlights
 			if (this._selectedFrom === sq) cell.classList.add('cbw-selected');
 			if (this._legalTargets.has(sq)) cell.classList.add('cbw-legal');
 			if (this._lastMove && (this._lastMove.from === sq || this._lastMove.to === sq)) cell.classList.add('cbw-last');
@@ -391,6 +450,9 @@ class ChessboardWidget {
 	}
 
 	#onSquareClick(square) {
+		// ✅ don’t allow clicks while animating external PGN
+		if (this._isAnimating) return;
+
 		const piece = this._game.get(square);
 		const turn = this._game.turn();
 
@@ -429,7 +491,7 @@ class ChessboardWidget {
 		this._lastMove = { from: move.from, to: move.to };
 		this.#clearSelection();
 
-		// animate only user-initiated move
+		// animate user move
 		this.#renderBoard(true);
 
 		this.#renderStatus();
