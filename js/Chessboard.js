@@ -51,6 +51,11 @@ class ChessboardWidget {
 		this._unsub = null;
 
 		this._applyingFromBoard = false;
+
+		// ✅ New: stable layers + piece map (for smooth movement)
+		this._squaresLayer = null;
+		this._piecesLayer = null;
+		this._pieceElsBySquare = new Map(); // square -> element (img/span)
 	}
 
 	async mount(els) {
@@ -77,7 +82,7 @@ class ChessboardWidget {
 	flip() {
 		this._orientation = this._orientation === 'white' ? 'black' : 'white';
 		this.#clearSelection();
-		this.#renderBoard();
+		this.#renderBoard(false); // no anim on flip
 	}
 
 	setOrientation(orientation) {
@@ -85,7 +90,7 @@ class ChessboardWidget {
 		if (this._orientation === orientation) return;
 		this._orientation = orientation;
 		this.#clearSelection();
-		this.#renderBoard();
+		this.#renderBoard(false); // no anim on orientation changes
 	}
 
 	getOrientation() {
@@ -178,7 +183,7 @@ class ChessboardWidget {
 			this._game.reset();
 			this._lastMove = null;
 			this.#clearSelection();
-			this.#renderBoard();
+			this.#renderBoard(false); // no anim on external reset
 			this.#renderStatus();
 			return;
 		}
@@ -199,7 +204,7 @@ class ChessboardWidget {
 		this.#recomputeLastMoveFromHistory();
 
 		this.#clearSelection();
-		this.#renderBoard();
+		this.#renderBoard(false); // PGN updates are "teleport" (stable), user moves are animated
 		this.#renderStatus();
 	}
 
@@ -220,22 +225,96 @@ class ChessboardWidget {
 		return PIECE_IMAGES?.[piece?.color]?.[piece?.type] ?? '';
 	}
 
-	#renderBoard() {
-		if (!this._ui?.boardEl || !this._game) return;
+	#ensureBoardLayers() {
+		if (!this._ui?.boardEl) return;
 
 		const boardEl = this._ui.boardEl;
+
+		if (this._squaresLayer && this._piecesLayer) return;
+
+		// clear once and create two layers:
 		boardEl.innerHTML = '';
 
-		const squares = this.#orderedSquares();
-		for (const sq of squares) {
-			const cell = document.createElement('div');
-			cell.className = `cbw-square ${this.#isLightSquare(sq) ? 'cbw-light' : 'cbw-dark'}`;
-			cell.dataset.square = sq;
+		const squares = document.createElement('div');
+		squares.className = 'cbw-squares-layer';
 
+		const pieces = document.createElement('div');
+		pieces.className = 'cbw-pieces-layer';
+
+		boardEl.appendChild(squares);
+		boardEl.appendChild(pieces);
+
+		this._squaresLayer = squares;
+		this._piecesLayer = pieces;
+	}
+
+	#allSquares() {
+		const files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+		const out = [];
+		for (let r = 1; r <= 8; r++) for (const f of files) out.push(`${f}${r}`);
+		return out;
+	}
+
+	#squareToGridXY(square) {
+		// returns { col: 0..7, row: 0..7 } where row 0 is top
+		const file = square.codePointAt(0) - 'a'.codePointAt(0); // 0..7
+		const rank = Number.parseInt(square[1], 10); // 1..8
+
+		if (this._orientation === 'white') {
+			return { col: file, row: 8 - rank };
+		}
+		// black orientation
+		return { col: 7 - file, row: rank - 1 };
+	}
+
+	#disablePieceAnimOnce() {
+		if (!this._ui?.boardEl) return;
+		const boardEl = this._ui.boardEl;
+		boardEl.classList.add('cbw-no-anim');
+		// re-enable next frame
+		requestAnimationFrame(() => {
+			boardEl.classList.remove('cbw-no-anim');
+		});
+	}
+
+	#syncPieces({ animateMove } = {}) {
+		if (!this._piecesLayer || !this._game) return;
+
+		// if not animating, disable transitions for this pass
+		if (!animateMove) this.#disablePieceAnimOnce();
+
+		// If this render comes right after a user move, reuse the DOM element from "from" -> "to"
+		if (animateMove && this._lastMove?.from && this._lastMove?.to) {
+			const { from, to } = this._lastMove;
+
+			// capture: remove the piece that used to be on 'to' (from previous position map)
+			const captured = this._pieceElsBySquare.get(to);
+			if (captured) {
+				captured.remove();
+				this._pieceElsBySquare.delete(to);
+			}
+
+			const movingEl = this._pieceElsBySquare.get(from);
+			if (movingEl) {
+				this._pieceElsBySquare.delete(from);
+				this._pieceElsBySquare.set(to, movingEl);
+				movingEl.dataset.square = to;
+			}
+		}
+
+		// Ensure every occupied square has a piece element, and remove the rest
+		const neededSquares = new Set();
+
+		for (const sq of this.#allSquares()) {
 			const piece = this._game.get(sq);
-			if (piece) {
-				const src = this.#getPieceImageSrc(piece);
+			if (!piece) continue;
 
+			neededSquares.add(sq);
+
+			let el = this._pieceElsBySquare.get(sq);
+			const src = this.#getPieceImageSrc(piece);
+
+			if (!el) {
 				if (src) {
 					const img = document.createElement('img');
 					img.className = 'cbw-piece';
@@ -243,19 +322,72 @@ class ChessboardWidget {
 					img.alt = `${piece.color}${piece.type}`;
 					img.draggable = false;
 					img.style.pointerEvents = 'none';
-					cell.appendChild(img);
+					img.dataset.square = sq;
+					el = img;
 				} else {
-					cell.textContent = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
+					const span = document.createElement('span');
+					span.className = 'cbw-piece cbw-piece-fallback';
+					span.textContent = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
+					span.style.pointerEvents = 'none';
+					span.dataset.square = sq;
+					el = span;
+				}
+
+				this._piecesLayer.appendChild(el);
+				this._pieceElsBySquare.set(sq, el);
+			} else {
+				// update piece visuals if needed (promotion etc.)
+				if (el.tagName === 'IMG') {
+					if (src && el.src !== src) el.src = src;
+				} else {
+					// fallback span
+					const txt = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
+					if (el.textContent !== txt) el.textContent = txt;
 				}
 			}
 
+			// update position (this is what animates)
+			const { col, row } = this.#squareToGridXY(sq);
+			el.style.left = `${col * 12.5}%`;
+			el.style.top = `${row * 12.5}%`;
+		}
+
+		// Remove pieces that are no longer on the board
+		for (const [sq, el] of this._pieceElsBySquare.entries()) {
+			if (neededSquares.has(sq)) continue;
+			el.remove();
+			this._pieceElsBySquare.delete(sq);
+		}
+	}
+
+	#renderSquares() {
+		if (!this._squaresLayer || !this._game) return;
+
+		const layer = this._squaresLayer;
+		layer.innerHTML = '';
+
+		const squares = this.#orderedSquares();
+		for (const sq of squares) {
+			const cell = document.createElement('div');
+			cell.className = `cbw-square ${this.#isLightSquare(sq) ? 'cbw-light' : 'cbw-dark'}`;
+			cell.dataset.square = sq;
+
+			// selection / targets / last move highlights
 			if (this._selectedFrom === sq) cell.classList.add('cbw-selected');
 			if (this._legalTargets.has(sq)) cell.classList.add('cbw-legal');
 			if (this._lastMove && (this._lastMove.from === sq || this._lastMove.to === sq)) cell.classList.add('cbw-last');
 
 			cell.addEventListener('click', () => this.#onSquareClick(sq));
-			boardEl.appendChild(cell);
+			layer.appendChild(cell);
 		}
+	}
+
+	#renderBoard(animateMove = false) {
+		if (!this._ui?.boardEl || !this._game) return;
+
+		this.#ensureBoardLayers();
+		this.#renderSquares();
+		this.#syncPieces({ animateMove });
 	}
 
 	#onSquareClick(square) {
@@ -266,14 +398,14 @@ class ChessboardWidget {
 			if (piece && piece.color === turn) {
 				this._selectedFrom = square;
 				this.#computeLegals(square);
-				this.#renderBoard();
+				this.#renderBoard(false);
 			}
 			return;
 		}
 
 		if (this._selectedFrom === square) {
 			this.#clearSelection();
-			this.#renderBoard();
+			this.#renderBoard(false);
 			return;
 		}
 
@@ -283,20 +415,23 @@ class ChessboardWidget {
 		if (piece && piece.color === turn) {
 			this._selectedFrom = square;
 			this.#computeLegals(square);
-			this.#renderBoard();
+			this.#renderBoard(false);
 			return;
 		}
 
 		const move = this._game.move({ from, to, promotion: 'q' });
 		if (!move) {
 			this.#computeLegals(from);
-			this.#renderBoard();
+			this.#renderBoard(false);
 			return;
 		}
 
 		this._lastMove = { from: move.from, to: move.to };
 		this.#clearSelection();
-		this.#renderBoard();
+
+		// animate only user-initiated move
+		this.#renderBoard(true);
+
 		this.#renderStatus();
 		this.#commitBoardToStore();
 	}
