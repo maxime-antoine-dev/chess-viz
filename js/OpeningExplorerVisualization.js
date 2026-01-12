@@ -111,7 +111,8 @@ class OpeningExplorerVisualization extends Visualization {
 
 	_sun_recursiveTransform(data) {
 		const node = {
-			name: data.move || data.name || "???"
+			name: data.name || "Unknown",
+			variant: data.variant || "Unknown"
 		};
 
 		if (data.children && Array.isArray(data.children) && data.children.length > 0) {
@@ -154,7 +155,6 @@ class OpeningExplorerVisualization extends Visualization {
 			});
 	}
 
-
     _sun_createVisualization(json, radius) {
 		this._sun_x = d3.scaleLinear().range([0, 2 * Math.PI]);
     	this._sun_y = d3.scaleSqrt().range([0, radius]);
@@ -181,7 +181,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.style("cursor", "pointer")
             .style("fill", d => colorScale(d.ancestors().reverse()[1]?.data.name))
             .style("stroke", "#0b1220")
-			.style("display", d => d.depth > 0 ? null : "none") 
+			.style("display", d => d.depth > 0 ? null : "none")
         	.on("click", (event, d) => this._sun_zoom(event, d, arc,radius))
 			// .on("click", (event, d) => {
 			// 	console.log("Clicked on:", d.data.name);
@@ -211,7 +211,7 @@ class OpeningExplorerVisualization extends Visualization {
                 const tooltip = document.getElementById("tooltip");
                 if (tooltip) {
                     tooltip.style.opacity = 1;
-                    tooltip.innerHTML = `<strong>${d.data.name}</strong><br>Games: ${d.value}`;
+                    tooltip.innerHTML = `<strong>${d.data.name}</strong><br>${d.data.variant}<br>Games: ${d.value}`;
                 }
             })
             .on("mousemove", (event) => {
