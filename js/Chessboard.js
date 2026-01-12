@@ -21,7 +21,6 @@ const PIECE_IMAGES = {
 	},
 };
 
-// Optional fallback if an image is missing
 const PIECES_FALLBACK = {
 	w: { k: '♔', q: '♕', r: '♖', b: '♗', n: '♘', p: '♙' },
 	b: { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟' },
@@ -54,13 +53,8 @@ class ChessboardWidget {
 		this._applyingFromBoard = false;
 	}
 
-	/**
-	 * @param {{ boardEl: HTMLElement, statusEl: HTMLElement, messageEl: HTMLElement }} els
-	 */
 	async mount(els) {
-		if (!els?.boardEl) {
-			throw new Error('ChessboardWidget.mount: boardEl are required');
-		}
+		if (!els?.boardEl) throw new Error('ChessboardWidget.mount: boardEl are required');
 		this._ui = els;
 
 		await this.#ensureChessLoaded();
@@ -98,8 +92,6 @@ class ChessboardWidget {
 		return this._orientation;
 	}
 
-	// Chess.js loading / PGN sync
-
 	static _chessModulePromise = null;
 
 	async #ensureChessLoaded() {
@@ -114,10 +106,75 @@ class ChessboardWidget {
 		if (!this._Chess) throw new Error('ChessboardWidget: failed to load chess.js Chess class');
 	}
 
-	#applyPGNToGame(pgn, source) {
-		if (!this._game) return;
+	#hasResultToken(s) {
+		const t = (s ?? '').trim();
+		return /\b(1-0|0-1|1\/2-1\/2|\*)\s*$/.test(t);
+	}
 
-		if (!pgn.trim()) {
+	#tryLoadPgn(game, raw) {
+		const pgn = (raw ?? '').trim();
+		if (!pgn) return true;
+
+		const pgnWithResult = this.#hasResultToken(pgn) ? pgn : `${pgn} *`;
+		const opts = { sloppy: true };
+
+		if (typeof game.loadPgn === 'function') return !!game.loadPgn(pgnWithResult, opts);
+		if (typeof game.load_pgn === 'function') return !!game.load_pgn(pgnWithResult, opts);
+		return false;
+	}
+
+	#tokenizeMovetextToSans(raw) {
+		let s = (raw ?? '').toString();
+
+		s = s
+			.split('\n')
+			.filter((line) => !line.trim().startsWith('['))
+			.join(' ');
+
+		s = s.replace(/\{[^}]*\}/g, ' ');
+		s = s.replace(/\([^)]*\)/g, ' ');
+		s = s.replace(/\$\d+/g, ' ');
+
+		s = s.replace(/\s+/g, ' ').trim();
+		if (!s) return [];
+
+		const tokens = s.split(' ').map((x) => x.trim()).filter(Boolean);
+
+		return tokens.filter((tok) => {
+			if (/^\d+\.(\.\.)?$/.test(tok)) return false;
+			if (/^\d+\.\.\.$/.test(tok)) return false;
+			if (/^\d+\.$/.test(tok)) return false;
+			if (/^(1-0|0-1|1\/2-1\/2|\*)$/.test(tok)) return false;
+			return true;
+		});
+	}
+
+	#tryApplySanSequence(game, raw) {
+		const sans = this.#tokenizeMovetextToSans(raw);
+		if (!sans.length) return true;
+
+		for (const san of sans) {
+			const mv = game.move(san, { sloppy: true });
+			if (!mv) return false;
+		}
+		return true;
+	}
+
+	#recomputeLastMoveFromHistory() {
+		this._lastMove = null;
+		try {
+			const hist = this._game.history?.({ verbose: true }) ?? [];
+			const last = hist[hist.length - 1];
+			if (last?.from && last?.to) this._lastMove = { from: last.from, to: last.to };
+		} catch {}
+	}
+
+	#applyPGNToGame(pgn, source) {
+		if (!this._game || !this._Chess) return;
+
+		const trimmed = (pgn ?? '').trim();
+
+		if (!trimmed) {
 			this._game.reset();
 			this._lastMove = null;
 			this.#clearSelection();
@@ -127,8 +184,20 @@ class ChessboardWidget {
 		}
 
 		const next = new this._Chess();
+
+		let ok = this.#tryLoadPgn(next, trimmed);
+
+		if (!ok) {
+			next.reset();
+			ok = this.#tryApplySanSequence(next, trimmed);
+		}
+
+		if (!ok) return;
+
 		this._game = next;
-		this._lastMove = null;
+
+		this.#recomputeLastMoveFromHistory();
+
 		this.#clearSelection();
 		this.#renderBoard();
 		this.#renderStatus();
@@ -137,7 +206,6 @@ class ChessboardWidget {
 	#commitBoardToStore() {
 		let pgn = '';
 		try {
-			// chess.js returns movetext (headers only if you set them)
 			pgn = this._game.pgn();
 		} catch {
 			pgn = '';
@@ -147,8 +215,6 @@ class ChessboardWidget {
 		this.store.setPGN(pgn, { source: 'board' });
 		this._applyingFromBoard = false;
 	}
-
-	// Rendering & interactions
 
 	#getPieceImageSrc(piece) {
 		return PIECE_IMAGES?.[piece?.color]?.[piece?.type] ?? '';
@@ -194,7 +260,7 @@ class ChessboardWidget {
 
 	#onSquareClick(square) {
 		const piece = this._game.get(square);
-		const turn = this._game.turn(); // 'w' | 'b'
+		const turn = this._game.turn();
 
 		if (!this._selectedFrom) {
 			if (piece && piece.color === turn) {
@@ -240,9 +306,7 @@ class ChessboardWidget {
 		try {
 			const moves = this._game.moves({ square: fromSquare, verbose: true }) || [];
 			for (const m of moves) this._legalTargets.add(m.to);
-		} catch {
-			// ignore
-		}
+		} catch {}
 	}
 
 	#clearSelection() {
@@ -261,9 +325,7 @@ class ChessboardWidget {
 			else if (this._game.isStalemate?.()) extra = ' — Stalemate';
 			else if (this._game.isDraw?.()) extra = ' — Draw';
 			else if (this._game.isCheck?.()) extra = ' — Check';
-		} catch {
-			// ignore
-		}
+		} catch {}
 
 		this._ui.statusEl.textContent = `Turn: ${turn}${extra}`;
 	}

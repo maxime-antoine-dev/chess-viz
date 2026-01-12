@@ -1,39 +1,113 @@
 import { OpeningExplorerVisualization } from './OpeningExplorerVisualization.js';
 import { PopularityVisualization } from './PopularityVisualization.js';
 import { AccuracyVisualization } from './AccuracyVisualization.js';
+import { openingExplorerState } from './OpeningExplorerState.js';
+import { OPENING_FIRST_MOVES } from './openings.js';
+
 
 let time_control = "rapid";
 let elo = "1500-2000";
 let color = "1"; // White
 let opening = "All";
+
 const charts = init();
 update(charts, time_control, elo, color, opening);
 
-document.getElementById("time_control").addEventListener("change", function() {
-	time_control = this.value;
+// ===== central helpers =====
+
+function detectOpeningFromPgnPrefix(pgnMovetext) {
+	const entries = Object.entries(OPENING_FIRST_MOVES || {})
+		.filter(([k, v]) => k !== "All" && v)
+		.sort((a, b) => b[1].length - a[1].length);
+
+	for (const [name, prefix] of entries) {
+		if ((pgnMovetext || "").startsWith(prefix)) return name;
+	}
+	return null;
+}
+
+function syncSelect(id, value) {
+	const el = document.getElementById(id);
+	if (!el) return;
+	if (el.value !== value) el.value = value;
+}
+
+// set filters + update charts
+function setExplorerFilters(partial = {}, meta = {}) {
+	if (partial.time_control != null) time_control = String(partial.time_control);
+	if (partial.elo != null) elo = String(partial.elo);
+	if (partial.color != null) color = String(partial.color);
+	if (partial.opening != null) opening = String(partial.opening);
+
+	// keep UI in sync (no dispatch needed)
+	syncSelect("time_control", time_control);
+	syncSelect("elo", elo);
+	syncSelect("color", color);
+	syncSelect("opening", opening);
+
+	// IMPORTANT:
+	// only when the opening is explicitly selected (UI/popularity) we load its base PGN
+	if (meta.setBasePGN && partial.opening != null) {
+		const pgn = (opening && opening !== "All") ? (OPENING_FIRST_MOVES?.[opening] ?? "") : "";
+		openingExplorerState.setPGN(pgn, { source: meta.source ?? "opening_select", force: true });
+	}
+
 	update(charts, time_control, elo, color, opening);
+}
+
+// set PGN (board/sunburst/reset) + ensure charts are re-rendered if needed
+function setExplorerPGN(pgn, meta = {}) {
+	openingExplorerState.setPGN(pgn ?? "", { source: meta.source ?? "external", force: !!meta.force });
+	// OpeningExplorer will rebuild sunburst on update; other charts only depend on filters anyway.
+	update(charts, time_control, elo, color, opening);
+}
+
+// expose for other visualizations (minimal change)
+window.setExplorerFilters = setExplorerFilters;
+window.setExplorerPGN = setExplorerPGN;
+
+// ===== UI listeners (keep your behavior) =====
+
+document.getElementById("time_control").addEventListener("change", function() {
+	setExplorerFilters({ time_control: this.value }, { source: "ui_time" });
 });
 
 document.getElementById("elo").addEventListener("change", function() {
-	elo = this.value;
-	update(charts, time_control, elo, color, opening);
+	setExplorerFilters({ elo: this.value }, { source: "ui_elo" });
 });
 
 document.getElementById("color").addEventListener("change", function() {
-	color = this.value;
-	update(charts, time_control, elo, color, opening);
+	setExplorerFilters({ color: this.value }, { source: "ui_color" });
 });
 
 document.getElementById("opening").addEventListener("change", function() {
-    opening = this.value;
-    update(charts, time_control, elo, color, opening);
-})
+	// user explicitly picked an opening -> we load base PGN
+	setExplorerFilters({ opening: this.value }, { source: "ui_opening", setBasePGN: true });
+});
+
+// ===== keep opening filter in sync when PGN changes (board/sunburst) =====
+openingExplorerState.onPGNChange(({ pgn, source }) => {
+	const detected = detectOpeningFromPgnPrefix(pgn || "");
+
+	// reset case
+	if (!pgn || !pgn.trim()) {
+		if (opening !== "All") setExplorerFilters({ opening: "All" }, { source: "pgn_reset" });
+		return;
+	}
+
+	// when pgn evolves (board move / sunburst), update opening filter
+	// BUT do NOT load base PGN (otherwise you overwrite exact moves)
+	if (detected && detected !== opening) {
+		setExplorerFilters({ opening: detected }, { source: "pgn_detect", setBasePGN: false });
+	}
+});
 
 function init() {
 	let charts = {};
 	charts.openingExplorer = new OpeningExplorerVisualization(
 		"./data/openingExplorer.json",
-		document.getElementById("opening_explorer"), document.getElementById("chessboard")
+		document.getElementById("opening_explorer"),
+		document.getElementById("chessboard")
 	);
 	charts.popularity = new PopularityVisualization("./data/popularity.json", document.getElementById("popularity"));
 	charts.accuracy = new AccuracyVisualization("./data/accuracy.json", document.getElementById("accuracy"));

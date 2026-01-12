@@ -1,14 +1,28 @@
 function normalizePgnToMovetext(raw) {
-	const s = (raw ?? '').toString();
+	let s = (raw ?? '').toString();
 
 	// Remove PGN tag-pairs: lines like [Event "..."]
-	const withoutTags = s
+	s = s
 		.split('\n')
 		.filter((line) => !line.trim().startsWith('['))
-		.join('\n');
+		.join(' ');
 
-	// Collapse whitespace/newlines to a single space (simple + stable)
-	return withoutTags.replace(/\s+/g, ' ').trim();
+	// Strip comments / variations / nags
+	s = s.replace(/\{[^}]*\}/g, ' ');
+	s = s.replace(/\([^)]*\)/g, ' ');
+	s = s.replace(/\$\d+/g, ' ');
+
+	// Remove move numbers like "1." and "1..." and "1.."
+	s = s.replace(/\b\d+\.(\.\.)?\b/g, ' ');
+	s = s.replace(/\b\d+\.\.\.\b/g, ' ');
+
+	// Remove results and trailing "*"
+	s = s.replace(/\b(1-0|0-1|1\/2-1\/2|\*)\b/g, ' ');
+
+	// Collapse whitespace
+	s = s.replace(/\s+/g, ' ').trim();
+
+	return s;
 }
 
 class OpeningExplorerState extends EventTarget {

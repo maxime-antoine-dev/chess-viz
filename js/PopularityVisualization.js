@@ -2,7 +2,7 @@ import { Visualization } from './Visualization.js';
 
 class PopularityVisualization extends Visualization {
 	constructor(dataPath, container) {
-		super(dataPath, container, { top: 30, right: 30, bottom: 60, left: 60 });
+		super(dataPath, container, {top: 30, right: 30, bottom: 60, left: 60});
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
 	}
@@ -18,8 +18,6 @@ class PopularityVisualization extends Visualization {
 			this.bindMarks(filtered);
 		}).catch(err => console.error(err));
 	}
-
-	// Private methods
 
 	computeScales() {
 		const payload = this.data.payload;
@@ -50,7 +48,6 @@ class PopularityVisualization extends Visualization {
 	}
 
 	drawAxes() {
-		// X axis
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g').attr('class', 'x-axis')
 			.attr('transform', `translate(0, ${this.innerH})`)
@@ -65,7 +62,6 @@ class PopularityVisualization extends Visualization {
 			.style('fill', '#ffffff')
 			.text('Popularity (% of games played)');
 
-		// Y axis
 		const yAxisG = this.g.axes.selectAll('.y-axis').data([0]);
 		yAxisG.join('g').attr('class', 'y-axis')
 			.call(d3.axisLeft(this.scales.y).tickFormat(d => this.formatPercent(d, 0)));
@@ -105,25 +101,13 @@ class PopularityVisualization extends Visualization {
 	preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
-		const colorFilter = this.filters.color; 
+		const color = this.filters.color;
 
 		const band = this.data?.payload?.[cadence]?.[eloKey];
 		if (!Array.isArray(band)) return [];
 
 		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
-			.map(d => {
-				let winRateValue;
-				if (colorFilter === 1) winRateValue = d.win_rate[1];
-				else if (colorFilter === 2) winRateValue = d.win_rate[2]; 
-				else winRateValue = d.win_rate[0];
-
-				return {
-					name: d.name,
-					popularity: d.popularity,
-					win_rate: winRateValue,
-					color: d.color 
-				};
-			});
+			.map(d => ({ name: d.name, popularity: d.popularity, win_rate: d.win_rate[color] }));
 	}
 
 	bindMarks(data) {
@@ -132,11 +116,8 @@ class PopularityVisualization extends Visualization {
 		this.g.marks.selectAll('*').remove();
 
 		const crosses = this.g.marks.selectAll('.cross').data(data, d => d.name);
-
-		// exit
 		crosses.exit().transition().duration(150).style('opacity', 0).remove();
 
-		// enter
 		const enter = crosses.enter().append('g').attr('class', 'cross').style('opacity', 0);
 		enter.append('circle').attr('class', 'bubble');
 
@@ -148,42 +129,36 @@ class PopularityVisualization extends Visualization {
 		const isSelected = (d) =>
 			(this.filters.opening && this.filters.opening !== 'All' && d.name === this.filters.opening);
 
-		const getFill = (d) => {
-			if (isSelected(d)) return '#3777ffff';
-			return d.color === 'black' ? '#555555' : '#ffffff';
-		};
 		merged.select('circle')
-			.attr('fill', d => getFill(d))
+			.attr('fill', d => isSelected(d) ? '#3777ffff' : 'white')
 			.attr('fill-opacity', d => isSelected(d) ? 0.8 : 0.5)
 			.attr('r', d => isSelected(d) ? 8 : 6)
 			.attr('filter', d => isSelected(d) ? 'url(#opening-glow)' : null)
-			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : '#eee')
-			.attr('stroke-width', d => isSelected(d) ? 2 : 0.25)
+			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : 'none')
+			.attr('stroke-width', d => isSelected(d) ? 2 : 0)
 			.style('cursor', 'pointer')
 			.style('transition', 'fill 0.5s ease, transform 0.5s ease');
 
-		// Hover interaction
-		const color = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
+		const colorLabel = this.filters.color === 1 ? 'White' : this.filters.color === 2 ? 'Black' : 'Both';
 		merged
 			.on('mouseover', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
 					.attr('fill', '#3777ffff')
-					.attr('fill-opacity', 0.8)
+					.attr('fill-opacity', 0.8);
 
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
 
 				this.showTooltip(
-					`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`,
+					`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${colorLabel}): ${this.formatPercent(d.win_rate, 2)}`,
 					event
 				);
 			})
 			.on('mouseout', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
-					.attr('fill', d=> getFill(d))
+					.attr('fill', isSelected(d) ? '#3777ffff' : 'white')
 					.attr('filter', isSelected(d) ? 'url(#opening-glow)' : null)
-					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5)
-
+					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5);
 
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
@@ -191,6 +166,12 @@ class PopularityVisualization extends Visualization {
 				this.hideTooltip();
 			})
 			.on('click', (event, d) => {
+				if (typeof window !== "undefined" && typeof window.setExplorerFilters === "function") {
+					window.setExplorerFilters({ opening: d.name }, { source: "popularity_click", setBasePGN: true });
+					return;
+				}
+
+				// fallback old behavior
 				const select = document.getElementById('opening');
 				if (!select) return;
 				const hasOption = Array.from(select.options).some((o) => o.value === d.name);
