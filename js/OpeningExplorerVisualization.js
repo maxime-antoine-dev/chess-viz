@@ -227,7 +227,7 @@ class OpeningExplorerVisualization extends Visualization {
 		} else {
 			hierarchyData = {
 				name: "All Openings",
-				variant: "Root",
+				variant: "",
 				_isMove: false,
 				children: rawData.map((v) => this._sun_recursiveTransform(v)),
 			};
