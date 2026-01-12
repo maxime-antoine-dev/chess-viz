@@ -418,7 +418,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.append("path")
 			.attr("d", arc)
 			.style("cursor", "pointer")
-			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.name))
+			.style("fill", (d) => colorScale(d.ancestors().reverse()[1]?.data.move))
 			.style("stroke", "#0b1220")
 			.style("display", (d) => (d.depth > 0 ? null : "none"))
 			.on("click", (event, d) => this._sun_zoom(event, d, arc, radius))
