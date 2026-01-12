@@ -27,15 +27,13 @@ class OpeningExplorerVisualization extends Visualization {
 		this._pgnUnsub = null;
 
 		this._lastColorApplied = null;
-	}
 
-	#normKey(s) {
-		return (s ?? "")
-			.toString()
-			.trim()
-			.toLowerCase()
-			.normalize("NFD")
-			.replace(/[\u0300-\u036f]/g, "");
+		// ✅ stability: avoid rebuilding on every move + kill stale transitions safely
+		this._sunRenderToken = 0;
+		this._lastSunburstKey = null;
+
+		// ✅ subtree mode (opening != All): first move is the subtree root, must be stripped on focus
+		this._subtreeRootSan = null;
 	}
 
 	#setSelectValue(id, value) {
@@ -56,6 +54,22 @@ class OpeningExplorerVisualization extends Visualization {
 			this.measure();
 			this.setupSVG();
 			await this.initBoardWidget();
+
+			// ✅ Sunburst should react to board moves / reset WITHOUT rebuilding everything:
+			// focus (zoom) only, and ignore stale renders.
+			if (!this._pgnUnsub) {
+				this._pgnUnsub = openingExplorerState.onPGNChange(({ pgn }) => {
+					if (!this._sun_vis || !this._sun_arc || !this._sun_root) return;
+
+					const tokenAtCall = this._sunRenderToken;
+					const next = (pgn ?? "").trim();
+					if (next === (this._lastFocusedPgn ?? "")) return;
+
+					this._lastFocusedPgn = next;
+					this.#focusSunburstFromPgn(next, 250, tokenAtCall);
+				});
+			}
+
 			this.initialized = true;
 		}
 		return this;
@@ -76,14 +90,17 @@ class OpeningExplorerVisualization extends Visualization {
 					this._boardWidget?.setOrientation(ori);
 				}
 
-				await this.initSunburst();
-
-				// after rebuild, focus on current PGN if we have a move-tree
-				if (this.filters.opening !== "All") {
-					const pgnNow = (openingExplorerState.getPGN?.() ?? "").trim();
-					this._lastFocusedPgn = pgnNow;
-					this.#focusSunburstFromPgn(pgnNow, 0);
+				// ✅ Only rebuild when the dataset slice changes (not on every move)
+				const sunburstKey = `${this.filters.time_control}|${this.filters.elo}|${this.filters.opening}`;
+				if (sunburstKey !== this._lastSunburstKey) {
+					this._lastSunburstKey = sunburstKey;
+					await this.initSunburst();
 				}
+
+				// ✅ Always focus to current PGN (works for moves + reset)
+				const pgnNow = (openingExplorerState.getPGN?.() ?? "").trim();
+				this._lastFocusedPgn = pgnNow;
+				this.#focusSunburstFromPgn(pgnNow, 0, this._sunRenderToken);
 			})
 			.catch((err) => console.error("Render error:", err));
 	}
@@ -98,7 +115,6 @@ class OpeningExplorerVisualization extends Visualization {
 		let currentList = rawData;
 		let rootNode = null;
 
-		// We record only the portion that actually exists in the dataset
 		const matchedMoves = [];
 
 		for (const mv of moves) {
@@ -115,8 +131,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		if (!rootNode) return null;
 
-		// Focus inside the sunburst: since rootNode is rendered as the first child,
-		// we must NOT include its own move in the focus sequence.
+		// inside subtree, do NOT include the subtree root move in the focus path
 		const focusMoves = matchedMoves.slice(1).join(" ");
 
 		return { rootNode, focusMoves, openingPgn: pgn };
@@ -125,6 +140,20 @@ class OpeningExplorerVisualization extends Visualization {
 	async initSunburst() {
 		const chartEl = this.container;
 		if (!chartEl || !this.data) return;
+
+		// ✅ NEW RENDER TOKEN (invalidates old transitions/end-callbacks)
+		const myToken = ++this._sunRenderToken;
+
+		// ✅ interrupt any running transitions before destroying DOM
+		try {
+			d3.select(chartEl).selectAll("*").interrupt();
+		} catch (_) {}
+
+		// drop references to avoid using stale selections
+		this._sun_vis = null;
+		this._sun_arc = null;
+		this._sun_root = null;
+		this._current_root = null;
 
 		d3.select(chartEl).selectAll("*").remove();
 
@@ -156,8 +185,10 @@ class OpeningExplorerVisualization extends Visualization {
 		let hierarchyData = null;
 		let focusMoves = "";
 
+		// subtree root marker
+		this._subtreeRootSan = null;
+
 		if (opening && opening !== "All") {
-			// ✅ NEW: openingName -> pgn -> traverse by node.move
 			const traversal = this.#findTreeRootAndFocusFromOpening(rawData, opening);
 
 			if (!traversal?.rootNode) {
@@ -169,10 +200,11 @@ class OpeningExplorerVisualization extends Visualization {
 				return;
 			}
 
+			this._subtreeRootSan = traversal.rootNode?.move ?? null;
 			focusMoves = traversal.focusMoves;
 
 			hierarchyData = {
-				name: opening, // keep label in the center
+				name: opening,
 				variant: traversal.rootNode.variant || "Unknown",
 				_isMove: false,
 				children: [this._sun_recursiveTransform(traversal.rootNode)],
@@ -188,11 +220,10 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._sun_createVisualization(hierarchyData, this._sun_radius);
 
-		// ✅ NEW: after build, focus the node corresponding to the full opening PGN path
-		// focusMoves is the move sequence inside the subtree (excluding the rootNode.move)
-		if (opening && opening !== "All") {
+		// ✅ focus only if still the current render
+		if (myToken === this._sunRenderToken && opening && opening !== "All") {
 			this._lastFocusedPgn = focusMoves;
-			this.#focusSunburstFromPgn(focusMoves, 0);
+			this.#focusSunburstFromPgn(focusMoves, 0, myToken);
 		}
 	}
 
@@ -233,6 +264,8 @@ class OpeningExplorerVisualization extends Visualization {
 		if (!Array.isArray(sans) || sans.length === 0) return this._sun_root;
 
 		let cur = this._sun_root;
+
+		// if in subtree mode, start at subtree root (first child)
 		if (this.filters.opening && this.filters.opening !== "All") {
 			cur = cur.children?.[0] ?? cur;
 		}
@@ -246,11 +279,20 @@ class OpeningExplorerVisualization extends Visualization {
 		return cur;
 	}
 
-	#applyZoomToNode(d, arc, radius, durationMs) {
+	#applyZoomToNode(d, arc, radius, durationMs, token) {
+		// ✅ ignore stale transitions
+		if (token !== this._sunRenderToken) return;
+		if (!this._sun_vis || !this._sun_x || !this._sun_y) return;
+
+		// ✅ cancel any running zoom transition before starting a new one
+		try {
+			this._sun_vis.interrupt();
+		} catch (_) {}
+
 		this._current_root = d;
-		this._sun_vis
-			.selectAll("path")
-			.style("display", (node) => (node.ancestors().includes(d) ? null : node.style?.("display")));
+
+		// make everything visible before re-hiding at end (stability)
+		this._sun_vis.selectAll("path").style("display", null);
 
 		const transition = this._sun_vis.transition().duration(durationMs);
 
@@ -262,31 +304,43 @@ class OpeningExplorerVisualization extends Visualization {
 			.selectAll("path")
 			.transition(transition)
 			.attrTween("d", (node) => (t) => {
+				// ✅ if a new render happened mid-transition, stop mutating scales
+				if (token !== this._sunRenderToken) return arc(node);
 				this._sun_x.domain(xd(t));
 				this._sun_y.domain(yd(t)).range(yr(t));
 				return arc(node);
 			});
 
 		transition.on("end", () => {
+			if (token !== this._sunRenderToken) return;
 			this._sun_vis
 				.selectAll("path")
 				.style("display", (node) => (node.ancestors().includes(d) ? null : "none"));
 		});
 	}
 
-	#focusSunburstFromPgn(pgnMovetext, durationMs = 350) {
+	#focusSunburstFromPgn(pgnMovetext, durationMs = 350, token = this._sunRenderToken) {
+		if (token !== this._sunRenderToken) return;
 		if (!this._sun_vis || !this._sun_arc || !this._sun_root) return;
 
 		if (!pgnMovetext || !pgnMovetext.trim()) {
-			this.#applyZoomToNode(this._sun_root, this._sun_arc, this._sun_radius, durationMs);
+			this.#applyZoomToNode(this._sun_root, this._sun_arc, this._sun_radius, durationMs, token);
 			return;
 		}
 
-		const sans = this.#tokenizeMovetextToSans(pgnMovetext);
+		let sans = this.#tokenizeMovetextToSans(pgnMovetext);
+
+		// ✅ subtree mode: strip the subtree root move if present
+		if (this.filters.opening && this.filters.opening !== "All") {
+			if (this._subtreeRootSan && sans[0] === this._subtreeRootSan) {
+				sans = sans.slice(1);
+			}
+		}
+
 		const target = this.#findNodeForSansSequence(sans);
 		if (!target) return;
 
-		this.#applyZoomToNode(target, this._sun_arc, this._sun_radius, durationMs);
+		this.#applyZoomToNode(target, this._sun_arc, this._sun_radius, durationMs, token);
 	}
 
 	_sun_zoom(event, d, arc, radius) {
@@ -303,15 +357,19 @@ class OpeningExplorerVisualization extends Visualization {
 			.filter((n) => n?.data?._isMove)
 			.map((n) => n.data.name);
 
-		// If user clicks back to (sub)root => reset board (PGN empty)
+		// ✅ CRITICAL STABILITY FIX:
+		// If user goes back to root and we trigger opening=All (=> rerender),
+		// do NOT zoom on stale nodes.
 		if (moves.length === 0) {
 			openingExplorerState.setPGN("", { source: "sunburst_zoom" });
 			this.#setSelectValue("opening", "All");
-		} else {
-			openingExplorerState.setPGN(moves.join(" "), { source: "sunburst_zoom" });
+			return;
 		}
 
-		this.#applyZoomToNode(d, arc, radius, 750);
+		openingExplorerState.setPGN(moves.join(" "), { source: "sunburst_zoom" });
+
+		// safe zoom (token-guarded)
+		this.#applyZoomToNode(d, arc, radius, 650, this._sunRenderToken);
 	}
 
 	_sun_createVisualization(json, radius) {
