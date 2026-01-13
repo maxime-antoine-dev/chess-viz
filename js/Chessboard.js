@@ -4,20 +4,20 @@ const PIECE_IMG_BASE_URL = 'img/pieces/';
 
 const PIECE_IMAGES = {
 	w: {
-		k: `${PIECE_IMG_BASE_URL}wk.png`,
-		q: `${PIECE_IMG_BASE_URL}wq.png`,
-		r: `${PIECE_IMG_BASE_URL}wr.png`,
-		b: `${PIECE_IMG_BASE_URL}wb.png`,
-		n: `${PIECE_IMG_BASE_URL}wn.png`,
-		p: `${PIECE_IMG_BASE_URL}wp.png`,
+		k: `${PIECE_IMG_BASE_URL}wK.png`,
+		q: `${PIECE_IMG_BASE_URL}wQ.png`,
+		r: `${PIECE_IMG_BASE_URL}wR.png`,
+		b: `${PIECE_IMG_BASE_URL}wB.png`,
+		n: `${PIECE_IMG_BASE_URL}wN.png`,
+		p: `${PIECE_IMG_BASE_URL}wP.png`,
 	},
 	b: {
-		k: `${PIECE_IMG_BASE_URL}bk.png`,
-		q: `${PIECE_IMG_BASE_URL}bq.png`,
-		r: `${PIECE_IMG_BASE_URL}br.png`,
-		b: `${PIECE_IMG_BASE_URL}bb.png`,
-		n: `${PIECE_IMG_BASE_URL}bn.png`,
-		p: `${PIECE_IMG_BASE_URL}bp.png`,
+		k: `${PIECE_IMG_BASE_URL}bK.png`,
+		q: `${PIECE_IMG_BASE_URL}bQ.png`,
+		r: `${PIECE_IMG_BASE_URL}bR.png`,
+		b: `${PIECE_IMG_BASE_URL}bB.png`,
+		n: `${PIECE_IMG_BASE_URL}bN.png`,
+		p: `${PIECE_IMG_BASE_URL}bP.png`,
 	},
 };
 
