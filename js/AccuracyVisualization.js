@@ -2,7 +2,8 @@ import { Visualization } from './Visualization.js';
 
 class AccuracyVisualization extends Visualization {
 	constructor(dataPath, container) {
-		super(dataPath, container, {top: 20, right: 30, bottom: 60, left: 60});
+		super(dataPath, container, { top: 20, right: 120, bottom: 60, left: 60 });
+		this._legendGradientId = `acc-legend-gradient-${Math.random().toString(36).slice(2)}`;
 	}
 
 	render(time_control, elo, color, opening) {
@@ -14,10 +15,10 @@ class AccuracyVisualization extends Visualization {
 
 			const filtered = this.preprocess();
 			this.drawSquares(filtered);
+
+			this.drawLegend();
 		}).catch(err => console.error(err));
 	}
-
-	// === Private methods ===
 
 	computeScales() {
 		const domain = d3.range(0, 100, 10); // [0,10,...,90]
@@ -37,6 +38,11 @@ class AccuracyVisualization extends Visualization {
 		this.scales.color = d3.scaleSequential()
 			.interpolator(d3.interpolateRdYlGn)
 			.domain([0, 1]);
+
+		// Legend scale (0 -> bottom, 1 -> top)
+		this.scales.legendY = d3.scaleLinear()
+			.domain([0, 1])
+			.range([this.innerH, 0]);
 	}
 
 	drawAxes() {
@@ -95,6 +101,78 @@ class AccuracyVisualization extends Visualization {
 			.text("Mean accuracy after opening");
 	}
 
+	drawLegend() {
+		if (!this.svg || !this.root || !this.scales?.legendY) return;
+
+		// gradient
+		let defs = this.svg.select('defs');
+		if (defs.empty()) defs = this.svg.append('defs');
+
+		let grad = defs.select(`#${this._legendGradientId}`);
+		if (grad.empty()) {
+			grad = defs.append('linearGradient')
+				.attr('id', this._legendGradientId)
+				.attr('x1', '0%').attr('y1', '100%')  // bottom
+				.attr('x2', '0%').attr('y2', '0%');   // top
+
+			// 0 = red, 1 = green
+			const stops = d3.range(0, 1.0001, 0.1);
+			grad.selectAll('stop')
+				.data(stops)
+				.enter()
+				.append('stop')
+				.attr('offset', d => `${d * 100}%`)
+				.attr('stop-color', d => d3.interpolateRdYlGn(d));
+		}
+
+		const legendW = 14;
+		const legendH = this.innerH;
+		const pad = 18;
+		const x = this.innerW + pad;
+		const y = 0;
+
+		const gLegend = this.root.selectAll('.acc-legend').data([0]).join('g')
+			.attr('class', 'acc-legend')
+			.attr('transform', `translate(${x},${y})`);
+
+		// Title
+		gLegend.selectAll('.acc-legend-title').data([0]).join('text')
+			.attr('class', 'acc-legend-title')
+			.attr('x', legendW / 2)
+			.attr('y', -10)
+			.attr('text-anchor', 'middle')
+			.style('font-size', '12px')
+			.style('fill', '#ffffff')
+			.text('Win rate');
+
+		// Gradient bar
+		gLegend.selectAll('rect.acc-legend-bar').data([0]).join('rect')
+			.attr('class', 'acc-legend-bar')
+			.attr('x', 0)
+			.attr('y', 0)
+			.attr('width', legendW)
+			.attr('height', legendH)
+			.attr('rx', 4)
+			.attr('ry', 4)
+			.style('fill', `url(#${this._legendGradientId})`)
+			.style('stroke', 'rgba(255,255,255,0.25)')
+			.style('stroke-width', 1);
+
+		// Axis
+		const axis = d3.axisRight(this.scales.legendY)
+			.ticks(5)
+			.tickFormat(d => `${Math.round(d * 100)}%`);
+
+		const gAxis = gLegend.selectAll('g.acc-legend-axis').data([0]).join('g')
+			.attr('class', 'acc-legend-axis')
+			.attr('transform', `translate(${legendW + 8},0)`)
+			.call(axis);
+
+		// Style axis
+		gAxis.selectAll('text').style('fill', '#ffffff').style('font-size', '11px');
+		gAxis.selectAll('path, line').style('stroke', 'rgba(255,255,255,0.55)');
+	}
+
 	preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
@@ -137,7 +215,7 @@ class AccuracyVisualization extends Visualization {
 			.attr('y', d => this.scales.y(d.y))
 			.attr('width', () => this.scales.x.bandwidth())
 			.attr('height', () => this.scales.y.bandwidth())
-			.style('fill', d => d.games === 0 ? '#2d3a58ff' : this.scales.color(d.value))
+			.style('fill', d => d.games < 10 ? '#2d3a58ff' : this.scales.color(d.value))
 			.style('stroke', 'none');
 
 		this.g.marks.selectAll('rect')

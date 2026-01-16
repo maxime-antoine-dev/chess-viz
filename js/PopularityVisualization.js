@@ -5,6 +5,10 @@ class PopularityVisualization extends Visualization {
 		super(dataPath, container, { top: 30, right: 30, bottom: 60, left: 60 });
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
+
+		// Always ignore openings with < 10 games
+		this._minGames = 15;
+		this._fixedYDomain = null;
 	}
 
 	render(time_control, elo, color, opening) {
@@ -13,6 +17,9 @@ class PopularityVisualization extends Visualization {
 			this.filters.elo = elo;
 			this.filters.color = Number.parseInt(color);
 			this.filters.opening = opening;
+			this.measure();
+			this.computeScales();
+			this.drawAxes();
 
 			const filtered = this.preprocess();
 			this.bindMarks(filtered);
@@ -24,8 +31,6 @@ class PopularityVisualization extends Visualization {
 	computeScales() {
 		const payload = this.data.payload;
 		let maxPop = -Infinity;
-		let minWin = Infinity;
-		let maxWin = -Infinity;
 
 		for (const cadenceKey in payload) {
 			const cadence = payload[cadenceKey];
@@ -33,20 +38,53 @@ class PopularityVisualization extends Visualization {
 				const band = cadence[eloKey];
 				band.forEach(d => {
 					maxPop = Math.max(maxPop, d.popularity);
-					d.win_rate.forEach(w => {
-						minWin = Math.min(minWin, w);
-						maxWin = Math.max(maxWin, w);
-					});
 				});
 			}
 		}
 
 		if (!Number.isFinite(maxPop) || maxPop <= 0) maxPop = 1;
-		if (!Number.isFinite(minWin)) minWin = 0;
-		if (!Number.isFinite(maxWin)) maxWin = 1;
 
-		this.scales.x = d3.scaleLinear().domain([0, maxPop * 1.1]).range([0, this.innerW]);
-		this.scales.y = d3.scaleLinear().domain([minWin * 0.95, maxWin * 1.05]).range([this.innerH, 0]);
+		this.scales.x = d3.scaleLinear()
+			.domain([0, maxPop * 1.1])
+			.range([0, this.innerW]);
+
+		// Compute fixed Y domain once, ignoring count < 10
+		if (!this._fixedYDomain) {
+			let minWin = Infinity;
+			let maxWin = -Infinity;
+
+			for (const cadenceKey in payload) {
+				const cadence = payload[cadenceKey];
+				for (const eloKey in cadence) {
+					const band = cadence[eloKey];
+					if (!Array.isArray(band)) continue;
+
+					for (const d of band) {
+						if (!d || !d.win_rate) continue;
+
+						const count = Number.isFinite(d.count) ? d.count : 0;
+						if (count < this._minGames) continue;
+
+						// cover all possible color series to keep axis stable even when color filter changes
+						for (const w of d.win_rate) {
+							if (Number.isFinite(w)) {
+								minWin = Math.min(minWin, w);
+								maxWin = Math.max(maxWin, w);
+							}
+						}
+					}
+				}
+			}
+
+			console.log(minWin, maxWin)
+
+			this._fixedYDomain = [minWin, maxWin]
+		}
+
+		// Always rebuild Y scale with the same domain (range may depend on size)
+		this.scales.y = d3.scaleLinear()
+			.domain(this._fixedYDomain)
+			.range([this.innerH, 0]);
 	}
 
 	drawAxes() {
@@ -105,23 +143,29 @@ class PopularityVisualization extends Visualization {
 	preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
-		const colorFilter = this.filters.color; 
+		const colorFilter = this.filters.color;
 
 		const band = this.data?.payload?.[cadence]?.[eloKey];
 		if (!Array.isArray(band)) return [];
 
-		return band.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
+		return band
+			.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
+			.filter(d => {
+				const count = Number.isFinite(d.count) ? d.count : 0;
+				return count >= this._minGames;
+			})
 			.map(d => {
 				let winRateValue;
 				if (colorFilter === 1) winRateValue = d.win_rate[1];
-				else if (colorFilter === 2) winRateValue = d.win_rate[2]; 
+				else if (colorFilter === 2) winRateValue = d.win_rate[2];
 				else winRateValue = d.win_rate[0];
 
 				return {
 					name: d.name,
 					popularity: d.popularity,
 					win_rate: winRateValue,
-					color: d.color 
+					color: d.color,
+					count: Number.isFinite(d.count) ? d.count : 0
 				};
 			});
 	}
@@ -152,6 +196,7 @@ class PopularityVisualization extends Visualization {
 			if (isSelected(d)) return '#3777ffff';
 			return d.color === 'black' ? '#555555' : '#ffffff';
 		};
+
 		merged.select('circle')
 			.attr('fill', d => getFill(d))
 			.attr('fill-opacity', d => isSelected(d) ? 0.8 : 0.5)
@@ -168,22 +213,24 @@ class PopularityVisualization extends Visualization {
 			.on('mouseover', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
 					.attr('fill', '#3777ffff')
-					.attr('fill-opacity', 0.8)
+					.attr('fill-opacity', 0.8);
 
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1.5)`);
 
 				this.showTooltip(
-					`<strong>${d.name}</strong><br>Popularity: ${this.formatPercent(d.popularity, 2)}<br>Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}`,
+					`<strong>${d.name}</strong><br>` +
+					`Popularity: ${this.formatPercent(d.popularity, 2)}<br>` +
+					`Win rate (${color}): ${this.formatPercent(d.win_rate, 2)}<br>` +
+					`Games: ${d.count}`,
 					event
 				);
 			})
 			.on('mouseout', (event, d) => {
 				d3.select(event.currentTarget).select('circle')
-					.attr('fill', d=> getFill(d))
+					.attr('fill', d => getFill(d))
 					.attr('filter', isSelected(d) ? 'url(#opening-glow)' : null)
-					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5)
-
+					.attr('fill-opacity', isSelected(d) ? 0.8 : 0.5);
 
 				d3.select(event.currentTarget)
 					.attr('transform', `translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)}) scale(1)`);
