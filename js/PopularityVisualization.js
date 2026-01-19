@@ -8,7 +8,6 @@ class PopularityVisualization extends Visualization {
 
 		// Always ignore openings with < 10 games
 		this._minGames = 15;
-		this._fixedYDomain = null;
 	}
 
 	render(time_control, elo, color, opening) {
@@ -17,9 +16,6 @@ class PopularityVisualization extends Visualization {
 			this.filters.elo = elo;
 			this.filters.color = Number.parseInt(color);
 			this.filters.opening = opening;
-			this.measure();
-			this.computeScales();
-			this.drawAxes();
 
 			const filtered = this.preprocess();
 			this.bindMarks(filtered);
@@ -31,59 +27,42 @@ class PopularityVisualization extends Visualization {
 	computeScales() {
 		const payload = this.data.payload;
 		let maxPop = -Infinity;
+		let minWin = Infinity;
+		let maxWin = -Infinity;
 
 		for (const cadenceKey in payload) {
 			const cadence = payload[cadenceKey];
 			for (const eloKey in cadence) {
 				const band = cadence[eloKey];
-				band.forEach(d => {
+				for (const d of band) {
+					// If count < minGames, skip
+					const count = Number.isFinite(d.count) ? d.count : 0;
+					if (count < this._minGames) continue;
+
+					// Find max popularity
 					maxPop = Math.max(maxPop, d.popularity);
-				});
-			}
-		}
 
-		if (!Number.isFinite(maxPop) || maxPop <= 0) maxPop = 1;
-
-		this.scales.x = d3.scaleLinear()
-			.domain([0, maxPop * 1.1])
-			.range([0, this.innerW]);
-
-		// Compute fixed Y domain once, ignoring count < 10
-		if (!this._fixedYDomain) {
-			let minWin = Infinity;
-			let maxWin = -Infinity;
-
-			for (const cadenceKey in payload) {
-				const cadence = payload[cadenceKey];
-				for (const eloKey in cadence) {
-					const band = cadence[eloKey];
-					if (!Array.isArray(band)) continue;
-
-					for (const d of band) {
-						if (!d || !d.win_rate) continue;
-
-						const count = Number.isFinite(d.count) ? d.count : 0;
-						if (count < this._minGames) continue;
-
-						// cover all possible color series to keep axis stable even when color filter changes
-						for (const w of d.win_rate) {
-							if (Number.isFinite(w)) {
-								minWin = Math.min(minWin, w);
-								maxWin = Math.max(maxWin, w);
-							}
-						}
-					}
+					// Find min/max win rate
+					const winRate = d.win_rate;
+					minWin = Math.min(minWin, winRate[1], winRate[2]);
+					maxWin = Math.max(maxWin, winRate[1], winRate[2]);
 				}
 			}
-
-			console.log(minWin, maxWin)
-
-			this._fixedYDomain = [minWin, maxWin]
 		}
 
-		// Always rebuild Y scale with the same domain (range may depend on size)
+		// Handle edge cases
+		if (!Number.isFinite(maxPop) || maxPop <= 0) maxPop = 1;
+		if (!Number.isFinite(minWin) || !Number.isFinite(maxWin) || minWin >= maxWin) {
+			minWin = 0;
+			maxWin = 1;
+		}
+
+		// Define scales
+		this.scales.x = d3.scaleLinear()
+			.domain([0, maxPop])
+			.range([0, this.innerW]);
 		this.scales.y = d3.scaleLinear()
-			.domain(this._fixedYDomain)
+			.domain([minWin, maxWin])
 			.range([this.innerH, 0]);
 	}
 
