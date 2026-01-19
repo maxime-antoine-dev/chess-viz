@@ -7,33 +7,22 @@ class OpeningExplorerVisualization extends Visualization {
 	constructor(data, container, chessboardContainer) {
 		super(data, container, { top: 0, right: 0, bottom: 0, left: 0 });
 		this.chessboardContainer = chessboardContainer;
-
 		this._boardWidget = null;
-
 		this.initialized = false;
-
 		this._sun_vis = null;
 		this._sun_radius = 0;
-
 		this._sun_x = null;
 		this._sun_y = null;
 		this._sun_arc = null;
 		this._sun_root = null;
 		this._current_root = null;
-
 		this.last_hovered_node = null;
-
 		this._lastFocusedPgn = null;
 		this._pgnUnsub = null;
-
 		this._lastColorApplied = null;
 		this._winRateBar = null;
-
-		// stability: avoid rebuilding on every move + kill stale transitions safely
 		this._sunRenderToken = 0;
 		this._lastSunburstKey = null;
-
-		// subtree mode (opening != All): first move is the subtree root, must be stripped on focus
 		this._subtreeRootSan = null;
 	}
 
@@ -49,7 +38,7 @@ class OpeningExplorerVisualization extends Visualization {
 		window.__suppressOpeningToPGN = false;
 	}
 
-	// "1. e4 e5 2. Nf3 Nc6 3. Bb5"
+	// "e4 e5 Nf3 Nf6 Bb5" => "1. e4 e5 2. Nf3 Nc6 3. Bb5"
 	#formatSansMovesToNumberedPgn(moves) {
 		const mv = Array.isArray(moves) ? moves.filter(Boolean) : [];
 		if (mv.length === 0) return "";
@@ -70,8 +59,7 @@ class OpeningExplorerVisualization extends Visualization {
 			this.setupSVG();
 			await this.initBoardWidget();
 
-			// Sunburst should react to board moves / reset WITHOUT rebuilding everything:
-			// focus (zoom) only, and ignore stale renders.
+			// Sunburst react to board moves : reset without rebuilding everything:
 			if (!this._pgnUnsub) {
 				this._pgnUnsub = openingExplorerState.onPGNChange(({ pgn }) => {
 					if (!this._sun_vis || !this._sun_arc || !this._sun_root) return;
@@ -124,10 +112,8 @@ class OpeningExplorerVisualization extends Visualization {
 	#findTreeRootAndFocusFromOpening(rawData, openingName) {
 		const pgn = (OPENING_FIRST_MOVES?.[openingName] ?? "").trim();
 		if (!pgn) return null;
-
 		const moves = this.#tokenizeMovetextToSans(pgn);
 		if (!moves.length) return null;
-
 		let currentList = rawData;
 		let rootNode = null;
 
@@ -135,19 +121,15 @@ class OpeningExplorerVisualization extends Visualization {
 
 		for (const mv of moves) {
 			if (!Array.isArray(currentList) || currentList.length === 0) break;
-
 			const found = currentList.find((n) => n?.move === mv);
 			if (!found) break;
-
 			if (!rootNode) rootNode = found;
 			matchedMoves.push(mv);
-
 			currentList = found.children ?? [];
 		}
 
 		if (!rootNode) return null;
 
-		// inside subtree, do NOT include the subtree root move in the focus path
 		const focusMoves = matchedMoves.slice(1).join(" ");
 
 		return { rootNode, focusMoves, openingPgn: pgn };
@@ -284,7 +266,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		let cur = this._sun_root;
 
-		// if in subtree mode, start at subtree root (first child)
+		// if in subtree mode, start at subtree root
 		if (this.filters.opening && this.filters.opening !== "All") {
 			cur = cur.children?.[0] ?? cur;
 		}
@@ -299,7 +281,6 @@ class OpeningExplorerVisualization extends Visualization {
 	}
 
 	#applyZoomToNode(d, arc, radius, durationMs, token) {
-		// ignore stale transitions
 		if (token !== this._sunRenderToken) return;
 		if (!this._sun_vis || !this._sun_x || !this._sun_y) return;
 
@@ -310,7 +291,7 @@ class OpeningExplorerVisualization extends Visualization {
 
 		this._current_root = d;
 
-		// make everything visible before re-hiding at end (stability)
+		// make everything visible before re-hiding at end
 		this._sun_vis.selectAll("path").style("display", null);
 
 		const transition = this._sun_vis.transition().duration(durationMs);
@@ -384,8 +365,7 @@ class OpeningExplorerVisualization extends Visualization {
 			.filter((n) => n?.data?._isMove)
 			.map((n) => n.data.move);
 
-		// If user goes back to root and we trigger opening=All (=> rerender),
-		// do NOT zoom on stale nodes.
+		// If user goes back to root and we trigger opening=All => rerender,
 		if (moves.length === 0) {
 			openingExplorerState.setPGN("", { source: "sunburst_zoom" });
 			this.#setSelectValue("opening", "All");
@@ -395,7 +375,6 @@ class OpeningExplorerVisualization extends Visualization {
 		const numbered = this.#formatSansMovesToNumberedPgn(moves);
 		openingExplorerState.setPGN(numbered, { source: "sunburst_zoom" });
 
-		// safe zoom (token-guarded)
 		this.#applyZoomToNode(d, arc, radius, 650, this._sunRenderToken);
 	}
 
@@ -532,7 +511,7 @@ class OpeningExplorerVisualization extends Visualization {
 	}
 
 
-	// === Chessboard ===
+	// Chessboard
 
 	async initBoardWidget() {
 		const boardEl = document.getElementById("oe-board");
@@ -586,7 +565,6 @@ class OpeningExplorerVisualization extends Visualization {
 				? this.filters.opening
 				: "All Openings";
 
-		// Default
 		let variant = "";
 		let title = openingTitle;
 

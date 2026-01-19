@@ -1,7 +1,7 @@
 .cbw-board {
 	height: 100%;
 	aspect-ratio: 1 / 1;
-	position: relative; /* required for absolute layers */
+	position: relative;
 	border-radius: 10px;
 	overflow: hidden;
 	user-select: none;
@@ -85,7 +85,6 @@
 	line-height: 1;
 }
 
-/* disable animation for PGN jumps / reset / flip */
 .cbw-no-anim .cbw-piece {
 	transition: none !important;
 }

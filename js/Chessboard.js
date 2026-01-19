@@ -21,11 +21,6 @@ const PIECE_IMAGES = {
 	},
 };
 
-const PIECES_FALLBACK = {
-	w: { k: '♔', q: '♕', r: '♖', b: '♗', n: '♘', p: '♙' },
-	b: { k: '♚', q: '♛', r: '♜', b: '♝', n: '♞', p: '♟' },
-};
-
 class ChessboardWidget {
 	/**
 	 * @param {{
@@ -379,33 +374,19 @@ class ChessboardWidget {
 			const src = this.#getPieceImageSrc(piece);
 
 			if (!el) {
-				if (src) {
-					const img = document.createElement('img');
-					img.className = 'cbw-piece';
-					img.src = src;
-					img.alt = `${piece.color}${piece.type}`;
-					img.draggable = false;
-					img.style.pointerEvents = 'none';
-					img.dataset.square = sq;
-					el = img;
-				} else {
-					const span = document.createElement('span');
-					span.className = 'cbw-piece cbw-piece-fallback';
-					span.textContent = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
-					span.style.pointerEvents = 'none';
-					span.dataset.square = sq;
-					el = span;
-				}
+				const img = document.createElement('img');
+				img.className = 'cbw-piece';
+				img.src = src;
+				img.alt = `${piece.color}${piece.type}`;
+				img.draggable = false;
+				img.style.pointerEvents = 'none';
+				img.dataset.square = sq;
+				el = img;
 
 				this._piecesLayer.appendChild(el);
 				this._pieceElsBySquare.set(sq, el);
 			} else {
-				if (el.tagName === 'IMG') {
-					if (src && el.src !== src) el.src = src;
-				} else {
-					const txt = PIECES_FALLBACK[piece.color]?.[piece.type] ?? '';
-					if (el.textContent !== txt) el.textContent = txt;
-				}
+				if (src && el.src !== src) el.src = src;
 			}
 
 			const { col, row } = this.#squareToGridXY(sq);
@@ -450,7 +431,6 @@ class ChessboardWidget {
 	}
 
 	#onSquareClick(square) {
-		// ✅ don’t allow clicks while animating external PGN
 		if (this._isAnimating) return;
 
 		const piece = this._game.get(square);
@@ -490,10 +470,7 @@ class ChessboardWidget {
 
 		this._lastMove = { from: move.from, to: move.to };
 		this.#clearSelection();
-
-		// animate user move
 		this.#renderBoard(true);
-
 		this.#renderStatus();
 		this.#commitBoardToStore();
 	}
