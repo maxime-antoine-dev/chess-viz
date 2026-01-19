@@ -5,8 +5,7 @@ class PopularityVisualization extends Visualization {
 		super(dataPath, container, { top: 30, right: 30, bottom: 60, left: 60 });
 		this.crossSize = 3;
 		this.scales = { x: null, y: null };
-
-		// Always ignore openings with < 10 games
+		// Always ignore openings with < 15 games
 		this._minGames = 15;
 	}
 

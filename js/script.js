@@ -13,7 +13,7 @@ const charts = init();
 update(charts, time_control, elo, color, opening);
 updateBoardDetails();
 
-// ===== central helpers =====
+// Helpers
 
 function detectOpeningFromPgnPrefix(pgnMovetext) {
 	const entries = Object.entries(OPENING_FIRST_MOVES || {})
@@ -32,7 +32,7 @@ function syncSelect(id, value) {
 	if (el.value !== value) el.value = value;
 }
 
-// ===== details panel (title/variant/pgn next to buttons) =====
+// Details panel
 
 function updateBoardDetails() {
 	const titleEl = document.getElementById("oe-opening-title");
@@ -59,13 +59,12 @@ function setExplorerFilters(partial = {}, meta = {}) {
 	if (partial.color != null) color = String(partial.color);
 	if (partial.opening != null) opening = String(partial.opening);
 
-	// keep UI in sync (no dispatch needed)
+	// keep UI in sync
 	syncSelect("time_control", time_control);
 	syncSelect("elo", elo);
 	syncSelect("color", color);
 	syncSelect("opening", opening);
 
-	// IMPORTANT:
 	// only when the opening is explicitly selected (UI/popularity) we load its base PGN
 	if (meta.setBasePGN && partial.opening != null) {
 		const pgn = (opening && opening !== "All") ? (OPENING_FIRST_MOVES?.[opening] ?? "") : "";
@@ -87,7 +86,7 @@ function setExplorerPGN(pgn, meta = {}) {
 window.setExplorerFilters = setExplorerFilters;
 window.setExplorerPGN = setExplorerPGN;
 
-// ===== UI listeners (keep your behavior) =====
+//  UI listeners
 
 document.getElementById("time_control").addEventListener("change", function () {
 	setExplorerFilters({ time_control: this.value }, { source: "ui_time" });
@@ -106,7 +105,7 @@ document.getElementById("opening").addEventListener("change", function () {
 	setExplorerFilters({ opening: this.value }, { source: "ui_opening", setBasePGN: true });
 });
 
-// ===== keep opening filter in sync when PGN changes (board/sunburst) =====
+// keep opening filter in sync when PGN changes (board/sunburst)
 openingExplorerState.onPGNChange(({ pgn, source }) => {
 	const detected = detectOpeningFromPgnPrefix(pgn || "");
 
@@ -118,7 +117,6 @@ openingExplorerState.onPGNChange(({ pgn, source }) => {
 	}
 
 	// when pgn evolves (board move / sunburst), update opening filter
-	// BUT do NOT load base PGN (otherwise you overwrite exact moves)
 	if (detected && detected !== opening) {
 		setExplorerFilters({ opening: detected }, { source: "pgn_detect", setBasePGN: false });
 		updateBoardDetails();
