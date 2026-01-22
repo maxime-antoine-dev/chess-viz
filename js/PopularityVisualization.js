@@ -59,7 +59,7 @@ class PopularityVisualization extends Visualization {
 				const band = cadence[eloKey];
 				for (const d of band) {
 
-					// Ignore openings with too few games
+					
 					const count = Number.isFinite(d.count) ? d.count : 0;
 					if (count < this._minGames) continue;
 
@@ -142,7 +142,7 @@ class PopularityVisualization extends Visualization {
 			? this.svg.append('defs')
 			: this.svg.select('defs');
 
-		// Do not recreate the filter if it already exists
+	
 		if (!defs.select('#opening-glow').empty()) return;
 
 		const filter = defs.append('filter')
@@ -172,10 +172,10 @@ class PopularityVisualization extends Visualization {
 		if (!Array.isArray(band)) return [];
 
 		return band
-			// Keep valid entries only
+			
 			.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
 
-			// Apply minimum games threshold
+			
 			.filter(d => {
 				const count = Number.isFinite(d.count) ? d.count : 0;
 				return count >= this._minGames;
