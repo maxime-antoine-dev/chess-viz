@@ -204,14 +204,12 @@ class PopularityVisualization extends Visualization {
 	bindMarks(data) {
 		this.#ensureGlowFilter();
 
-		// Clear previous marks
 		this.g.marks.selectAll('*').remove();
-
 		const crosses = this.g.marks
 			.selectAll('.cross')
 			.data(data, d => d.name);
 
-		// Remove old points
+		
 		crosses.exit()
 			.transition()
 			.duration(150)
@@ -242,7 +240,6 @@ class PopularityVisualization extends Visualization {
 			this.filters.opening !== 'All' &&
 			d.name === this.filters.opening;
 
-		// Fill color logic
 		const getFill = d => {
 			if (isSelected(d)) return '#3777ffff';
 			return d.color === 'black' ? '#555555' : '#ffffff';
@@ -295,7 +292,7 @@ class PopularityVisualization extends Visualization {
 				this.hideTooltip();
 			})
 			.on('click', (event, d) => {
-				// Select opening via the dropdown
+				
 				const select = document.getElementById('opening');
 				if (!select) return;
 
