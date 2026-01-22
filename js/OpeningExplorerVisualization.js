@@ -224,6 +224,7 @@ class OpeningExplorerVisualization extends Visualization {
 		}
 	}
 
+	// Recursively transform raw data into hierarchical format for d3.hierarchy
 	_sun_recursiveTransform(data) {
 		const isMove = !!data.move;
 		const node = {
@@ -351,6 +352,7 @@ class OpeningExplorerVisualization extends Visualization {
 		this.#applyZoomToNode(target, this._sun_arc, this._sun_radius, durationMs, token);
 	}
 
+	// this function applies zoom to a given node in the sunburst it is used on click events
 	_sun_zoom(event, d, arc, radius) {
 		event.stopPropagation();
 
@@ -393,6 +395,7 @@ class OpeningExplorerVisualization extends Visualization {
 		d3.partition()(root);
 		const nodes = root.descendants().filter((d) => d.depth && d.x1 - d.x0 > 0.001);
 
+		// define arc generator avoiding negative angles
 		const arc = d3
 			.arc()
 			.startAngle((d) => Math.max(0, Math.min(2 * Math.PI, this._sun_x(d.x0))))
@@ -403,6 +406,8 @@ class OpeningExplorerVisualization extends Visualization {
 		this._sun_arc = arc;
 
 		const colorScale = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, root.children?.length + 1 || 2));
+
+		// draw paths
 		this._sun_vis
 			.selectAll("path")
 			.data(nodes)
@@ -443,6 +448,7 @@ class OpeningExplorerVisualization extends Visualization {
 			});
 	}
 
+	// Draws a win rate bar in the designated container based on the provided data
 	_drawWinRateBar(data) {
 		const container = this._winRateBar;
 		console.log("Drawing win rate bar in container:", container, "with data:", data);
