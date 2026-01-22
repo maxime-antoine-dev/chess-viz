@@ -1,57 +1,49 @@
-// Import de la classe de base pour toutes les visualisations
+
 import { Visualization } from './Visualization.js';
 
 /**
- * Visualisation : Popularité vs taux de victoire des ouvertures
- * Axe X : popularité (% de parties jouées)
- * Axe Y : win rate
+ * Visualization: Opening popularity vs win rate
+ * X axis: popularity (% of games)
+ * Y axis: win rate
  */
 class PopularityVisualization extends Visualization {
 
 	/**
-	 * @param {string} dataPath - Chemin vers le fichier de données
-	 * @param {HTMLElement} container - Élément DOM contenant le SVG
+	 * @param {string} dataPath - Path to the data file
+	 * @param {HTMLElement} container - DOM element containing the SVG
 	 */
 	constructor(dataPath, container) {
-		// Appel du constructeur parent avec marges personnalisées
+		// Call parent constructor with custom margins
 		super(dataPath, container, { top: 30, right: 30, bottom: 60, left: 60 });
-
-		// Taille de référence (héritage / usage futur)
 		this.crossSize = 3;
-
-		// Échelles D3 (initialisées plus tard)
 		this.scales = { x: null, y: null };
 
-		// Seuil minimum de parties pour afficher une ouverture
-		
+		// Minimum number of games required to display an opening
 		this._minGames = 15;
 	}
 
 	/**
-	 * Méthode principale appelée lors d’un changement de filtre
+	 * Main render method, called when filters change
 	 */
 	render(time_control, elo, color, opening) {
 		this.init().then(() => {
-			// Mise à jour des filtres
+			// Update filters
 			this.filters.time_control = time_control;
 			this.filters.elo = elo;
 			this.filters.color = Number.parseInt(color);
 			this.filters.opening = opening;
 
-			// Prétraitement des données
+			// Prepare filtered data
 			const filtered = this.preprocess();
 
-			// Affichage / mise à jour des points
+			// Draw / update points
 			this.bindMarks(filtered);
 		}).catch(err => console.error(err));
 	}
 
-	// ============================
-	// Méthodes internes
-	// ============================
 
 	/**
-	 * Calcule les échelles X et Y à partir de toutes les données valides
+	 * Compute X and Y scales using all valid data
 	 */
 	computeScales() {
 		const payload = this.data.payload;
@@ -60,21 +52,21 @@ class PopularityVisualization extends Visualization {
 		let minWin = Infinity;
 		let maxWin = -Infinity;
 
-		// Parcours de toutes les cadences et tranches ELO
+		// Iterate over all time controls and ELO ranges
 		for (const cadenceKey in payload) {
 			const cadence = payload[cadenceKey];
 			for (const eloKey in cadence) {
 				const band = cadence[eloKey];
 				for (const d of band) {
 
-					// Ignorer les ouvertures avec trop peu de parties
+					// Ignore openings with too few games
 					const count = Number.isFinite(d.count) ? d.count : 0;
 					if (count < this._minGames) continue;
 
-					// Popularité maximale
+					// Max popularity
 					maxPop = Math.max(maxPop, d.popularity);
 
-					// Min / max des taux de victoire (blancs et noirs)
+					// Min / max win rates (white and black)
 					const winRate = d.win_rate;
 					minWin = Math.min(minWin, winRate[1], winRate[2]);
 					maxWin = Math.max(maxWin, winRate[1], winRate[2]);
@@ -82,29 +74,28 @@ class PopularityVisualization extends Visualization {
 			}
 		}
 
-		// Gestion des cas limites (données absentes ou invalides)
 		if (!Number.isFinite(maxPop) || maxPop <= 0) maxPop = 1;
 		if (!Number.isFinite(minWin) || !Number.isFinite(maxWin) || minWin >= maxWin) {
 			minWin = 0;
 			maxWin = 1;
 		}
 
-		// Échelle X : popularité
+		// X scale: popularity
 		this.scales.x = d3.scaleLinear()
 			.domain([0, maxPop])
 			.range([0, this.innerW]);
 
-		// Échelle Y : win rate
+		// Y scale: win rate
 		this.scales.y = d3.scaleLinear()
 			.domain([minWin, maxWin])
 			.range([this.innerH, 0]);
 	}
 
 	/**
-	 * Dessin des axes X et Y + leurs labels
+	 * Draw X and Y axes and their labels
 	 */
 	drawAxes() {
-		// Axe X (popularité)
+		// X axis (popularity)
 		const xAxisG = this.g.axes.selectAll('.x-axis').data([0]);
 		xAxisG.join('g')
 			.attr('class', 'x-axis')
@@ -112,7 +103,7 @@ class PopularityVisualization extends Visualization {
 			.call(d3.axisBottom(this.scales.x)
 				.tickFormat(d => this.formatPercent(d, 0)));
 
-		// Label axe X
+		// X axis label
 		this.g.axes.selectAll('.x-label').data([0]).join('text')
 			.attr('class', 'x-label')
 			.attr('x', this.innerW / 2)
@@ -122,14 +113,14 @@ class PopularityVisualization extends Visualization {
 			.style('fill', '#ffffff')
 			.text('Popularity (% of games played)');
 
-		// Axe Y (win rate)
+		// Y axis (win rate)
 		const yAxisG = this.g.axes.selectAll('.y-axis').data([0]);
 		yAxisG.join('g')
 			.attr('class', 'y-axis')
 			.call(d3.axisLeft(this.scales.y)
 				.tickFormat(d => this.formatPercent(d, 0)));
 
-		// Label axe Y
+		// Y axis label
 		this.g.axes.selectAll('.y-label').data([0]).join('text')
 			.attr('class', 'y-label')
 			.attr('transform', 'rotate(-90)')
@@ -142,8 +133,7 @@ class PopularityVisualization extends Visualization {
 	}
 
 	/**
-	 * Ajoute un filtre SVG pour un halo lumineux
-	 * utilisé sur l’ouverture sélectionnée
+	 * Create a glow SVG filter for the selected opening
 	 */
 	#ensureGlowFilter() {
 		if (!this.svg) return;
@@ -152,7 +142,7 @@ class PopularityVisualization extends Visualization {
 			? this.svg.append('defs')
 			: this.svg.select('defs');
 
-		// Ne pas recréer le filtre s’il existe déjà
+		// Do not recreate the filter if it already exists
 		if (!defs.select('#opening-glow').empty()) return;
 
 		const filter = defs.append('filter')
@@ -171,7 +161,7 @@ class PopularityVisualization extends Visualization {
 	}
 
 	/**
-	 * Filtrage et transformation des données selon les filtres actifs
+	 * Filter and transform data based on active filters
 	 */
 	preprocess() {
 		const cadence = this.filters.time_control;
@@ -182,21 +172,21 @@ class PopularityVisualization extends Visualization {
 		if (!Array.isArray(band)) return [];
 
 		return band
-			// Données valides uniquement
+			// Keep valid entries only
 			.filter(d => d && d.popularity !== undefined && d.win_rate !== undefined)
 
-			// Seuil minimum de parties
+			// Apply minimum games threshold
 			.filter(d => {
 				const count = Number.isFinite(d.count) ? d.count : 0;
 				return count >= this._minGames;
 			})
 
-			// Sélection du win rate selon la couleur
+			// Select win rate depending on color
 			.map(d => {
 				let winRateValue;
-				if (colorFilter === 1) winRateValue = d.win_rate[1];      // Blancs
-				else if (colorFilter === 2) winRateValue = d.win_rate[2]; // Noirs
-				else winRateValue = d.win_rate[0];                        // Global
+				if (colorFilter === 1) winRateValue = d.win_rate[1];      // White
+				else if (colorFilter === 2) winRateValue = d.win_rate[2]; // Black
+				else winRateValue = d.win_rate[0];                        // Both
 
 				return {
 					name: d.name,
@@ -209,26 +199,26 @@ class PopularityVisualization extends Visualization {
 	}
 
 	/**
-	 * Création, mise à jour et interaction des cercles
+	 * Create, update and handle interactions for points
 	 */
 	bindMarks(data) {
 		this.#ensureGlowFilter();
 
-		// Nettoyage complet avant redraw
+		// Clear previous marks
 		this.g.marks.selectAll('*').remove();
 
 		const crosses = this.g.marks
 			.selectAll('.cross')
 			.data(data, d => d.name);
 
-		// Suppression des points obsolètes
+		// Remove old points
 		crosses.exit()
 			.transition()
 			.duration(150)
 			.style('opacity', 0)
 			.remove();
 
-		// Création des nouveaux points
+		// Create new points
 		const enter = crosses.enter()
 			.append('g')
 			.attr('class', 'cross')
@@ -238,7 +228,7 @@ class PopularityVisualization extends Visualization {
 
 		const merged = enter.merge(crosses);
 
-		// Positionnement des points
+		
 		merged.transition()
 			.duration(200)
 			.style('opacity', 1)
@@ -246,19 +236,19 @@ class PopularityVisualization extends Visualization {
 				`translate(${this.scales.x(d.popularity)}, ${this.scales.y(d.win_rate)})`
 			);
 
-		// Vérifie si l’ouverture est sélectionnée
+		// Check if opening is selected
 		const isSelected = d =>
 			this.filters.opening &&
 			this.filters.opening !== 'All' &&
 			d.name === this.filters.opening;
 
-		// Couleur de remplissage selon sélection et couleur d’ouverture
+		// Fill color logic
 		const getFill = d => {
 			if (isSelected(d)) return '#3777ffff';
 			return d.color === 'black' ? '#555555' : '#ffffff';
 		};
 
-		// Style des cercles
+	
 		merged.select('circle')
 			.attr('fill', d => getFill(d))
 			.attr('fill-opacity', d => isSelected(d) ? 0.8 : 0.5)
@@ -266,10 +256,9 @@ class PopularityVisualization extends Visualization {
 			.attr('filter', d => isSelected(d) ? 'url(#opening-glow)' : null)
 			.attr('stroke', d => isSelected(d) ? '#a0c6ff' : '#eee')
 			.attr('stroke-width', d => isSelected(d) ? 2 : 0.25)
-			.style('cursor', 'pointer')
-			.style('transition', 'fill 0.5s ease, transform 0.5s ease');
+			.style('cursor', 'pointer');
 
-		// Interactions (hover + click)
+		// Interactions (hover and click)
 		const color = this.filters.color === 1 ? 'White' :
 					  this.filters.color === 2 ? 'Black' : 'Both';
 
@@ -306,7 +295,7 @@ class PopularityVisualization extends Visualization {
 				this.hideTooltip();
 			})
 			.on('click', (event, d) => {
-				// Sélection de l’ouverture via le <select>
+				// Select opening via the dropdown
 				const select = document.getElementById('opening');
 				if (!select) return;
 
@@ -319,5 +308,5 @@ class PopularityVisualization extends Visualization {
 	}
 }
 
-// Export de la classe
+// Export class
 export { PopularityVisualization };
