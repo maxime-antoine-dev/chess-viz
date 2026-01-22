@@ -1,11 +1,27 @@
 import { Visualization } from './Visualization.js';
 
+/**
+ * AccuracyVisualization class
+ * Renders a heatmap visualization of accuracy data using D3.js.
+ */
 class AccuracyVisualization extends Visualization {
+	/**
+	 * Constructor for AccuracyVisualization.
+	 * @param {string} dataPath - The path to the data source.
+	 * @param {HTMLElement} container - The container element for the visualization.
+	 */
 	constructor(dataPath, container) {
 		super(dataPath, container, { top: 20, right: 120, bottom: 60, left: 60 });
 		this._legendGradientId = `acc-legend-gradient-${Math.random().toString(36).slice(2)}`;
 	}
 
+	/**
+	 * Renders the accuracy visualization.
+	 * @param {string} time_control - The time control filter.
+	 * @param {string} elo - The ELO rating filter.
+	 * @param {string} color - The color filter (0 for white, 1 for black).
+	 * @param {string} opening - The opening filter.
+	 */
 	render(time_control, elo, color, opening) {
 		this.init().then(() => {
 			this.filters.time_control = time_control;
@@ -20,6 +36,11 @@ class AccuracyVisualization extends Visualization {
 		}).catch(err => console.error(err));
 	}
 
+	/**
+	 * Computes the scales for the visualization.
+	 * Sets up x, y, color, and legend scales.
+	 * @returns {void}
+	 */
 	computeScales() {
 		const domain = d3.range(0, 100, 10); // [0,10,...,90]
 
@@ -45,6 +66,10 @@ class AccuracyVisualization extends Visualization {
 			.range([this.innerH, 0]);
 	}
 
+	/**
+	 * Draws the axes for the visualization.
+	 * @returns {void}
+	 */
 	drawAxes() {
 		const tickVals = d3.range(0, 110, 10); // show labels 0..100
 
@@ -57,7 +82,6 @@ class AccuracyVisualization extends Visualization {
 					.tickValues(tickVals)
 					.tickFormat(d => `${d}%`)
 			);
-
 		xG.selectAll('.tick')
 			.attr('transform', d => `translate(${d === 100 ? this.innerW : this.scales.x(d)},0)`);
 
@@ -79,9 +103,7 @@ class AccuracyVisualization extends Visualization {
 					.tickValues(tickVals)
 					.tickFormat(d => `${d}%`)
 			);
-
 		const bw = this.scales.y.bandwidth();
-
 		yG.selectAll('.tick')
 			.attr('transform', d => {
 				if (d === 100) return `translate(0,0)`;
@@ -101,6 +123,10 @@ class AccuracyVisualization extends Visualization {
 			.text("Mean accuracy after opening");
 	}
 
+	/**
+	 * Draws the legend for the visualization.
+	 * @returns {void}
+	 */
 	drawLegend() {
 		if (!this.svg || !this.root || !this.scales?.legendY) return;
 
@@ -173,6 +199,10 @@ class AccuracyVisualization extends Visualization {
 		gAxis.selectAll('path, line').style('stroke', 'rgba(255,255,255,0.55)');
 	}
 
+	/**
+	 * Preprocesses the data based on current filters.
+	 * @returns {Array} Processed dataset for visualization.
+	 */
 	preprocess() {
 		const cadence = this.filters.time_control;
 		const eloKey = this.filters.elo;
@@ -204,6 +234,11 @@ class AccuracyVisualization extends Visualization {
 		return dataset;
 	}
 
+	/**
+	 * Draws the squares of the heatmap.
+	 * @param {Array} data - The dataset to visualize.
+	 * @returns {void}
+	 */
 	drawSquares(data) {
 		const rects = this.g.marks.selectAll('rect').data(data, d => `${d.x}-${d.y}`);
 
