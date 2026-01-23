@@ -16,6 +16,8 @@ This project focuses on the analytical study of chess openings. See [about.html]
 
 The project was developed as part of the [Data Visualization](https://lyondataviz.github.io/teaching/lyon1-m2/2025/) course at Claude Bernard University Lyon 1.
 
+View the project on : [viz.maxime-antoine.eu](https://viz.maxime-antoine.eu)
+
 ## Dataset
 
 The dataset used in this project is sourced from [Lichess.org](https://database.lichess.org/), a popular online chess platform. It contains detailed records of chess games played on the platform, including information about openings, player ratings, and game outcomes.
